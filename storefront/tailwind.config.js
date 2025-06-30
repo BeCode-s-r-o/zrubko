@@ -21,20 +21,23 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
-        grey: {
-          0: "#FFFFFF",
-          5: "#F9FAFB",
-          10: "#F3F4F6",
-          20: "#E5E7EB",
-          30: "#D1D5DB",
-          40: "#9CA3AF",
-          50: "#6B7280",
-          60: "#4B5563",
-          70: "#374151",
-          80: "#1F2937",
-          90: "#111827",
+        white: "#ffffff",
+        black: "#000000",
+        gray: {
+          DEFAULT: "#374151",   // topbar
+          light: "#6b7280",      // svetlejší variant (voliteľne)
+        },
+        accent: {
+          DEFAULT: "#9C8A62",    // hlavná značka
+          dark: "#85754f",       // hover/pressed
+          light: "#b7a884",      // pozadie/badge
+        },
+        cta: {
+          DEFAULT: "#D97706",   // CTA tlačidlo topbar
+          hover: "#B45309",     // hover efekt
         },
       },
+      
       borderRadius: {
         none: "0px",
         soft: "2px",
@@ -59,16 +62,8 @@ module.exports = {
         "3xl": "2rem",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica Neue",
-          "Ubuntu",
-          "sans-serif",
-        ],
+        sans: ["Sora", "sans-serif"],
+        heading: ["Manrope", "sans-serif"],
       },
       keyframes: {
         ring: {

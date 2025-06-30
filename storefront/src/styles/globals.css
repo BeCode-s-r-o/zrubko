@@ -1,8 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");/* Manrope basic text*/
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");   /* Manrope heading*/
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 @layer utilities {
+
+
+
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -55,7 +61,7 @@
   }
 
   .contrast-btn {
-    @apply px-4 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 ease-in;
+    @apply px-4 py-2 rounded-full border border-black transition-colors duration-200 ease-in hover:bg-black hover:text-white;
   }
 
   .text-xsmall-regular {
@@ -63,27 +69,27 @@
   }
 
   .text-small-regular {
-    @apply text-xs leading-5 font-normal;
+    @apply text-xs font-normal leading-5;
   }
 
   .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
+    @apply text-xs font-semibold leading-5;
   }
 
   .text-base-regular {
-    @apply text-sm leading-6 font-normal;
+    @apply text-sm font-normal leading-6;
   }
 
   .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
+    @apply text-sm font-semibold leading-6;
   }
 
   .text-large-regular {
-    @apply text-base leading-6 font-normal;
+    @apply text-base font-normal leading-6;
   }
 
   .text-large-semi {
-    @apply text-base leading-6 font-semibold;
+    @apply text-base font-semibold leading-6;
   }
 
   .text-xl-regular {
@@ -108,5 +114,17 @@
 
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
+  }
+}
+
+
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  p, span, a, li, button, input, textarea, select {
+    @apply font-sans;
   }
 }
