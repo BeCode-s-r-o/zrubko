@@ -50,7 +50,7 @@ export default function NavClient({ regions }: NavClientProps) {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="flex gap-1 justify-center items-center md:justify-end">
+          <div className="hidden gap-1 justify-center items-center hide-store:flex hide-store:justify-end">
             <MapPin size={18} />
             <span>
               <a
