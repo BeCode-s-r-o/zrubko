@@ -1,4 +1,4 @@
-const path = require("path")
+const path = require("path") 
 
 module.exports = {
   darkMode: "class",
@@ -50,6 +50,8 @@ module.exports = {
         "8xl": "100rem",
       },
       screens: {
+
+        'hide-store': '870px', // hide store on 870px topbar
         "2xsmall": "320px",
         xsmall: "512px",
         small: "1024px",
