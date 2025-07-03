@@ -1,4 +1,4 @@
-import { XMarkMini } from "@medusajs/icons"
+import { MagnifyingGlass, XMarkMini } from "@medusajs/icons"
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation"
 
@@ -23,9 +23,7 @@ const ControlledSearchBox = ({
       onSubmit(event)
     }
 
-    if (inputRef.current) {
-      inputRef.current.blur()
-    }
+    inputRef.current?.blur()
   }
 
   const handleReset = (event: FormEvent) => {
@@ -33,37 +31,38 @@ const ControlledSearchBox = ({
     event.stopPropagation()
 
     onReset(event)
-
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
+    inputRef.current?.focus()
   }
 
   return (
     <div {...props} className="w-full">
-      <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-        <div className="flex items-center justify-between">
+      <form noValidate onSubmit={handleSubmit} onReset={handleReset}>
+        <div className="flex relative items-center px-4 py-2 w-full bg-white rounded-md border border-gray-300">
+          <span className="absolute left-6 top-1/2 -translate-y-1/2">
+            <MagnifyingGlass className="w-5 text-gray-500" />
+          </span>
+
           <input
             ref={inputRef}
             data-testid="search-input"
             autoComplete="off"
             autoCorrect="off"
             autoCapitalize="off"
-            placeholder={placeholder}
+            placeholder={placeholder || "Search products..."}
             spellCheck={false}
             type="search"
             value={value}
             onChange={onChange}
-            className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
+            className="flex-1 pl-10 text-base bg-transparent placeholder:text-gray-500 focus:outline-none"
           />
+
           {value && (
             <button
               onClick={handleReset}
               type="button"
-              className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large flex"
+              className="ml-2 text-gray-500 hover:text-black"
             >
-              <XMarkMini />
-              Cancel
+              <XMarkMini className="w-4 h-4" />
             </button>
           )}
         </div>
@@ -77,13 +76,7 @@ const SearchBox = () => {
 
   return (
     <SearchBoxWrapper>
-      {(props) => {
-        return (
-          <>
-            <ControlledSearchBox {...props} />
-          </>
-        )
-      }}
+      {(props) => <ControlledSearchBox {...props} />}
     </SearchBoxWrapper>
   )
 }
