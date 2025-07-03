@@ -1,3 +1,5 @@
+// Deprecated: This file used Algolia hooks. Use Meilisearch-based components instead.
+
 import { clx } from "@medusajs/ui"
 import React from "react"
 import {
