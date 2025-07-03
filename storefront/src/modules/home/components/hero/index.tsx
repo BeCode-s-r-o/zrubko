@@ -1,34 +1,29 @@
 import { Github } from "@medusajs/icons"
+import LightButton from "../../../layout/components/ui/LightButton"
+import PrimaryButton from "../../../layout/components/ui/PrimaryButton"
+
 import { Button, Heading } from "@medusajs/ui"
+import { CirclePlay } from "lucide-react"
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Well done! You have successfully deployed your Medusa 2.0 store on Railway!
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Need help customizing your store?
-          </Heading>
-        </span>
-        <a
-          href="https://funkyton.com/medusajs-2-0-is-finally-here/"
-          target="_blank"
-        >
-          <h1 style={{ textDecoration: "underline" }}>
-            Visit the tutorial
-          </h1>
-        </a>
+    <section className="pt-12 pb-16 lg:pt-24"> {/* pt-12 on small, pt-24 on large screens */}
+      <div className="text-left content-container">
+        <h1 className="mb-6 text-5xl font-bold leading-tight">
+          Staviate alebo Obkladáte? Zrubko  <br />má drevo na mieru
+        </h1>
+        <p className="mb-10 text-xl text-gray-600">
+          Vyberiete, vypočítate, objednáte – doručíme až k vám domov.
+        </p>
+
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <LightButton href="/vyber" icon={<CirclePlay size={18} />}>Začať s výberom</LightButton>
+          <PrimaryButton href="/showroom">Navštíviť showroom</PrimaryButton>
+
+
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
 
