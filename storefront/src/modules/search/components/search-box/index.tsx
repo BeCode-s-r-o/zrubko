@@ -1,3 +1,5 @@
+// Deprecated: This file used Algolia hooks. Use Meilisearch-based components instead.
+
 import { MagnifyingGlass, XMarkMini } from "@medusajs/icons"
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation"
@@ -62,7 +64,7 @@ const ControlledSearchBox = ({
               type="button"
               className="ml-2 text-gray-500 hover:text-black"
             >
-              <XMarkMini className="w-4 h-4" />
+              <XMarkMini className="w-4 h-4s" />
             </button>
           )}
         </div>

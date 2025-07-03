@@ -15,8 +15,7 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { StoreRegion } from "@medusajs/types"
-import SearchBox from "@modules/search/components/search-box"
-import { InstantSearch } from "react-instantsearch-hooks-web"
+import SearchBar from "@modules/search/components/SearchBar"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 
 type NavClientProps = {
@@ -128,9 +127,7 @@ export default function NavClient({ regions }: NavClientProps) {
           </div>
           <div className="hidden absolute left-1/2 w-full max-w-md -translate-x-1/2 lg:flex">
             <div className="relative w-full">
-              <InstantSearch searchClient={searchClient} indexName={SEARCH_INDEX_NAME}>
-                <SearchBox />
-              </InstantSearch>
+              <SearchBar />
             </div>
           </div>
           <div className="flex gap-2 items-center">

@@ -24,16 +24,17 @@ export async function POST(req: Request) {
       "Content-Type": "application/json",
     }
     if (apiKey) {
-      headers["X-MEILI-API-KEY"] = apiKey
+      headers["Authorization"] = `Bearer ${apiKey}`
     }
 
     const res = await fetch(`${endpoint}/indexes/${index}/search`, {
       method: "POST",
       headers,
-      body: JSON.stringify({ q: query }),
+      body: JSON.stringify({ q: query, limit: 10 }),
     })
 
     const data = await res.json()
+    console.log("Meilisearch response:", data)
     return NextResponse.json(data)
   } catch (error) {
     console.error("Search API error:", error)

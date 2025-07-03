@@ -1,3 +1,5 @@
+// Deprecated: This file used Algolia hooks. Use Meilisearch-based components instead.
+
 import { useRouter } from "next/navigation"
 import {
   ChangeEvent,
