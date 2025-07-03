@@ -7,7 +7,7 @@ import { CirclePlay } from "lucide-react"
 
 const Hero = () => {
   return (
-    <section className="pt-12 pb-16 lg:pt-24"> {/* pt-12 on small, pt-24 on large screens */}
+    <section className="pt-6 lg:pt-20"> {/* pt-6 on small, pt-12 on large screens */}
       <div className="text-left content-container">
         <h1 className="mb-6 text-5xl font-bold leading-tight">
           Staviate alebo Obkladáte? Zrubko  <br />má drevo na mieru

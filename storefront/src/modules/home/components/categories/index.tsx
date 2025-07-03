@@ -13,7 +13,7 @@ export default function Categories({
   }
 
   return (
-    <section className="py-12 content-container small:py-24">
+    <section className="py-6 content-container small:py-12">
       <div className="flex justify-between items-center mb-8">
         <div>
           <h2 className="mb-2 text-3xl-semi">Kategórie produktov</h2>

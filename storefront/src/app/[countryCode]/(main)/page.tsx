@@ -6,6 +6,9 @@ import Categories from "@modules/home/components/categories"
 import { getCollectionsWithProducts } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 import { listCategories } from "@lib/data/categories"
+import InfoStepsSection from "@modules/home/components/info-steps-section"
+import FavoriteProductsSection from "@modules/home/components/favorite-products-section"
+import ScrollingBar from "@modules/home/components/ScrollingBar"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -28,13 +31,17 @@ export default async function Home({
 
   return (
     <>
+      
       <Hero />
       <Categories categories={categories} />
-      <div className="py-12">
+      <InfoStepsSection />
+      <FavoriteProductsSection countryCode={countryCode} region={region} />
+      <div className="">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>
       </div>
+      <ScrollingBar />
     </>
   )
 }
