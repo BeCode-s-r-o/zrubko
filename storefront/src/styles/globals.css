@@ -80,6 +80,10 @@
     @apply text-sm font-normal leading-6;
   }
 
+  .text-description {
+    @apply text-base font-normal leading-6 text-gray-600;
+  }
+
   .text-base-semi {
     @apply text-sm font-semibold leading-6;
   }
@@ -114,6 +118,15 @@
 
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
+  }
+
+
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
