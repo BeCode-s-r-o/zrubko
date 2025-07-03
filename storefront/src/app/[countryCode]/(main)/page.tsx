@@ -9,6 +9,7 @@ import { listCategories } from "@lib/data/categories"
 import InfoStepsSection from "@modules/home/components/info-steps-section"
 import FavoriteProductsSection from "@modules/home/components/favorite-products-section"
 import ScrollingBar from "@modules/home/components/ScrollingBar"
+import HomepageAccordion from "@modules/home/components/HomepageAccordion"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -42,6 +43,7 @@ export default async function Home({
         </ul>
       </div>
       <ScrollingBar />
+      <HomepageAccordion />
     </>
   )
 }
