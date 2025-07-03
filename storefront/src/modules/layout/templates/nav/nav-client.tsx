@@ -15,6 +15,9 @@ import {
   ChevronDown,
 } from "lucide-react"
 import { StoreRegion } from "@medusajs/types"
+import SearchBox from "@modules/search/components/search-box"
+import { InstantSearch } from "react-instantsearch-hooks-web"
+import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 
 type NavClientProps = {
   regions: StoreRegion[]
@@ -125,12 +128,9 @@ export default function NavClient({ regions }: NavClientProps) {
           </div>
           <div className="hidden absolute left-1/2 w-full max-w-md -translate-x-1/2 lg:flex">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 w-4 h-4 -translate-y-1/2 text-ui-fg-muted" />
-              <input
-                type="text"
-                placeholder="Zadajte názov produktu"
-                className="px-9 py-2 w-full text-sm bg-white rounded-md border border-ui-border-base placeholder:text-ui-fg-muted focus:outline-none focus:ring-1 focus:ring-ui-fg-muted"
-              />
+              <InstantSearch searchClient={searchClient} indexName={SEARCH_INDEX_NAME}>
+                <SearchBox />
+              </InstantSearch>
             </div>
           </div>
           <div className="flex gap-2 items-center">
