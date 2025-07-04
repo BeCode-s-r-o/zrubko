@@ -12,7 +12,9 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
   return (
     <>
       <Nav />
-      {props.children}
+      <main className="min-h-[calc(100vh-64px)]">
+        {props.children}
+      </main>
       <Footer />
     </>
   )

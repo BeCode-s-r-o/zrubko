@@ -1,7 +1,12 @@
 "use client"
 import React, { useState } from "react"
 
-const items = [
+export type FAQItem = {
+  title: string
+  content: string
+}
+
+export const defaultProductFAQItems: FAQItem[] = [
   {
     title: "Kde dodávate a za ako dlho?",
     content: "Dodávame po celom Slovensku. Štandardná dodacia doba je 2-5 pracovných dní, v závislosti od lokality a dostupnosti materiálu."
@@ -20,7 +25,34 @@ const items = [
   }
 ]
 
-const HomepageAccordion = () => {
+export const contactFAQItems: FAQItem[] = [
+  {
+    title: "Ako vás môžem kontaktovať?",
+    content: "Môžete nás kontaktovať emailom na info@zrubko.sk, telefonicky na +421 907 695 363, alebo nás navštívte osobne v našej predajni v Žiline."
+  },
+  {
+    title: "Aká je vaša otváracía doba?",
+    content: "Naša predajňa je otvorená v pracovných dňoch od 8:00 do 16:00. Návštevu mimo otváracích hodín je možné dohodnúť individuálne."
+  },
+  {
+    title: "Poskytujete technické poradenstvo?",
+    content: "Áno, naši odborníci vám radi poradia s technickými otázkami ohľadom montáže, údržby a výberu vhodného materiálu."
+  },
+  {
+    title: "Robíte aj cenové kalkulácie?",
+    content: "Áno, na základe vašich požiadaviek vám vypracujeme detailnú cenovú kalkuláciu vrátane dopravy a prípadných doplnkových služieb."
+  }
+]
+
+interface ProductFAQProps {
+  items?: FAQItem[]
+  title?: string
+}
+
+const ProductFAQ = ({ 
+  items = defaultProductFAQItems,
+  title = "Máte otázky? Tu nájdete odpovede!"
+}: ProductFAQProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const handleToggle = (idx: number) => {
@@ -28,15 +60,15 @@ const HomepageAccordion = () => {
   }
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-2xl">
+    <div className="mx-auto mt-12 mb-12 w-full max-w-2xl">
       <h2 className="mb-8 text-3xl text-center md:text-4xl font-heading">
-        Máte otázky? Tu nájdete odpovede! <span className="inline-block text-2xl align-middle text-accent">✨</span>
+        {title} <span className="inline-block text-2xl align-middle text-accent">✨</span>
       </h2>
       <div className="border-t border-b border-gray-200 divide-y divide-gray-200">
         {items.map((item, idx) => (
           <div key={idx}>
             <button
-              className="flex justify-between items-center px-2 py-5 w-full text-lg text-left md:px-6 font-heading focus:outline-none"
+              className="flex justify-between items-center px-2 py-5 w-full text-lg text-left md:px-6 font-heading focus:outline-none hover:bg-gray-50 transition-colors"
               onClick={() => handleToggle(idx)}
               aria-expanded={openIndex === idx}
               aria-controls={`accordion-content-${idx}`}
@@ -54,13 +86,8 @@ const HomepageAccordion = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-8">
-        <button className="px-8 py-3 text-lg font-semibold text-white rounded-full shadow transition-colors bg-accent hover:bg-accent/90">
-          En savoir plus <span className="ml-2">→</span>
-        </button>
-      </div>
     </div>
   )
 }
 
-export default HomepageAccordion 
+export default ProductFAQ 

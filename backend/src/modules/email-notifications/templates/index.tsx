@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { MedusaError } from '@medusajs/framework/utils'
 import { InviteUserEmail, INVITE_USER, isInviteUserData } from './invite-user'
 import { OrderPlacedTemplate, ORDER_PLACED, isOrderPlacedTemplateData } from './order-placed'
+import { ContactFormEmail } from './contact-form'
 
 export const EmailTemplates = {
   INVITE_USER,
@@ -29,6 +30,9 @@ export function generateEmailTemplate(templateKey: string, data: unknown): React
         )
       }
       return <OrderPlacedTemplate {...data} />
+
+    case 'contact-form':
+      return <ContactFormEmail data={data} />
 
     default:
       throw new MedusaError(
