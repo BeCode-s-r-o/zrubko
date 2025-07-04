@@ -1,6 +1,7 @@
 "use client"
 
 import { Suspense, useState, useRef, useEffect } from "react"
+import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
@@ -133,19 +134,20 @@ export default function NavClient({ regions }: NavClientProps) {
           <div className="flex gap-2 items-center">
             <LocalizedClientLink
               href="/account"
-              className="p-2 rounded-md border hover:bg-ui-button-neutral-hover"
+              className="flex gap-2 items-center px-3 py-2 text-gray-600 rounded-md border hover:bg-ui-button-neutral-hover"
               aria-label="Účet"
             >
-              <User size={18} />
+              <User size={20} />
+              <span className="hidden md:inline">Účet</span>
             </LocalizedClientLink>
             <Suspense
               fallback={
                 <LocalizedClientLink
                   href="/cart"
-                  className="flex gap-2 items-center px-3 py-2 text-white rounded-md bg-ui-button hover:bg-ui-button-hover"
+                  className="flex gap-2 items-center px-3 py-2 text-white rounded-md bg-cart hover:bg-cart-hover"
                 >
-                  <ShoppingCart size={16} />
-                  (0)
+                  <ShoppingCart size={20} />
+                  <span>(0)</span>
                 </LocalizedClientLink>
               }
             >
@@ -216,7 +218,7 @@ export default function NavClient({ regions }: NavClientProps) {
               </div>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -225,7 +227,7 @@ export default function NavClient({ regions }: NavClientProps) {
       
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -233,7 +235,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 </a>
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -241,7 +243,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 </a>
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -268,7 +270,7 @@ export default function NavClient({ regions }: NavClientProps) {
               </div>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -277,7 +279,7 @@ export default function NavClient({ regions }: NavClientProps) {
       
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -285,7 +287,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 </a>
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
@@ -293,7 +295,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 </a>
 
                 <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" />
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
                     <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
                     <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
