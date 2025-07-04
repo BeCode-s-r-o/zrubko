@@ -7,13 +7,17 @@ type PrimaryButtonProps = {
   children: ReactNode
   className?: string
   icon?: ReactNode
+  type?: "button" | "submit" | "reset"
+  disabled?: boolean
 }
 
-const PrimaryButton = ({ href, children, className, icon }: PrimaryButtonProps) => {
+const PrimaryButton = ({ href, children, className, icon, type = "button", disabled }: PrimaryButtonProps) => {
   const content = (
     <Button
+      type={type}
+      disabled={disabled}
       className={clsx(
-        "px-6 py-3 text-white border-2 transition duration-300 bg-accent border-accent hover:bg-accent-dark hover:border-accent-light text-[18px]",
+        "px-6 py-3 text-white border-2 transition duration-300 bg-accent border-accent hover:bg-accent-dark hover:border-accent-light text-[18px] disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}
     >

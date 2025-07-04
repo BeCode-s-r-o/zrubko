@@ -24,17 +24,22 @@ module.exports = {
         white: "#ffffff",
         black: "#000000",
         gray: {
-          DEFAULT: "#374151",   // topbar
-          light: "#6b7280",      // svetlejší variant (voliteľne)
+          DEFAULT: "#374151",   // farba pre topbar
+          light: "#6b7280",     // svetlejšia varianta pre texty
+        },
+        amber: {
+          50: "#FFFBEB",        // svetlé pozadie
+          100: "#FEF3C7",       // jemné ohraničenie
+          300: "#FCD34D",       // zvýraznenie pri focus
         },
         accent: {
-          DEFAULT: "#9C8A62",    // hlavná značka
-          dark: "#85754f",       // hover/pressed
-          light: "#b7a884",      // pozadie/badge
+          DEFAULT: "#9C8A62",   // primárna značková farba
+          dark: "#85754f",      // tmavšia pre hover/stlačenie
+          light: "#b7a884",     // svetlejšia pre pozadia/odznaky
         },
         cta: {
-          DEFAULT: "#D97706",   // CTA tlačidlo topbar
-          hover: "#B45309",     // hover efekt
+          DEFAULT: "#D97706",   // farba pre CTA tlačidlá
+          hover: "#B45309",     // farba pre hover na CTA
         },
       },
       
