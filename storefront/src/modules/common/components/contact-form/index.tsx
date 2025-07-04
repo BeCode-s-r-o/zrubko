@@ -1,146 +1,173 @@
-"use client"
+'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import PrimaryButton from '../../../layout/components/ui/PrimaryButton'
 import ProductFAQ, { contactFAQItems } from "@modules/common/components/product-faq"
-import { medusaClient } from "@lib/config"
-
-type FormValues = {
-  name: string
-  email: string
-  message: string
-}
 
 const ContactForm = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState<string | null>(null)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  })
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({
+    type: null,
+    message: '',
+  })
+  const [loading, setLoading] = useState(false)
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    message: false,
+  })
+  const [showErrors, setShowErrors] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, touchedFields }
-  } = useForm<FormValues>()
+  const validateEmail = (email: string) => {
+    return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+  }
 
-  const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true)
-    setSubmitError(null)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setShowErrors(true)
+    setTouched({
+      name: true,
+      email: true,
+      message: true,
+    })
+    
+    if (!formData.name || !formData.email || !formData.message || !validateEmail(formData.email)) {
+      return
+    }
+    
+    setLoading(true)
+    setStatus({ type: null, message: '' })
     
     try {
-      const response = await fetch("/api/store/contact/submit", {
-        method: "POST",
+      const response = await fetch('/api/store/custom/contact', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       })
 
       if (!response.ok) {
-        throw new Error("Failed to submit form")
+        throw new Error('Failed to send message')
       }
 
-      setSubmitSuccess(true)
-      reset()
-    } catch (error) {
-      setSubmitError("Niečo sa pokazilo. Skúste to prosím znova.")
+      setStatus({
+        type: 'success',
+        message: 'Ďakujeme za vašu správu. Budeme vás kontaktovať čo najskôr.',
+      })
+      setFormData({ name: '', email: '', message: '' })
+      setShowErrors(false)
+      setTouched({
+        name: false,
+        email: false,
+        message: false,
+      })
+    } catch (error: any) {
+      setStatus({
+        type: 'error',
+        message: error?.message || 'Niečo sa pokazilo. Skúste to prosím znova.',
+      })
     } finally {
-      setIsSubmitting(false)
+      setLoading(false)
     }
   }
 
   return (
     <div className="flex flex-col gap-y-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-y-6" noValidate>
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            Meno
-          </label>
+          <label className="text-sm text-gray-700">Vaše meno *</label>
           <input
             type="text"
-            id="name"
-            {...register("name", { required: true })}
-            className={`mt-1 block w-full rounded-md shadow-sm 
-              ${errors.name || (touchedFields.name && !submitSuccess) 
-                ? "border-red-300 focus:border-red-500 focus:ring-red-500" 
-                : "border-gray-300 focus:border-amber-500 focus:ring-amber-500"}`}
+            value={formData.name}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, name: e.target.value }))
+              setTouched(prev => ({ ...prev, name: true }))
+            }}
+            className={`px-4 py-3 mt-1 w-full text-base bg-white rounded-lg border-2 ${
+              touched.name && showErrors && !formData.name 
+              ? 'border-red-500 focus:border-red-500' 
+              : 'border-gray-200 focus:border-gray-900'
+            } focus:ring-0 transition-colors`}
+            required
+            placeholder="Vaše meno"
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">Meno je povinné</p>
+          {touched.name && showErrors && !formData.name && (
+            <p className="mt-1 text-sm text-red-500">Prosím, vyplňte vaše meno</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
-          </label>
+          <label className="text-sm text-gray-700">Email *</label>
           <input
             type="email"
-            id="email"
-            {...register("email", { 
-              required: true,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Neplatná emailová adresa"
-              }
-            })}
-            className={`mt-1 block w-full rounded-md shadow-sm 
-              ${errors.email || (touchedFields.email && !submitSuccess)
-                ? "border-red-300 focus:border-red-500 focus:ring-red-500" 
-                : "border-gray-300 focus:border-amber-500 focus:ring-amber-500"}`}
+            value={formData.email}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, email: e.target.value }))
+              setTouched(prev => ({ ...prev, email: true }))
+            }}
+            className={`px-4 py-3 mt-1 w-full text-base bg-white rounded-lg border-2 ${
+              touched.email && showErrors && (!formData.email || !validateEmail(formData.email))
+              ? 'border-red-500 focus:border-red-500' 
+              : 'border-gray-200 focus:border-gray-900'
+            } focus:ring-0 transition-colors`}
+            required
+            placeholder="vas@email.sk"
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">
-              {errors.email.type === "required" 
-                ? "Email je povinný" 
-                : errors.email.message}
-            </p>
+          {touched.email && showErrors && !formData.email && (
+            <p className="mt-1 text-sm text-red-500">Prosím, vyplňte Váš email</p>
+          )}
+          {touched.email && showErrors && formData.email && !validateEmail(formData.email) && (
+            <p className="mt-1 text-sm text-red-500">Prosím, zadajte platný email</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-            Správa
-          </label>
+          <label className="text-sm text-gray-700">Povedzte nám viac o vašom projekte... *</label>
           <textarea
-            id="message"
+            value={formData.message}
+            onChange={(e) => {
+              setFormData((prev) => ({ ...prev, message: e.target.value }))
+              setTouched(prev => ({ ...prev, message: true }))
+            }}
+            className={`px-4 py-3 mt-1 w-full text-base bg-white rounded-lg border-2 ${
+              touched.message && showErrors && !formData.message 
+              ? 'border-red-500 focus:border-red-500' 
+              : 'border-gray-200 focus:border-gray-900'
+            } focus:ring-0 resize-none transition-colors`}
+            required
             rows={4}
-            {...register("message", { required: true })}
-            className={`mt-1 block w-full rounded-md shadow-sm 
-              ${errors.message || (touchedFields.message && !submitSuccess)
-                ? "border-red-300 focus:border-red-500 focus:ring-red-500" 
-                : "border-gray-300 focus:border-amber-500 focus:ring-amber-500"}`}
+            placeholder="Napríklad: Chcem si postaviť zrubovú chatu s rozmermi 8x6m, s terasou a podkrovím..."
           />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-600">Správa je povinná</p>
+          {touched.message && showErrors && !formData.message && (
+            <p className="mt-1 text-sm text-red-500">Prosím, napíšte nám správu</p>
           )}
         </div>
 
-        {submitError && (
-          <div className="text-red-600 text-sm">{submitError}</div>
-        )}
-
-        {submitSuccess && (
-          <div className="text-green-600 text-sm">
-            Ďakujeme za vašu správu. Budeme vás kontaktovať čo najskôr.
+        {status.message && (
+          <div
+            className={`p-4 rounded-lg ${
+              status.type === 'success'
+                ? 'bg-green-50 text-green-800'
+                : 'bg-red-50 text-red-800'
+            }`}
+          >
+            {status.message}
           </div>
         )}
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`w-full py-3 px-4 border border-transparent rounded-md shadow-sm text-white 
-            bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 
-            focus:ring-offset-2 focus:ring-amber-500 ${isSubmitting ? "opacity-75" : ""}`}
-        >
-          {isSubmitting ? "Odosielam..." : "Odoslať správu"}
-        </button>
+        <PrimaryButton type="submit" disabled={loading} className="w-full">
+          {loading ? 'Odosielanie...' : "Začať projekt so Zrubko"}
+        </PrimaryButton>
       </form>
-      <ProductFAQ 
-        items={contactFAQItems} 
-        title="Často kladené otázky"
-      />
+      <ProductFAQ items={contactFAQItems} />
     </div>
   )
 }

@@ -1,5 +1,10 @@
-import { MedusaRequest, MedusaResponse } from '@medusajs/medusa'
-import { NotificationProviderService } from '@medusajs/medusa'
+import type { 
+  MedusaRequest, 
+  MedusaResponse,
+} from "@medusajs/medusa/dist/types/router"
+import type { 
+  NotificationService 
+} from "@medusajs/medusa"
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
   const { name, email, message } = req.body
@@ -11,7 +16,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const notificationService: NotificationProviderService = req.scope.resolve(
+  const notificationService: NotificationService = req.scope.resolve(
     'notificationService'
   )
 
@@ -23,10 +28,10 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         name,
         email,
         message,
-        emailOptions: {
-          subject: `New Contact Form Submission from ${name}`,
-          replyTo: email,
-        },
+      },
+      emailOptions: {
+        subject: `New Contact Form Submission from ${name}`,
+        replyTo: email,
       },
     })
 
