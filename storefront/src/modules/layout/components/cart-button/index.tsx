@@ -33,12 +33,12 @@ export default function CartButton() {
   return (
     <LocalizedClientLink
       href="/cart"
-      className="flex gap-2 items-center px-3 py-2 text-white rounded-md bg-cart hover:bg-cart-hover"
+      className="flex gap-2 items-center px-3 py-2 text-white rounded-md bg-cta hover:bg-cta-hover"
     >
       <ShoppingCart size={20} />
       <span>({itemCount})</span>
       {total && (
-        <span className="hidden md:inline border-l border-white/30 ml-2 pl-2">
+        <span className="hidden pl-2 ml-2 border-l md:inline border-white/30">
           {convertToLocale({
             amount: total.amount,
             currency_code: total.currency_code
