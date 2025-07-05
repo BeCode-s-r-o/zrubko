@@ -41,10 +41,7 @@ module.exports = {
           DEFAULT: "#D97706",   // farba pre CTA tlačidlá
           hover: "#B45309",     // farba pre hover na CTA
         },
-        cart: {
-          DEFAULT: "#5f9ea0",   // cadetblue for cart button
-          hover: "#4f8587",     // darker shade for hover
-        },
+       
       },
       
       borderRadius: {
