@@ -7,6 +7,7 @@ import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import { HttpTypes } from "@medusajs/types"
 
 export default function CategoryTemplate({
@@ -28,11 +29,21 @@ export default function CategoryTemplate({
 
   if (!category || !countryCode) notFound()
 
+  // Príprava category path pre breadcrumbs
+  const categoryPath = categories.map(cat => ({
+    name: cat.name,
+    handle: cat.handle
+  }))
+
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
+    <>
+      <div className="content-container mt-4 md:mt-12 lg:mt-20">
+        <Breadcrumbs categoryPath={categoryPath} />
+      </div>
+      <div
+        className="flex flex-col small:flex-row small:items-start py-6 content-container"
+        data-testid="category-container"
+      >
       <RefinementList sortBy={sort} data-testid="sort-by-container" />
       <div className="w-full">
         <div className="flex flex-row mb-8 text-2xl-semi gap-4">
@@ -79,5 +90,6 @@ export default function CategoryTemplate({
         </Suspense>
       </div>
     </div>
+    </>
   )
 }
