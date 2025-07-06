@@ -1,6 +1,5 @@
-import ContactForm from '../../../../modules/common/components/contact-form'
+import ContactForm from '@modules/common/components/contact-form'
 import { Mail, MapPin, Phone } from 'lucide-react'
-import Image from 'next/image'
 
 export const metadata = {
   title: 'Contact Us',
@@ -55,28 +54,18 @@ export default function ContactPage() {
             <a href="tel:+421907695363" className="text-gray-900 hover:underline">+421 907 695 363</a>
           </div>
 
-          {/* Contact Image */}
-          <div className="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-lg group">
-            <Image
-              src="/images/contact-image.jpg"
-              alt="Zrubko showroom"
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
-            {/* Overlay with centered button */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-              <a 
-                href="/store"
-                className="px-8 py-3 bg-amber-500 text-white font-semibold rounded-lg 
-                         shadow-lg transform transition-all duration-300 hover:bg-amber-600 
-                         hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-500 
-                         focus:ring-offset-2"
-              >
-                Navštíviť obchod
-              </a>
-            </div>
+          {/* Google Maps */}
+          <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2613.9887890420147!2d19.1537885!3d49.0681225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4714f6c1e89fc3e3%3A0x2c8c7e0c7e0c7e0c!2sZrubko!5e0!3m2!1sen!2ssk!4v1620000000000!5m2!1sen!2ssk"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="rounded-2xl"
+            ></iframe>
           </div>
 
           {/* Social Links */}
