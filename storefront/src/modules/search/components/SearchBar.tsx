@@ -58,7 +58,7 @@ const SearchBar: React.FC = () => {
           }}
           onFocus={() => value && setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-          placeholder="Search products..."
+          placeholder="Hľadať produkty..."
           className="px-4 py-2 w-full rounded border focus:outline-none"
           autoComplete="off"
         />
