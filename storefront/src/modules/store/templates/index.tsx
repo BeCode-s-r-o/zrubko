@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
 
 import PaginatedProducts from "./paginated-products"
 import StoreTitle from "../components/store-title"
@@ -20,10 +21,14 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
+    <>
+      <div className="content-container mt-4 md:mt-12 lg:mt-20">
+        <Breadcrumbs />
+      </div>
+      <div
+        className="flex flex-col small:flex-row small:items-start py-6 content-container"
+        data-testid="category-container"
+      >
       <RefinementList sortBy={sort} />
       <div className="w-full">
         <StoreTitle />
@@ -36,6 +41,7 @@ const StoreTemplate = ({
         </Suspense>
       </div>
     </div>
+    </>
   )
 }
 

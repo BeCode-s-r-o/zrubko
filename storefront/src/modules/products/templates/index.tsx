@@ -7,6 +7,7 @@ import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
+import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import { HttpTypes } from "@medusajs/types"
@@ -26,8 +27,20 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     return notFound()
   }
 
+  // Príprava kategórií pre breadcrumbs
+  const categoryPath = product.categories?.map(category => ({
+    name: category.name,
+    handle: category.handle
+  })) || []
+
   return (
     <>
+      <div className="content-container mt-4 md:mt-12 lg:mt-20">
+        <Breadcrumbs 
+          productTitle={product.title}
+          categoryPath={categoryPath}
+        />
+      </div>
       <div
         className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
         data-testid="product-container"
