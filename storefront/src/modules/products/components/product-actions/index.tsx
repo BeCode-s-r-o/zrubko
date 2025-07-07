@@ -108,13 +108,18 @@ export default function ProductActions({
     setIsAdding(false)
   }
 
+  // Filter out color options
+  const filteredOptions = (product.options || []).filter(
+    (option) => option.title?.toLowerCase() !== "color"
+  )
+
   return (
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
         <div>
-          {(product.variants?.length ?? 0) > 1 && (
+          {(product.variants?.length ?? 0) > 1 && filteredOptions.length > 0 && (
             <div className="flex flex-col gap-y-4">
-              {(product.options || []).map((option) => {
+              {filteredOptions.map((option) => {
                 return (
                   <div key={option.id}>
                     <OptionSelect
@@ -143,9 +148,7 @@ export default function ProductActions({
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {!selectedVariant
-            ? "Vyberte variant"
-            : !inStock
+          {!inStock
             ? "Nie je na sklade"
             : "Pridať do košíka"}
         </Button>
