@@ -31,6 +31,9 @@ import {
   Waves as WavesIcon,
   Tent,
   Grid3x3,
+  Menu,
+  X,
+  ChevronRight,
 } from "lucide-react"
 import { StoreRegion } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
@@ -134,6 +137,236 @@ const topProducts = [
   { title: "Plotovky smrek", href: "/produkty/plotovky-smrek" }
 ]
 
+// Mobilný komponent pre navigáciu
+const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [expandedMobile, setExpandedMobile] = useState<'products' | 'usage' | null>(null)
+  const [expandedUsage, setExpandedUsage] = useState<'interior' | 'exterior' | null>(null)
+
+  const toggleMobile = (section: 'products' | 'usage') => {
+    setExpandedMobile(expandedMobile === section ? null : section)
+    if (section !== 'usage') {
+      setExpandedUsage(null)
+    }
+  }
+
+  const toggleUsage = (section: 'interior' | 'exterior') => {
+    setExpandedUsage(expandedUsage === section ? null : section)
+  }
+
+  const closeMobile = () => {
+    setIsOpen(false)
+    setExpandedMobile(null)
+    setExpandedUsage(null)
+  }
+
+  return (
+    <>
+      {/* Mobile menu button */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="flex items-center justify-center w-10 h-10 text-gray-700 lg:hidden"
+      >
+        <Menu size={24} />
+      </button>
+
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeMobile} />
+          
+          {/* Mobile menu panel */}
+          <div className="fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
+            <div className="p-4">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold">Menu</h2>
+                <button onClick={closeMobile} className="p-2">
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Navigation items */}
+              <nav className="space-y-2">
+                {/* Produkty */}
+                <div>
+                  <button
+                    onClick={() => toggleMobile('products')}
+                    className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 rounded-lg"
+                  >
+                    <span className="font-semibold">Produkty</span>
+                    <ChevronDown 
+                      className={`w-5 h-5 transition-transform ${
+                        expandedMobile === 'products' ? 'rotate-180' : ''
+                      }`} 
+                    />
+                  </button>
+                  
+                  {expandedMobile === 'products' && (
+                    <div className="pl-4 mt-2 space-y-2">
+                      <LocalizedClientLink
+                        href="/kategorie/terasove-dosky"
+                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
+                        onClick={closeMobile}
+                      >
+                        Terásové dosky
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/fasadne-dosky"
+                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
+                        onClick={closeMobile}
+                      >
+                        Fasádne dosky
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/konstrukcne-drevo"
+                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
+                        onClick={closeMobile}
+                      >
+                        Konštrukčné drevo
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/plotove-dosky"
+                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
+                        onClick={closeMobile}
+                      >
+                        Plotové dosky
+                      </LocalizedClientLink>
+                    </div>
+                  )}
+                </div>
+
+                {/* Miesto použitia */}
+                <div>
+                  <button
+                    onClick={() => toggleMobile('usage')}
+                    className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 rounded-lg"
+                  >
+                    <span className="font-semibold">Miesto použitia</span>
+                    <ChevronDown 
+                      className={`w-5 h-5 transition-transform ${
+                        expandedMobile === 'usage' ? 'rotate-180' : ''
+                      }`} 
+                    />
+                  </button>
+                  
+                  {expandedMobile === 'usage' && (
+                    <div className="pl-4 mt-2 space-y-2">
+                      {/* Interiér */}
+                      <div>
+                        <button
+                          onClick={() => toggleUsage('interior')}
+                          className="flex items-center justify-between w-full p-2 text-left hover:bg-blue-50 rounded-lg"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Home className="w-4 h-4 text-blue-600" />
+                            <span className="text-sm font-medium">Interiér</span>
+                          </div>
+                          <ChevronRight 
+                            className={`w-4 h-4 transition-transform ${
+                              expandedUsage === 'interior' ? 'rotate-90' : ''
+                            }`} 
+                          />
+                        </button>
+                        
+                        {expandedUsage === 'interior' && (
+                          <div className="pl-6 mt-2 space-y-1">
+                            {interiorCategories.map((category, index) => (
+                              <LocalizedClientLink
+                                key={index}
+                                href={category.href}
+                                className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
+                                onClick={closeMobile}
+                              >
+                                <category.icon className="w-4 h-4" />
+                                <span>{category.title}</span>
+                              </LocalizedClientLink>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Exteriér */}
+                      <div>
+                        <button
+                          onClick={() => toggleUsage('exterior')}
+                          className="flex items-center justify-between w-full p-2 text-left hover:bg-green-50 rounded-lg"
+                        >
+                          <div className="flex items-center gap-2">
+                            <Building className="w-4 h-4 text-green-600" />
+                            <span className="text-sm font-medium">Exteriér</span>
+                          </div>
+                          <ChevronRight 
+                            className={`w-4 h-4 transition-transform ${
+                              expandedUsage === 'exterior' ? 'rotate-90' : ''
+                            }`} 
+                          />
+                        </button>
+                        
+                        {expandedUsage === 'exterior' && (
+                          <div className="pl-6 mt-2 space-y-1">
+                            {exteriorCategories.map((category, index) => (
+                              <LocalizedClientLink
+                                key={index}
+                                href={category.href}
+                                className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg"
+                                onClick={closeMobile}
+                              >
+                                <category.icon className="w-4 h-4" />
+                                <span>{category.title}</span>
+                              </LocalizedClientLink>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Ostatné linky */}
+                <LocalizedClientLink
+                  href="/kalkulacka"
+                  className="block p-3 font-semibold hover:bg-gray-50 rounded-lg"
+                  onClick={closeMobile}
+                >
+                  Kalkulačka
+                </LocalizedClientLink>
+                
+                <LocalizedClientLink
+                  href="/kontakt"
+                  className="block p-3 font-semibold hover:bg-gray-50 rounded-lg"
+                  onClick={closeMobile}
+                >
+                  Kontakt
+                </LocalizedClientLink>
+
+                {/* Pomocné linky */}
+                <div className="pt-4 mt-6 border-t border-gray-200">
+                  <LocalizedClientLink
+                    href="/purchase-advisor"
+                    className="block p-3 text-sm text-amber-600 hover:bg-amber-50 rounded-lg"
+                    onClick={closeMobile}
+                  >
+                    🛒 Poradca nákupu
+                  </LocalizedClientLink>
+                  
+                  <LocalizedClientLink
+                    href="/najpredavanejsie"
+                    className="block p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg"
+                    onClick={closeMobile}
+                  >
+                    ⭐ Najpredávanejšie
+                  </LocalizedClientLink>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 export default function NavClient({ regions }: NavClientProps) {
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isUsageOpen, setIsUsageOpen] = useState(false)
@@ -228,7 +461,7 @@ export default function NavClient({ regions }: NavClientProps) {
       <header className="relative mx-auto h-20 bg-white border-b border-ui-border-base">
         <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-ui-fg-subtle">
           <div className="flex items-center lg:hidden">
-            <SideMenu regions={regions} />
+            <MobileSideMenu regions={regions} />
           </div>
           <div className="flex flex-1 justify-center lg:justify-start">
             <LocalizedClientLink
