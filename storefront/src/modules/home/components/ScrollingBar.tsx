@@ -2,25 +2,31 @@
 import React from "react"
 
 const messages = [
-  "Tentez votre chance",
-  "400€ à gagner",
-  "1 commande = 1 participation"
+  "🚚 Doprava ZDARMA od 150€",
+  "🌲 Certifikované drevo z udržateľných zdrojov", 
+  "⚡ Expresné dodanie do 24 hodín",
+  "🎯 Presný výpočet materiálu online",
+  "🏠 Profesionálne poradenstvo ZDARMA",
+  "✨ Viac ako 15 rokov skúseností"
 ]
 
 const ScrollingBar = () => {
   return (
-    <div className="overflow-hidden mt-4 w-full bg-accent">
-      <div className="flex items-center pt-1 pb-1 whitespace-nowrap animate-marquee">
-        {Array.from({ length: 8 }).map((_, i) => (
+    <div className="overflow-hidden w-full bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 border-y border-amber-700 mt-8 mb-8">
+      <div className="flex items-center py-3 whitespace-nowrap animate-marquee">
+        {Array.from({ length: 6 }).map((_, i) => (
           <React.Fragment key={i}>
             {messages.map((msg, j) => (
               <span
                 key={j}
-                className="mx-8 text-xl italic font-semibold text-white font-heading md:text-2xl"
+                className="mx-12 text-sm font-medium text-white tracking-wide md:text-base hover:text-amber-100 transition-colors duration-300"
               >
                 {msg}
               </span>
             ))}
+            {i < 5 && (
+              <span className="mx-12 text-amber-200 text-lg">•</span>
+            )}
           </React.Fragment>
         ))}
       </div>

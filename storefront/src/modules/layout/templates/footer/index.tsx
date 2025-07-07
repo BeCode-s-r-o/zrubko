@@ -13,19 +13,35 @@ export default async function Footer() {
     <footer className="w-full bg-white border-t border-ui-border-base">
       <div className="flex flex-col w-full content-container">
         {/* Newsletter Section */}
-        <div className="py-12 border-b border-ui-border-base">
-          <div className="max-w-2xl">
-            <h3 className="mb-2 text-2xl font-bold">Join our newsletter</h3>
-            <p className="mb-6 text-ui-fg-subtle">We&apos;ll send you a nice letter once per week. No spam.</p>
-            <div className="flex gap-x-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-grow px-4 py-3 rounded-lg border-2 border-gray-200 transition-colors focus:border-amber-600 focus:ring-0"
-              />
-              <button className="px-6 py-3 text-white bg-amber-600 rounded-lg transition-colors hover:bg-amber-700">
-                Subscribe
-              </button>
+        <div className="py-12 border-b border-ui-border-base bg-gray-25 rounded-2xl mx-4 my-8">
+          <div className="w-full max-w-4xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+              {/* Left Column - Text */}
+              <div className="text-left">
+                <h3 className="mb-3 text-2xl font-bold text-gray-900 leading-tight">
+                  Pripojte sa k našej komunite
+                </h3>
+                <p className="text-base text-gray-600 leading-relaxed">
+                  Získajte najnovšie informácie o drevených produktoch a exkluzívne ponuky.
+                </p>
+              </div>
+              
+              {/* Right Column - Form */}
+              <div className="text-left">
+                <div className="flex flex-col gap-3">
+                  <input
+                    type="email"
+                    placeholder="Zadajte váš email"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 bg-white text-gray-900 placeholder-gray-500 text-sm transition-all focus:border-amber-400 focus:ring-0 focus:outline-none"
+                  />
+                  <button className="w-full px-6 py-3 text-white bg-gradient-to-r from-amber-500 to-amber-600 rounded-lg font-medium transition-all hover:from-amber-600 hover:to-amber-700 hover:shadow-md text-sm">
+                    Odoberať
+                  </button>
+                  <p className="text-xs text-gray-500">
+                    Žiadny spam. Odhlásenie kedykoľvek.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
