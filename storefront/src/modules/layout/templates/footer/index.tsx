@@ -54,13 +54,13 @@ export default async function Footer() {
               Zrubko
             </LocalizedClientLink>
             <p className="mb-6 text-ui-fg-subtle">
-              Design amazing digital experiences that create more happy in the world.
+              Vytvárame kvalitné drevené riešenia pre váš domov a záhradu. Tradícia a remeselná dokonalosť v každom kuse dreva.
             </p>
           </div>
 
           {/* Product Categories */}
           {product_categories && product_categories?.length > 0 && (
-            <FooterAccordion title="Product">
+            <FooterAccordion title="Produkty">
               <div className="pb-4 md:pb-0">
                 <ul className="grid grid-cols-1 gap-2">
                   {product_categories?.slice(0, 6).map((c) => {
@@ -82,22 +82,27 @@ export default async function Footer() {
           )}
 
           {/* Company Links */}
-          <FooterAccordion title="Company">
+          <FooterAccordion title="Spoločnosť">
             <div className="pb-4 md:pb-0">
               <ul className="grid grid-cols-1 gap-2">
                 <li>
                   <LocalizedClientLink href="/about" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    About us
+                    O nás
                   </LocalizedClientLink>
                 </li>
                 <li>
                   <LocalizedClientLink href="/careers" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    Careers
+                    Kariéra
                   </LocalizedClientLink>
                 </li>
                 <li>
                   <LocalizedClientLink href="/contact" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    Contact
+                    Kontakt
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink href="/purchase-advisor" className="text-ui-fg-subtle hover:text-ui-fg-base">
+                    Sprievodca nákupom
                   </LocalizedClientLink>
                 </li>
               </ul>
@@ -105,22 +110,27 @@ export default async function Footer() {
           </FooterAccordion>
 
           {/* Legal Links */}
-          <FooterAccordion title="Legal">
+          <FooterAccordion title="Právne informácie">
             <div className="pb-4 md:pb-0">
               <ul className="grid grid-cols-1 gap-2">
                 <li>
                   <LocalizedClientLink href="/terms" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    Terms
+                    Obchodné podmienky
                   </LocalizedClientLink>
                 </li>
                 <li>
                   <LocalizedClientLink href="/privacy" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    Privacy
+                    Ochrana osobných údajov
                   </LocalizedClientLink>
                 </li>
                 <li>
                   <LocalizedClientLink href="/cookies" className="text-ui-fg-subtle hover:text-ui-fg-base">
-                    Cookies
+                    Používanie cookies
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink href="/shipping" className="text-ui-fg-subtle hover:text-ui-fg-base">
+                    Doprava a dodanie
                   </LocalizedClientLink>
                 </li>
               </ul>
@@ -128,7 +138,7 @@ export default async function Footer() {
           </FooterAccordion>
 
           {/* Contact Information */}
-          <FooterAccordion title="Contact">
+          <FooterAccordion title="Kontakt">
             <div className="pb-4 md:pb-0">
               {/* Google Map */}
               <div className="overflow-hidden mb-3 h-32 rounded-lg">
@@ -154,7 +164,7 @@ export default async function Footer() {
                 </li>
                 <li className="flex gap-2 items-center text-ui-fg-subtle">
                   <MapPin className="w-4 h-4" />
-                  <span>Zrubko Street 123, City 12345</span>
+                  <span>Drevená ulica 123, Bratislava 12345</span>
                 </li>
               </ul>
             </div>
