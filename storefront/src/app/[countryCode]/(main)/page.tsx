@@ -10,6 +10,7 @@ import InfoStepsSection from "@modules/home/components/info-steps-section"
 import FavoriteProductsSection from "@modules/home/components/favorite-products-section"
 import ScrollingBar from "@modules/home/components/ScrollingBar"
 import HomepageAccordion from "@modules/home/components/HomepageAccordion"
+import WoodConfiguratorSection from "@modules/home/components/wood-configurator-section"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -34,15 +35,16 @@ export default async function Home({
     <>
       
       <Hero />
+      <ScrollingBar />
       <Categories categories={categories} />
       <InfoStepsSection />
+      <WoodConfiguratorSection />
       <FavoriteProductsSection countryCode={countryCode} region={region} />
       <div className="">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>
       </div>
-      <ScrollingBar />
       <HomepageAccordion />
     </>
   )
