@@ -8,6 +8,8 @@ import { SortOptions } from "@modules/store/components/refinement-list/sort-prod
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
+import CategoryBanner from "@modules/categories/components/category-banner"
+import ShouSugiBanInfo from "@modules/categories/components/shou-sugi-ban-info"
 import { HttpTypes } from "@medusajs/types"
 
 export default function CategoryTemplate({
@@ -40,56 +42,63 @@ export default function CategoryTemplate({
       <div className="content-container mt-4 md:mt-12 lg:mt-20">
         <Breadcrumbs categoryPath={categoryPath} />
       </div>
-      <div
-        className="flex flex-col small:flex-row small:items-start py-6 content-container"
-        data-testid="category-container"
-      >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.name}
-                </LocalizedClientLink>
-                /
-              </span>
-            ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
-        </div>
-        {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
-          </div>
-        )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
+      
+      {/* Banner */}
+      <CategoryBanner 
+        title="SHOU SUGI BAN"
+        subtitle="Tradičná japonská technika spracowania dreva"
+        description="Kvalitné drevené materiály pre stavbu, obklady a interiér. Široký výber rozmerov a druhov dreva."
+      />
+
+      {/* Podkategórie ak existujú */}
+      {category.category_children && category.category_children.length > 0 && (
+        <div className="content-container pt-16 pb-8">
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4 text-ui-fg-base">Podkategórie</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
-                  </InteractiveLink>
-                </li>
+                <LocalizedClientLink 
+                  key={c.id} 
+                  href={`/categories/${c.handle}`}
+                  className="p-4 bg-ui-bg-subtle rounded-lg border border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm transition-all duration-200 block"
+                >
+                  <h3 className="font-medium text-ui-fg-base">{c.name}</h3>
+                  {c.description && (
+                    <p className="text-sm text-ui-fg-subtle mt-1 line-clamp-2">
+                      {c.description}
+                    </p>
+                  )}
+                </LocalizedClientLink>
               ))}
-            </ul>
+            </div>
           </div>
-        )}
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            categoryId={category.id}
-            countryCode={countryCode}
-          />
-        </Suspense>
-      </div>
-    </div>
-    </>
-  )
-}
+        </div>
+      )}
+
+      {/* Hlavný obsah s filtrami a produktmi */}
+      <div className={`content-container ${category.category_children && category.category_children.length > 0 ? 'pb-32' : 'pt-32 pb-32'}`}>
+        <div className="flex flex-col lg:flex-row gap-8 items-start" data-testid="category-container">
+          {/* Filtre na ľavej strane */}
+          <aside className="lg:w-80 flex-shrink-0">
+            <RefinementList sortBy={sort} data-testid="sort-by-container" />
+          </aside>
+
+          {/* Produkty na pravej strane */}
+          <main className="flex-1 min-w-0">
+            <Suspense fallback={<SkeletonProductGrid />}>
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                categoryId={category.id}
+                countryCode={countryCode}
+              />
+            </Suspense>
+                      </main>
+          </div>
+        </div>
+      
+      {/* SHOU SUGI BAN informácie */}
+      <ShouSugiBanInfo />
+      </>
+    )
+  }

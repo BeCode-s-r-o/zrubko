@@ -1,6 +1,7 @@
 import { getProductsListWithSort } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import ProductPreview from "@modules/products/components/product-preview"
+import WoodProductCard from "@modules/products/components/wood-product-card"
 import { Pagination } from "@modules/store/components/pagination"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
@@ -73,9 +74,26 @@ export default async function PaginatedProducts({
         data-testid="products-list"
       >
         {products.map((p) => {
+          // Identifikuj drevo produkty podľa kategórie alebo options
+          const isWoodProduct = p.categories?.some(cat => 
+            cat.name === "Tatranský profil" || 
+            cat.name === "Drevo" ||
+            cat.handle === "tatransky-profil" ||
+            cat.handle === "drevo"
+          ) || p.variants?.some(variant => 
+            variant.options?.some(opt => 
+              opt.option?.title === "Rozmer" || 
+              opt.option?.title === "Materiál"
+            )
+          )
+
           return (
             <li key={p.id}>
-              <ProductPreview product={p} region={region} />
+              {isWoodProduct ? (
+                <WoodProductCard product={p} region={region} />
+              ) : (
+                <ProductPreview product={p} region={region} />
+              )}
             </li>
           )
         })}
