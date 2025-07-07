@@ -329,6 +329,16 @@ export default async function seedDemoData({ container }: ExecArgs) {
           name: "Merch",
           is_active: true,
         },
+        {
+          name: "Tatranský profil",
+          is_active: true,
+          description: "Kvalitné drevené profily z Vysokých Tatier",
+        },
+        {
+          name: "Drevo",
+          is_active: true,
+          description: "Rôzne druhy dreva a drevené produkty",
+        },
       ],
     },
   });
@@ -816,6 +826,225 @@ export default async function seedDemoData({ container }: ExecArgs) {
                 {
                   amount: 15,
                   currency_code: "usd",
+                },
+              ],
+            },
+          ],
+          sales_channels: [
+            {
+              id: defaultSalesChannel[0].id,
+            },
+          ],
+        },
+        {
+          title: "Smrekové dosky kartáčované",
+          category_ids: [
+            categoryResult.find((cat) => cat.name === "Tatranský profil")!.id,
+          ],
+          description:
+            "Kvalitný smrekový profil kartáčovaný povrch zo Sibírskeho smreka. Ideálny pre obklady a fasády.",
+          handle: "smrekove-dosky-kartacovane",
+          weight: 2500,
+          status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
+          images: [
+            {
+              url: "https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg",
+            },
+          ],
+          options: [
+            {
+              title: "Rozmer",
+              values: ["20x140", "20x146", "25x146"],
+            },
+            {
+              title: "Materiál", 
+              values: ["Sibírsky smrek", "Smrek"],
+            },
+            {
+              title: "Typ",
+              values: ["kartáčovaný", "klasik"],
+            },
+          ],
+          variants: [
+            {
+              title: "20x140 / Sibírsky smrek / kartáčovaný",
+              sku: "WOOD-20X140-SIBSMREK-KARTAC",
+              options: {
+                Rozmer: "20x140",
+                Materiál: "Sibírsky smrek",
+                Typ: "kartáčovaný",
+              },
+              prices: [
+                {
+                  amount: 4600,
+                  currency_code: "eur",
+                },
+              ],
+            },
+            {
+              title: "20x146 / Sibírsky smrek / kartáčovaný",
+              sku: "WOOD-20X146-SIBSMREK-KARTAC",
+              options: {
+                Rozmer: "20x146",
+                Materiál: "Sibírsky smrek", 
+                Typ: "kartáčovaný",
+              },
+              prices: [
+                {
+                  amount: 4900,
+                  currency_code: "eur",
+                },
+              ],
+            },
+            {
+              title: "25x146 / Smrek / klasik",
+              sku: "WOOD-25X146-SMREK-KLASIK",
+              options: {
+                Rozmer: "25x146",
+                Materiál: "Smrek",
+                Typ: "klasik",
+              },
+              prices: [
+                {
+                  amount: 3800,
+                  currency_code: "eur",
+                },
+              ],
+            },
+          ],
+          sales_channels: [
+            {
+              id: defaultSalesChannel[0].id,
+            },
+          ],
+        },
+        {
+          title: "Borovicové profily opalované",
+          category_ids: [
+            categoryResult.find((cat) => cat.name === "Tatranský profil")!.id,
+          ],
+          description:
+            "Opalované borovicové profily s prirodzenou odolnosťou. Perfektné pre exteriérovú fasádu.",
+          handle: "borovicove-profily-opalovane",
+          weight: 2200,
+          status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
+          images: [
+            {
+              url: "https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg",
+            },
+          ],
+          options: [
+            {
+              title: "Rozmer",
+              values: ["14x121", "18x140", "20x175"],
+            },
+            {
+              title: "Materiál",
+              values: ["Sibírska borovica", "Červený smrek"],
+            },
+            {
+              title: "Typ",
+              values: ["opalovaný a kartáčovaný", "soft"],
+            },
+          ],
+          variants: [
+            {
+              title: "14x121 / Sibírska borovica / opalovaný a kartáčovaný",
+              sku: "WOOD-14X121-SIBBOROV-OPAL",
+              options: {
+                Rozmer: "14x121",
+                Materiál: "Sibírska borovica",
+                Typ: "opalovaný a kartáčovaný",
+              },
+              prices: [
+                {
+                  amount: 5200,
+                  currency_code: "eur",
+                },
+              ],
+            },
+            {
+              title: "18x140 / Červený smrek / soft",
+              sku: "WOOD-18X140-CERVSMREK-SOFT",
+              options: {
+                Rozmer: "18x140",
+                Materiál: "Červený smrek",
+                Typ: "soft",
+              },
+              prices: [
+                {
+                  amount: 4800,
+                  currency_code: "eur",
+                },
+              ],
+            },
+          ],
+          sales_channels: [
+            {
+              id: defaultSalesChannel[0].id,
+            },
+          ],
+        },
+        {
+          title: "Klasické smrekové dosky",
+          category_ids: [
+            categoryResult.find((cat) => cat.name === "Tatranský profil")!.id,
+          ],
+          description:
+            "Tradičné smrekové dosky klasického spracovania. AB trieda kvality pre dlhodobú použitie.",
+          handle: "klasicke-smrekove-dosky",
+          weight: 1800,
+          status: ProductStatus.PUBLISHED,
+          shipping_profile_id: shippingProfile.id,
+          images: [
+            {
+              url: "https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg",
+            },
+          ],
+          options: [
+            {
+              title: "Rozmer",
+              values: ["11x96", "12x96", "12.5x96"],
+            },
+            {
+              title: "Materiál",
+              values: ["Smrek"],
+            },
+            {
+              title: "Typ",
+              values: ["klasik", "originál"],
+            },
+          ],
+          variants: [
+            {
+              title: "11x96 / Smrek / klasik",
+              sku: "WOOD-11X96-SMREK-KLASIK",
+              options: {
+                Rozmer: "11x96",
+                Materiál: "Smrek",
+                Typ: "klasik",
+              },
+              prices: [
+                {
+                  amount: 2800,
+                  currency_code: "eur",
+                },
+              ],
+            },
+            {
+              title: "12x96 / Smrek / originál",
+              sku: "WOOD-12X96-SMREK-ORIGINAL",
+              options: {
+                Rozmer: "12x96",
+                Materiál: "Smrek",
+                Typ: "originál",
+              },
+              prices: [
+                {
+                  amount: 3200,
+                  currency_code: "eur",
                 },
               ],
             },
