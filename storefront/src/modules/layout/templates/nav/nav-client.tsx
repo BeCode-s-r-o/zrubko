@@ -14,6 +14,23 @@ import {
   Search,
   ShoppingCart,
   ChevronDown,
+  Home,
+  Building,
+  TreePine,
+  Waves,
+  Fence,
+  Calculator,
+  Star,
+  ArrowRight,
+  Paintbrush,
+  Layers,
+  Square,
+  Thermometer,
+  Building2,
+  Triangle,
+  Waves as WavesIcon,
+  Tent,
+  Grid3x3,
 } from "lucide-react"
 import { StoreRegion } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
@@ -23,9 +40,104 @@ type NavClientProps = {
   regions: StoreRegion[]
 }
 
+// Definícia kategórií pre interiér a exteriér
+const interiorCategories = [
+  {
+    title: "Obklad stien",
+    icon: Paintbrush,
+    description: "Dekoratívny obklad vnútorných stien",
+    profiles: ["Tatranský profil", "Smrekovec"],
+    quality: ["AB", "BC"],
+    image: "/images/wood-previews/interior-wall.jpg",
+    href: "/kategorie/obklad-stien"
+  },
+  {
+    title: "Podbitie stropov",
+    icon: Layers,
+    description: "Elegantné riešenie pre stropy",
+    profiles: ["Smrekovec", "Lambris"],
+    quality: ["AB"],
+    image: "/images/wood-previews/ceiling.jpg",
+    href: "/kategorie/podbitie-stropov"
+  },
+  {
+    title: "Podlaha",
+    icon: Square,
+    description: "Pevná drevená podlaha",
+    profiles: ["Masívne dosky", "Parkety"],
+    quality: ["A", "AB"],
+    image: "/images/wood-previews/flooring.jpg",
+    href: "/kategorie/podlaha"
+  },
+  {
+    title: "Sauna",
+    icon: Thermometer,
+    description: "Špeciálne drevo do sauny",
+    profiles: ["Abachi", "Céder"],
+    quality: ["A"],
+    image: "/images/wood-previews/sauna.jpg",
+    href: "/kategorie/sauna"
+  }
+]
+
+const exteriorCategories = [
+  {
+    title: "Fasáda",
+    icon: Building2,
+    description: "Obklad vonkajšej steny",
+    profiles: ["Tatranský profil", "Rhombus"],
+    quality: ["AB", "BC"],
+    image: "/images/wood-previews/facade.jpg",
+    href: "/kategorie/fasada"
+  },
+  {
+    title: "Podbitie strechy",
+    icon: Triangle,
+    description: "Ochrana a úprava podstefí",
+    profiles: ["Smrekovec", "Tatranský profil"],
+    quality: ["AB", "BC"],
+    image: "/images/wood-previews/roof-soffit.jpg",
+    href: "/kategorie/podbitie-strechy"
+  },
+  {
+    title: "Terasa",
+    icon: WavesIcon,
+    description: "Terásové dosky a konštrukcie",
+    profiles: ["Terásové dosky", "WPC"],
+    quality: ["A", "AB"],
+    image: "/images/wood-previews/deck.jpg",
+    href: "/kategorie/terasa"
+  },
+  {
+    title: "Prístrešok",
+    icon: Tent,
+    description: "Konštrukčné drevo pre prístrešky",
+    profiles: ["Hranoly", "Latky"],
+    quality: ["AB", "BC"],
+    image: "/images/wood-previews/shelter.jpg",
+    href: "/kategorie/pristresok"
+  },
+  {
+    title: "Plot",
+    icon: Grid3x3,
+    description: "Plotové dosky a stĺpiky",
+    profiles: ["Plotovky", "Stĺpiky"],
+    quality: ["BC", "C"],
+    image: "/images/wood-previews/fence.jpg",
+    href: "/kategorie/plot"
+  }
+]
+
+const topProducts = [
+  { title: "Tatranský profil AB", href: "/produkty/tatransky-profil-ab" },
+  { title: "Terásové dosky", href: "/produkty/terasove-dosky" },
+  { title: "Plotovky smrek", href: "/produkty/plotovky-smrek" }
+]
+
 export default function NavClient({ regions }: NavClientProps) {
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isUsageOpen, setIsUsageOpen] = useState(false)
+  const [expandedSection, setExpandedSection] = useState<'interior' | 'exterior' | null>(null)
 
   const usageMenuRef = useRef<HTMLDivElement>(null)
   const productsMenuRef = useRef<HTMLDivElement>(null)
@@ -158,7 +270,6 @@ export default function NavClient({ regions }: NavClientProps) {
 
         {/* SECOND NAV: DESKTOP MENU BAR */}
         <nav className="hidden items-center w-full h-full bg-white border-t lg:flex border-ui-border-base">
-
           <div className="flex gap-10 items-center content-container">
             <button
               id="products-menu-button"
@@ -211,42 +322,41 @@ export default function NavClient({ regions }: NavClientProps) {
           >
              <div className="w-full max-w-6xl">
               <div className="mb-6">
-                <h2 className="mb-1 text-2xl font-bold">Miesto použitia</h2>
+                <h2 className="mb-1 text-2xl font-bold">Produkty</h2>
                 <p className="max-w-2xl text-base text-ui-fg-muted">
-                  Vyberte si produkty podľa miesta použitia. Každá kategória obsahuje špeciálne produkty vhodné pre dané prostredie.
+                  Prehliadajte naše produkty podľa kategórií a nájdite to, čo potrebujete pre váš projekt.
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
+                <a href="/kategorie/terasove-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terásové dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+                    <h3 className="mb-1 text-lg font-semibold">Terásové dosky</h3>
+                    <p className="text-sm text-ui-fg-muted">Kvalitné dosky pre terasy a balkóny.</p>
                   </div>
                 </a>
-      
-
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
+                
+                <a href="/kategorie/fasadne-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Fasádne dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
-                  </div>
-                </a>
-
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+                    <h3 className="mb-1 text-lg font-semibold">Fasádne dosky</h3>
+                    <p className="text-sm text-ui-fg-muted">Obklady pre vonkajšie steny.</p>
                   </div>
                 </a>
 
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
+                <a href="/kategorie/konstrukcne-drevo" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Konštrukčné drevo" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
                   <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+                    <h3 className="mb-1 text-lg font-semibold">Konštrukčné drevo</h3>
+                    <p className="text-sm text-ui-fg-muted">Hranoly a latky pre stavbu.</p>
+                  </div>
+                </a>
+
+                <a href="/kategorie/plotove-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
+                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Plotové dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
+                  <div className="p-4">
+                    <h3 className="mb-1 text-lg font-semibold">Plotové dosky</h3>
+                    <p className="text-sm text-ui-fg-muted">Dosky a stĺpiky pre ploty.</p>
                   </div>
                 </a>
               </div>
@@ -258,50 +368,232 @@ export default function NavClient({ regions }: NavClientProps) {
         {isUsageOpen && (
           <div
             ref={usageMenuRef}
-            className="flex z-40 justify-center px-8 py-8 w-full bg-white border-t shadow-lg border-ui-border-base animate-fade-in"
-            style={{ minHeight: 320 }}
+            className="flex z-40 justify-center px-8 py-8 w-full bg-white border-t shadow-lg border-ui-border-base animate-fade-in relative"
           >
-            <div className="w-full max-w-6xl">
-              <div className="mb-6">
-                <h2 className="mb-1 text-2xl font-bold">Miesto použitia</h2>
-                <p className="max-w-2xl text-base text-ui-fg-muted">
-                  Vyberte si produkty podľa miesta použitia. Každá kategória obsahuje špeciálne produkty vhodné pre dané prostredie.
+            <div className="w-full max-w-7xl relative">
+              {/* Jednoduché absolute tlačidlá vpravo hore */}
+              <div className="absolute top-0 right-0 flex gap-2">
+                <LocalizedClientLink
+                  href="/purchase-advisor"
+                  className="px-4 py-2 text-sm font-medium text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors"
+                >
+                  Poradca nákupu
+                </LocalizedClientLink>
+                <LocalizedClientLink
+                  href="/najpredavanejsie"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Najpredávanejšie
+                </LocalizedClientLink>
+              </div>
+
+              <div className="mb-8">
+                <h2 className="mb-2 text-2xl font-bold">Miesto použitia</h2>
+                <p className="max-w-3xl text-base text-ui-fg-muted">
+                  Vyberte si produkty podľa miesta použitia. Kliknite na sekciu pre zobrazenie detailov.
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
-                  </div>
-                </a>
-      
 
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+              {/* Základná úroveň - Interiér a Exteriér */}
+              <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
+                {/* Interiér sekcia */}
+                <div 
+                  className={`relative p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                    expandedSection === 'interior' 
+                      ? 'border-blue-300 shadow-lg' 
+                      : 'border-blue-200 hover:border-blue-300 hover:shadow-md'
+                  }`}
+                  onClick={() => setExpandedSection(expandedSection === 'interior' ? null : 'interior')}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-lg">
+                        <Home className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">Interiér</h3>
+                        <p className="text-sm text-gray-600">Drevo do vnútorných priestorov</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full">
+                        {interiorCategories.length} kategórií
+                      </span>
+                      <ChevronDown 
+                        className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${
+                          expandedSection === 'interior' ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </div>
                   </div>
-                </a>
+                  
+                  {/* Rýchly náhľad kategórií */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {interiorCategories.map((category, index) => (
+                      <span key={index} className="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded-full">
+                        {category.title}
+                      </span>
+                    ))}
+                  </div>
+                </div>
 
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+                {/* Exteriér sekcia */}
+                <div 
+                  className={`relative p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                    expandedSection === 'exterior' 
+                      ? 'border-green-300 shadow-lg' 
+                      : 'border-green-200 hover:border-green-300 hover:shadow-md'
+                  }`}
+                  onClick={() => setExpandedSection(expandedSection === 'exterior' ? null : 'exterior')}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-lg">
+                        <Building className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">Exteriér</h3>
+                        <p className="text-sm text-gray-600">Drevo do vonkajších priestorov</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full">
+                        {exteriorCategories.length} kategórií
+                      </span>
+                      <ChevronDown 
+                        className={`w-5 h-5 text-green-600 transition-transform duration-300 ${
+                          expandedSection === 'exterior' ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </div>
                   </div>
-                </a>
-
-                <a href="/miesto/terasa" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terasa" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terasa</h3>
-                    <p className="text-sm text-ui-fg-muted">Produkty vhodné na ochranu a úrčbu terás.</p>
+                  
+                  {/* Rýchly náhľad kategórií */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {exteriorCategories.map((category, index) => (
+                      <span key={index} className="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">
+                        {category.title}
+                      </span>
+                    ))}
                   </div>
-                </a>
+                </div>
               </div>
+
+              {/* Detailná úroveň - Rozklikaná sekcia */}
+              {expandedSection && (
+                <div className="overflow-hidden transition-all duration-500 ease-in-out animate-fade-in">
+                  <div className={`p-6 rounded-xl border-2 ${
+                    expandedSection === 'interior' 
+                      ? 'bg-blue-50 border-blue-200' 
+                      : 'bg-green-50 border-green-200'
+                  }`}>
+                    <div className="flex items-center justify-between mb-6">
+                      <h4 className={`text-lg font-bold ${
+                        expandedSection === 'interior' ? 'text-blue-900' : 'text-green-900'
+                      }`}>
+                        {expandedSection === 'interior' ? 'Interiérové kategórie' : 'Exteriérové kategórie'}
+                      </h4>
+                      <button
+                        onClick={() => setExpandedSection(null)}
+                        className={`px-3 py-1 text-sm font-medium rounded-lg transition-colors ${
+                          expandedSection === 'interior' 
+                            ? 'bg-blue-200 text-blue-800 hover:bg-blue-300' 
+                            : 'bg-green-200 text-green-800 hover:bg-green-300'
+                        }`}
+                      >
+                        Zavrieť
+                      </button>
+                    </div>
+                    
+                    <div className={`grid grid-cols-1 gap-4 ${
+                      expandedSection === 'interior' 
+                        ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
+                        : 'sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'
+                    }`}>
+                      {(expandedSection === 'interior' ? interiorCategories : exteriorCategories).map((category, index) => (
+                        <LocalizedClientLink
+                          key={index}
+                          href={category.href}
+                          className={`group relative flex items-start p-4 bg-white rounded-xl border-2 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer ${
+                            expandedSection === 'interior' 
+                              ? 'border-blue-200 hover:bg-blue-50 hover:border-blue-300' 
+                              : 'border-green-200 hover:bg-green-50 hover:border-green-300'
+                          }`}
+                        >
+                          {/* Ikona vľavo */}
+                          <div className={`flex items-center justify-center w-12 h-12 rounded-lg mr-3 transition-all duration-300 flex-shrink-0 ${
+                            expandedSection === 'interior' 
+                              ? 'bg-blue-100 group-hover:bg-blue-200' 
+                              : 'bg-green-100 group-hover:bg-green-200'
+                          }`}>
+                            <category.icon className={`w-6 h-6 ${
+                              expandedSection === 'interior' ? 'text-blue-600' : 'text-green-600'
+                            }`} />
+                          </div>
+                          
+                          {/* Obsah vpravo */}
+                          <div className="flex-1 min-w-0">
+                            {/* Názov kategórie */}
+                            <h4 className="text-base font-semibold text-gray-900 mb-1">{category.title}</h4>
+                            
+                            {/* Popis */}
+                            <p className="text-sm text-gray-500 mb-2 leading-snug line-clamp-2">{category.description}</p>
+                            
+                            {/* Profily */}
+                            <div className="flex flex-wrap gap-1 mb-2">
+                              {category.profiles.slice(0, 2).map((profile, idx) => (
+                                <span key={idx} className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded-full border border-gray-200">
+                                  {profile}
+                                </span>
+                              ))}
+                            </div>
+                            
+                            {/* Kvality */}
+                            <div className="flex gap-1">
+                              {category.quality.map((quality, idx) => (
+                                <span 
+                                  key={idx} 
+                                  className={`px-2 py-0.5 text-xs font-medium rounded-full border ${
+                                    quality === 'A'
+                                      ? 'bg-purple-100 text-purple-800 border-purple-200'
+                                      : quality === 'AB'
+                                      ? 'bg-orange-100 text-orange-800 border-orange-200'
+                                      : quality === 'BC'
+                                      ? 'bg-amber-100 text-amber-800 border-amber-200'
+                                      : quality === 'C'
+                                      ? 'bg-gray-100 text-gray-800 border-gray-200'
+                                      : 'bg-gray-100 text-gray-800 border-gray-200'
+                                  }`}
+                                >
+                                  {quality}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          {/* CTA šípka a mini náhľad */}
+                          <div className="flex flex-col items-center gap-2 ml-2">
+                            <div className={`w-8 h-8 rounded-lg border opacity-80 group-hover:opacity-100 transition-opacity duration-300 ${
+                              expandedSection === 'interior' 
+                                ? 'bg-gradient-to-br from-amber-200 to-amber-300 border-amber-300' 
+                                : 'bg-gradient-to-br from-green-200 to-green-300 border-green-300'
+                            }`}>
+                              <div className={`w-full h-full rounded-lg opacity-60 ${
+                                expandedSection === 'interior' 
+                                  ? 'bg-gradient-to-br from-amber-100 to-amber-200' 
+                                  : 'bg-gradient-to-br from-green-100 to-green-200'
+                              }`}></div>
+                            </div>
+                            <div className="flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+                              <ArrowRight className="w-3 h-3 text-gray-600" />
+                            </div>
+                          </div>
+                        </LocalizedClientLink>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
