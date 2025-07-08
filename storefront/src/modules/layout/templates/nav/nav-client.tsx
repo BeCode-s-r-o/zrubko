@@ -49,7 +49,7 @@ type NavClientProps = {
   regions: StoreRegion[]
 }
 
-// Definícia kategórií pre interiér a exteriér
+// Definícia kategórií pre interiér a exteriér s SHOU SUGI BAN tematikou
 const interiorCategories = [
   {
     title: "Obklad stien",
@@ -57,7 +57,7 @@ const interiorCategories = [
     description: "Dekoratívny obklad vnútorných stien",
     profiles: ["Tatranský profil", "Smrekovec"],
     quality: ["AB", "BC"],
-    image: "/images/wood-previews/interior-wall.jpg",
+    image: "/burnt-wood.jpg",
     href: "/kategorie/obklad-stien"
   },
   {
@@ -66,7 +66,7 @@ const interiorCategories = [
     description: "Elegantné riešenie pre stropy",
     profiles: ["Smrekovec", "Lambris"],
     quality: ["AB"],
-    image: "/test-category.png",
+    image: "/shou-sugi-ban-bg.png",
     href: "/kategorie/podbitie-stropov"
   },
   {
@@ -75,7 +75,7 @@ const interiorCategories = [
     description: "Pevná drevená podlaha",
     profiles: ["Masívne dosky", "Parkety"],
     quality: ["A", "AB"],
-    image: "/images/wood-previews/flooring.jpg",
+    image: "/shou-sugi-ban-hero.jpg",
     href: "/kategorie/podlaha"
   },
   {
@@ -84,7 +84,7 @@ const interiorCategories = [
     description: "Špeciálne drevo do sauny",
     profiles: ["Abachi", "Céder"],
     quality: ["A"],
-    image: "/images/wood-previews/sauna.jpg",
+    image: "/shou-sugi-ban-main.jpg",
     href: "/kategorie/sauna"
   }
 ]
@@ -96,7 +96,7 @@ const exteriorCategories = [
     description: "Obklad vonkajšej steny",
     profiles: ["Tatranský profil", "Rhombus"],
     quality: ["AB", "BC"],
-    image: "/images/wood-previews/facade.jpg",
+    image: "/burnt-wood.jpg",
     href: "/kategorie/fasada"
   },
   {
@@ -105,7 +105,7 @@ const exteriorCategories = [
     description: "Ochrana a úprava podstefí",
     profiles: ["Smrekovec", "Tatranský profil"],
     quality: ["AB", "BC"],
-    image: "/images/wood-previews/roof-soffit.jpg",
+    image: "/shou-sugi-ban-main.jpg",
     href: "/kategorie/podbitie-strechy"
   },
   {
@@ -114,7 +114,7 @@ const exteriorCategories = [
     description: "Terásové dosky a konštrukcie",
     profiles: ["Terásové dosky", "WPC"],
     quality: ["A", "AB"],
-    image: "/images/wood-previews/deck.jpg",
+    image: "/shou-sugi-ban-hero.jpg",
     href: "/kategorie/terasa"
   },
   {
@@ -123,7 +123,7 @@ const exteriorCategories = [
     description: "Konštrukčné drevo pre prístrešky",
     profiles: ["Hranoly", "Latky"],
     quality: ["AB", "BC"],
-    image: "/images/wood-previews/shelter.jpg",
+    image: "/shou-sugi-ban-bg.png",
     href: "/kategorie/pristresok"
   },
   {
@@ -132,7 +132,7 @@ const exteriorCategories = [
     description: "Plotové dosky a stĺpiky",
     profiles: ["Plotovky", "Stĺpiky"],
     quality: ["BC", "C"],
-    image: "/images/wood-previews/fence.jpg",
+    image: "/burnt-wood.jpg",
     href: "/kategorie/plot"
   }
 ]
@@ -893,8 +893,8 @@ export default function NavClient({ regions }: NavClientProps) {
                     <div className="animate-fade-in">
                       <div className="w-full h-48 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg mb-4 flex items-center justify-center">
                         <img 
-                          src="/test-category.png" 
-                          alt="Tatranský profil" 
+                          src="/burnt-wood.jpg" 
+                          alt="Tatranský profil - SHOU SUGI BAN" 
                           className="w-full h-full object-cover rounded-lg"
                           onError={(e) => {
                             const target = e.currentTarget;

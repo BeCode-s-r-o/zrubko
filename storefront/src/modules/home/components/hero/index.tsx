@@ -11,9 +11,11 @@ import { useState, useEffect } from "react"
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   
+  // Skutočné SHOU SUGI BAN obrázky s jednoduchými názvami
   const images = [
-    '/9pdbmtzg5xvsirgyplj6la120080.jpg',
-    '/lightwoodinteriordiningroom26041710904800x533_1.jpg'
+    '/burnt-wood.jpg',
+    '/shou-sugi-ban-main.jpg',
+    '/shou-sugi-ban-hero.jpg'
   ]
 
   useEffect(() => {
@@ -28,7 +30,7 @@ const Hero = () => {
     <section className="pt-6 lg:pt-20">
       <div className="content-container">
         <div className="relative rounded-xl overflow-hidden min-h-[500px] flex items-center">
-          {/* Background images with transition */}
+          {/* SHOU SUGI BAN obrázky s prechodovými efektmi */}
           {images.map((image, index) => (
             <div
               key={index}
@@ -39,8 +41,8 @@ const Hero = () => {
             />
           ))}
           
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+          {/* Tmavší overlay pre lepší kontrast s SHOU SUGI BAN témou */}
+          <div className="absolute inset-0 bg-black bg-opacity-60"></div>
           
           {/* Content */}
           <div className="relative z-10 text-left px-8 py-12 lg:px-12 lg:py-16">
