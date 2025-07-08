@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { Button } from "@medusajs/ui"
 import { HttpTypes } from "@medusajs/types"
+import Link from "next/link"
 import { addToCart } from "@lib/data/cart"
 import VariantCard from "./variant-card"
 import QuantitySelector from "./quantity-selector"
@@ -129,7 +130,20 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
                   {selectedVariant.size} mm – SHOU SUGI BAN + {selectedVariant.treatment}
                 </h5>
                 <p className="text-gray-600 mb-4 md:mb-6 font-semibold text-base md:text-lg">
-                  {selectedVariant.material}
+                  {selectedVariant.material.includes('AB') ? (
+                    <>
+                      Sibírsky smrek{' '}
+                      <Link 
+                        href="/kvalita-ab" 
+                        className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
+                        title="Dozvedieť sa viac o kvalite AB"
+                      >
+                        AB
+                      </Link>
+                    </>
+                  ) : (
+                    selectedVariant.material
+                  )}
                 </p>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4 md:mb-6">

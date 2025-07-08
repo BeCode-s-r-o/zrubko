@@ -128,7 +128,19 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 {[
                   { label: "Drevina", value: "Sibírsky smrek/smrekovec", icon: <TreeIcon className="text-green-600" /> },
                   { label: "Vlhkosť dreva", value: "8-12%", icon: <DropletIcon className="text-blue-500" /> },
-                  { label: "Trieda kvality", value: "AB", icon: <StarIcon className="text-yellow-500" /> },
+                  { 
+                    label: "Trieda kvality", 
+                    value: (
+                      <a 
+                        href="/kvalita-ab" 
+                        className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
+                        title="Dozvedieť sa viac o kvalite AB"
+                      >
+                        AB
+                      </a>
+                    ), 
+                    icon: <StarIcon className="text-yellow-500" /> 
+                  },
                   { label: "Povrchová úprava", value: "Spálené + kartáč + olej", icon: <PaletteIcon className="text-accent" /> }
                 ].map((spec, index) => (
                   <div key={index} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-accent/5 transition-colors border border-accent/5">
