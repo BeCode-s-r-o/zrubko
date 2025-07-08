@@ -1,3 +1,5 @@
+"use client"
+
 import { Text } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
@@ -6,8 +8,8 @@ export default function CategoryCard({
 }: {
   category: any
 }) {
-  // Use category image if available, otherwise fallback to default
-  const imageUrl = category.image || "https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg"
+  // Použije obrázok kategórie ak existuje, inak fallback na SHOU SUGI BAN tematiku
+  const imageUrl = category.image || "/shou-sugi-ban-bg.png"
 
   return (
     <div className="overflow-hidden relative bg-white rounded-lg border border-gray-200 transition-all duration-300 group hover:border-gray-300 hover:shadow-lg">
@@ -18,6 +20,11 @@ export default function CategoryCard({
             src={imageUrl}
             alt={category.name}
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            onError={(e) => {
+              // Fallback ak sa obrázok nenačíta
+              const target = e.currentTarget;
+              target.src = "/shou-sugi-ban-bg.png";
+            }}
           />
           
           {/* Overlay effect on hover */}

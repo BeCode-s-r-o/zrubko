@@ -13,16 +13,16 @@ interface CategoryBannerProps {
 export default function CategoryBanner({ title, subtitle, description }: CategoryBannerProps) {
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
-      {/* Background obrázok */}
+      {/* Background obrázok - skutočný SHOU SUGI BAN */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
         style={{
-          backgroundImage: `url('/Hand drawn abstract outline background _ Free Vector_files/monochromatic-wooden-surface-with-knots_23-2148413337.jpg')`
+          backgroundImage: `url('/shou-sugi-ban-main.jpg')`
         }}
       />
       
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-gray-900/50 to-black/60" />
+      {/* Gradient overlay - tmavší pre lepší kontrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-gray-900/60 to-black/70" />
       
       <div className="relative content-container py-12 md:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -71,18 +71,23 @@ export default function CategoryBanner({ title, subtitle, description }: Categor
             </div>
           </div>
           
-          {/* Pravá strana - obrázok */}
+          {/* Pravá strana - skutočný SHOU SUGI BAN obrázok */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 border border-gray-700">
               <img
-                src="/Hand drawn abstract outline background _ Free Vector_files/distress-old-dry-wooden-texture_615910-9657.jpg"
-                alt="SHOU SUGI BAN - Opaľované drevo"
+                src="/burnt-wood.jpg"
+                alt="SHOU SUGI BAN - Skutočné spálené drevo"
                 className="w-full h-64 md:h-80 lg:h-96 object-cover"
+                onError={(e) => {
+                  // Fallback ak sa obrázok nenačíta
+                  const target = e.currentTarget;
+                  target.src = "/shou-sugi-ban-main.jpg";
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             </div>
             
-            {/* Floating element */}
+            {/* Floating element - japonské znaky pre ohňom pálené */}
             <div className="absolute -top-6 -right-6 bg-gray-900 border border-gray-600 rounded-xl shadow-lg p-4 transform -rotate-12">
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">火</div>
@@ -90,7 +95,7 @@ export default function CategoryBanner({ title, subtitle, description }: Categor
               </div>
             </div>
             
-            {/* Floating element 2 */}
+            {/* Floating element 2 - pálené */}
             <div className="absolute -bottom-4 -left-4 bg-black border border-gray-700 rounded-xl shadow-lg p-3 transform rotate-12">
               <div className="text-center">
                 <div className="text-lg font-bold text-white">焼</div>
