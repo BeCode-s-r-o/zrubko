@@ -60,7 +60,7 @@ const interiorCategories = [
     description: "Elegantné riešenie pre stropy",
     profiles: ["Smrekovec", "Lambris"],
     quality: ["AB"],
-    image: "/images/wood-previews/ceiling.jpg",
+    image: "/test-category.png",
     href: "/kategorie/podbitie-stropov"
   },
   {
