@@ -46,18 +46,18 @@ const Hero = () => {
           <div className="relative z-10 text-left px-8 py-12 lg:px-12 lg:py-16">
             <h1 className="mb-6 text-4xl lg:text-6xl font-bold leading-tight text-white">
               Staviate alebo Obkladáte? 
-              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent"> Zrubko má drevo na mieru</span>
+              <span className="bg-gradient-to-r from-accent to-accent-dark bg-clip-text text-transparent"> Zrubko má drevo na mieru</span>
             </h1>
             <p className="mb-10 text-xl text-gray-200 leading-relaxed">
               Vyberiete, vypočítate, objednáte – doručíme až k vám domov.
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <button className="group bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center">
+              <button className="group bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent-dark text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center">
                 <CirclePlay size={18} className="mr-2" />
                 Začať s výberom
               </button>
-              <button className="bg-white/90 hover:bg-white text-gray-800 border-2 border-white/50 hover:border-amber-300 px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
+              <button className="bg-white/90 hover:bg-white text-gray-800 border-2 border-white/50 hover:border-accent px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
                 Navštíviť showroom
               </button>
             </div>
@@ -70,7 +70,7 @@ const Hero = () => {
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
                 className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                  index === currentImageIndex ? 'bg-amber-600' : 'bg-amber-600 bg-opacity-30'
+                  index === currentImageIndex ? 'bg-accent' : 'bg-accent bg-opacity-30'
                 }`}
               />
             ))}
