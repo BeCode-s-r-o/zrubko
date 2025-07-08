@@ -82,86 +82,104 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Nadpis produktu */}
+      {/* Kompaktný nadpis s gradientom */}
       <div className="mb-4">
-        <h1 className="text-3xl font-bold text-ui-fg-base mb-2">
+        <h1 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2">
           SHOU SUGI BAN + kartáč + olej
         </h1>
-        <p className="text-base text-ui-fg-subtle">
+        <p className="text-base text-gray-600 leading-relaxed">
           Tradičná japonská technika spracowania dreva
         </p>
+        <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3"></div>
       </div>
 
-      {/* Varianty */}
-      <div className="grid grid-cols-1 gap-4">
-        {mockVariants.map((variant) => (
-          <VariantCard
-            key={variant.id}
-            variant={variant}
-            isSelected={selectedVariant.id === variant.id}
-            onSelect={() => setSelectedVariant(variant)}
-          />
-        ))}
+      {/* Kompaktný variant selector */}
+      <div className="bg-white rounded-xl shadow-md border border-accent/10 overflow-hidden">
+        <div className="bg-gradient-to-r from-accent/5 to-accent-light/5 px-5 py-3 border-b border-accent/10">
+          <h3 className="text-lg font-semibold text-accent-dark">Dostupné varianty</h3>
+          <p className="text-xs text-gray-600 mt-0.5">Vyberte si rozmer a typ spracovania</p>
+        </div>
+        
+        <div className="p-4 space-y-3">
+          {mockVariants.map((variant) => (
+            <VariantCard
+              key={variant.id}
+              variant={variant}
+              isSelected={selectedVariant.id === variant.id}
+              onSelect={() => setSelectedVariant(variant)}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Vybraný variant - detail a objednávka */}
+      {/* Kompaktný vybraný variant */}
       {selectedVariant && (
-        <div className="bg-ui-bg-subtle rounded-lg p-6">
-          <h4 className="font-semibold text-lg mb-4">Vybraný variant</h4>
+        <div className="bg-gradient-to-br from-white to-accent-light/10 rounded-xl shadow-md border border-accent/20 overflow-hidden">
+          <div className="bg-gradient-to-r from-accent to-accent-light px-5 py-3">
+            <h4 className="font-semibold text-lg text-white">Vybraný variant</h4>
+            <p className="text-accent-light text-xs mt-0.5">Finalizujte svoju objednávku</p>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Detaily variantu */}
-            <div>
-              <h5 className="font-medium text-base mb-2">
-                {selectedVariant.size} mm – SHOU SUGI BAN + {selectedVariant.treatment}
-              </h5>
-              <p className="text-sm text-ui-fg-subtle mb-3">
-                {selectedVariant.material}
-              </p>
-              
-              <div className="space-y-2 text-sm mb-8">
-                <div className="flex justify-between">
-                  <span>Dĺžka:</span>
-                  <span>{selectedVariant.length} m</span>
+          <div className="p-5">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              {/* Detaily variantu - kompaktnejšie */}
+              <div>
+                <div className="bg-white rounded-lg p-4 shadow-sm border border-accent/10 mb-4">
+                  <h5 className="font-semibold text-base text-accent-dark mb-2">
+                    {selectedVariant.size} mm – SHOU SUGI BAN + {selectedVariant.treatment}
+                  </h5>
+                  <p className="text-gray-600 mb-3 font-medium text-sm">
+                    {selectedVariant.material}
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                    <div className="bg-accent-light/10 rounded-lg p-2.5">
+                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide">Dĺžka</span>
+                      <p className="text-accent-dark font-bold text-base">{selectedVariant.length} m</p>
+                    </div>
+                    <div className="bg-accent-light/10 rounded-lg p-2.5">
+                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide">Cena za m²</span>
+                      <p className="text-accent-dark font-bold text-base">{selectedVariant.pricePerM2.toFixed(2)} €</p>
+                    </div>
+                    <div className="bg-accent-light/10 rounded-lg p-2.5">
+                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide">M² v 1 ks</span>
+                      <p className="text-accent-dark font-bold text-base">{selectedVariant.m2PerPiece} m²</p>
+                    </div>
+                    <div className="bg-accent-light/10 rounded-lg p-2.5">
+                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide">Dostupnosť</span>
+                      <p className="text-green-600 font-bold text-sm">Na sklade</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Cena za m²:</span>
-                  <span className="font-medium">{selectedVariant.pricePerM2.toFixed(2)} €</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>M² v 1 ks:</span>
-                  <span>{selectedVariant.m2PerPiece} m²</span>
-                </div>
+
+                <Button
+                  onClick={handleAddToCart}
+                  disabled={selectedVariant.availability === "unavailable" || isAdding}
+                  className="w-full h-12 bg-gradient-to-r from-accent to-accent-light hover:from-accent-dark hover:to-accent text-white font-semibold text-base rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                  isLoading={isAdding}
+                >
+                  {selectedVariant.availability === "unavailable" 
+                    ? "Nedostupné"
+                    : `Pridať do košíka - ${totalPrice.toFixed(2)} €`
+                  }
+                </Button>
               </div>
 
-              <Button
-                onClick={handleAddToCart}
-                disabled={selectedVariant.availability === "unavailable" || isAdding}
-                variant="primary"
-                className="w-full h-12"
-                isLoading={isAdding}
-              >
-                {selectedVariant.availability === "unavailable" 
-                  ? "Nedostupné"
-                  : `Pridať do košíka - ${totalPrice.toFixed(2)} €`
-                }
-              </Button>
-            </div>
-
-            {/* Kalkulačka */}
-            <div>
-              <QuantitySelector
-                quantity={quantity}
-                onQuantityChange={setQuantity}
-                availability={selectedVariant.availability}
-              />
-              
-              <PriceCalculator
-                variant={selectedVariant}
-                quantity={quantity}
-                totalM2={totalM2}
-                totalPrice={totalPrice}
-              />
+              {/* Kalkulačka - kompaktnejšia */}
+              <div className="space-y-4">
+                <QuantitySelector
+                  quantity={quantity}
+                  onQuantityChange={setQuantity}
+                  availability={selectedVariant.availability}
+                />
+                
+                <PriceCalculator
+                  variant={selectedVariant}
+                  quantity={quantity}
+                  totalM2={totalM2}
+                  totalPrice={totalPrice}
+                />
+              </div>
             </div>
           </div>
         </div>

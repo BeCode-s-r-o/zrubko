@@ -32,18 +32,18 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   }
 
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-medium mb-2">
+    <div className="bg-white border border-accent/20 rounded-lg p-4 shadow-sm">
+      <label className="block text-sm font-semibold mb-3 text-accent-dark">
         Počet kusov
       </label>
       
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2">
         <Button
           variant="secondary"
           size="small"
           onClick={handleDecrease}
           disabled={quantity <= 1 || isDisabled}
-          className="w-10 h-10 p-0 flex items-center justify-center"
+          className="w-9 h-9 p-0 flex items-center justify-center bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent-dark font-bold rounded-lg transition-colors"
         >
           −
         </Button>
@@ -54,7 +54,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
           onChange={handleInputChange}
           disabled={isDisabled}
           min="1"
-          className="w-20 h-10 text-center border rounded-lg border-ui-border-base focus:border-ui-border-interactive focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-16 h-9 text-center border border-accent/30 rounded-lg focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 font-semibold text-accent-dark disabled:opacity-50 disabled:cursor-not-allowed"
         />
         
         <Button
@@ -62,18 +62,18 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
           size="small"
           onClick={handleIncrease}
           disabled={isDisabled}
-          className="w-10 h-10 p-0 flex items-center justify-center"
+          className="w-9 h-9 p-0 flex items-center justify-center bg-accent/10 hover:bg-accent/20 border-accent/30 text-accent-dark font-bold rounded-lg transition-colors"
         >
           +
         </Button>
         
-        <span className="text-sm text-ui-fg-subtle ml-2">
+        <span className="text-sm text-gray-600 ml-2 font-medium">
           ks
         </span>
       </div>
       
       {availability === "unavailable" && (
-        <p className="text-xs text-red-600 mt-1">
+        <p className="text-xs text-red-600 mt-2 font-medium">
           Tento variant nie je momentálne dostupný
         </p>
       )}
