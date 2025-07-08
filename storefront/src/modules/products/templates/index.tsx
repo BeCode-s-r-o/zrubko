@@ -31,36 +31,46 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
-      <div className="content-container mt-4 md:mt-12 lg:mt-20">
-        <Breadcrumbs 
-          productTitle={product.title}
-          categoryPath={categoryPath}
-        />
-      </div>
+      {/* Moderný hero sekcia s gradientom - širšie rozloženie */}
+      <div className="bg-gradient-to-br from-accent-light/20 via-white to-accent/10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 md:pt-6 lg:pt-8">
+          <Breadcrumbs 
+            productTitle={product.title}
+            categoryPath={categoryPath}
+          />
+        </div>
 
-      <div className="content-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Galéria obrázkov */}
-          <div className="flex">
-            <ImageGallery images={product?.images || []} />
-          </div>
-          
-          {/* Variant selector a objednávka */}
-          <div className="flex flex-col gap-y-8">
-            <ProductVariantSelector 
-              product={product} 
-              region={region}
-              countryCode={countryCode}
-            />
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-6 md:pb-8 lg:pb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+            {/* Galéria obrázkov - 2 stĺpce z 5 */}
+            <div className="lg:col-span-2">
+              <div className="w-full bg-white rounded-xl shadow-md overflow-hidden">
+                <ImageGallery images={product?.images || []} />
+              </div>
+            </div>
+            
+            {/* Variant selector a objednávka - 3 stĺpce z 5 */}
+            <div className="lg:col-span-3">
+              <ProductVariantSelector 
+                product={product} 
+                region={region}
+                countryCode={countryCode}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Súvisiace produkty */}
-      <div className="content-container my-16 small:my-32">
-        <Suspense fallback={<SkeletonRelatedProducts />}>
-          <RelatedProducts product={product} countryCode={countryCode} />
-        </Suspense>
+      {/* Tenší rozdeľovač */}
+      <div className="h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+      {/* Súvisiace produkty s menšími medzerami */}
+      <div className="bg-gradient-to-br from-white via-accent-light/5 to-accent/5">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
+          <Suspense fallback={<SkeletonRelatedProducts />}>
+            <RelatedProducts product={product} countryCode={countryCode} />
+          </Suspense>
+        </div>
       </div>
     </>
   )

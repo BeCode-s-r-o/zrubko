@@ -22,13 +22,37 @@ type VariantCardProps = {
 const getAvailabilityInfo = (availability: string) => {
   switch (availability) {
     case "in_stock":
-      return { text: "Na sklade", color: "text-green-600", bgColor: "bg-green-100", icon: "●" }
+      return { 
+        text: "Na sklade", 
+        color: "text-green-600", 
+        bgColor: "bg-green-100", 
+        icon: "●",
+        badgeColor: "bg-green-500"
+      }
     case "available_soon":
-      return { text: "Do mesiaca", color: "text-orange-600", bgColor: "bg-orange-100", icon: "◐" }
+      return { 
+        text: "Do mesiaca", 
+        color: "text-orange-600", 
+        bgColor: "bg-orange-100", 
+        icon: "◐",
+        badgeColor: "bg-orange-500"
+      }
     case "unavailable":
-      return { text: "Nedostupné", color: "text-red-600", bgColor: "bg-red-100", icon: "○" }
+      return { 
+        text: "Nedostupné", 
+        color: "text-red-600", 
+        bgColor: "bg-red-100", 
+        icon: "○",
+        badgeColor: "bg-red-500"
+      }
     default:
-      return { text: "Neznáme", color: "text-gray-600", bgColor: "bg-gray-100", icon: "?" }
+      return { 
+        text: "Neznáme", 
+        color: "text-gray-600", 
+        bgColor: "bg-gray-100", 
+        icon: "?",
+        badgeColor: "bg-gray-500"
+      }
   }
 }
 
@@ -43,60 +67,70 @@ const VariantCard: React.FC<VariantCardProps> = ({
     <div
       onClick={onSelect}
       className={clx(
-        "border rounded-lg p-4 cursor-pointer transition-all duration-200 hover:shadow-md",
+        "border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:shadow-md transform hover:scale-101 relative overflow-hidden",
         {
-          "border-ui-border-interactive bg-ui-bg-interactive/10 shadow-sm": isSelected,
-          "border-ui-border-base bg-ui-bg-base hover:border-ui-border-strong": !isSelected,
+          "border-accent bg-gradient-to-br from-accent/5 to-accent-light/10 shadow-sm ring-1 ring-accent/20": isSelected,
+          "border-gray-200 bg-white hover:border-accent/40 hover:shadow-sm": !isSelected,
           "opacity-50 cursor-not-allowed": variant.availability === "unavailable"
         }
       )}
     >
-      <div className="flex items-center justify-between">
-        {/* Základné info */}
+      {/* Gradient pozadie pre selected */}
+      {isSelected && (
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/3 via-transparent to-accent-light/3 pointer-events-none"></div>
+      )}
+
+      <div className="relative flex items-center justify-between">
+        {/* Základné info - kompaktnejšie */}
         <div className="flex-1">
-          <h4 className="font-semibold text-base mb-1">
-            {variant.size} mm – SHOU SUGI BAN + {variant.treatment}
-          </h4>
-          <p className="text-sm text-ui-fg-subtle mb-2">
-            {variant.material}
-          </p>
+          <div className="flex items-start justify-between mb-2">
+            <div>
+              <h4 className="font-bold text-base text-accent-dark mb-1">
+                {variant.size} mm – SHOU SUGI BAN + {variant.treatment}
+              </h4>
+              <p className="text-gray-600 font-medium text-sm">
+                {variant.material}
+              </p>
+            </div>
+            
+            {/* Kompaktný dostupnosť badge */}
+            <div className="flex items-center gap-1">
+              <div className={`w-2 h-2 rounded-full ${availabilityInfo.badgeColor}`}></div>
+              <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${availabilityInfo.bgColor} ${availabilityInfo.color}`}>
+                {availabilityInfo.text}
+              </span>
+            </div>
+          </div>
           
-          {/* Technické údaje */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div>
-              <span className="text-ui-fg-subtle">Dĺžka:</span>
-              <p className="font-medium">{variant.length} m</p>
+          {/* Kompaktné technické údaje */}
+          <div className="grid grid-cols-4 gap-2">
+            <div className="bg-white rounded p-2 border border-accent/10 text-center">
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.length} m</p>
             </div>
-            <div>
-              <span className="text-ui-fg-subtle">Cena/m²:</span>
-              <p className="font-medium">{variant.pricePerM2.toFixed(2)} €</p>
+            <div className="bg-white rounded p-2 border border-accent/10 text-center">
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.pricePerM2.toFixed(0)} €</p>
             </div>
-            <div>
-              <span className="text-ui-fg-subtle">M² v 1 ks:</span>
-              <p className="font-medium">{variant.m2PerPiece} m²</p>
+            <div className="bg-white rounded p-2 border border-accent/10 text-center">
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">m²/ks</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.m2PerPiece}</p>
             </div>
-            <div>
-              <span className="text-ui-fg-subtle">Dostupnosť:</span>
-              <div className="flex items-center gap-1">
-                <span className={`${availabilityInfo.color} text-lg leading-none`}>
-                  {availabilityInfo.icon}
-                </span>
-                <span className={`text-xs font-medium ${availabilityInfo.color}`}>
-                  {availabilityInfo.text}
-                </span>
-              </div>
+            <div className="bg-white rounded p-2 border border-accent/10 text-center">
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/ks</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{(variant.pricePerM2 * variant.m2PerPiece).toFixed(0)} €</p>
             </div>
           </div>
         </div>
 
-        {/* Výber indikátor */}
+        {/* Kompaktný výber indikátor */}
         <div className="ml-4">
           <div
             className={clx(
-              "w-6 h-6 rounded-full border-2 flex items-center justify-center",
+              "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 shadow-sm",
               {
-                "border-ui-border-interactive bg-ui-bg-interactive": isSelected,
-                "border-ui-border-base": !isSelected
+                "border-accent bg-gradient-to-br from-accent to-accent-light shadow-accent/20": isSelected,
+                "border-gray-300 bg-white hover:border-accent/50": !isSelected
               }
             )}
           >
@@ -106,6 +140,11 @@ const VariantCard: React.FC<VariantCardProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Subtle hover overlay */}
+      {!isSelected && (
+        <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent-light/0 hover:from-accent/2 hover:to-accent-light/2 transition-all duration-200 pointer-events-none rounded-lg"></div>
+      )}
     </div>
   )
 }
