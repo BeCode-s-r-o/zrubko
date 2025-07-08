@@ -34,6 +34,12 @@ import {
   Menu,
   X,
   ChevronRight,
+  Package,
+  Hammer,
+  Ruler,
+  Wrench,
+  Zap,
+  ShoppingBag,
 } from "lucide-react"
 import { StoreRegion } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
@@ -142,11 +148,15 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [expandedMobile, setExpandedMobile] = useState<'products' | 'usage' | null>(null)
   const [expandedUsage, setExpandedUsage] = useState<'interior' | 'exterior' | null>(null)
+  const [expandedProducts, setExpandedProducts] = useState<'wood' | 'construction' | null>(null)
 
   const toggleMobile = (section: 'products' | 'usage') => {
     setExpandedMobile(expandedMobile === section ? null : section)
     if (section !== 'usage') {
       setExpandedUsage(null)
+    }
+    if (section !== 'products') {
+      setExpandedProducts(null)
     }
   }
 
@@ -154,10 +164,15 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
     setExpandedUsage(expandedUsage === section ? null : section)
   }
 
+  const toggleProducts = (section: 'wood' | 'construction') => {
+    setExpandedProducts(expandedProducts === section ? null : section)
+  }
+
   const closeMobile = () => {
     setIsOpen(false)
     setExpandedMobile(null)
     setExpandedUsage(null)
+    setExpandedProducts(null)
   }
 
   return (
@@ -165,7 +180,8 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center w-10 h-10 text-gray-700 lg:hidden"
+        className="flex items-center justify-center w-12 h-12 text-gray-700 lg:hidden hover:bg-gray-100 rounded-lg transition-colors"
+        aria-label="Otvoriť menu"
       >
         <Menu size={24} />
       </button>
@@ -179,183 +195,356 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
           <div className="fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
             <div className="p-4">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold">Menu</h2>
-                <button onClick={closeMobile} className="p-2">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+                <button 
+                  onClick={closeMobile} 
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  aria-label="Zavrieť menu"
+                >
                   <X size={24} />
                 </button>
               </div>
 
               {/* Navigation items */}
-              <nav className="space-y-2">
+              <nav className="space-y-3">
                 {/* Produkty */}
-                <div>
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => toggleMobile('products')}
-                    className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-50 transition-colors bg-white"
                   >
-                    <span className="font-semibold">Produkty</span>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-lg">
+                        <ShoppingBag className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <span className="font-semibold text-gray-900">Produkty</span>
+                    </div>
                     <ChevronDown 
-                      className={`w-5 h-5 transition-transform ${
+                      className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
                         expandedMobile === 'products' ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   
                   {expandedMobile === 'products' && (
-                    <div className="pl-4 mt-2 space-y-2">
-                      <LocalizedClientLink
-                        href="/kategorie/terasove-dosky"
-                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
-                        onClick={closeMobile}
-                      >
-                        Terásové dosky
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/kategorie/fasadne-dosky"
-                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
-                        onClick={closeMobile}
-                      >
-                        Fasádne dosky
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/kategorie/konstrukcne-drevo"
-                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
-                        onClick={closeMobile}
-                      >
-                        Konštrukčné drevo
-                      </LocalizedClientLink>
-                      <LocalizedClientLink
-                        href="/kategorie/plotove-dosky"
-                        className="block p-2 text-sm text-gray-600 hover:text-gray-900"
-                        onClick={closeMobile}
-                      >
-                        Plotové dosky
-                      </LocalizedClientLink>
+                    <div className="bg-gray-50 border-t border-gray-200">
+                      <div className="p-4 space-y-4">
+                        {/* Drevené profily a dosky */}
+                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                          <button
+                            onClick={() => toggleProducts('wood')}
+                            className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <TreePine className="w-5 h-5 text-amber-600" />
+                              <span className="text-sm font-medium text-gray-700">Drevené profily a dosky</span>
+                            </div>
+                            <ChevronDown 
+                              className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                                expandedProducts === 'wood' ? 'rotate-180' : ''
+                              }`} 
+                            />
+                          </button>
+                          
+                          {expandedProducts === 'wood' && (
+                            <div className="bg-gray-50 border-t border-gray-200 p-3 space-y-2">
+                              <LocalizedClientLink
+                                href="/kategorie/tatransky-profil"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-lg">
+                                  <TreePine className="w-4 h-4 text-amber-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Tatranský profil</span>
+                                  <p className="text-xs text-gray-500">Na steny a stropy</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/terasove-dosky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+                                  <Waves className="w-4 h-4 text-blue-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Terásové dosky</span>
+                                  <p className="text-xs text-gray-500">Pre terasy a balkóny</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/fasadne-dosky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
+                                  <Building2 className="w-4 h-4 text-green-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Fasádne dosky</span>
+                                  <p className="text-xs text-gray-500">Obklady vonkajších stien</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/podlahove-dosky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-purple-100 rounded-lg">
+                                  <Square className="w-4 h-4 text-purple-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Podlahové dosky</span>
+                                  <p className="text-xs text-gray-500">Masívne drevené podlahy</p>
+                                </div>
+                              </LocalizedClientLink>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Konštrukčné prvky a doplnky */}
+                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                          <button
+                            onClick={() => toggleProducts('construction')}
+                            className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <Hammer className="w-5 h-5 text-gray-600" />
+                              <span className="text-sm font-medium text-gray-700">Konštrukčné prvky</span>
+                            </div>
+                            <ChevronDown 
+                              className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                                expandedProducts === 'construction' ? 'rotate-180' : ''
+                              }`} 
+                            />
+                          </button>
+                          
+                          {expandedProducts === 'construction' && (
+                            <div className="bg-gray-50 border-t border-gray-200 p-3 space-y-2">
+                              <LocalizedClientLink
+                                href="/kategorie/hranoly"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                  <Package className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Hranoly</span>
+                                  <p className="text-xs text-gray-500">Konštrukčné prvky</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/plotovky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                  <Fence className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Plotovky</span>
+                                  <p className="text-xs text-gray-500">Plotové dosky</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/stlpiky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                  <Ruler className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Stĺpiky</span>
+                                  <p className="text-xs text-gray-500">Plotové stĺpiky</p>
+                                </div>
+                              </LocalizedClientLink>
+                              
+                              <LocalizedClientLink
+                                href="/kategorie/latky"
+                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                onClick={closeMobile}
+                              >
+                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                  <Wrench className="w-4 h-4 text-gray-600" />
+                                </div>
+                                <div className="flex-1">
+                                  <span className="font-medium">Latky</span>
+                                  <p className="text-xs text-gray-500">Pomocné latky</p>
+                                </div>
+                              </LocalizedClientLink>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>
 
                 {/* Miesto použitia */}
-                <div>
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => toggleMobile('usage')}
-                    className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 rounded-lg"
+                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-50 transition-colors bg-white"
                   >
-                    <span className="font-semibold">Miesto použitia</span>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-center w-10 h-10 bg-green-100 rounded-lg">
+                        <Home className="w-5 h-5 text-green-600" />
+                      </div>
+                      <span className="font-semibold text-gray-900">Miesto použitia</span>
+                    </div>
                     <ChevronDown 
-                      className={`w-5 h-5 transition-transform ${
+                      className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
                         expandedMobile === 'usage' ? 'rotate-180' : ''
                       }`} 
                     />
                   </button>
                   
                   {expandedMobile === 'usage' && (
-                    <div className="pl-4 mt-2 space-y-2">
-                      {/* Interiér */}
-                      <div>
-                        <button
-                          onClick={() => toggleUsage('interior')}
-                          className="flex items-center justify-between w-full p-2 text-left hover:bg-blue-50 rounded-lg"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Home className="w-4 h-4 text-blue-600" />
-                            <span className="text-sm font-medium">Interiér</span>
-                          </div>
-                          <ChevronRight 
-                            className={`w-4 h-4 transition-transform ${
-                              expandedUsage === 'interior' ? 'rotate-90' : ''
-                            }`} 
-                          />
-                        </button>
-                        
-                        {expandedUsage === 'interior' && (
-                          <div className="pl-6 mt-2 space-y-1">
-                            {interiorCategories.map((category, index) => (
-                              <LocalizedClientLink
-                                key={index}
-                                href={category.href}
-                                className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg"
-                                onClick={closeMobile}
-                              >
-                                <category.icon className="w-4 h-4" />
-                                <span>{category.title}</span>
-                              </LocalizedClientLink>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+                    <div className="bg-gray-50 border-t border-gray-200">
+                      <div className="p-4 space-y-3">
+                        {/* Interiér */}
+                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                          <button
+                            onClick={() => toggleUsage('interior')}
+                            className="flex items-center justify-between w-full p-3 text-left hover:bg-blue-50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+                                <Home className="w-4 h-4 text-blue-600" />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700">Interiér</span>
+                            </div>
+                            <ChevronDown 
+                              className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                                expandedUsage === 'interior' ? 'rotate-180' : ''
+                              }`} 
+                            />
+                          </button>
+                          
+                          {expandedUsage === 'interior' && (
+                            <div className="bg-blue-50 border-t border-blue-200 p-3 space-y-2">
+                              {interiorCategories.map((category, index) => (
+                                <LocalizedClientLink
+                                  key={index}
+                                  href={category.href}
+                                  className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                                  onClick={closeMobile}
+                                >
+                                  <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+                                    <category.icon className="w-4 h-4 text-blue-600" />
+                                  </div>
+                                  <div className="flex-1">
+                                    <span className="font-medium">{category.title}</span>
+                                    <p className="text-xs text-gray-500">{category.description}</p>
+                                  </div>
+                                </LocalizedClientLink>
+                              ))}
+                            </div>
+                          )}
+                        </div>
 
-                      {/* Exteriér */}
-                      <div>
-                        <button
-                          onClick={() => toggleUsage('exterior')}
-                          className="flex items-center justify-between w-full p-2 text-left hover:bg-green-50 rounded-lg"
-                        >
-                          <div className="flex items-center gap-2">
-                            <Building className="w-4 h-4 text-green-600" />
-                            <span className="text-sm font-medium">Exteriér</span>
-                          </div>
-                          <ChevronRight 
-                            className={`w-4 h-4 transition-transform ${
-                              expandedUsage === 'exterior' ? 'rotate-90' : ''
-                            }`} 
-                          />
-                        </button>
-                        
-                        {expandedUsage === 'exterior' && (
-                          <div className="pl-6 mt-2 space-y-1">
-                            {exteriorCategories.map((category, index) => (
-                              <LocalizedClientLink
-                                key={index}
-                                href={category.href}
-                                className="flex items-center gap-2 p-2 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg"
-                                onClick={closeMobile}
-                              >
-                                <category.icon className="w-4 h-4" />
-                                <span>{category.title}</span>
-                              </LocalizedClientLink>
-                            ))}
-                          </div>
-                        )}
+                        {/* Exteriér */}
+                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                          <button
+                            onClick={() => toggleUsage('exterior')}
+                            className="flex items-center justify-between w-full p-3 text-left hover:bg-green-50 transition-colors"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
+                                <Building className="w-4 h-4 text-green-600" />
+                              </div>
+                              <span className="text-sm font-medium text-gray-700">Exteriér</span>
+                            </div>
+                            <ChevronDown 
+                              className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                                expandedUsage === 'exterior' ? 'rotate-180' : ''
+                              }`} 
+                            />
+                          </button>
+                          
+                          {expandedUsage === 'exterior' && (
+                            <div className="bg-green-50 border-t border-green-200 p-3 space-y-2">
+                              {exteriorCategories.map((category, index) => (
+                                <LocalizedClientLink
+                                  key={index}
+                                  href={category.href}
+                                  className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+                                  onClick={closeMobile}
+                                >
+                                  <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
+                                    <category.icon className="w-4 h-4 text-green-600" />
+                                  </div>
+                                  <div className="flex-1">
+                                    <span className="font-medium">{category.title}</span>
+                                    <p className="text-xs text-gray-500">{category.description}</p>
+                                  </div>
+                                </LocalizedClientLink>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   )}
                 </div>
 
                 {/* Ostatné linky */}
-                <LocalizedClientLink
-                  href="/kalkulacka"
-                  className="block p-3 font-semibold hover:bg-gray-50 rounded-lg"
-                  onClick={closeMobile}
-                >
-                  Kalkulačka
-                </LocalizedClientLink>
-                
-                <LocalizedClientLink
-                  href="/kontakt"
-                  className="block p-3 font-semibold hover:bg-gray-50 rounded-lg"
-                  onClick={closeMobile}
-                >
-                  Kontakt
-                </LocalizedClientLink>
-
-                {/* Pomocné linky */}
-                <div className="pt-4 mt-6 border-t border-gray-200">
+                <div className="space-y-2">
                   <LocalizedClientLink
-                    href="/purchase-advisor"
-                    className="block p-3 text-sm text-amber-600 hover:bg-amber-50 rounded-lg"
+                    href="/kalkulacka"
+                    className="flex items-center gap-3 p-4 font-semibold hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
                     onClick={closeMobile}
                   >
-                    🛒 Poradca nákupu
+                    <div className="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-lg">
+                      <Calculator className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <span className="text-gray-900">Kalkulačka</span>
+                  </LocalizedClientLink>
+                  
+                  <LocalizedClientLink
+                    href="/kontakt"
+                    className="flex items-center gap-3 p-4 font-semibold hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
+                    onClick={closeMobile}
+                  >
+                    <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-lg">
+                      <Phone className="w-5 h-5 text-gray-600" />
+                    </div>
+                    <span className="text-gray-900">Kontakt</span>
+                  </LocalizedClientLink>
+                </div>
+
+                {/* Pomocné linky */}
+                <div className="pt-4 mt-6 border-t border-gray-200 space-y-2">
+                  <LocalizedClientLink
+                    href="/purchase-advisor"
+                    className="flex items-center gap-3 p-3 text-sm text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                    onClick={closeMobile}
+                  >
+                    <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-lg">
+                      <Zap className="w-4 h-4 text-amber-600" />
+                    </div>
+                    <span className="font-medium">Poradca nákupu</span>
                   </LocalizedClientLink>
                   
                   <LocalizedClientLink
                     href="/najpredavanejsie"
-                    className="block p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg"
+                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
                     onClick={closeMobile}
                   >
-                    ⭐ Najpredávanejšie
+                    <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                      <Star className="w-4 h-4 text-gray-600" />
+                    </div>
+                    <span className="font-medium">Najpredávanejšie</span>
                   </LocalizedClientLink>
                 </div>
               </nav>
@@ -371,6 +560,7 @@ export default function NavClient({ regions }: NavClientProps) {
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isUsageOpen, setIsUsageOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<'interior' | 'exterior' | null>(null)
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
 
   const usageMenuRef = useRef<HTMLDivElement>(null)
   const productsMenuRef = useRef<HTMLDivElement>(null)
@@ -553,45 +743,444 @@ export default function NavClient({ regions }: NavClientProps) {
             ref={productsMenuRef}
             className="flex z-40 justify-center px-8 py-8 w-full bg-white border-t shadow-lg border-ui-border-base animate-fade-in"
           >
-             <div className="w-full max-w-6xl">
+            <div className="w-full max-w-7xl">
               <div className="mb-6">
                 <h2 className="mb-1 text-2xl font-bold">Produkty</h2>
                 <p className="max-w-2xl text-base text-ui-fg-muted">
-                  Prehliadajte naše produkty podľa kategórií a nájdite to, čo potrebujete pre váš projekt.
+                  Prehliadajte naše produkty podľa kategórií. Prejdite myšou nad kategóriou pre zobrazenie detailov.
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                <a href="/kategorie/terasove-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Terásové dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Terásové dosky</h3>
-                    <p className="text-sm text-ui-fg-muted">Kvalitné dosky pre terasy a balkóny.</p>
+              
+              {/* Desktop Layout - 2 columns */}
+              <div className="hidden lg:grid lg:grid-cols-5 gap-8 mb-8">
+                {/* Left Column - Product Types (40%) */}
+                <div className="lg:col-span-2 space-y-2">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Kategórie produktov</h3>
+                  
+                  {/* Tatranský profil */}
+                  <div className="relative">
+                    <LocalizedClientLink
+                      href="/kategorie/tatransky-profil"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 cursor-pointer"
+                      onMouseEnter={() => setHoveredProduct('tatransky')}
+                      onMouseLeave={() => setHoveredProduct(null)}
+                    >
+                      <div className="flex items-center justify-center w-12 h-12 bg-amber-100 rounded-lg hover:bg-amber-200 transition-colors">
+                        <span className="text-xl">🪵</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 hover:text-amber-800">Tatranský profil</h4>
+                        <p className="text-sm text-gray-600">Klasický profil na steny a stropy</p>
+                      </div>
+                    </LocalizedClientLink>
                   </div>
-                </a>
-                
-                <a href="/kategorie/fasadne-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Fasádne dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Fasádne dosky</h3>
-                    <p className="text-sm text-ui-fg-muted">Obklady pre vonkajšie steny.</p>
-                  </div>
-                </a>
 
-                <a href="/kategorie/konstrukcne-drevo" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Konštrukčné drevo" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Konštrukčné drevo</h3>
-                    <p className="text-sm text-ui-fg-muted">Hranoly a latky pre stavbu.</p>
+                  {/* Terásové dosky */}
+                  <div className="relative">
+                    <LocalizedClientLink
+                      href="/kategorie/terasove-dosky"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 cursor-pointer"
+                      onMouseEnter={() => setHoveredProduct('terasove')}
+                      onMouseLeave={() => setHoveredProduct(null)}
+                    >
+                      <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors">
+                        <span className="text-xl">🌊</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 hover:text-blue-800">Terásové dosky</h4>
+                        <p className="text-sm text-gray-600">Dosky pre terasy a balkóny</p>
+                      </div>
+                    </LocalizedClientLink>
                   </div>
-                </a>
 
-                <a href="/kategorie/plotove-dosky" className="block overflow-hidden rounded-lg border transition group hover:shadow-lg">
-                  <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Plotové dosky" className="object-cover w-full h-32 transition-transform group-hover:scale-105" width={400} height={128} />
-                  <div className="p-4">
-                    <h3 className="mb-1 text-lg font-semibold">Plotové dosky</h3>
-                    <p className="text-sm text-ui-fg-muted">Dosky a stĺpiky pre ploty.</p>
+                  {/* Fasádne dosky */}
+                  <div className="relative">
+                    <LocalizedClientLink
+                      href="/kategorie/fasadne-dosky"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 cursor-pointer"
+                      onMouseEnter={() => setHoveredProduct('fasadne')}
+                      onMouseLeave={() => setHoveredProduct(null)}
+                    >
+                      <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg hover:bg-green-200 transition-colors">
+                        <span className="text-xl">🧱</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 hover:text-green-800">Fasádne dosky</h4>
+                        <p className="text-sm text-gray-600">Obklady vonkajších stien</p>
+                      </div>
+                    </LocalizedClientLink>
                   </div>
-                </a>
+
+                  {/* Podlahové dosky */}
+                  <div className="relative">
+                    <LocalizedClientLink
+                      href="/kategorie/podlahove-dosky"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 cursor-pointer"
+                      onMouseEnter={() => setHoveredProduct('podlahove')}
+                      onMouseLeave={() => setHoveredProduct(null)}
+                    >
+                      <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg hover:bg-purple-200 transition-colors">
+                        <span className="text-xl">🔲</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 hover:text-purple-800">Podlahové dosky</h4>
+                        <p className="text-sm text-gray-600">Masívne drevené podlahy</p>
+                      </div>
+                    </LocalizedClientLink>
+                  </div>
+
+                  {/* Konštrukčné prvky */}
+                  <div className="mt-6">
+                    <h4 className="text-md font-medium text-gray-700 mb-3">Konštrukčné prvky</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      <LocalizedClientLink
+                        href="/kategorie/hranoly"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <span className="text-sm">🧱</span>
+                        <span className="text-sm font-medium text-gray-700">Hranoly</span>
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/plotovky"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <span className="text-sm">🪚</span>
+                        <span className="text-sm font-medium text-gray-700">Plotovky</span>
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/stlpiky"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <span className="text-sm">📏</span>
+                        <span className="text-sm font-medium text-gray-700">Stĺpiky</span>
+                      </LocalizedClientLink>
+                      <LocalizedClientLink
+                        href="/kategorie/latky"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <span className="text-sm">🔧</span>
+                        <span className="text-sm font-medium text-gray-700">Latky</span>
+                      </LocalizedClientLink>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column - Dynamic Preview Panel (60%) */}
+                <div className="lg:col-span-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6">
+                  {hoveredProduct === 'tatransky' && (
+                    <div className="animate-fade-in">
+                      <div className="w-full h-48 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg mb-4 flex items-center justify-center">
+                        <img 
+                          src="/test-category.png" 
+                          alt="Tatranský profil" 
+                          className="w-full h-full object-cover rounded-lg"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            const nextElement = target.nextElementSibling as HTMLElement;
+                            target.style.display = 'none';
+                            if (nextElement) {
+                              nextElement.style.display = 'flex';
+                            }
+                          }}
+                        />
+                        <div className="hidden w-full h-full bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg items-center justify-center">
+                          <span className="text-6xl">🪵</span>
+                        </div>
+                      </div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Tatranský profil</h4>
+                      <p className="text-gray-600 mb-4">Klasický drevený profil ideálny na obklady stien a stropov. Vytvára útulnú atmosféru v interiéri.</p>
+                      
+                      <div className="space-y-3 mb-6">
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Borovica</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
+                          <p className="text-sm text-gray-600 mt-1">12,5 x 96 mm, 15 x 96 mm, 19 x 96 mm</p>
+                        </div>
+                      </div>
+                      
+                      <button className="w-full px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium">
+                        Zobraziť produkty
+                      </button>
+                    </div>
+                  )}
+
+                  {hoveredProduct === 'terasove' && (
+                    <div className="animate-fade-in">
+                      <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg mb-4 flex items-center justify-center">
+                        <span className="text-6xl">🌊</span>
+                      </div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Terásové dosky</h4>
+                      <p className="text-gray-600 mb-4">Kvalitné dosky určené pre stavbu terás a balkónov. Odolné voči poveternostným vplyvom.</p>
+                      
+                      <div className="space-y-3 mb-6">
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Céder</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
+                          <p className="text-sm text-gray-600 mt-1">28 x 142 mm, 32 x 142 mm</p>
+                        </div>
+                      </div>
+                      
+                      <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        Zobraziť produkty
+                      </button>
+                    </div>
+                  )}
+
+                  {hoveredProduct === 'fasadne' && (
+                    <div className="animate-fade-in">
+                      <div className="w-full h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-lg mb-4 flex items-center justify-center">
+                        <span className="text-6xl">🧱</span>
+                      </div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Fasádne dosky</h4>
+                      <p className="text-gray-600 mb-4">Dosky určené na obklady vonkajších stien. Poskytujú ochranu a estetický vzhľad budovy.</p>
+                      
+                      <div className="space-y-3 mb-6">
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Borovica</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
+                          <p className="text-sm text-gray-600 mt-1">15 x 121 mm, 19 x 121 mm</p>
+                        </div>
+                      </div>
+                      
+                      <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
+                        Zobraziť produkty
+                      </button>
+                    </div>
+                  )}
+
+                  {hoveredProduct === 'podlahove' && (
+                    <div className="animate-fade-in">
+                      <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg mb-4 flex items-center justify-center">
+                        <span className="text-6xl">🔲</span>
+                      </div>
+                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Podlahové dosky</h4>
+                      <p className="text-gray-600 mb-4">Masívne drevené dosky na podlahy. Vytvoria teplý a prirodzený vzhľad interiéru.</p>
+                      
+                      <div className="space-y-3 mb-6">
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Dub</span>
+                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <div className="flex gap-2 mt-1">
+                            <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
+                          <p className="text-sm text-gray-600 mt-1">20 x 140 mm, 25 x 140 mm</p>
+                        </div>
+                      </div>
+                      
+                      <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                        Zobraziť produkty
+                      </button>
+                    </div>
+                  )}
+
+                  {!hoveredProduct && (
+                    <div className="text-center">
+                      <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span className="text-3xl text-white">🪵</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Kvalitné drevené produkty</h3>
+                      <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                        Prejdite myšou nad kategóriou v ľavom stĺpci pre zobrazenie detailných informácií o produktoch.
+                      </p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <div className="text-2xl mb-2">🌲</div>
+                          <h4 className="font-semibold text-gray-900 mb-1">Prírodné materiály</h4>
+                          <p className="text-sm text-gray-600">Smrek, borovica, dub a ďalšie kvalitné druhy dreva</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <div className="text-2xl mb-2">⭐</div>
+                          <h4 className="font-semibold text-gray-900 mb-1">Rôzne kvality</h4>
+                          <p className="text-sm text-gray-600">Klasifikácia A, AB, BC podľa kvality a vzhľadu</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <div className="text-2xl mb-2">📏</div>
+                          <h4 className="font-semibold text-gray-900 mb-1">Rôzne rozmery</h4>
+                          <p className="text-sm text-gray-600">Široký výber rozmerov pre rôzne účely použitia</p>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                          <div className="text-2xl mb-2">🚚</div>
+                          <h4 className="font-semibold text-gray-900 mb-1">Doprava zdarma</h4>
+                          <p className="text-sm text-gray-600">Pri objednávke nad 30 bežných metrov</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <LocalizedClientLink
+                          href="/kalkulacka"
+                          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                        >
+                          Kalkulačka spotreby
+                        </LocalizedClientLink>
+                        <LocalizedClientLink
+                          href="/poradca"
+                          className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                        >
+                          Poradca výberu
+                        </LocalizedClientLink>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Mobile Layout - Vertical Stack */}
+              <div className="lg:hidden space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <LocalizedClientLink
+                    href="/kategorie/tatransky-profil"
+                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-amber-100 rounded-lg group-hover:bg-amber-200 transition-colors">
+                        <span className="text-xl">🪵</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-amber-800">Tatranský profil</h4>
+                        <p className="text-sm text-gray-600">Na steny a stropy</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1 mb-2">
+                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Smrek, Borovica</p>
+                  </LocalizedClientLink>
+
+                  <LocalizedClientLink
+                    href="/kategorie/terasove-dosky"
+                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                        <span className="text-xl">🌊</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-blue-800">Terásové dosky</h4>
+                        <p className="text-sm text-gray-600">Pre terasy a balkóny</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1 mb-2">
+                      <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Smrek, Céder</p>
+                  </LocalizedClientLink>
+
+                  <LocalizedClientLink
+                    href="/kategorie/fasadne-dosky"
+                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
+                        <span className="text-xl">🧱</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-green-800">Fasádne dosky</h4>
+                        <p className="text-sm text-gray-600">Obklady vonkajších stien</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1 mb-2">
+                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Smrek, Borovica</p>
+                  </LocalizedClientLink>
+
+                  <LocalizedClientLink
+                    href="/kategorie/podlahove-dosky"
+                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
+                        <span className="text-xl">🔲</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-gray-900 group-hover:text-purple-800">Podlahové dosky</h4>
+                        <p className="text-sm text-gray-600">Masívne drevené podlahy</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-1 mb-2">
+                      <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                    </div>
+                    <p className="text-xs text-gray-500">Dub, Smrek</p>
+                  </LocalizedClientLink>
+                </div>
+
+                {/* Mobile CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <LocalizedClientLink
+                    href="/kalkulacka"
+                    className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-center"
+                  >
+                    Kalkulačka spotreby
+                  </LocalizedClientLink>
+                  <LocalizedClientLink
+                    href="/poradca"
+                    className="flex-1 px-4 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium text-center"
+                  >
+                    Poradca výberu
+                  </LocalizedClientLink>
+                </div>
               </div>
             </div>
           </div>
@@ -834,3 +1423,4 @@ export default function NavClient({ regions }: NavClientProps) {
     </div>
   )
 }
+
