@@ -180,7 +180,7 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center w-12 h-12 text-gray-700 lg:hidden hover:bg-gray-100 rounded-lg transition-colors"
+        className="flex items-center justify-center w-12 h-12 text-amber-700 lg:hidden hover:bg-amber-50 rounded-lg transition-all duration-200 border border-amber-200 hover:border-amber-300"
         aria-label="Otvoriť menu"
       >
         <Menu size={24} />
@@ -195,11 +195,11 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
           <div className="fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
             <div className="p-4">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
-                <h2 className="text-xl font-bold text-gray-900">Menu</h2>
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-amber-200">
+                <h2 className="text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Menu</h2>
                 <button 
                   onClick={closeMobile} 
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-lg transition-all duration-200"
                   aria-label="Zavrieť menu"
                 >
                   <X size={24} />
@@ -209,19 +209,23 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
               {/* Navigation items */}
               <nav className="space-y-3">
                 {/* Produkty */}
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <div className="border border-amber-200 rounded-lg overflow-hidden shadow-sm">
                   <button
                     onClick={() => toggleMobile('products')}
-                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-50 transition-colors bg-white"
+                    className={`flex items-center justify-between w-full p-4 text-left transition-all duration-200 ${
+                      expandedMobile === 'products' 
+                        ? 'bg-amber-50 border-amber-300' 
+                        : 'bg-white hover:bg-amber-50'
+                    }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-lg">
-                        <ShoppingBag className="w-5 h-5 text-blue-600" />
+                      <div className="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-lg">
+                        <ShoppingBag className="w-5 h-5 text-amber-600" />
                       </div>
                       <span className="font-semibold text-gray-900">Produkty</span>
                     </div>
                     <ChevronDown 
-                      className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
+                      className={`w-5 h-5 text-amber-600 transition-transform duration-300 ${
                         expandedMobile === 'products' ? 'rotate-180' : ''
                       }`} 
                     />
@@ -391,19 +395,23 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
                 </div>
 
                 {/* Miesto použitia */}
-                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                <div className="border border-orange-200 rounded-lg overflow-hidden shadow-sm">
                   <button
                     onClick={() => toggleMobile('usage')}
-                    className="flex items-center justify-between w-full p-4 text-left hover:bg-gray-50 transition-colors bg-white"
+                    className={`flex items-center justify-between w-full p-4 text-left transition-all duration-200 ${
+                      expandedMobile === 'usage' 
+                        ? 'bg-orange-50 border-orange-300' 
+                        : 'bg-white hover:bg-orange-50'
+                    }`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 bg-green-100 rounded-lg">
-                        <Home className="w-5 h-5 text-green-600" />
+                      <div className="flex items-center justify-center w-10 h-10 bg-orange-100 rounded-lg">
+                        <Home className="w-5 h-5 text-orange-600" />
                       </div>
                       <span className="font-semibold text-gray-900">Miesto použitia</span>
                     </div>
                     <ChevronDown 
-                      className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
+                      className={`w-5 h-5 text-orange-600 transition-transform duration-300 ${
                         expandedMobile === 'usage' ? 'rotate-180' : ''
                       }`} 
                     />
@@ -499,10 +507,10 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
                 </div>
 
                 {/* Ostatné linky */}
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <LocalizedClientLink
                     href="/kalkulacka"
-                    className="flex items-center gap-3 p-4 font-semibold hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
+                    className="flex items-center gap-3 p-4 font-semibold hover:bg-amber-50 hover:border-amber-300 rounded-lg transition-all duration-200 border border-amber-200 shadow-sm"
                     onClick={closeMobile}
                   >
                     <div className="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-lg">
@@ -513,11 +521,11 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
                   
                   <LocalizedClientLink
                     href="/kontakt"
-                    className="flex items-center gap-3 p-4 font-semibold hover:bg-gray-50 rounded-lg transition-colors border border-gray-200"
+                    className="flex items-center gap-3 p-4 font-semibold hover:bg-orange-50 hover:border-orange-300 rounded-lg transition-all duration-200 border border-orange-200 shadow-sm"
                     onClick={closeMobile}
                   >
-                    <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-lg">
-                      <Phone className="w-5 h-5 text-gray-600" />
+                    <div className="flex items-center justify-center w-10 h-10 bg-orange-100 rounded-lg">
+                      <Phone className="w-5 h-5 text-orange-600" />
                     </div>
                     <span className="text-gray-900">Kontakt</span>
                   </LocalizedClientLink>
@@ -612,32 +620,32 @@ export default function NavClient({ regions }: NavClientProps) {
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
       {/* TOPBAR */}
-      <div className="px-4 py-2 w-full text-xs text-white bg-gray">
+      <div className="px-4 py-3 w-full text-xs text-white bg-gradient-to-r from-amber-600 via-amber-700 to-orange-600 shadow-sm">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-[13px] gap-y-2 text-center md:text-left">
           <div className="flex flex-wrap gap-6 justify-center items-center md:justify-start">
-            <a href="tel:+421907695363" className="flex gap-1 items-center hover:underline">
+            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-amber-200 transition-colors duration-200">
               <Phone size={18} /> <strong>+421 907 695 363</strong>
             </a>
-            <a href="mailto:info@zrubko.sk" className="flex gap-1 items-center hover:underline">
+            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-amber-200 transition-colors duration-200">
               <Mail size={18} /> <strong>info@zrubko.sk</strong>
             </a>
           </div>
           <div className="flex justify-center">
             <a
               href="/doprava"
-              className="flex items-center gap-2 bg-cta hover:bg-cta-hover text-white px-3 py-1 rounded-full text-[12px] font-semibold transition-all duration-300"
+              className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-white/20 hover:border-white/40"
             >
-              <Truck size={16} /> Doprava zdarma po Slovensku od 30m
+              <Truck size={16} /> Doprava zdarma po Slovensku od 30m²
             </a>
           </div>
-          <div className="hidden gap-1 justify-center items-center hide-store:flex hide-store:justify-end">
+          <div className="hidden gap-2 justify-center items-center hide-store:flex hide-store:justify-end">
             <MapPin size={18} />
             <span>
               <a
                 href="https://www.google.com/maps?q=Predajňa+Zrubko,+Žilina"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline"
+                className="hover:text-amber-200 transition-colors duration-200"
               >
                 <strong>Predajňa</strong> <strong>Žilina</strong>
               </a>{" "}
@@ -648,7 +656,7 @@ export default function NavClient({ regions }: NavClientProps) {
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto h-20 bg-white border-b border-ui-border-base">
+      <header className="relative mx-auto h-20 bg-white border-b border-amber-100 shadow-sm">
         <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-ui-fg-subtle">
           <div className="flex items-center lg:hidden">
             <MobileSideMenu regions={regions} />
@@ -656,7 +664,7 @@ export default function NavClient({ regions }: NavClientProps) {
           <div className="flex flex-1 justify-center lg:justify-start">
             <LocalizedClientLink
               href="/"
-              className="text-lg font-bold text-ui-fg-base hover:text-ui-fg-base"
+              className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent hover:from-amber-700 hover:to-orange-700 transition-all duration-300"
             >
               Zrubko.sk
             </LocalizedClientLink>
@@ -666,23 +674,23 @@ export default function NavClient({ regions }: NavClientProps) {
               <SearchBar />
             </div>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-3 items-center">
             <LocalizedClientLink
               href="/account"
-              className="flex gap-2 items-center px-3 py-2 text-gray-600 rounded-md border hover:bg-ui-button-neutral-hover"
+              className="flex gap-2 items-center px-4 py-2 text-gray-700 rounded-lg border border-amber-200 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-700 transition-all duration-200"
               aria-label="Účet"
             >
               <User size={20} />
-              <span className="hidden md:inline">Účet</span>
+              <span className="hidden md:inline font-medium">Účet</span>
             </LocalizedClientLink>
             <Suspense
               fallback={
                 <LocalizedClientLink
                   href="/cart"
-                  className="flex gap-2 items-center px-3 py-2 text-white rounded-md bg-cart hover:bg-cart-hover"
+                  className="flex gap-2 items-center px-4 py-2 text-white rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
                   <ShoppingCart size={20} />
-                  <span>(0)</span>
+                  <span className="font-medium">(0)</span>
                 </LocalizedClientLink>
               }
             >
@@ -692,8 +700,8 @@ export default function NavClient({ regions }: NavClientProps) {
         </nav>
 
         {/* SECOND NAV: DESKTOP MENU BAR */}
-        <nav className="hidden items-center w-full h-full bg-white border-t lg:flex border-ui-border-base">
-          <div className="flex gap-10 items-center content-container">
+        <nav className="hidden items-center w-full h-14 bg-gradient-to-r from-amber-50 to-orange-50 border-t lg:flex border-amber-100 shadow-sm">
+          <div className="flex gap-8 items-center content-container">
             <button
               id="products-menu-button"
               onClick={() => {
@@ -702,7 +710,11 @@ export default function NavClient({ regions }: NavClientProps) {
                   return !prev
                 })
               }}
-              className="flex gap-1 items-center text-base font-semibold hover:text-ui-fg-base"
+              className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
+                isProductsOpen 
+                  ? "bg-amber-100 text-amber-800 shadow-sm" 
+                  : "text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+              }`}
             >
               Produkty
               <ChevronDown
@@ -719,7 +731,11 @@ export default function NavClient({ regions }: NavClientProps) {
                   return !prev
                 })
               }}
-              className="flex gap-1 items-center text-base font-semibold hover:text-ui-fg-base"
+              className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
+                isUsageOpen 
+                  ? "bg-amber-100 text-amber-800 shadow-sm" 
+                  : "text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+              }`}
             >
               Miesto použitia
               <ChevronDown
@@ -728,10 +744,16 @@ export default function NavClient({ regions }: NavClientProps) {
               />
             </button>
 
-            <LocalizedClientLink href="/kalkulacka" className="text-base font-semibold hover:text-ui-fg-base">
+            <LocalizedClientLink 
+              href="/kalkulacka" 
+              className="px-4 py-2 text-base font-semibold text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-all duration-200"
+            >
               Kalkulačka
             </LocalizedClientLink>
-            <LocalizedClientLink href="/kontakt" className="text-base font-semibold hover:text-ui-fg-base">
+            <LocalizedClientLink 
+              href="/kontakt" 
+              className="px-4 py-2 text-base font-semibold text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-all duration-200"
+            >
               Kontakt
             </LocalizedClientLink>
           </div>
