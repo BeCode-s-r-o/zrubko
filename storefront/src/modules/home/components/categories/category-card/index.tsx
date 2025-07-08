@@ -6,13 +6,16 @@ export default function CategoryCard({
 }: {
   category: any
 }) {
+  // Use category image if available, otherwise fallback to default
+  const imageUrl = category.image || "https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg"
+
   return (
     <div className="overflow-hidden relative bg-white rounded-lg border border-gray-200 transition-all duration-300 group hover:border-gray-300 hover:shadow-lg">
       <LocalizedClientLink href={`/categories/${category.handle}`}>
         <div className="aspect-[4/3] relative overflow-hidden">
           {/* Category image */}
           <img 
-            src="https://cdn.sellio.net/vendors/phpThumb/phpThumb.php?w=350&h=240&far=0&src=/uploads/96/categories/_kg12836.jpg"
+            src={imageUrl}
             alt={category.name}
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
           />
