@@ -3,15 +3,15 @@ import { cache } from "react"
 
 export const listCategories = cache(async function () {
   return sdk.store.category
-    .list({ fields: "+category_children" }, { next: { tags: ["categories"] } })
+    .list({ fields: "+category_children,+metadata" }, { next: { tags: ["categories"] } })
     .then(({ product_categories }) => {
-      // Add test image to the second category for demonstration
-      if (product_categories && product_categories.length > 1) {
-        (product_categories[1] as any).image = "/test-category.png"
-      }
-      // Add test image to the third category as well (merch category)
-      if (product_categories && product_categories.length > 2) {
-        (product_categories[2] as any).image = "/test-category.png"
+      // Map metadata image_url to image property for easier access
+      if (product_categories) {
+        product_categories.forEach((category: any) => {
+          if (category.metadata?.image_url) {
+            category.image = category.metadata.image_url
+          }
+        })
       }
       return product_categories
     })

@@ -86,7 +86,18 @@ const WoodRefinementList = ({ sortBy, dataTestId }: { sortBy: SortOptions, dataT
     "Sibírska borovica": "Sibírska borovica - extrémne odolná proti poveternostným vplyvom",
     "Sibírsky smrek": "Sibírsky smrek - prémiová kvalita zo Sibírie",
     "Smrek": "Smrek - tradičný stredoeurópsky materiál",
-    "AB trieda": "AB trieda - prémiová kvalita s minimálnym výskytom sukov",
+    "AB trieda": (
+      <>
+        <a 
+          href="/kvalita-ab" 
+          className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
+          title="Dozvedieť sa viac o kvalite AB"
+        >
+          AB trieda
+        </a>
+        {" - prémiová kvalita s minimálnym výskytom sukov"}
+      </>
+    ),
     "Interiér": "Vhodné pre interiérové použitie - obklady stien, stropov",
     "Exteriér": "Vhodné pre exteriérové použitie - fasády, terasy",
     "Fasády": "Špeciálne určené pre fasádne systémy",

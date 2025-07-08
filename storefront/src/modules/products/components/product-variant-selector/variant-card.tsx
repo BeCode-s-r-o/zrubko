@@ -89,7 +89,21 @@ const VariantCard: React.FC<VariantCardProps> = ({
                 {variant.size} mm – SHOU SUGI BAN + {variant.treatment}
               </h4>
               <p className="text-gray-600 font-medium text-sm">
-                {variant.material}
+                {variant.material.includes('AB') ? (
+                  <>
+                    Sibírsky smrek{' '}
+                    <a 
+                      href="/kvalita-ab" 
+                      className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
+                      title="Dozvedieť sa viac o kvalite AB"
+                      onClick={(e) => e.stopPropagation()} // Prevent card selection when clicking link
+                    >
+                      AB
+                    </a>
+                  </>
+                ) : (
+                  variant.material
+                )}
               </p>
             </div>
             

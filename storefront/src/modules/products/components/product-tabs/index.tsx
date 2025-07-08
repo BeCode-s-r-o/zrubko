@@ -107,7 +107,15 @@ const TechnicalSpecsTab = () => {
             </div>
             <div className="flex justify-between">
               <span>Trieda kvality:</span>
-              <span className="font-medium">AB</span>
+              <span className="font-medium">
+                <a 
+                  href="/kvalita-ab" 
+                  className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
+                  title="Dozvedieť sa viac o kvalite AB"
+                >
+                  AB
+                </a>
+              </span>
             </div>
             <div className="flex justify-between">
               <span>Povrchová úprava:</span>
