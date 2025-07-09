@@ -28,6 +28,10 @@ const nextConfig = {
         protocol: "https",
         hostname: process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL?.replace('https://', ''),
       },
+      { // Note: Railway MinIO bucket for file storage
+        protocol: "https",
+        hostname: "bucket-production-b953.up.railway.app",
+      },
       { // Note: can be removed after deleting demo products
         protocol: "https",
         hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com",

@@ -2,6 +2,8 @@ import React, { Suspense } from "react"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductVariantSelector from "@modules/products/components/product-variant-selector"
+import ProductInfo from "@modules/products/components/product-info"
+import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
@@ -43,9 +45,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-6 md:pb-8 lg:pb-10">
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-12 items-start">
             {/* Väčšia galéria obrázkov - 4 stĺpce z 7 */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 space-y-6">
               <div className="w-full bg-white rounded-xl shadow-md overflow-hidden">
                 <ImageGallery images={product?.images || []} />
+              </div>
+              
+              {/* ProductInfo hneď pod galériou */}
+              <div className="w-full">
+                <ProductInfo product={product} />
               </div>
             </div>
             
@@ -60,6 +67,16 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Tenší rozdeľovač */}
+      <div className="h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+      {/* Accordion s technickými parametrami */}
+      <div className="bg-gradient-to-br from-white via-accent-light/5 to-accent/5">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-12 md:py-16 lg:py-20">
+          <ProductTabs product={product} />
         </div>
       </div>
 

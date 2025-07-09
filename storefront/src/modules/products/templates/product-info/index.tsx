@@ -23,14 +23,14 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           className="text-3xl leading-10 text-ui-fg-base"
           data-testid="product-title"
         >
-          Tatranský profil
+          {product.title}
         </Heading>
 
         <Text
           className="text-medium text-ui-fg-subtle whitespace-pre-line"
           data-testid="product-description"
         >
-          Smrekové drevo pre obklady stien a stropov.
+          {product.description}
         </Text>
       </div>
     </div>

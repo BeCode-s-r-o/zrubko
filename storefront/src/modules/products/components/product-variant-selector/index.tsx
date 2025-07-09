@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
 import { Button } from "@medusajs/ui"
 import { HttpTypes } from "@medusajs/types"
 import Link from "next/link"
 import { addToCart } from "@lib/data/cart"
+import { getProductPrice } from "@lib/util/get-product-price"
 import VariantCard from "./variant-card"
 import QuantitySelector from "./quantity-selector"
 import PriceCalculator from "./price-calculator"
@@ -15,86 +16,120 @@ type ProductVariantSelectorProps = {
   countryCode: string
 }
 
-// Simulované dáta pre varianty (neskôr z API)
-const mockVariants = [
-  {
-    id: "var_1",
-    size: "20×140",
-    treatment: "kartáč + olej",
-    material: "Sibírsky smrek AB",
-    length: 6,
-    pricePerM2: 46.00,
-    m2PerPiece: 0.88,
-    availability: "in_stock",
-    image: "/wood-1.jpg"
-  },
-  {
-    id: "var_2", 
-    size: "20×146",
-    treatment: "kartáč + olej",
-    material: "Sibírsky smrek AB",
-    length: 6,
-    pricePerM2: 49.00,
-    m2PerPiece: 0.88,
-    availability: "available_soon",
-    image: "/wood-2.jpg"
-  },
-  {
-    id: "var_3",
-    size: "20×140",
-    treatment: "extra + olej", 
-    material: "Sibírsky smrekovec",
-    length: 3.9,
-    pricePerM2: 65.90,
-    m2PerPiece: 0.55,
-    availability: "in_stock",
-    image: "/wood-3.jpg"
-  }
-]
+type DisplayVariant = {
+  id: string
+  size: string
+  treatment: string
+  material: string
+  length: number
+  pricePerM2: number
+  m2PerPiece: number
+  availability: "in_stock" | "available_soon" | "unavailable"
+  image: string
+  variantData: HttpTypes.StoreProductVariant
+  availability_text: string
+}
+
+// Helper function to get option value from variant
+const getOptionValue = (variant: HttpTypes.StoreProductVariant, optionTitle: string) => {
+  const option = variant.options?.find(opt => opt.option?.title === optionTitle)
+  return option?.value || ""
+}
+
+// Helper function to get availability status
+const getAvailabilityStatus = (variant: HttpTypes.StoreProductVariant): "in_stock" | "available_soon" | "unavailable" => {
+  if (!variant.manage_inventory) return "in_stock"
+  if (variant.allow_backorder) return "available_soon"
+  if ((variant.inventory_quantity || 0) > 0) return "in_stock"
+  return "unavailable"
+}
 
 const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   product,
   region,
   countryCode,
 }) => {
-  const [selectedVariant, setSelectedVariant] = useState(mockVariants[0])
+  // Transform real variants to display format
+  const displayVariants = useMemo(() => {
+    if (!product.variants) return []
+    
+    return product.variants.map(variant => {
+      const priceInfo = getProductPrice({ product, variantId: variant.id })
+      const pricePerUnit = priceInfo.variantPrice?.calculated_price_number || 0
+      const priceInEuros = pricePerUnit / 100 // Convert from cents to euros
+      
+      // Default values for wood-specific calculations
+      const m2PerPiece = 0.88 // Default m2 per piece, can be made dynamic later
+      const pricePerM2 = priceInEuros / m2PerPiece
+      
+      return {
+        id: variant.id,
+        variantData: variant,
+        size: getOptionValue(variant, "Rozmer"),
+        treatment: getOptionValue(variant, "Typ"),
+        material: getOptionValue(variant, "Materiál"),
+        availability: getAvailabilityStatus(variant),
+        pricePerM2: pricePerM2,
+        availability_text: getOptionValue(variant, "Dostupnosť"),
+        length: 6, // Default length, can be made dynamic later
+        m2PerPiece: m2PerPiece,
+        image: variant.product?.images?.[0]?.url || "/wood-default.jpg", // Default image
+      }
+    })
+  }, [product])
+
+  const [selectedVariant, setSelectedVariant] = useState<DisplayVariant | null>(displayVariants[0] || null)
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
 
-  // Výpočty
-  const totalM2 = selectedVariant.m2PerPiece * quantity
-  const totalPrice = totalM2 * selectedVariant.pricePerM2
+  // Calculations
+  const totalM2 = selectedVariant?.m2PerPiece ? selectedVariant.m2PerPiece * quantity : 0
+  const totalPrice = selectedVariant?.pricePerM2 ? totalM2 * selectedVariant.pricePerM2 : 0
 
   const handleAddToCart = async () => {
+    if (!selectedVariant?.variantData?.id) return
+    
     setIsAdding(true)
     
-    // Simulácia pridania do košíka
-    // await addToCart({
-    //   variantId: selectedVariant.id,
-    //   quantity: quantity,
-    //   countryCode,
-    // })
-    
-    setTimeout(() => {
+    try {
+      await addToCart({
+        variantId: selectedVariant.variantData.id,
+        quantity: quantity,
+        countryCode,
+      })
+      // TODO: Add success notification
+    } catch (error) {
+      console.error("Error adding to cart:", error)
+      // TODO: Add error notification
+    } finally {
       setIsAdding(false)
-      // Zobrazenie notifikácie o úspešnom pridaní
-    }, 1000)
+    }
+  }
+
+  if (!displayVariants.length) {
+    return (
+      <div className="flex flex-col gap-6 h-full">
+        <div className="text-center p-8">
+          <p className="text-gray-500">Žiadne varianty nie sú k dispozícii</p>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className="flex flex-col gap-6 h-full">
-      {/* Roztiahnutý nadpis */}
+      {/* Dynamic product title and description */}
       <div className="mb-4 md:mb-6">
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2 md:mb-3 leading-tight">
-          SHOU SUGI BAN + kartáč + olej
+          {product.title}
         </h1>
         <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
-          Tradičná japonská technika spracowania dreva
+          {product.description}
         </p>
         <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4"></div>
       </div>
 
-      {/* Rozšírený variant selector */}
+      {/* Variant selector */}
       <div className="bg-white rounded-xl shadow-md border border-accent/10 overflow-hidden flex-1">
         <div className="bg-gradient-to-r from-accent/5 to-accent-light/5 px-6 py-4 border-b border-accent/10">
           <h3 className="text-xl lg:text-2xl font-semibold text-accent-dark">Dostupné varianty</h3>
@@ -102,18 +137,18 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
         </div>
         
         <div className="p-6 space-y-4">
-          {mockVariants.map((variant) => (
+          {displayVariants.map((variant) => (
             <VariantCard
               key={variant.id}
               variant={variant}
-              isSelected={selectedVariant.id === variant.id}
+              isSelected={selectedVariant?.id === variant.id}
               onSelect={() => setSelectedVariant(variant)}
             />
           ))}
         </div>
       </div>
 
-      {/* Rozšírený vybraný variant */}
+      {/* Selected variant details */}
       {selectedVariant && (
         <div className="bg-gradient-to-br from-white to-accent-light/10 rounded-xl shadow-md border border-accent/20 overflow-hidden">
           <div className="bg-gradient-to-r from-accent to-accent-light px-6 py-4">
@@ -122,17 +157,16 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
           </div>
           
           <div className="p-6">
-            {/* Single column layout pre lepšie využitie priestoru */}
             <div className="space-y-6">
-              {/* Rozšírené detaily variantu */}
+              {/* Variant details */}
               <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm border border-accent/10">
                 <h5 className="font-bold text-lg md:text-xl lg:text-2xl text-accent-dark mb-3 md:mb-4 leading-tight">
-                  {selectedVariant.size} mm – SHOU SUGI BAN + {selectedVariant.treatment}
+                  {selectedVariant.size} mm – {selectedVariant.treatment}
                 </h5>
                 <p className="text-gray-600 mb-4 md:mb-6 font-semibold text-base md:text-lg">
                   {selectedVariant.material.includes('AB') ? (
                     <>
-                      Sibírsky smrek{' '}
+                      {selectedVariant.material.replace(' AB', '')}{' '}
                       <Link 
                         href="/kvalita-ab" 
                         className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
@@ -176,20 +210,17 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
                         ? "text-yellow-600 text-xs sm:text-sm md:text-base lg:text-sm xl:text-base"
                         : "text-red-600 text-sm sm:text-base md:text-lg lg:text-base xl:text-lg"
                     }`}>
-                      {selectedVariant.availability === "in_stock" && "Na sklade"}
-                      {selectedVariant.availability === "available_soon" && (
-                        <span className="block">
-                          <span className="block sm:inline">Čoskoro</span>
-                          <span className="block sm:inline sm:ml-1">dostupné</span>
-                        </span>
+                      {selectedVariant.availability_text || (
+                        selectedVariant.availability === "in_stock" ? "Na sklade" :
+                        selectedVariant.availability === "available_soon" ? "Čoskoro dostupné" :
+                        "Nedostupné"
                       )}
-                      {selectedVariant.availability === "unavailable" && "Nedostupné"}
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Rozšírená kalkulačka a množstvo na jednom riadku */}
+              {/* Quantity and price calculator */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <QuantitySelector
                   quantity={quantity}
@@ -205,17 +236,16 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
                 />
               </div>
 
-              {/* Rozšírené tlačidlo */}
+              {/* Add to cart button */}
               <Button
                 onClick={handleAddToCart}
                 disabled={selectedVariant.availability === "unavailable" || isAdding}
-                className="w-full h-12 md:h-14 lg:h-16 bg-gradient-to-r from-accent to-accent-light hover:from-accent-dark hover:to-accent text-white font-bold text-base md:text-lg lg:text-xl rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                className="w-full bg-gradient-to-r from-accent to-accent-light hover:from-accent-dark hover:to-accent text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                 isLoading={isAdding}
               >
-                {selectedVariant.availability === "unavailable" 
-                  ? "Nedostupné"
-                  : `Pridať do košíka - ${totalPrice.toFixed(2)} €`
-                }
+                {isAdding ? "Pridávam..." : 
+                 selectedVariant.availability === "unavailable" ? "Nedostupné" :
+                 `Pridať do košíka - ${totalPrice.toFixed(2)} €`}
               </Button>
             </div>
           </div>
