@@ -63,6 +63,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         <div className="text-sm py-5">
           <div className="bg-gradient-to-br from-accent/5 to-accent-light/5 rounded-lg p-4 mb-4 border border-accent/10">
             <p className="text-gray-600 mb-4">Technické parametre a špecifikácie</p>
+
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -71,6 +72,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
               { label: "Šírka", value: getAttributeValue("width"), icon: <RulerIcon className="text-accent" /> },
               { label: "Dĺžka", value: getAttributeValue("length"), icon: <RulerIcon className="text-accent" /> },
               { label: "Hmotnosť", value: getAttributeValue("weight"), icon: <PackageIcon className="text-accent-dark" /> },
+              { label: "Certifikácia", value: getAttributeValue("certification"), icon: <LeafIcon className="text-green-600" /> },
               { label: "MID kód", value: getAttributeValue("mid_code"), icon: <LinkIcon className="text-accent-light" /> },
               { label: "HS kód", value: getAttributeValue("hs_code"), icon: <LinkIcon className="text-accent-light" /> },
               { label: "Krajina pôvodu", value: getAttributeValue("origin_country"), icon: <TreeIcon className="text-green-600" /> }
