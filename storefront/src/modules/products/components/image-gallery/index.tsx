@@ -7,9 +7,10 @@ import { useState } from "react"
 
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
+  product?: HttpTypes.StoreProduct
 }
 
-const ImageGallery = ({ images }: ImageGalleryProps) => {
+const ImageGallery = ({ images, product }: ImageGalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   
   if (!images || images.length === 0) {
@@ -61,6 +62,20 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority
             />
+          )}
+          
+          {/* Product tags in top-left corner */}
+          {product?.tags && product.tags.length > 0 && (
+            <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
+              {product.tags.map((tag) => (
+                <span
+                  key={tag.id}
+                  className="px-2 py-1 bg-white/90 backdrop-blur-sm text-gray-800 text-xs font-medium rounded shadow-sm"
+                >
+                  {tag.value}
+                </span>
+              ))}
+            </div>
           )}
         </div>
       </div>

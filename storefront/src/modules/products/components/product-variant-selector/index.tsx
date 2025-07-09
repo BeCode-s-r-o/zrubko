@@ -10,6 +10,7 @@ import VariantCard from "./variant-card"
 import QuantitySelector from "./quantity-selector"
 import PriceCalculator from "./price-calculator"
 
+
 type ProductVariantSelectorProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
@@ -28,6 +29,18 @@ type DisplayVariant = {
   image: string
   variantData: HttpTypes.StoreProductVariant
   availability_text: string
+  metadata: {
+    dlzka?: string
+    obklad?: string
+    povrch?: string
+    trieda?: string
+    rozmery?: string
+    pouzitie?: string
+    v_baliku?: string
+    typ_dreva?: string
+    cena_za_m_2?: string
+    [key: string]: any
+  }
 }
 
 // Helper function to get option value from variant
@@ -58,10 +71,6 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
       const pricePerUnit = priceInfo.variantPrice?.calculated_price_number || 0
       const priceInEuros = pricePerUnit / 100 // Convert from cents to euros
       
-      // Default values for wood-specific calculations
-      const m2PerPiece = 0.88 // Default m2 per piece, can be made dynamic later
-      const pricePerM2 = priceInEuros / m2PerPiece
-      
       return {
         id: variant.id,
         variantData: variant,
@@ -69,11 +78,23 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
         treatment: getOptionValue(variant, "Typ"),
         material: getOptionValue(variant, "Materiál"),
         availability: getAvailabilityStatus(variant),
-        pricePerM2: pricePerM2,
+        pricePerM2: priceInEuros,
         availability_text: getOptionValue(variant, "Dostupnosť"),
-        length: 6, // Default length, can be made dynamic later
-        m2PerPiece: m2PerPiece,
-        image: variant.product?.images?.[0]?.url || "/wood-default.jpg", // Default image
+        length: 0,
+        m2PerPiece: 0,
+        image: variant.product?.images?.[0]?.url || "",
+        metadata: {
+          dlzka: (variant.metadata?.dlzka as string) || (product.metadata?.dlzka as string) || undefined,
+          obklad: (variant.metadata?.obklad as string) || (product.metadata?.obklad as string) || undefined,
+          povrch: (variant.metadata?.povrch as string) || (product.metadata?.povrch as string) || undefined,
+          trieda: (variant.metadata?.trieda as string) || (product.metadata?.trieda as string) || undefined,
+          rozmery: (variant.metadata?.rozmery as string) || (product.metadata?.rozmery as string) || undefined,
+          pouzitie: (variant.metadata?.pouzitie as string) || (product.metadata?.pouzitie as string) || undefined,
+          v_baliku: (variant.metadata?.v_baliku as string) || (product.metadata?.v_baliku as string) || undefined,
+          typ_dreva: (variant.metadata?.typ_dreva as string) || (product.metadata?.typ_dreva as string) || undefined,
+          cena_za_m_2: (variant.metadata?.cena_za_m_2 as string) || (product.metadata?.cena_za_m_2 as string) || undefined,
+          ...variant.metadata
+        }
       }
     })
   }, [product])
@@ -82,9 +103,8 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
 
-  // Calculations
-  const totalM2 = selectedVariant?.m2PerPiece ? selectedVariant.m2PerPiece * quantity : 0
-  const totalPrice = selectedVariant?.pricePerM2 ? totalM2 * selectedVariant.pricePerM2 : 0
+  // Calculations - now using metadata or fallback to variant price
+  const totalPrice = selectedVariant?.pricePerM2 ? selectedVariant.pricePerM2 * quantity : 0
 
   const handleAddToCart = async () => {
     if (!selectedVariant?.variantData?.id) return
@@ -109,8 +129,39 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   if (!displayVariants.length) {
     return (
       <div className="flex flex-col gap-6 h-full">
-        <div className="text-center p-8">
-          <p className="text-gray-500">Žiadne varianty nie sú k dispozícii</p>
+        {/* Dynamic product title and description */}
+        <div className="mb-4 md:mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2 md:mb-3 leading-tight">
+            {product.title}
+          </h1>
+          <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed mb-4">
+            {product.description}
+          </p>
+          <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4 mb-4"></div>
+        </div>
+
+
+        
+        <div className="text-center p-8 bg-amber-50 border border-amber-200 rounded-lg">
+          <p className="text-amber-800 font-medium mb-2">Žiadne varianty nie sú k dispozícii</p>
+          <p className="text-amber-600 text-sm">
+            Tento produkt nemá nakonfigurované varianty. Kontaktujte nás pre viac informácií.
+          </p>
+          {/* Debug info - remove in production */}
+          <details className="mt-4 text-left">
+            <summary className="cursor-pointer text-sm text-gray-600">Debug info (pre vývojárov)</summary>
+            <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">
+              {JSON.stringify({
+                productId: product.id,
+                hasVariants: !!product.variants,
+                variantsLength: product.variants?.length || 0,
+                variants: product.variants,
+                hasOptions: !!product.options,
+                optionsLength: product.options?.length || 0,
+                options: product.options
+              }, null, 2)}
+            </pre>
+          </details>
         </div>
       </div>
     )
@@ -123,10 +174,10 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
         <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2 md:mb-3 leading-tight">
           {product.title}
         </h1>
-        <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
+        <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed mb-4">
           {product.description}
         </p>
-        <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4"></div>
+        <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4 mb-4"></div>
       </div>
 
       {/* Variant selector */}
@@ -161,37 +212,26 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
               {/* Variant details */}
               <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm border border-accent/10">
                 <h5 className="font-bold text-lg md:text-xl lg:text-2xl text-accent-dark mb-3 md:mb-4 leading-tight">
-                  {selectedVariant.size} mm – {selectedVariant.treatment}
+                  {selectedVariant.metadata.rozmery} – {selectedVariant.metadata.povrch}
                 </h5>
                 <p className="text-gray-600 mb-4 md:mb-6 font-semibold text-base md:text-lg">
-                  {selectedVariant.material.includes('AB') ? (
-                    <>
-                      {selectedVariant.material.replace(' AB', '')}{' '}
-                      <Link 
-                        href="/kvalita-ab" 
-                        className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
-                        title="Dozvedieť sa viac o kvalite AB"
-                      >
-                        AB
-                      </Link>
-                    </>
-                  ) : (
-                    selectedVariant.material
+                  {selectedVariant.metadata.typ_dreva} {selectedVariant.metadata.trieda && (
+                    <span className="text-amber-600">{selectedVariant.metadata.trieda}</span>
                   )}
                 </p>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4 md:mb-6">
                   <div className="bg-accent-light/10 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 text-center min-h-[80px] sm:min-h-[90px] flex flex-col justify-center">
                     <span className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-wide block mb-1 sm:mb-2">Dĺžka</span>
-                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.length} m</p>
+                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.metadata.dlzka || "-"}</p>
                   </div>
                   <div className="bg-accent-light/10 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 text-center min-h-[80px] sm:min-h-[90px] flex flex-col justify-center">
-                    <span className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-wide block mb-1 sm:mb-2">Cena za m²</span>
-                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.pricePerM2.toFixed(2)} €</p>
+                    <span className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-wide block mb-1 sm:mb-2">€/m²</span>
+                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.metadata.cena_za_m_2 || "-"}</p>
                   </div>
                   <div className="bg-accent-light/10 rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 text-center min-h-[80px] sm:min-h-[90px] flex flex-col justify-center">
-                    <span className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-wide block mb-1 sm:mb-2">M² v 1 ks</span>
-                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.m2PerPiece} m²</p>
+                    <span className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-wide block mb-1 sm:mb-2">V balíku</span>
+                    <p className="text-accent-dark font-bold text-lg sm:text-xl md:text-2xl lg:text-xl">{selectedVariant.metadata.v_baliku || "-"}</p>
                   </div>
                   <div className={`rounded-xl p-3 sm:p-4 md:p-5 lg:p-6 min-h-[80px] sm:min-h-[90px] flex flex-col items-center justify-center text-center ${
                     selectedVariant.availability === "in_stock" 
@@ -231,7 +271,6 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
                 <PriceCalculator
                   variant={selectedVariant}
                   quantity={quantity}
-                  totalM2={totalM2}
                   totalPrice={totalPrice}
                 />
               </div>

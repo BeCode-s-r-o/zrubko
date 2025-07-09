@@ -11,6 +11,18 @@ type Variant = {
   m2PerPiece: number
   availability: "in_stock" | "available_soon" | "unavailable"
   image: string
+  metadata: {
+    dlzka?: string
+    obklad?: string
+    povrch?: string
+    trieda?: string
+    rozmery?: string
+    pouzitie?: string
+    v_baliku?: string
+    typ_dreva?: string
+    cena_za_m_2?: string
+    [key: string]: any
+  }
 }
 
 type VariantCardProps = {
@@ -86,23 +98,11 @@ const VariantCard: React.FC<VariantCardProps> = ({
           <div className="flex items-start justify-between mb-2">
             <div>
               <h4 className="font-bold text-base text-accent-dark mb-1">
-                {variant.size} mm – SHOU SUGI BAN + {variant.treatment}
+                {variant.metadata.rozmery} – {variant.metadata.povrch}
               </h4>
               <p className="text-gray-600 font-medium text-sm">
-                {variant.material.includes('AB') ? (
-                  <>
-                    Sibírsky smrek{' '}
-                    <a 
-                      href="/kvalita-ab" 
-                      className="text-amber-600 hover:text-amber-700 underline decoration-amber-300 hover:decoration-amber-500 transition-colors"
-                      title="Dozvedieť sa viac o kvalite AB"
-                      onClick={(e) => e.stopPropagation()} // Prevent card selection when clicking link
-                    >
-                      AB
-                    </a>
-                  </>
-                ) : (
-                  variant.material
+                {variant.metadata.typ_dreva} {variant.metadata.trieda && (
+                  <span className="text-amber-600">{variant.metadata.trieda}</span>
                 )}
               </p>
             </div>
@@ -116,25 +116,44 @@ const VariantCard: React.FC<VariantCardProps> = ({
             </div>
           </div>
           
-          {/* Kompaktné technické údaje */}
-          <div className="grid grid-cols-4 gap-2">
+          {/* Technické údaje z metadata */}
+          <div className="grid grid-cols-4 gap-2 mb-3">
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.length} m</p>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.pricePerM2.toFixed(0)} €</p>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_za_m_2 || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">m²/ks</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.m2PerPiece}</p>
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">V balíku</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.v_baliku || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/ks</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{(variant.pricePerM2 * variant.m2PerPiece).toFixed(0)} €</p>
+              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Použitie</span>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || "-"}</p>
             </div>
           </div>
+
+          {/* Metadata section */}
+          {Object.keys(variant.metadata).length > 0 && (
+            <div className="space-y-2">
+              <h6 className="font-semibold text-accent-dark text-xs">Metadata</h6>
+              <div className="grid grid-cols-2 gap-2">
+                {Object.entries(variant.metadata).map(([key, value]) => (
+                  value && (
+                    <div key={key} className="bg-gray-50 rounded p-2 border border-gray-200 text-center">
+                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">{key}</span>
+                      <p className="font-bold text-accent-dark text-xs mt-0.5">
+                        {String(value)}
+                      </p>
+                    </div>
+                  )
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Kompaktný výber indikátor */}

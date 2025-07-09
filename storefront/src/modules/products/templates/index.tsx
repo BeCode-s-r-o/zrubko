@@ -2,7 +2,6 @@ import React, { Suspense } from "react"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductVariantSelector from "@modules/products/components/product-variant-selector"
-import ProductInfo from "@modules/products/components/product-info"
 import ProductTabs from "@modules/products/components/product-tabs"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
@@ -47,12 +46,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             {/* Väčšia galéria obrázkov - 4 stĺpce z 7 */}
             <div className="lg:col-span-4 space-y-6">
               <div className="w-full bg-white rounded-xl shadow-md overflow-hidden">
-                <ImageGallery images={product?.images || []} />
-              </div>
-              
-              {/* ProductInfo hneď pod galériou */}
-              <div className="w-full">
-                <ProductInfo product={product} />
+                <ImageGallery images={product?.images || []} product={product} />
               </div>
             </div>
             
