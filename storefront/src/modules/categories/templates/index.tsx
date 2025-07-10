@@ -12,6 +12,9 @@ import CategoryBanner from "@modules/categories/components/category-banner"
 import ShouSugiBanInfo from "@modules/categories/components/shou-sugi-ban-info"
 import { HttpTypes } from "@medusajs/types"
 
+// Import the client component
+import CategoryExpandableContent from "@modules/categories/components/category-expandable-content"
+
 export default function CategoryTemplate({
   categories,
   sortBy,
@@ -44,11 +47,7 @@ export default function CategoryTemplate({
       </div>
       
       {/* Banner */}
-      <CategoryBanner 
-        title="SHOU SUGI BAN"
-        subtitle="Tradičná japonská technika spracowania dreva"
-        description="Kvalitné drevené materiály pre stavbu, obklady a interiér. Široký výber rozmerov a druhov dreva."
-      />
+      <CategoryBanner category={category} />
 
       {/* Podkategórie ak existujú */}
       {category.category_children && category.category_children.length > 0 && (
@@ -93,12 +92,15 @@ export default function CategoryTemplate({
                 countryCode={countryCode}
               />
             </Suspense>
-                      </main>
-          </div>
+          </main>
         </div>
+      </div>
+    
+      {/* Metadata sekcia - NAD ikonkami */}
+      <CategoryExpandableContent category={category} />
       
-      {/* SHOU SUGI BAN informácie */}
-      <ShouSugiBanInfo />
-      </>
-    )
-  }
+      {/* SHOU SUGI BAN informácie - ikonky */}
+      <ShouSugiBanInfo category={category} />
+    </>
+  )
+}

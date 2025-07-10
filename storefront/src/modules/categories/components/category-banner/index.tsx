@@ -3,21 +3,34 @@
 import { MessageCircle } from "lucide-react"
 import { Button } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { HttpTypes } from "@medusajs/types"
 
 interface CategoryBannerProps {
-  title: string
-  subtitle: string
-  description?: string
+  category: HttpTypes.StoreProductCategory
 }
 
-export default function CategoryBanner({ title, subtitle, description }: CategoryBannerProps) {
+export default function CategoryBanner({ category }: CategoryBannerProps) {
+  // Extraktuj metadata z kategórie
+  const metadata = category.metadata || {}
+  const getMetadataString = (key: string): string | undefined => {
+    const value = metadata[key]
+    return typeof value === 'string' ? value : undefined
+  }
+
+  // Použiť názov kategórie a default description
+  const title = category.name || "SHOU SUGI BAN"
+  const description = category.description || "Kvalitné drevené materiály pre stavbu, obklady a interiér. Široký výber rozmerov a druhov dreva."
+  
+  // Dynamický background obrázok z metadata
+  const backgroundImage = getMetadataString('background_img') || '/shou-sugi-ban-main.jpg'
+
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
-      {/* Background obrázok - skutočný SHOU SUGI BAN */}
+      {/* Background obrázok - dynamický z metadata */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
         style={{
-          backgroundImage: `url('/shou-sugi-ban-main.jpg')`
+          backgroundImage: `url('${backgroundImage}')`
         }}
       />
       
@@ -32,11 +45,8 @@ export default function CategoryBanner({ title, subtitle, description }: Categor
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-wide">
                 {title}
               </h1>
-              <p className="text-xl md:text-2xl text-gray-200 font-medium">
-                {subtitle}
-              </p>
               {description && (
-                <p className="text-lg text-gray-300 max-w-xl leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-300 max-w-xl leading-relaxed">
                   {description}
                 </p>
               )}
@@ -48,7 +58,7 @@ export default function CategoryBanner({ title, subtitle, description }: Categor
                 size="large"
                 className="bg-white hover:bg-gray-100 text-black px-8 py-4 text-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
                 onClick={() => {
-                  document.getElementById('shou-sugi-ban-info')?.scrollIntoView({ 
+                  document.getElementById('category-metadata')?.scrollIntoView({ 
                     behavior: 'smooth' 
                   })
                 }}
