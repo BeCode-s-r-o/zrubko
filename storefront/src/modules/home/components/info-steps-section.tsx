@@ -27,7 +27,7 @@ const steps = [
 
 const InfoStepsSection = () => {
   return (
-    <section className="relative py-16 bg-gradient-to-br from-champagne-light to-champagne overflow-hidden">
+    <section className="relative pt-4 pb-16 bg-gradient-to-br from-champagne-light to-champagne overflow-hidden">
       {/* Wood rings pattern background */}
       <div className="absolute inset-0" style={{ opacity: 0.3 }}>
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
