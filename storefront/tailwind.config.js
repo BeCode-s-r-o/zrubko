@@ -23,6 +23,27 @@ module.exports = {
       colors: {
         white: "#ffffff",
         black: "#000000",
+        // Luxusná paleta pre drevo e-shop
+        ebony: {
+          DEFAULT: "#2D1810", // tmavohnedá - hlavná luxusná farba
+          dark: "#1F0F08",    // tmavšia varianta
+          light: "#3D2418",   // svetlejšia varianta
+        },
+        gold: {
+          DEFAULT: "#D4AF37", // zlatá - akcentová luxusná farba
+          dark: "#B8941F",    // tmavšia varianta
+          light: "#E6C757",   // svetlejšia varianta
+        },
+        champagne: {
+          DEFAULT: "#F7F3E9", // krémová šampanská - neutrálna farba
+          dark: "#EDE5D3",    // tmavšia varianta
+          light: "#FBFAF7",   // svetlejšia varianta
+        },
+        mahogany: {
+          DEFAULT: "#C04000", // mahagón - doplnková farba
+          dark: "#8B2C00",    // tmavšia varianta
+          light: "#D4651A",   // svetlejšia varianta
+        },
         gray: {
           DEFAULT: "#374151",   // farba pre topbar
           light: "#6b7280",     // svetlejšia varianta pre texty
@@ -33,13 +54,13 @@ module.exports = {
           300: "#FCD34D",       // zvýraznenie pri focus
         },
         accent: {
-          DEFAULT: "#9C8A62",   // primárna značková farba
-          dark: "#85754f",      // tmavšia pre hover/stlačenie
-          light: "#b7a884",     // svetlejšia pre pozadia/odznaky
+          DEFAULT: "#D4AF37",   // zlatá ako primárna značková farba
+          dark: "#B8941F",      // tmavšia pre hover/stlačenie
+          light: "#E6C757",     // svetlejšia pre pozadia/odznaky
         },
         cta: {
-          DEFAULT: "#D97706",   // farba pre CTA tlačidlá
-          hover: "#B45309",     // farba pre hover na CTA
+          DEFAULT: "#C04000",   // mahagón pre CTA tlačidlá
+          hover: "#8B2C00",     // tmavší mahagón pre hover na CTA
         },
        
       },

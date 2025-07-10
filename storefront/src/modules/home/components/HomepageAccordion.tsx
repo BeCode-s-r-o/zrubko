@@ -29,20 +29,20 @@ const HomepageAccordion = () => {
 
   return (
     <div className="mx-auto mt-8 w-full max-w-2xl">
-      <h2 className="mb-8 text-3xl text-center md:text-4xl font-heading">
-        Máte otázky? Tu nájdete odpovede! <span className="inline-block text-2xl align-middle text-accent">✨</span>
+      <h2 className="mb-8 text-3xl text-center md:text-4xl font-heading text-ebony">
+        Máte otázky? Tu nájdete odpovede!
       </h2>
-      <div className="border-t border-b border-gray-200 divide-y divide-gray-200">
+      <div className="border-t border-b border-gold/30 divide-y divide-gold/30">
         {items.map((item, idx) => (
           <div key={idx}>
             <button
-              className="flex justify-between items-center px-2 py-5 w-full text-lg text-left md:px-6 font-heading focus:outline-none"
+              className="flex justify-between items-center px-2 py-5 w-full text-lg text-left md:px-6 font-heading focus:outline-none text-ebony hover:text-gold transition-colors"
               onClick={() => handleToggle(idx)}
               aria-expanded={openIndex === idx}
               aria-controls={`accordion-content-${idx}`}
             >
               <span>{item.title}</span>
-              <span className="text-2xl">{openIndex === idx ? '-' : '+'}</span>
+              <span className="text-2xl text-gold">{openIndex === idx ? '-' : '+'}</span>
             </button>
             <div
               id={`accordion-content-${idx}`}
@@ -55,8 +55,8 @@ const HomepageAccordion = () => {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <button className="px-8 py-3 text-lg font-semibold text-white rounded-full shadow transition-colors bg-accent hover:bg-accent/90">
-          En savoir plus <span className="ml-2">→</span>
+        <button className="px-8 py-3 text-lg font-semibold text-white rounded-full shadow-lg transition-all duration-300 bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold hover:scale-105 border border-gold/30">
+          Viac informácií <span className="ml-2">→</span>
         </button>
       </div>
     </div>
