@@ -4,6 +4,8 @@ import { cache } from "react"
 import { getRegion } from "./regions"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import { sortProducts } from "@lib/util/sort-products"
+import { filterProducts } from "@lib/util/filter-products"
+import { ProductFilters } from "../../types/filters"
 
 export const getProductsById = cache(async function ({
   ids,
@@ -90,18 +92,20 @@ export const getProductsList = cache(async function ({
 })
 
 /**
- * This will fetch 100 products to the Next.js cache and sort them based on the sortBy parameter.
- * It will then return the paginated products based on the page and limit parameters.
+ * This will fetch 100 products to the Next.js cache, filter them based on metadata, 
+ * sort them based on the sortBy parameter, and return the paginated products.
  */
 export const getProductsListWithSort = cache(async function ({
   page = 0,
   queryParams,
   sortBy = "created_at",
+  filters,
   countryCode,
 }: {
   page?: number
   queryParams?: HttpTypes.FindParams & HttpTypes.StoreProductParams
   sortBy?: SortOptions
+  filters?: ProductFilters
   countryCode: string
 }): Promise<{
   response: { products: HttpTypes.StoreProduct[]; count: number }
@@ -121,18 +125,22 @@ export const getProductsListWithSort = cache(async function ({
     countryCode,
   })
 
-  const sortedProducts = sortProducts(products, sortBy)
+  // Apply filters first
+  const filteredProducts = filters ? filterProducts(products, filters) : products
+  
+  // Then sort the filtered products
+  const sortedProducts = sortProducts(filteredProducts, sortBy)
 
+  // Calculate pagination with filtered count
+  const filteredCount = filteredProducts.length
   const pageParam = (page - 1) * limit
-
-  const nextPage = count > pageParam + limit ? pageParam + limit : null
-
+  const nextPage = filteredCount > pageParam + limit ? pageParam + limit : null
   const paginatedProducts = sortedProducts.slice(pageParam, pageParam + limit)
 
   return {
     response: {
       products: paginatedProducts,
-      count,
+      count: filteredCount,
     },
     nextPage,
     queryParams,

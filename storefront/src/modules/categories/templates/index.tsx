@@ -3,36 +3,51 @@ import { Suspense } from "react"
 
 import InteractiveLink from "@modules/common/components/interactive-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import CategoryBanner from "@modules/categories/components/category-banner"
 import ShouSugiBanInfo from "@modules/categories/components/shou-sugi-ban-info"
 import { HttpTypes } from "@medusajs/types"
+import { getProductsListWithSort } from "@lib/data/products"
+import { extractFiltersFromProducts } from "@lib/util/filter-products"
+import { getRegion } from "@lib/data/regions"
 
-// Import the client component
+// Import client components
 import CategoryExpandableContent from "@modules/categories/components/category-expandable-content"
+import ClientCategoryFiltering from "@modules/categories/components/client-category-filtering"
 
-export default function CategoryTemplate({
-  categories,
-  sortBy,
-  page,
-  countryCode,
-}: {
+interface CategoryTemplateProps {
   categories: HttpTypes.StoreProductCategory[]
-  sortBy?: SortOptions
-  page?: string
   countryCode: string
-}) {
-  const pageNumber = page ? parseInt(page) : 1
-  const sort = sortBy || "created_at"
+}
 
+export default async function CategoryTemplate({
+  categories,
+  countryCode,
+}: CategoryTemplateProps) {
   const category = categories[categories.length - 1]
   const parents = categories.slice(0, categories.length - 1)
 
   if (!category || !countryCode) notFound()
+
+  // Get region for product cards
+  const region = await getRegion(countryCode)
+  if (!region) notFound()
+
+  // Get all products in category for client-side filtering
+  const queryParams = {
+    limit: 100,
+    category_id: [category.id]
+  } as any // Temporary type assertion until we fix the types
+
+  const { response: { products: allProducts } } = await getProductsListWithSort({
+    page: 1,
+    queryParams,
+    countryCode,
+  })
+
+  // Extract available filters from all products in category
+  const availableFilters = extractFiltersFromProducts(allProducts)
 
   // Príprava category path pre breadcrumbs
   const categoryPath = categories.map(cat => ({
@@ -74,26 +89,13 @@ export default function CategoryTemplate({
         </div>
       )}
 
-      {/* Hlavný obsah s filtrami a produktmi */}
+      {/* Hlavný obsah s filtrami a produktmi - Client-side */}
       <div className={`content-container ${category.category_children && category.category_children.length > 0 ? 'pb-32' : 'pt-32 pb-32'}`}>
-        <div className="flex flex-col lg:flex-row gap-8 items-start" data-testid="category-container">
-          {/* Filtre na ľavej strane */}
-          <aside className="lg:w-80 flex-shrink-0">
-            <RefinementList sortBy={sort} data-testid="sort-by-container" />
-          </aside>
-
-          {/* Produkty na pravej strane */}
-          <main className="flex-1 min-w-0">
-            <Suspense fallback={<SkeletonProductGrid />}>
-              <PaginatedProducts
-                sortBy={sort}
-                page={pageNumber}
-                categoryId={category.id}
-                countryCode={countryCode}
-              />
-            </Suspense>
-          </main>
-        </div>
+        <ClientCategoryFiltering
+          allProducts={allProducts}
+          region={region}
+          availableFilters={availableFilters}
+        />
       </div>
     
       {/* Metadata sekcia - NAD ikonkami */}
