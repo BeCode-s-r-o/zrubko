@@ -4,6 +4,7 @@ import ProductPreview from "@modules/products/components/product-preview"
 import WoodProductCard from "@modules/products/components/wood-product-card"
 import { Pagination } from "@modules/store/components/pagination"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { ProductFilters } from "../../../types/filters"
 
 const PRODUCT_LIMIT = 12
 
@@ -21,6 +22,7 @@ export default async function PaginatedProducts({
   collectionId,
   categoryId,
   productsIds,
+  filters,
   countryCode,
 }: {
   sortBy?: SortOptions
@@ -28,6 +30,7 @@ export default async function PaginatedProducts({
   collectionId?: string
   categoryId?: string
   productsIds?: string[]
+  filters?: ProductFilters
   countryCode: string
 }) {
   const queryParams: PaginatedProductsParams = {
@@ -62,6 +65,7 @@ export default async function PaginatedProducts({
     page,
     queryParams,
     sortBy,
+    filters,
     countryCode,
   })
 
