@@ -70,30 +70,14 @@ export default async function PaginatedProducts({
   return (
     <>
       <ul
-        className="grid grid-cols-2 w-full small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8"
+        className="grid grid-cols-1 w-full small:grid-cols-2 medium:grid-cols-3 gap-x-6 gap-y-8"
         data-testid="products-list"
       >
         {products.map((p) => {
-          // Identifikuj drevo produkty podľa kategórie alebo options
-          const isWoodProduct = p.categories?.some(cat => 
-            cat.name === "Tatranský profil" || 
-            cat.name === "Drevo" ||
-            cat.handle === "tatransky-profil" ||
-            cat.handle === "drevo"
-          ) || p.variants?.some(variant => 
-            variant.options?.some(opt => 
-              opt.option?.title === "Rozmer" || 
-              opt.option?.title === "Materiál"
-            )
-          )
-
+          // Použiť WoodProductCard pre všetky produkty
           return (
             <li key={p.id}>
-              {isWoodProduct ? (
-                <WoodProductCard product={p} region={region} />
-              ) : (
-                <ProductPreview product={p} region={region} />
-              )}
+              <WoodProductCard product={p} region={region} />
             </li>
           )
         })}
