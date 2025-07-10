@@ -30,6 +30,7 @@ type DisplayVariant = {
   variantData: HttpTypes.StoreProductVariant
   availability_text: string
   metadata: {
+    // Základné metadata
     dlzka?: string
     obklad?: string
     povrch?: string
@@ -39,6 +40,21 @@ type DisplayVariant = {
     v_baliku?: string
     typ_dreva?: string
     cena_za_m_2?: string
+    
+    // Nové variant metadata
+    dlzka_m?: string
+    cena_m2_s_dph?: string
+    kusov_v_baliku?: string
+    
+    // Kalkulačné polia pre výpočty
+    kalk_dlzka?: string
+    kalk_plocha?: string
+    kalk_kusov?: string
+    systemova_cena_baliku?: string
+    kalk_kusy_v_baliku?: string
+    kalk_dlzka_m?: string
+    kalk_plocha_balika_m2?: string
+    
     [key: string]: any
   }
 }
@@ -69,7 +85,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     return product.variants.map(variant => {
       const priceInfo = getProductPrice({ product, variantId: variant.id })
       const pricePerUnit = priceInfo.variantPrice?.calculated_price_number || 0
-      const priceInEuros = pricePerUnit / 100 // Convert from cents to euros
+      // Use backend price directly without conversion
       
       return {
         id: variant.id,
@@ -78,7 +94,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
         treatment: getOptionValue(variant, "Typ"),
         material: getOptionValue(variant, "Materiál"),
         availability: getAvailabilityStatus(variant),
-        pricePerM2: priceInEuros,
+        pricePerM2: pricePerUnit,
         availability_text: getOptionValue(variant, "Dostupnosť"),
         length: 0,
         m2PerPiece: 0,
@@ -100,11 +116,12 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   }, [product])
 
   const [selectedVariant, setSelectedVariant] = useState<DisplayVariant | null>(displayVariants[0] || null)
-  const [quantity, setQuantity] = useState(1)
+  const [packages, setPackages] = useState(1) // Zmenené z quantity na packages
   const [isAdding, setIsAdding] = useState(false)
 
-  // Calculations - now using metadata or fallback to variant price
-  const totalPrice = selectedVariant?.pricePerM2 ? selectedVariant.pricePerM2 * quantity : 0
+  // Calculations - now using backend price multiplied by packages
+  const totalPrice = selectedVariant ? 
+    (selectedVariant.pricePerM2 * packages) : 0
 
   const handleAddToCart = async () => {
     if (!selectedVariant?.variantData?.id) return
@@ -114,7 +131,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     try {
       await addToCart({
         variantId: selectedVariant.variantData.id,
-        quantity: quantity,
+        quantity: packages, // Changed to packages
         countryCode,
       })
       // TODO: Add success notification
@@ -263,14 +280,14 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
               {/* Quantity and price calculator */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <QuantitySelector
-                  quantity={quantity}
-                  onQuantityChange={setQuantity}
+                  quantity={packages} // Changed to packages
+                  onQuantityChange={setPackages}
                   availability={selectedVariant.availability}
                 />
                 
                 <PriceCalculator
                   variant={selectedVariant}
-                  quantity={quantity}
+                  packages={packages} // Changed from quantity to packages
                   totalPrice={totalPrice}
                 />
               </div>
