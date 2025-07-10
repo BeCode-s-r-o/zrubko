@@ -34,7 +34,7 @@ const QuantitySelector: React.FC<QuantitySelectorProps> = ({
   return (
     <div className="bg-white border border-accent/20 rounded-lg p-4 shadow-sm">
       <label className="block text-sm font-semibold mb-3 text-accent-dark">
-        Počet kusov
+        Počet balíkov
       </label>
       
       <div className="flex items-center gap-2">

@@ -12,6 +12,7 @@ type Variant = {
   availability: "in_stock" | "available_soon" | "unavailable"
   image: string
   metadata: {
+    // Základné metadata
     dlzka?: string
     obklad?: string
     povrch?: string
@@ -21,6 +22,21 @@ type Variant = {
     v_baliku?: string
     typ_dreva?: string
     cena_za_m_2?: string
+    
+    // Nové variant metadata
+    dlzka_m?: string
+    cena_m2_s_dph?: string
+    kusov_v_baliku?: string
+    
+    // Kalkulačné polia pre výpočty
+    kalk_dlzka?: string
+    kalk_plocha?: string
+    kalk_kusov?: string
+    systemova_cena_baliku?: string
+    kalk_kusy_v_baliku?: string
+    kalk_dlzka_m?: string
+    kalk_plocha_balika_m2?: string
+    
     [key: string]: any
   }
 }
@@ -120,15 +136,15 @@ const VariantCard: React.FC<VariantCardProps> = ({
           <div className="grid grid-cols-4 gap-2 mb-3">
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka || "-"}</p>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_za_m_2 || "-"}</p>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">V balíku</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.v_baliku || "-"}</p>
+              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || "-"}</p>
             </div>
             <div className="bg-white rounded p-2 border border-accent/10 text-center">
               <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Použitie</span>
