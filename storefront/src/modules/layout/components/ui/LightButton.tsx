@@ -23,7 +23,7 @@ const LightButton = ({ href, children, className, icon, type = "button", disable
       disabled={disabled}
       variant="secondary"
       className={clsx(
-        "px-6 py-3 text-black bg-white border-2 transition duration-300 text-[18px] border-accent hover:border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed",
+        "px-6 py-3 text-forest bg-white border-2 transition duration-300 text-[18px] border-wood hover:border-forest hover:bg-wood-light disabled:opacity-50 disabled:cursor-not-allowed",
         className
       )}
     >

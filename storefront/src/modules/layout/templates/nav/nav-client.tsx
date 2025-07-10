@@ -180,7 +180,7 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center w-12 h-12 text-amber-700 lg:hidden hover:bg-amber-50 rounded-lg transition-all duration-200 border border-amber-200 hover:border-amber-300"
+        className="flex items-center justify-center w-12 h-12 text-ebony lg:hidden hover:bg-gold-light rounded-lg transition-all duration-200 border border-gold hover:border-ebony"
         aria-label="Otvoriť menu"
       >
         <Menu size={24} />
@@ -195,11 +195,11 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
           <div className="fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
             <div className="p-4">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-amber-200">
-                <h2 className="text-xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">Menu</h2>
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gold">
+                <h2 className="text-xl font-bold bg-gradient-to-r from-ebony to-ebony-light bg-clip-text text-transparent">Menu</h2>
                 <button 
                   onClick={closeMobile} 
-                  className="p-2 hover:bg-amber-50 text-amber-700 hover:text-amber-800 rounded-lg transition-all duration-200"
+                  className="p-2 hover:bg-gold-light text-ebony hover:text-ebony-dark rounded-lg transition-all duration-200"
                   aria-label="Zavrieť menu"
                 >
                   <X size={24} />
@@ -620,20 +620,20 @@ export default function NavClient({ regions }: NavClientProps) {
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
       {/* TOPBAR */}
-      <div className="px-4 py-3 w-full text-xs text-white bg-gradient-to-r from-amber-600 via-amber-700 to-orange-600 shadow-sm">
+      <div className="px-4 py-3 w-full text-xs text-white bg-gradient-to-r from-ebony via-ebony-dark to-ebony shadow-sm">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-[13px] gap-y-2 text-center md:text-left">
           <div className="flex flex-wrap gap-6 justify-center items-center md:justify-start">
-            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-amber-200 transition-colors duration-200">
+            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-gold transition-colors duration-200">
               <Phone size={18} /> <strong>+421 907 695 363</strong>
             </a>
-            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-amber-200 transition-colors duration-200">
+            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-gold transition-colors duration-200">
               <Mail size={18} /> <strong>info@zrubko.sk</strong>
             </a>
           </div>
           <div className="flex justify-center">
             <a
               href="/doprava"
-              className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-white/20 hover:border-white/40"
+              className="flex items-center gap-2 bg-gold/20 hover:bg-gold/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-gold/20 hover:border-gold/40"
             >
               <Truck size={16} /> Doprava zdarma po Slovensku od 30m²
             </a>
@@ -645,7 +645,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 href="https://www.google.com/maps?q=Predajňa+Zrubko,+Žilina"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-amber-200 transition-colors duration-200"
+                className="hover:text-gold transition-colors duration-200"
               >
                 <strong>Predajňa</strong> <strong>Žilina</strong>
               </a>{" "}
@@ -656,7 +656,7 @@ export default function NavClient({ regions }: NavClientProps) {
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto h-20 bg-white border-b border-amber-100 shadow-sm">
+      <header className="relative mx-auto h-20 bg-champagne border-b border-gold/30 shadow-sm">
         <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-ui-fg-subtle">
           <div className="flex items-center lg:hidden">
             <MobileSideMenu regions={regions} />
@@ -664,7 +664,7 @@ export default function NavClient({ regions }: NavClientProps) {
           <div className="flex flex-1 justify-center lg:justify-start">
             <LocalizedClientLink
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent hover:from-amber-700 hover:to-orange-700 transition-all duration-300"
+              className="text-2xl font-bold bg-gradient-to-r from-ebony to-ebony-light bg-clip-text text-transparent hover:from-ebony-dark hover:to-ebony transition-all duration-300"
             >
               Zrubko.sk
             </LocalizedClientLink>
@@ -677,7 +677,7 @@ export default function NavClient({ regions }: NavClientProps) {
           <div className="flex gap-3 items-center">
             <LocalizedClientLink
               href="/account"
-              className="flex gap-2 items-center px-4 py-2 text-gray-700 rounded-lg border border-amber-200 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-700 transition-all duration-200"
+              className="flex gap-2 items-center px-4 py-2 text-ebony rounded-lg border border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark transition-all duration-200"
               aria-label="Účet"
             >
               <User size={20} />
@@ -687,7 +687,7 @@ export default function NavClient({ regions }: NavClientProps) {
               fallback={
                 <LocalizedClientLink
                   href="/cart"
-                  className="flex gap-2 items-center px-4 py-2 text-white rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                  className="flex gap-2 items-center px-4 py-2 text-white rounded-lg bg-gradient-to-r from-mahogany to-mahogany-dark hover:from-mahogany-dark hover:to-mahogany shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
                 >
                   <ShoppingCart size={20} />
                   <span className="font-medium">(0)</span>
@@ -700,7 +700,7 @@ export default function NavClient({ regions }: NavClientProps) {
         </nav>
 
         {/* SECOND NAV: DESKTOP MENU BAR */}
-        <nav className="hidden items-center w-full h-14 bg-gradient-to-r from-amber-50 to-orange-50 border-t lg:flex border-amber-100 shadow-sm">
+        <nav className="hidden items-center w-full h-14 bg-gradient-to-r from-champagne-light to-champagne border-t lg:flex border-gold/30 shadow-sm">
           <div className="flex gap-8 items-center content-container">
             <button
               id="products-menu-button"
@@ -712,8 +712,8 @@ export default function NavClient({ regions }: NavClientProps) {
               }}
               className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
                 isProductsOpen 
-                  ? "bg-amber-100 text-amber-800 shadow-sm" 
-                  : "text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+                  ? "bg-gold text-ebony shadow-sm" 
+                  : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
               }`}
             >
               Produkty
@@ -733,8 +733,8 @@ export default function NavClient({ regions }: NavClientProps) {
               }}
               className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
                 isUsageOpen 
-                  ? "bg-amber-100 text-amber-800 shadow-sm" 
-                  : "text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+                  ? "bg-gold text-ebony shadow-sm" 
+                  : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
               }`}
             >
               Miesto použitia
@@ -746,13 +746,13 @@ export default function NavClient({ regions }: NavClientProps) {
 
             <LocalizedClientLink 
               href="/kalkulacka" 
-              className="px-4 py-2 text-base font-semibold text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-all duration-200"
+              className="px-4 py-2 text-base font-semibold text-ebony hover:text-ebony-dark hover:bg-gold-light rounded-lg transition-all duration-200"
             >
               Kalkulačka
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/kontakt" 
-              className="px-4 py-2 text-base font-semibold text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-all duration-200"
+              className="px-4 py-2 text-base font-semibold text-ebony hover:text-ebony-dark hover:bg-gold-light rounded-lg transition-all duration-200"
             >
               Kontakt
             </LocalizedClientLink>
@@ -767,8 +767,8 @@ export default function NavClient({ regions }: NavClientProps) {
           >
             <div className="w-full max-w-7xl">
               <div className="mb-6">
-                <h2 className="mb-1 text-2xl font-bold">Produkty</h2>
-                <p className="max-w-2xl text-base text-ui-fg-muted">
+                <h2 className="mb-1 text-2xl font-bold text-ebony">Produkty</h2>
+                <p className="max-w-2xl text-base text-ebony-light">
                   Prehliadajte naše produkty podľa kategórií. Prejdite myšou nad kategóriou pre zobrazenie detailov.
                 </p>
               </div>
@@ -777,22 +777,22 @@ export default function NavClient({ regions }: NavClientProps) {
               <div className="hidden lg:grid lg:grid-cols-5 gap-8 mb-8">
                 {/* Left Column - Product Types (40%) */}
                 <div className="lg:col-span-2 space-y-2">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Kategórie produktov</h3>
+                  <h3 className="text-lg font-semibold text-ebony mb-4">Kategórie produktov</h3>
                   
                   {/* Tatranský profil */}
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/tatransky-profil"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200 cursor-pointer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
                       onMouseEnter={() => setHoveredProduct('tatransky')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-amber-100 rounded-lg hover:bg-amber-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🪵</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 hover:text-amber-800">Tatranský profil</h4>
-                        <p className="text-sm text-gray-600">Klasický profil na steny a stropy</p>
+                        <h4 className="font-medium text-ebony hover:text-ebony-dark">Tatranský profil</h4>
+                        <p className="text-sm text-ebony-light">Klasický profil na steny a stropy</p>
                       </div>
                     </LocalizedClientLink>
                   </div>
@@ -801,16 +801,16 @@ export default function NavClient({ regions }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/terasove-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 cursor-pointer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
                       onMouseEnter={() => setHoveredProduct('terasove')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🌊</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 hover:text-blue-800">Terásové dosky</h4>
-                        <p className="text-sm text-gray-600">Dosky pre terasy a balkóny</p>
+                        <h4 className="font-medium text-ebony hover:text-ebony-dark">Terásové dosky</h4>
+                        <p className="text-sm text-ebony-light">Dosky pre terasy a balkóny</p>
                       </div>
                     </LocalizedClientLink>
                   </div>
@@ -819,16 +819,16 @@ export default function NavClient({ regions }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/fasadne-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 cursor-pointer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
                       onMouseEnter={() => setHoveredProduct('fasadne')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg hover:bg-green-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🧱</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 hover:text-green-800">Fasádne dosky</h4>
-                        <p className="text-sm text-gray-600">Obklady vonkajších stien</p>
+                        <h4 className="font-medium text-ebony hover:text-ebony-dark">Fasádne dosky</h4>
+                        <p className="text-sm text-ebony-light">Obklady vonkajších stien</p>
                       </div>
                     </LocalizedClientLink>
                   </div>
@@ -837,61 +837,61 @@ export default function NavClient({ regions }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/podlahove-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 cursor-pointer"
+                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
                       onMouseEnter={() => setHoveredProduct('podlahove')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg hover:bg-purple-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🔲</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 hover:text-purple-800">Podlahové dosky</h4>
-                        <p className="text-sm text-gray-600">Masívne drevené podlahy</p>
+                        <h4 className="font-medium text-ebony hover:text-ebony-dark">Podlahové dosky</h4>
+                        <p className="text-sm text-ebony-light">Masívne drevené podlahy</p>
                       </div>
                     </LocalizedClientLink>
                   </div>
 
                   {/* Konštrukčné prvky */}
                   <div className="mt-6">
-                    <h4 className="text-md font-medium text-gray-700 mb-3">Konštrukčné prvky</h4>
+                    <h4 className="text-md font-medium text-ebony mb-3">Konštrukčné prvky</h4>
                     <div className="grid grid-cols-2 gap-2">
                       <LocalizedClientLink
                         href="/kategorie/hranoly"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
                       >
                         <span className="text-sm">🧱</span>
-                        <span className="text-sm font-medium text-gray-700">Hranoly</span>
+                        <span className="text-sm font-medium text-ebony">Hranoly</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/plotovky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
                       >
                         <span className="text-sm">🪚</span>
-                        <span className="text-sm font-medium text-gray-700">Plotovky</span>
+                        <span className="text-sm font-medium text-ebony">Plotovky</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/stlpiky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
                       >
                         <span className="text-sm">📏</span>
-                        <span className="text-sm font-medium text-gray-700">Stĺpiky</span>
+                        <span className="text-sm font-medium text-ebony">Stĺpiky</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/latky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
                       >
                         <span className="text-sm">🔧</span>
-                        <span className="text-sm font-medium text-gray-700">Latky</span>
+                        <span className="text-sm font-medium text-ebony">Latky</span>
                       </LocalizedClientLink>
                     </div>
                   </div>
                 </div>
 
                 {/* Right Column - Dynamic Preview Panel (60%) */}
-                <div className="lg:col-span-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6">
+                <div className="lg:col-span-3 bg-gradient-to-br from-champagne to-champagne-light rounded-xl p-6">
                   {hoveredProduct === 'tatransky' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg mb-4 flex items-center justify-center">
+                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
                         <img 
                           src="/burnt-wood.jpg" 
                           alt="Tatranský profil - SHOU SUGI BAN" 
@@ -905,37 +905,37 @@ export default function NavClient({ regions }: NavClientProps) {
                             }
                           }}
                         />
-                        <div className="hidden w-full h-full bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg items-center justify-center">
+                        <div className="hidden w-full h-full bg-gradient-to-br from-gold to-gold-dark rounded-lg items-center justify-center">
                           <span className="text-6xl">🪵</span>
                         </div>
                       </div>
-                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Tatranský profil</h4>
-                      <p className="text-gray-600 mb-4">Klasický drevený profil ideálny na obklady stien a stropov. Vytvára útulnú atmosféru v interiéri.</p>
+                      <h4 className="text-2xl font-bold text-ebony mb-2">Tatranský profil</h4>
+                      <p className="text-ebony-light mb-4">Klasický drevený profil ideálny na obklady stien a stropov. Vytvára útulnú atmosféru v interiéri.</p>
                       
                       <div className="space-y-3 mb-6">
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Borovica</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Borovica</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
-                          <p className="text-sm text-gray-600 mt-1">12,5 x 96 mm, 15 x 96 mm, 19 x 96 mm</p>
+                          <span className="text-sm font-medium text-ebony">Rozmery:</span>
+                          <p className="text-sm text-ebony-light mt-1">12,5 x 96 mm, 15 x 96 mm, 19 x 96 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium">
+                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -943,36 +943,36 @@ export default function NavClient({ regions }: NavClientProps) {
 
                   {hoveredProduct === 'terasove' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg mb-4 flex items-center justify-center">
+                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
                         <span className="text-6xl">🌊</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Terásové dosky</h4>
-                      <p className="text-gray-600 mb-4">Kvalitné dosky určené pre stavbu terás a balkónov. Odolné voči poveternostným vplyvom.</p>
+                      <h4 className="text-2xl font-bold text-ebony mb-2">Terásové dosky</h4>
+                      <p className="text-ebony-light mb-4">Kvalitné dosky určené pre stavbu terás a balkónov. Odolné voči poveternostným vplyvom.</p>
                       
                       <div className="space-y-3 mb-6">
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Céder</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Céder</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
-                          <p className="text-sm text-gray-600 mt-1">28 x 142 mm, 32 x 142 mm</p>
+                          <span className="text-sm font-medium text-ebony">Rozmery:</span>
+                          <p className="text-sm text-ebony-light mt-1">28 x 142 mm, 32 x 142 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -980,36 +980,36 @@ export default function NavClient({ regions }: NavClientProps) {
 
                   {hoveredProduct === 'fasadne' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-lg mb-4 flex items-center justify-center">
+                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
                         <span className="text-6xl">🧱</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Fasádne dosky</h4>
-                      <p className="text-gray-600 mb-4">Dosky určené na obklady vonkajších stien. Poskytujú ochranu a estetický vzhľad budovy.</p>
+                      <h4 className="text-2xl font-bold text-ebony mb-2">Fasádne dosky</h4>
+                      <p className="text-ebony-light mb-4">Dosky určené na obklady vonkajších stien. Poskytujú ochranu a estetický vzhľad budovy.</p>
                       
                       <div className="space-y-3 mb-6">
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Borovica</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Borovica</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
-                          <p className="text-sm text-gray-600 mt-1">15 x 121 mm, 19 x 121 mm</p>
+                          <span className="text-sm font-medium text-ebony">Rozmery:</span>
+                          <p className="text-sm text-ebony-light mt-1">15 x 121 mm, 19 x 121 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium">
+                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -1017,36 +1017,36 @@ export default function NavClient({ regions }: NavClientProps) {
 
                   {hoveredProduct === 'podlahove' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg mb-4 flex items-center justify-center">
+                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
                         <span className="text-6xl">🔲</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-gray-900 mb-2">Podlahové dosky</h4>
-                      <p className="text-gray-600 mb-4">Masívne drevené dosky na podlahy. Vytvoria teplý a prirodzený vzhľad interiéru.</p>
+                      <h4 className="text-2xl font-bold text-ebony mb-2">Podlahové dosky</h4>
+                      <p className="text-ebony-light mb-4">Masívne drevené dosky na podlahy. Vytvoria teplý a prirodzený vzhľad interiéru.</p>
                       
                       <div className="space-y-3 mb-6">
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Materiály:</span>
+                          <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Dub</span>
-                            <span className="px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Dub</span>
+                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Klasifikácia:</span>
+                          <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
+                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
                           </div>
                         </div>
                         
                         <div>
-                          <span className="text-sm font-medium text-gray-700">Rozmery:</span>
-                          <p className="text-sm text-gray-600 mt-1">20 x 140 mm, 25 x 140 mm</p>
+                          <span className="text-sm font-medium text-ebony">Rozmery:</span>
+                          <p className="text-sm text-ebony-light mt-1">20 x 140 mm, 25 x 140 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -1054,47 +1054,47 @@ export default function NavClient({ regions }: NavClientProps) {
 
                   {!hoveredProduct && (
                     <div className="text-center">
-                      <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <span className="text-3xl text-white">🪵</span>
+                      <div className="w-24 h-24 bg-gradient-to-br from-ebony to-ebony-dark rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <span className="text-3xl text-gold">🪵</span>
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Kvalitné drevené produkty</h3>
-                      <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                      <h3 className="text-2xl font-bold text-ebony mb-2">Kvalitné drevené produkty</h3>
+                      <p className="text-ebony-light mb-6 max-w-md mx-auto">
                         Prejdite myšou nad kategóriou v ľavom stĺpci pre zobrazenie detailných informácií o produktoch.
                       </p>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gold/30">
                           <div className="text-2xl mb-2">🌲</div>
-                          <h4 className="font-semibold text-gray-900 mb-1">Prírodné materiály</h4>
-                          <p className="text-sm text-gray-600">Smrek, borovica, dub a ďalšie kvalitné druhy dreva</p>
+                          <h4 className="font-semibold text-ebony mb-1">Prírodné materiály</h4>
+                          <p className="text-sm text-ebony-light">Smrek, borovica, dub a ďalšie kvalitné druhy dreva</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gold/30">
                           <div className="text-2xl mb-2">⭐</div>
-                          <h4 className="font-semibold text-gray-900 mb-1">Rôzne kvality</h4>
-                          <p className="text-sm text-gray-600">Klasifikácia A, AB, BC podľa kvality a vzhľadu</p>
+                          <h4 className="font-semibold text-ebony mb-1">Rôzne kvality</h4>
+                          <p className="text-sm text-ebony-light">Klasifikácia A, AB, BC podľa kvality a vzhľadu</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gold/30">
                           <div className="text-2xl mb-2">📏</div>
-                          <h4 className="font-semibold text-gray-900 mb-1">Rôzne rozmery</h4>
-                          <p className="text-sm text-gray-600">Široký výber rozmerov pre rôzne účely použitia</p>
+                          <h4 className="font-semibold text-ebony mb-1">Rôzne rozmery</h4>
+                          <p className="text-sm text-ebony-light">Široký výber rozmerov pre rôzne účely použitia</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gold/30">
                           <div className="text-2xl mb-2">🚚</div>
-                          <h4 className="font-semibold text-gray-900 mb-1">Doprava zdarma</h4>
-                          <p className="text-sm text-gray-600">Pri objednávke nad 30 bežných metrov</p>
+                          <h4 className="font-semibold text-ebony mb-1">Doprava zdarma</h4>
+                          <p className="text-sm text-ebony-light">Pri objednávke nad 30 bežných metrov</p>
                         </div>
                       </div>
                       
                       <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <LocalizedClientLink
                           href="/kalkulacka"
-                          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                          className="px-6 py-3 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium"
                         >
                           Kalkulačka spotreby
                         </LocalizedClientLink>
                         <LocalizedClientLink
                           href="/poradca"
-                          className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                          className="px-6 py-3 bg-gold text-ebony rounded-lg hover:bg-gold-dark transition-colors font-medium"
                         >
                           Poradca výberu
                         </LocalizedClientLink>
@@ -1109,82 +1109,82 @@ export default function NavClient({ regions }: NavClientProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <LocalizedClientLink
                     href="/kategorie/tatransky-profil"
-                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-amber-300 hover:bg-amber-50 transition-all duration-200"
+                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-amber-100 rounded-lg group-hover:bg-amber-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🪵</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 group-hover:text-amber-800">Tatranský profil</h4>
-                        <p className="text-sm text-gray-600">Na steny a stropy</p>
+                        <h4 className="font-medium text-ebony group-hover:text-ebony-dark">Tatranský profil</h4>
+                        <p className="text-sm text-ebony-light">Na steny a stropy</p>
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
                     </div>
-                    <p className="text-xs text-gray-500">Smrek, Borovica</p>
+                    <p className="text-xs text-ebony-light">Smrek, Borovica</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/terasove-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
+                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🌊</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 group-hover:text-blue-800">Terásové dosky</h4>
-                        <p className="text-sm text-gray-600">Pre terasy a balkóny</p>
+                        <h4 className="font-medium text-ebony group-hover:text-ebony-dark">Terásové dosky</h4>
+                        <p className="text-sm text-ebony-light">Pre terasy a balkóny</p>
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
                     </div>
-                    <p className="text-xs text-gray-500">Smrek, Céder</p>
+                    <p className="text-xs text-ebony-light">Smrek, Céder</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/fasadne-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200"
+                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg group-hover:bg-green-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🧱</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 group-hover:text-green-800">Fasádne dosky</h4>
-                        <p className="text-sm text-gray-600">Obklady vonkajších stien</p>
+                        <h4 className="font-medium text-ebony group-hover:text-ebony-dark">Fasádne dosky</h4>
+                        <p className="text-sm text-ebony-light">Obklady vonkajších stien</p>
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">BC</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
                     </div>
-                    <p className="text-xs text-gray-500">Smrek, Borovica</p>
+                    <p className="text-xs text-ebony-light">Smrek, Borovica</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/podlahove-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200"
+                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
                   >
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg group-hover:bg-purple-200 transition-colors">
+                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
                         <span className="text-xl">🔲</span>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 group-hover:text-purple-800">Podlahové dosky</h4>
-                        <p className="text-sm text-gray-600">Masívne drevené podlahy</p>
+                        <h4 className="font-medium text-ebony group-hover:text-ebony-dark">Podlahové dosky</h4>
+                        <p className="text-sm text-ebony-light">Masívne drevené podlahy</p>
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">A</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
+                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
                     </div>
-                    <p className="text-xs text-gray-500">Dub, Smrek</p>
+                    <p className="text-xs text-ebony-light">Dub, Smrek</p>
                   </LocalizedClientLink>
                 </div>
 
@@ -1192,7 +1192,7 @@ export default function NavClient({ regions }: NavClientProps) {
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
                   <LocalizedClientLink
                     href="/kalkulacka"
-                    className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium text-center"
+                    className="flex-1 px-4 py-3 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium text-center"
                   >
                     Kalkulačka spotreby
                   </LocalizedClientLink>
