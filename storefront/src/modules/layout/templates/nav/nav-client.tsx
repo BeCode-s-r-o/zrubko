@@ -41,15 +41,18 @@ import {
   Zap,
   ShoppingBag,
 } from "lucide-react"
-import { StoreRegion } from "@medusajs/types"
+import { StoreRegion, HttpTypes } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
+import ModernNavbar from "@modules/layout/components/modern-navbar"
+import MobileCategoryMenu from "@modules/layout/components/mobile-category-menu"
 
 type NavClientProps = {
   regions: StoreRegion[]
+  categories: HttpTypes.StoreProductCategory[]
 }
 
-// Definícia kategórií pre interiér a exteriér s SHOU SUGI BAN tematikou
+// Statické kategórie pre miesto použitia (zostávajú pre Miesto použitia menu)
 const interiorCategories = [
   {
     title: "Obklad stien",
@@ -137,14 +140,8 @@ const exteriorCategories = [
   }
 ]
 
-const topProducts = [
-  { title: "Tatranský profil AB", href: "/produkty/tatransky-profil-ab" },
-  { title: "Terásové dosky", href: "/produkty/terasove-dosky" },
-  { title: "Plotovky smrek", href: "/produkty/plotovky-smrek" }
-]
-
 // Mobilný komponent pre navigáciu
-const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
+const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categories: HttpTypes.StoreProductCategory[] }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [expandedMobile, setExpandedMobile] = useState<'products' | 'usage' | null>(null)
   const [expandedUsage, setExpandedUsage] = useState<'interior' | 'exterior' | null>(null)
@@ -564,7 +561,7 @@ const MobileSideMenu = ({ regions }: { regions: StoreRegion[] }) => {
   )
 }
 
-export default function NavClient({ regions }: NavClientProps) {
+export default function NavClient({ regions, categories }: NavClientProps) {
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isUsageOpen, setIsUsageOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<'interior' | 'exterior' | null>(null)
@@ -659,7 +656,7 @@ export default function NavClient({ regions }: NavClientProps) {
       <header className="relative mx-auto h-20 bg-champagne border-b border-gold/30 shadow-sm">
         <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-ui-fg-subtle">
           <div className="flex items-center lg:hidden">
-            <MobileSideMenu regions={regions} />
+            <MobileCategoryMenu regions={regions} categories={categories} />
           </div>
           <div className="flex flex-1 justify-center lg:justify-start">
             <LocalizedClientLink
@@ -702,26 +699,7 @@ export default function NavClient({ regions }: NavClientProps) {
         {/* SECOND NAV: DESKTOP MENU BAR */}
         <nav className="hidden items-center w-full h-14 bg-gradient-to-r from-champagne-light to-champagne border-t lg:flex border-gold/30 shadow-sm">
           <div className="flex gap-8 items-center content-container">
-            <button
-              id="products-menu-button"
-              onClick={() => {
-                setIsProductsOpen((prev) => {
-                  if (!prev) setIsUsageOpen(false)
-                  return !prev
-                })
-              }}
-              className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
-                isProductsOpen 
-                  ? "bg-gold text-ebony shadow-sm" 
-                  : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
-              }`}
-            >
-              Produkty
-              <ChevronDown
-                size={16}
-                className={`transition-transform duration-200 ${isProductsOpen ? "rotate-180" : ""}`}
-              />
-            </button>
+            <ModernNavbar categories={categories} />
 
             <button
               id="usage-menu-button"
