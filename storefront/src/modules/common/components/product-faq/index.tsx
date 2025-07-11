@@ -61,8 +61,8 @@ const ProductFAQ = ({
 
   return (
     <div className="mx-auto mt-12 mb-12 w-full max-w-2xl">
-      <h2 className="mb-8 text-3xl text-center md:text-4xl font-heading">
-        {title} <span className="inline-block text-2xl align-middle text-accent">✨</span>
+      <h2 className="mb-8 text-3xl text-center md:text-4xl font-heading text-ebony hover:text-gold transition-colors">
+        {title}
       </h2>
       <div className="border-t border-b border-gray-200 divide-y divide-gray-200">
         {items.map((item, idx) => (
