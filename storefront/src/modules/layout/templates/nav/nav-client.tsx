@@ -52,93 +52,57 @@ type NavClientProps = {
   categories: HttpTypes.StoreProductCategory[]
 }
 
-// Statické kategórie pre miesto použitia (zostávajú pre Miesto použitia menu)
-const interiorCategories = [
-  {
-    title: "Obklad stien",
-    icon: Paintbrush,
-    description: "Dekoratívny obklad vnútorných stien",
-    profiles: ["Tatranský profil", "Smrekovec"],
-    quality: ["AB", "BC"],
-    image: "/burnt-wood.jpg",
-    href: "/kategorie/obklad-stien"
-  },
-  {
-    title: "Podbitie stropov",
-    icon: Layers,
-    description: "Elegantné riešenie pre stropy",
-    profiles: ["Smrekovec", "Lambris"],
-    quality: ["AB"],
-    image: "/shou-sugi-ban-bg.png",
-    href: "/kategorie/podbitie-stropov"
-  },
-  {
-    title: "Podlaha",
-    icon: Square,
-    description: "Pevná drevená podlaha",
-    profiles: ["Masívne dosky", "Parkety"],
-    quality: ["A", "AB"],
-    image: "/shou-sugi-ban-hero.jpg",
-    href: "/kategorie/podlaha"
-  },
-  {
-    title: "Sauna",
-    icon: Thermometer,
-    description: "Špeciálne drevo do sauny",
-    profiles: ["Abachi", "Céder"],
-    quality: ["A"],
-    image: "/shou-sugi-ban-main.jpg",
-    href: "/kategorie/sauna"
+// Helper functions to get categories from backend data
+const getCategoryIcon = (categoryName: string) => {
+  const iconMap: { [key: string]: any } = {
+    "Obklad stien": Paintbrush,
+    "Podbitie stropov": Layers,
+    "Podlaha": Square,
+    "Sauna": Thermometer,
+    "Fasáda": Building2,
+    "Podbitie strechy": Triangle,
+    "Terasa": WavesIcon,
+    "Prístrešok": Tent,
+    "Plot": Grid3x3,
   }
-]
+  return iconMap[categoryName] || Package
+}
 
-const exteriorCategories = [
-  {
-    title: "Fasáda",
-    icon: Building2,
-    description: "Obklad vonkajšej steny",
-    profiles: ["Tatranský profil", "Rhombus"],
-    quality: ["AB", "BC"],
-    image: "/burnt-wood.jpg",
-    href: "/kategorie/fasada"
-  },
-  {
-    title: "Podbitie strechy",
-    icon: Triangle,
-    description: "Ochrana a úprava podstefí",
-    profiles: ["Smrekovec", "Tatranský profil"],
-    quality: ["AB", "BC"],
-    image: "/shou-sugi-ban-main.jpg",
-    href: "/kategorie/podbitie-strechy"
-  },
-  {
-    title: "Terasa",
-    icon: WavesIcon,
-    description: "Terásové dosky a konštrukcie",
-    profiles: ["Terásové dosky", "WPC"],
-    quality: ["A", "AB"],
-    image: "/shou-sugi-ban-hero.jpg",
-    href: "/kategorie/terasa"
-  },
-  {
-    title: "Prístrešok",
-    icon: Tent,
-    description: "Konštrukčné drevo pre prístrešky",
-    profiles: ["Hranoly", "Latky"],
-    quality: ["AB", "BC"],
-    image: "/shou-sugi-ban-bg.png",
-    href: "/kategorie/pristresok"
-  },
-  {
-    title: "Plot",
-    icon: Grid3x3,
-    description: "Plotové dosky a stĺpiky",
-    profiles: ["Plotovky", "Stĺpiky"],
-    quality: ["BC", "C"],
-    image: "/burnt-wood.jpg",
-    href: "/kategorie/plot"
+const getUsageCategories = (categories: HttpTypes.StoreProductCategory[]) => {
+  const interiorCategory = categories.find(cat => cat.name === "Interiér")
+  const exteriorCategory = categories.find(cat => cat.name === "Exteriér")
+
+  // If main categories don't exist, create fallback using existing categories
+  let interiorSubcategories = interiorCategory?.category_children || []
+  let exteriorSubcategories = exteriorCategory?.category_children || []
+
+  // Fallback: if no Interiér/Exteriér categories exist, use existing categories as subcategories
+  if (!interiorCategory && !exteriorCategory) {
+    
+    // Interior-like categories
+    const interiorCategoryNames = ["Obklad stien", "Podbitie stropov", "Podlaha", "Sauna", "Podlahové dosky"]
+    interiorSubcategories = categories.filter(cat => 
+      interiorCategoryNames.some(name => cat.name.includes(name) || name.includes(cat.name))
+    )
+    
+    // Exterior-like categories  
+    const exteriorCategoryNames = ["Fasáda", "Podbitie strechy", "Terasa", "Prístrešok", "Plot", "Fasádne dosky", "Terásové dosky", "Tatranský profil"]
+    exteriorSubcategories = categories.filter(cat => 
+      exteriorCategoryNames.some(name => cat.name.includes(name) || name.includes(cat.name))
+    )
   }
-]
+
+  return {
+    interior: {
+      category: interiorCategory,
+      subcategories: interiorSubcategories
+    },
+    exterior: {
+      category: exteriorCategory,
+      subcategories: exteriorSubcategories
+    }
+  }
+}
 
 // Mobilný komponent pre navigáciu
 const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categories: HttpTypes.StoreProductCategory[] }) => {
@@ -146,6 +110,9 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
   const [expandedMobile, setExpandedMobile] = useState<'products' | 'usage' | null>(null)
   const [expandedUsage, setExpandedUsage] = useState<'interior' | 'exterior' | null>(null)
   const [expandedProducts, setExpandedProducts] = useState<'wood' | 'construction' | null>(null)
+  
+  // Get dynamic usage categories
+  const usageCategories = getUsageCategories(categories)
 
   const toggleMobile = (section: 'products' | 'usage') => {
     setExpandedMobile(expandedMobile === section ? null : section)
@@ -424,8 +391,18 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                             className="flex items-center justify-between w-full p-3 text-left hover:bg-blue-50 transition-colors"
                           >
                             <div className="flex items-center gap-3">
-                              <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
-                                <Home className="w-4 h-4 text-blue-600" />
+                              <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                                {usageCategories.interior.category?.metadata?.image_url ? (
+                                  <Image
+                                    src={usageCategories.interior.category.metadata.image_url as string}
+                                    alt="Interiér"
+                                    width={64}
+                                    height={48}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <Home className="w-6 h-6 text-blue-600" />
+                                )}
                               </div>
                               <span className="text-sm font-medium text-gray-700">Interiér</span>
                             </div>
@@ -438,22 +415,35 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           
                           {expandedUsage === 'interior' && (
                             <div className="bg-blue-50 border-t border-blue-200 p-3 space-y-2">
-                              {interiorCategories.map((category, index) => (
-                                <LocalizedClientLink
-                                  key={index}
-                                  href={category.href}
-                                  className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
-                                  onClick={closeMobile}
-                                >
-                                  <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
-                                    <category.icon className="w-4 h-4 text-blue-600" />
-                                  </div>
-                                  <div className="flex-1">
-                                    <span className="font-medium">{category.title}</span>
-                                    <p className="text-xs text-gray-500">{category.description}</p>
-                                  </div>
-                                </LocalizedClientLink>
-                              ))}
+                              {usageCategories.interior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
+                                const CategoryIcon = getCategoryIcon(category.name)
+                                return (
+                                  <LocalizedClientLink
+                                    key={category.id}
+                                    href={`/categories/${category.handle}`}
+                                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                                    onClick={closeMobile}
+                                  >
+                                    <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                                      {category.metadata?.image_url ? (
+                                        <Image
+                                          src={category.metadata.image_url as string}
+                                          alt={category.name}
+                                          width={64}
+                                          height={48}
+                                          className="w-full h-full object-cover"
+                                        />
+                                      ) : (
+                                        <CategoryIcon className="w-6 h-6 text-blue-600" />
+                                      )}
+                                    </div>
+                                    <div className="flex-1">
+                                      <span className="font-medium">{category.name}</span>
+                                      <p className="text-xs text-gray-500">{category.description}</p>
+                                    </div>
+                                  </LocalizedClientLink>
+                                )
+                              })}
                             </div>
                           )}
                         </div>
@@ -465,8 +455,18 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                             className="flex items-center justify-between w-full p-3 text-left hover:bg-green-50 transition-colors"
                           >
                             <div className="flex items-center gap-3">
-                              <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
-                                <Building className="w-4 h-4 text-green-600" />
+                              <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                                {usageCategories.exterior.category?.metadata?.image_url ? (
+                                  <Image
+                                    src={usageCategories.exterior.category.metadata.image_url as string}
+                                    alt="Exteriér"
+                                    width={64}
+                                    height={48}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <Building className="w-6 h-6 text-green-600" />
+                                )}
                               </div>
                               <span className="text-sm font-medium text-gray-700">Exteriér</span>
                             </div>
@@ -479,22 +479,35 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           
                           {expandedUsage === 'exterior' && (
                             <div className="bg-green-50 border-t border-green-200 p-3 space-y-2">
-                              {exteriorCategories.map((category, index) => (
-                                <LocalizedClientLink
-                                  key={index}
-                                  href={category.href}
-                                  className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-100 rounded-lg transition-colors"
-                                  onClick={closeMobile}
-                                >
-                                  <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
-                                    <category.icon className="w-4 h-4 text-green-600" />
-                                  </div>
-                                  <div className="flex-1">
-                                    <span className="font-medium">{category.title}</span>
-                                    <p className="text-xs text-gray-500">{category.description}</p>
-                                  </div>
-                                </LocalizedClientLink>
-                              ))}
+                              {usageCategories.exterior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
+                                const CategoryIcon = getCategoryIcon(category.name)
+                                return (
+                                  <LocalizedClientLink
+                                    key={category.id}
+                                    href={`/categories/${category.handle}`}
+                                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+                                    onClick={closeMobile}
+                                  >
+                                    <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                                      {category.metadata?.image_url ? (
+                                        <Image
+                                          src={category.metadata.image_url as string}
+                                          alt={category.name}
+                                          width={64}
+                                          height={48}
+                                          className="w-full h-full object-cover"
+                                        />
+                                      ) : (
+                                        <CategoryIcon className="w-6 h-6 text-green-600" />
+                                      )}
+                                    </div>
+                                    <div className="flex-1">
+                                      <span className="font-medium">{category.name}</span>
+                                      <p className="text-xs text-gray-500">{category.description}</p>
+                                    </div>
+                                  </LocalizedClientLink>
+                                )
+                              })}
                             </div>
                           )}
                         </div>
@@ -569,6 +582,9 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
   const usageMenuRef = useRef<HTMLDivElement>(null)
   const productsMenuRef = useRef<HTMLDivElement>(null)
+  
+  // Get dynamic usage categories
+  const usageCategories = getUsageCategories(categories)
 
   // Miesto použitia – click-away
   useEffect(() => {
@@ -1211,9 +1227,6 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
               <div className="mb-8">
                 <h2 className="mb-2 text-2xl font-bold">Miesto použitia</h2>
-                <p className="max-w-3xl text-base text-ui-fg-muted">
-                  Vyberte si produkty podľa miesta použitia. Kliknite na sekciu pre zobrazenie detailov.
-                </p>
               </div>
 
               {/* Základná úroveň - Interiér a Exteriér */}
@@ -1229,8 +1242,18 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-blue-500 text-white rounded-lg">
-                        <Home className="w-6 h-6" />
+                      <div className="flex items-center justify-center w-32 h-24 bg-blue-100 rounded-lg overflow-hidden">
+                        {usageCategories.interior.category?.metadata?.image_url ? (
+                          <Image
+                            src={usageCategories.interior.category.metadata.image_url as string}
+                            alt="Interiér"
+                            width={128}
+                            height={96}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <Home className="w-12 h-12 text-blue-600" />
+                        )}
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-gray-900">Interiér</h3>
@@ -1239,7 +1262,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full">
-                        {interiorCategories.length} kategórií
+                        {usageCategories.interior.subcategories.length} kategórií
                       </span>
                       <ChevronDown 
                         className={`w-5 h-5 text-blue-600 transition-transform duration-300 ${
@@ -1251,9 +1274,9 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   
                   {/* Rýchly náhľad kategórií */}
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {interiorCategories.map((category, index) => (
-                      <span key={index} className="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded-full">
-                        {category.title}
+                    {usageCategories.interior.subcategories.map((category: HttpTypes.StoreProductCategory) => (
+                      <span key={category.id} className="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded-full">
+                        {category.name}
                       </span>
                     ))}
                   </div>
@@ -1270,8 +1293,18 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-lg">
-                        <Building className="w-6 h-6" />
+                      <div className="flex items-center justify-center w-32 h-24 bg-green-100 rounded-lg overflow-hidden">
+                        {usageCategories.exterior.category?.metadata?.image_url ? (
+                          <Image
+                            src={usageCategories.exterior.category.metadata.image_url as string}
+                            alt="Exteriér"
+                            width={128}
+                            height={96}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <Building className="w-12 h-12 text-green-600" />
+                        )}
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-gray-900">Exteriér</h3>
@@ -1280,7 +1313,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="px-3 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full">
-                        {exteriorCategories.length} kategórií
+                        {usageCategories.exterior.subcategories.length} kategórií
                       </span>
                       <ChevronDown 
                         className={`w-5 h-5 text-green-600 transition-transform duration-300 ${
@@ -1292,9 +1325,9 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   
                   {/* Rýchly náhľad kategórií */}
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {exteriorCategories.map((category, index) => (
-                      <span key={index} className="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">
-                        {category.title}
+                    {usageCategories.exterior.subcategories.map((category: HttpTypes.StoreProductCategory) => (
+                      <span key={category.id} className="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">
+                        {category.name}
                       </span>
                     ))}
                   </div>
@@ -1332,86 +1365,72 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                         ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
                         : 'sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5'
                     }`}>
-                      {(expandedSection === 'interior' ? interiorCategories : exteriorCategories).map((category, index) => (
-                        <LocalizedClientLink
-                          key={index}
-                          href={category.href}
-                          className={`group relative flex items-start p-4 bg-white rounded-xl border-2 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer ${
-                            expandedSection === 'interior' 
-                              ? 'border-blue-200 hover:bg-blue-50 hover:border-blue-300' 
-                              : 'border-green-200 hover:bg-green-50 hover:border-green-300'
-                          }`}
-                        >
-                          {/* Ikona vľavo */}
-                          <div className={`flex items-center justify-center w-12 h-12 rounded-lg mr-3 transition-all duration-300 flex-shrink-0 ${
-                            expandedSection === 'interior' 
-                              ? 'bg-blue-100 group-hover:bg-blue-200' 
-                              : 'bg-green-100 group-hover:bg-green-200'
-                          }`}>
-                            <category.icon className={`w-6 h-6 ${
-                              expandedSection === 'interior' ? 'text-blue-600' : 'text-green-600'
-                            }`} />
-                          </div>
-                          
-                          {/* Obsah vpravo */}
-                          <div className="flex-1 min-w-0">
-                            {/* Názov kategórie */}
-                            <h4 className="text-base font-semibold text-gray-900 mb-1">{category.title}</h4>
-                            
-                            {/* Popis */}
-                            <p className="text-sm text-gray-500 mb-2 leading-snug line-clamp-2">{category.description}</p>
-                            
-                            {/* Profily */}
-                            <div className="flex flex-wrap gap-1 mb-2">
-                              {category.profiles.slice(0, 2).map((profile, idx) => (
-                                <span key={idx} className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded-full border border-gray-200">
-                                  {profile}
-                                </span>
-                              ))}
-                            </div>
-                            
-                            {/* Kvality */}
-                            <div className="flex gap-1">
-                              {category.quality.map((quality, idx) => (
-                                <span 
-                                  key={idx} 
-                                  className={`px-2 py-0.5 text-xs font-medium rounded-full border ${
-                                    quality === 'A'
-                                      ? 'bg-purple-100 text-purple-800 border-purple-200'
-                                      : quality === 'AB'
-                                      ? 'bg-orange-100 text-orange-800 border-orange-200'
-                                      : quality === 'BC'
-                                      ? 'bg-amber-100 text-amber-800 border-amber-200'
-                                      : quality === 'C'
-                                      ? 'bg-gray-100 text-gray-800 border-gray-200'
-                                      : 'bg-gray-100 text-gray-800 border-gray-200'
-                                  }`}
-                                >
-                                  {quality}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* CTA šípka a mini náhľad */}
-                          <div className="flex flex-col items-center gap-2 ml-2">
-                            <div className={`w-8 h-8 rounded-lg border opacity-80 group-hover:opacity-100 transition-opacity duration-300 ${
+                      {(expandedSection === 'interior' ? usageCategories.interior.subcategories : usageCategories.exterior.subcategories).map((category: HttpTypes.StoreProductCategory) => {
+                        const CategoryIcon = getCategoryIcon(category.name)
+                        const categoryImage = category.metadata?.image_url as string
+                        return (
+                          <LocalizedClientLink
+                            key={category.id}
+                            href={`/categories/${category.handle}`}
+                            className={`group relative flex items-start p-4 bg-white rounded-xl border-2 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer ${
                               expandedSection === 'interior' 
-                                ? 'bg-gradient-to-br from-amber-200 to-amber-300 border-amber-300' 
-                                : 'bg-gradient-to-br from-green-200 to-green-300 border-green-300'
+                                ? 'border-blue-200 hover:bg-blue-50 hover:border-blue-300' 
+                                : 'border-green-200 hover:bg-green-50 hover:border-green-300'
+                            }`}
+                          >
+                            {/* Obrázok alebo ikona vľavo */}
+                            <div className={`flex items-center justify-center w-24 h-20 rounded-lg mr-3 transition-all duration-300 flex-shrink-0 overflow-hidden ${
+                              expandedSection === 'interior' 
+                                ? 'bg-blue-100 group-hover:bg-blue-200' 
+                                : 'bg-green-100 group-hover:bg-green-200'
                             }`}>
-                              <div className={`w-full h-full rounded-lg opacity-60 ${
-                                expandedSection === 'interior' 
-                                  ? 'bg-gradient-to-br from-amber-100 to-amber-200' 
-                                  : 'bg-gradient-to-br from-green-100 to-green-200'
-                              }`}></div>
+                              {categoryImage ? (
+                                <Image
+                                  src={categoryImage}
+                                  alt={category.name}
+                                  width={96}
+                                  height={80}
+                                  className="w-full h-full object-cover"
+                                />
+                              ) : (
+                                <CategoryIcon className={`w-10 h-10 ${
+                                  expandedSection === 'interior' ? 'text-blue-600' : 'text-green-600'
+                                }`} />
+                              )}
                             </div>
-                            <div className="flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300">
-                              <ArrowRight className="w-3 h-3 text-gray-600" />
+                            
+                            {/* Obsah vpravo */}
+                            <div className="flex-1 min-w-0">
+                              {/* Názov kategórie */}
+                              <h4 className="text-base font-semibold text-gray-900 mb-1">{category.name}</h4>
+                              
+                              {/* Popis */}
+                              <p className="text-sm text-gray-500 mb-2 leading-snug line-clamp-2">{category.description}</p>
+                              
+                              {/* Badge s počtom produktov alebo iné info */}
+                              <div className="flex flex-wrap gap-1 mb-2">
+                                <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-700 rounded-full border border-gray-200">
+                                  Produkty
+                                </span>
+                              </div>
+                              
+                              {/* Iba jeden univerzálny badge */}
+                              <div className="flex gap-1">
+                                <span className="px-2 py-0.5 text-xs font-medium rounded-full border bg-blue-100 text-blue-800 border-blue-200">
+                                  Dostupné
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        </LocalizedClientLink>
-                      ))}
+                            
+                            {/* CTA šípka */}
+                            <div className="flex flex-col items-center justify-center ml-2">
+                              <div className="flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                <ArrowRight className="w-3 h-3 text-gray-600" />
+                              </div>
+                            </div>
+                          </LocalizedClientLink>
+                        )
+                      })}
                     </div>
                   </div>
                 </div>

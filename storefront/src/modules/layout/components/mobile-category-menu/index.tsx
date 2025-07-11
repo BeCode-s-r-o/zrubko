@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react"
 import { 
   Menu, X, ChevronDown, ChevronRight, Package, ShoppingBag, 
-  Star, ArrowRight, Loader2, Grid3X3 
+  Star, ArrowRight, Loader2, Grid3X3, Home, Building,
+  Paintbrush, Layers, Square, Thermometer, Building2, 
+  Triangle, Waves as WavesIcon, Tent
 } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes, StoreRegion } from "@medusajs/types"
@@ -54,12 +56,67 @@ const fetchProductsForCategory = async (categoryId: string, countryCode: string)
   }
 }
 
+// Helper functions for usage categories
+const getCategoryIcon = (categoryName: string) => {
+  const iconMap: { [key: string]: any } = {
+    "Obklad stien": Paintbrush,
+    "Podbitie stropov": Layers,
+    "Podlaha": Square,
+    "Sauna": Thermometer,
+    "Fasáda": Building2,
+    "Podbitie strechy": Triangle,
+    "Terasa": WavesIcon,
+    "Prístrešok": Tent,
+    "Plot": Grid3X3,
+  }
+  return iconMap[categoryName] || Package
+}
+
+const getUsageCategories = (categories: HttpTypes.StoreProductCategory[]) => {
+  const interiorCategory = categories.find(cat => cat.name === "Interiér")
+  const exteriorCategory = categories.find(cat => cat.name === "Exteriér")
+
+  // If main categories don't exist, create fallback using existing categories
+  let interiorSubcategories = interiorCategory?.category_children || []
+  let exteriorSubcategories = exteriorCategory?.category_children || []
+
+  // Fallback: if no Interiér/Exteriér categories exist, use existing categories as subcategories
+  if (!interiorCategory && !exteriorCategory) {
+    // Interior-like categories
+    const interiorCategoryNames = ["Obklad stien", "Podbitie stropov", "Podlaha", "Sauna", "Podlahové dosky"]
+    interiorSubcategories = categories.filter(cat => 
+      interiorCategoryNames.some(name => cat.name.includes(name) || name.includes(cat.name))
+    )
+    
+    // Exterior-like categories  
+    const exteriorCategoryNames = ["Fasáda", "Podbitie strechy", "Terasa", "Prístrešok", "Plot", "Fasádne dosky", "Terásové dosky", "Tatranský profil"]
+    exteriorSubcategories = categories.filter(cat => 
+      exteriorCategoryNames.some(name => cat.name.includes(name) || name.includes(cat.name))
+    )
+  }
+
+  return {
+    interior: {
+      category: interiorCategory,
+      subcategories: interiorSubcategories
+    },
+    exterior: {
+      category: exteriorCategory,
+      subcategories: exteriorSubcategories
+    }
+  }
+}
+
 export default function MobileCategoryMenu({ regions, categories }: MobileCategoryMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null)
   const [categoryProducts, setCategoryProducts] = useState<ProductsState>({})
   const [loadingProducts, setLoadingProducts] = useState<Set<string>>(new Set())
+  const [expandedUsageSection, setExpandedUsageSection] = useState<'interior' | 'exterior' | null>(null)
   const { countryCode } = useParams() as { countryCode: string }
+
+  // Get dynamic usage categories
+  const usageCategories = getUsageCategories(categories)
 
   // Filter out parent categories (main categories)
   const mainCategories = categories?.filter(cat => !cat.parent_category) || []
@@ -113,6 +170,7 @@ export default function MobileCategoryMenu({ regions, categories }: MobileCatego
   const closeMobile = () => {
     setIsOpen(false)
     setExpandedCategory(null)
+    setExpandedUsageSection(null)
   }
 
   return (
@@ -375,8 +433,146 @@ export default function MobileCategoryMenu({ regions, categories }: MobileCatego
                 )}
               </div>
 
+              {/* Miesto použitia Section */}
+              <div className="mb-6 pt-4 border-t border-gold/20">
+                <div className="flex items-center gap-2 mb-4">
+                  <Home size={20} className="text-orange-600" />
+                  <h3 className="text-lg font-bold text-ebony">Miesto použitia</h3>
+                </div>
+
+                <div className="space-y-3">
+                  {/* Interiér */}
+                  <div className="border border-blue-200 rounded-lg overflow-hidden bg-white">
+                    <button
+                      onClick={() => setExpandedUsageSection(expandedUsageSection === 'interior' ? null : 'interior')}
+                      className="flex items-center justify-between w-full p-3 text-left hover:bg-blue-50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                          {usageCategories.interior.category?.metadata?.image_url ? (
+                            <Image
+                              src={usageCategories.interior.category.metadata.image_url as string}
+                              alt="Interiér"
+                              width={64}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Home className="w-6 h-6 text-blue-600" />
+                          )}
+                        </div>
+                        <span className="text-sm font-medium text-gray-700">Interiér</span>
+                      </div>
+                      <ChevronDown 
+                        className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                          expandedUsageSection === 'interior' ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                    
+                    {expandedUsageSection === 'interior' && (
+                      <div className="bg-blue-50 border-t border-blue-200 p-3 space-y-2">
+                        {usageCategories.interior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
+                          const CategoryIcon = getCategoryIcon(category.name)
+                          return (
+                            <LocalizedClientLink
+                              key={category.id}
+                              href={`/categories/${category.handle}`}
+                              className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                              onClick={closeMobile}
+                            >
+                              <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                                {category.metadata?.image_url ? (
+                                  <Image
+                                    src={category.metadata.image_url as string}
+                                    alt={category.name}
+                                    width={64}
+                                    height={48}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <CategoryIcon className="w-6 h-6 text-blue-600" />
+                                )}
+                              </div>
+                              <div className="flex-1">
+                                <span className="font-medium">{category.name}</span>
+                                <p className="text-xs text-gray-500">{category.description}</p>
+                              </div>
+                            </LocalizedClientLink>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Exteriér */}
+                  <div className="border border-green-200 rounded-lg overflow-hidden bg-white">
+                    <button
+                      onClick={() => setExpandedUsageSection(expandedUsageSection === 'exterior' ? null : 'exterior')}
+                      className="flex items-center justify-between w-full p-3 text-left hover:bg-green-50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                          {usageCategories.exterior.category?.metadata?.image_url ? (
+                            <Image
+                              src={usageCategories.exterior.category.metadata.image_url as string}
+                              alt="Exteriér"
+                              width={64}
+                              height={48}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Building className="w-6 h-6 text-green-600" />
+                          )}
+                        </div>
+                        <span className="text-sm font-medium text-gray-700">Exteriér</span>
+                      </div>
+                      <ChevronDown 
+                        className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${
+                          expandedUsageSection === 'exterior' ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    </button>
+                    
+                    {expandedUsageSection === 'exterior' && (
+                      <div className="bg-green-50 border-t border-green-200 p-3 space-y-2">
+                        {usageCategories.exterior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
+                          const CategoryIcon = getCategoryIcon(category.name)
+                          return (
+                            <LocalizedClientLink
+                              key={category.id}
+                              href={`/categories/${category.handle}`}
+                              className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+                              onClick={closeMobile}
+                            >
+                              <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                                {category.metadata?.image_url ? (
+                                  <Image
+                                    src={category.metadata.image_url as string}
+                                    alt={category.name}
+                                    width={64}
+                                    height={48}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <CategoryIcon className="w-6 h-6 text-green-600" />
+                                )}
+                              </div>
+                              <div className="flex-1">
+                                <span className="font-medium">{category.name}</span>
+                                <p className="text-xs text-gray-500">{category.description}</p>
+                              </div>
+                            </LocalizedClientLink>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
               {/* Other Navigation Links */}
-              <div className="space-y-3 pt-4 border-t border-gold/20">
+              <div className="space-y-3">
                 <LocalizedClientLink
                   href="/kalkulacka"
                   onClick={closeMobile}
