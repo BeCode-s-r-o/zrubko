@@ -21,15 +21,12 @@ const FloatingChatButton = () => {
       {/* Floating Button */}
       <div className="fixed bottom-6 right-6 z-40">
         <div className="relative">
-          {/* Pulse effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-accent to-accent-dark rounded-full animate-pulse opacity-75"></div>
-          
           {/* Main Button */}
           <button
             onClick={openChat}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="relative w-16 h-16 bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 group"
+            className="relative w-16 h-16 bg-black hover:bg-black/90 text-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 group"
           >
             <MessageCircle className="w-8 h-8" />
             

@@ -56,7 +56,7 @@ export default function CategoryBanner({ category }: CategoryBannerProps) {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button 
                 size="large"
-                className="bg-white hover:bg-gray-100 text-black px-8 py-4 text-lg font-semibold transition-all duration-200 hover:scale-105 shadow-lg"
+                className="bg-white text-black px-8 py-4 font-medium text-base transition-all duration-300 hover:bg-black hover:text-white shadow-sm hover:shadow-md"
                 onClick={() => {
                   document.getElementById('category-metadata')?.scrollIntoView({ 
                     behavior: 'smooth' 
@@ -69,7 +69,7 @@ export default function CategoryBanner({ category }: CategoryBannerProps) {
               <Button 
                 variant="secondary"
                 size="large"
-                className="border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white px-8 py-4 text-lg font-semibold transition-all duration-200 hover:scale-105"
+                className="bg-transparent text-white border border-white/30 hover:border-white hover:bg-white hover:text-black px-8 py-4 font-medium text-base transition-all duration-300"
                 onClick={() => {
                   // Tu by mohla byť integrácia s chat systémom
                   console.log("Opening chat...")

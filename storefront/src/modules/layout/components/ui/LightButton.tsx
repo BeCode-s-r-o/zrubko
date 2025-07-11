@@ -2,11 +2,6 @@ import { Button } from "@medusajs/ui"
 import { ReactNode } from "react"
 import clsx from "clsx"
 
-import {
-    CirclePlay,
-  } from "lucide-react"
-  
-
 type LightButtonProps = {
   href?: string
   children: ReactNode
@@ -23,7 +18,7 @@ const LightButton = ({ href, children, className, icon, type = "button", disable
       disabled={disabled}
       variant="secondary"
       className={clsx(
-        "px-6 py-3 text-forest bg-white border-2 transition duration-300 text-[18px] border-wood hover:border-forest hover:bg-wood-light disabled:opacity-50 disabled:cursor-not-allowed",
+        "px-8 py-4 text-black bg-transparent border border-black/30 hover:border-black hover:bg-black hover:text-white font-medium text-base transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-black",
         className
       )}
     >
