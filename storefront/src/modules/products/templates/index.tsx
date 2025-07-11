@@ -31,61 +31,106 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   })) || []
 
   return (
-    <>
-      {/* Roztiahnutý hero sekcia na plnú šírku */}
-      <div className="bg-gradient-to-br from-accent-light/20 via-white to-accent/10">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-4 md:pt-6 lg:pt-8">
-          <Breadcrumbs 
-            productTitle={product.title}
-            categoryPath={categoryPath}
-          />
+    <div className="min-h-screen bg-gradient-to-b from-champagne-light via-champagne to-champagne-dark">
+      {/* Hero sekcia s rovnakým pozadím ako homepage */}
+      <div className="relative overflow-hidden">
+        {/* Luxusný pattern pozadie - rovnaký ako na homepage */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10L90 50L50 90L10 50Z' fill='%23D4AF37' fill-opacity='0.3'/%3E%3C/svg%3E")`,
+            backgroundSize: '80px 80px'
+          }} />
         </div>
-
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-6 md:pb-8 lg:pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-12 items-start">
-            {/* Väčšia galéria obrázkov - 4 stĺpce z 7 */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="w-full bg-white rounded-xl shadow-md overflow-hidden">
-                <ImageGallery images={product?.images || []} product={product} />
-              </div>
+        
+        <div className="relative z-10">
+          <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-4 md:pt-6 lg:pt-8">
+            <div className="mb-8">
+              <Breadcrumbs 
+                productTitle={product.title}
+                categoryPath={categoryPath}
+              />
             </div>
-            
-            {/* Variant selector - 3 stĺpce z 7 - sticky pozicionovanie */}
-            <div className="lg:col-span-3">
-              <div className="sticky top-4 lg:top-8">
-                <ProductVariantSelector 
-                  product={product} 
-                  region={region}
-                  countryCode={countryCode}
-                />
+          </div>
+
+          <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-12 md:pb-16 lg:pb-20">
+            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-12 items-start">
+              {/* Väčšia galéria obrázkov - 4 stĺpce z 7 */}
+              <div className="lg:col-span-4 space-y-8">
+                {/* Galéria v luxusnom rámčeku */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-transparent to-mahogany/20 rounded-3xl blur-xl"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
+                    <div className="p-2">
+                      <ImageGallery images={product?.images || []} product={product} />
+                    </div>
+                  </div>
+                </div>
+                
+                {/* ProductTabs v luxusnom dizajne */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ebony/10 via-transparent to-gold/10 rounded-3xl blur-xl"></div>
+                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
+                    <div className="p-8">
+                      <ProductTabs product={product} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Variant selector v luxusnom dizajne - 3 stĺpce z 7 */}
+              <div className="lg:col-span-3">
+                <div className="sticky top-8">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-mahogany/20 via-transparent to-gold/20 rounded-3xl blur-xl"></div>
+                    <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
+                      <div className="p-8">
+                        <ProductVariantSelector 
+                          product={product} 
+                          region={region}
+                          countryCode={countryCode}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tenší rozdeľovač */}
-      <div className="h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+      {/* Luxusný rozdeľovač - rovnaký štýl ako na homepage */}
+      <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
 
-      {/* Accordion s technickými parametrami */}
-      <div className="bg-gradient-to-br from-white via-accent-light/5 to-accent/5">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-12 md:py-16 lg:py-20">
-          <ProductTabs product={product} />
+      {/* Súvisiace produkty - presne rovnaký štýl ako featured collections na homepage */}
+      <div className="py-20 bg-gradient-to-br from-ebony/5 via-champagne to-gold/10 relative overflow-hidden">
+        {/* Luxusný pattern pozadie - rovnaký ako na homepage */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10L90 50L50 90L10 50Z' fill='%23D4AF37' fill-opacity='0.3'/%3E%3C/svg%3E")`,
+            backgroundSize: '80px 80px'
+          }} />
+        </div>
+        
+        <div className="content-container relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-ebony via-ebony-light to-gold bg-clip-text text-transparent mb-6 leading-tight">
+              Odporúčame Vám Tiež
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-gold via-mahogany to-ebony rounded-full mx-auto mb-8"></div>
+            <p className="text-xl text-ebony-light max-w-3xl mx-auto leading-relaxed">
+              Objavte ďalšie prémiové drevené produkty z našej kolekcie
+            </p>
+          </div>
+          
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gold/20">
+            <Suspense fallback={<SkeletonRelatedProducts />}>
+              <RelatedProducts product={product} countryCode={countryCode} />
+            </Suspense>
+          </div>
         </div>
       </div>
-
-      {/* Tenší rozdeľovač */}
-      <div className="h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
-
-      {/* Roztiahnuté súvisiace produkty */}
-      <div className="bg-gradient-to-br from-white via-accent-light/5 to-accent/5">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-12 md:py-16 lg:py-20">
-          <Suspense fallback={<SkeletonRelatedProducts />}>
-            <RelatedProducts product={product} countryCode={countryCode} />
-          </Suspense>
-        </div>
-      </div>
-    </>
+    </div>
   )
 }
 
