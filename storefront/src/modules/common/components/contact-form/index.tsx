@@ -209,24 +209,20 @@ const ContactForm = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="relative w-full group overflow-hidden rounded-2xl bg-gradient-to-r from-gold via-mahogany to-gold-dark p-1 shadow-2xl transition-all duration-300 hover:shadow-3xl hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-black text-white px-8 py-4 font-medium text-base transition-all duration-300 hover:bg-black/90 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black"
               >
-                <div className="relative rounded-2xl bg-gradient-to-r from-gold via-mahogany to-gold-dark px-8 py-4 transition-all duration-300 group-hover:from-gold-dark group-hover:via-mahogany-dark group-hover:to-gold">
-                  <div className="flex items-center justify-center gap-3 text-white">
-                    {loading ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                        <span className="text-lg font-bold">Odosielanie...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Crown className="w-5 h-5" />
-                        <span className="text-lg font-bold">Začať projekt so Zrubko</span>
-                        <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                      </>
-                    )}
-                  </div>
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/20 via-transparent to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="flex items-center justify-center gap-3">
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                      <span className="font-medium">Odosielanie...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-medium">Začať projekt so Zrubko</span>
+                      <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
                 </div>
               </button>
             </div>
