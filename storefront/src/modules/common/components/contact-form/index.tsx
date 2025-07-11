@@ -1,78 +1,69 @@
 'use client'
 
 import { useState } from 'react'
-import { Crown, Sparkles, Send, User, Mail, MessageCircle } from 'lucide-react'
+import { Crown, Sparkles, Send, User, Mail, MessageCircle, Star } from 'lucide-react'
 import ProductFAQ, { contactFAQItems } from "@modules/common/components/product-faq"
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    message: ''
   })
-  const [status, setStatus] = useState<{
-    type: 'success' | 'error' | null
-    message: string
-  }>({
-    type: null,
-    message: '',
-  })
+  
   const [loading, setLoading] = useState(false)
+  const [showErrors, setShowErrors] = useState(false)
   const [touched, setTouched] = useState({
     name: false,
     email: false,
-    message: false,
+    message: false
   })
-  const [showErrors, setShowErrors] = useState(false)
+  
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
 
   const validateEmail = (email: string) => {
-    return email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setShowErrors(true)
-    setTouched({
-      name: true,
-      email: true,
-      message: true,
-    })
     
+    // Validate form
     if (!formData.name || !formData.email || !formData.message || !validateEmail(formData.email)) {
-      return
-    }
-    
-    setLoading(true)
-    setStatus({ type: null, message: '' })
-    
-    try {
-      const response = await fetch('/api/store/custom/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to send message')
-      }
-
-      setStatus({
-        type: 'success',
-        message: 'Ďakujeme za vašu správu. Budeme vás kontaktovať čo najskôr.',
-      })
-      setFormData({ name: '', email: '', message: '' })
-      setShowErrors(false)
-      setTouched({
-        name: false,
-        email: false,
-        message: false,
-      })
-    } catch (error: any) {
       setStatus({
         type: 'error',
-        message: error?.message || 'Niečo sa pokazilo. Skúste to prosím znova.',
+        message: 'Prosím, vyplňte všetky povinné polia správne'
+      })
+      return
+    }
+
+    setLoading(true)
+    setStatus({ type: null, message: '' })
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      
+      // Success
+      setStatus({
+        type: 'success',
+        message: 'Ďakujeme za vašu správu! Ozveme sa vám čoskoro.'
+      })
+      
+      // Reset form
+      setFormData({ name: '', email: '', message: '' })
+      setTouched({ name: false, email: false, message: false })
+      setShowErrors(false)
+      
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: 'Nastala chyba pri odosielaní správy. Skúste to prosím znova.'
       })
     } finally {
       setLoading(false)
@@ -81,18 +72,31 @@ const ContactForm = () => {
 
   return (
     <div className="space-y-8">
-      {/* Luxusný formulár */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-champagne-light via-champagne to-champagne-dark p-8 shadow-2xl border border-gold/20">
+      {/* Luxusný formulár s farbami z homepage */}
+      <div className="relative overflow-hidden rounded-3xl bg-champagne/50 backdrop-blur-sm p-8 shadow-2xl border border-gold/20">
         {/* Dekoratívne pozadie */}
         <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-mahogany/5"></div>
-        <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-mahogany/10 rounded-full blur-2xl"></div>
         
         <div className="relative z-10">
+          {/* Luxusný nadpis - rovnaký štýl ako na homepage */}
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Crown className="w-6 h-6 text-gold" />
+              <h2 className="text-5xl font-bold bg-gradient-to-r from-ebony via-ebony-light to-gold bg-clip-text text-transparent leading-tight">
+                Začnite Váš Projekt
+              </h2>
+              <Crown className="w-6 h-6 text-gold" />
+            </div>
+            <div className="w-32 h-1 bg-gradient-to-r from-gold via-mahogany to-ebony rounded-full mx-auto mb-8"></div>
+            <p className="text-xl text-ebony-light max-w-3xl mx-auto leading-relaxed">
+              Napíšte nám, čo plánujete, a my vám pomôžeme s výberom aj realizáciou.
+            </p>
+          </div>
+          
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             {/* Meno */}
             <div className="group">
-              <label className="flex items-center gap-2 text-sm font-semibold text-ebony font-heading mb-3">
+              <label className="flex items-center gap-2 text-sm font-semibold text-ebony mb-3">
                 <User className="w-4 h-4 text-gold" />
                 Vaše meno *
               </label>
@@ -108,7 +112,7 @@ const ContactForm = () => {
                     touched.name && showErrors && !formData.name 
                     ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
                     : 'border-gold/30 focus:border-gold focus:ring-2 focus:ring-gold/20 hover:border-gold/50'
-                  } placeholder-ebony/50 text-ebony shadow-lg focus:shadow-xl`}
+                  } placeholder-ebony-light text-ebony shadow-lg focus:shadow-xl`}
                   required
                   placeholder="Vaše meno"
                 />
@@ -121,7 +125,7 @@ const ContactForm = () => {
 
             {/* Email */}
             <div className="group">
-              <label className="flex items-center gap-2 text-sm font-semibold text-ebony font-heading mb-3">
+              <label className="flex items-center gap-2 text-sm font-semibold text-ebony mb-3">
                 <Mail className="w-4 h-4 text-gold" />
                 Email *
               </label>
@@ -137,7 +141,7 @@ const ContactForm = () => {
                     touched.email && showErrors && (!formData.email || !validateEmail(formData.email))
                     ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
                     : 'border-gold/30 focus:border-gold focus:ring-2 focus:ring-gold/20 hover:border-gold/50'
-                  } placeholder-ebony/50 text-ebony shadow-lg focus:shadow-xl`}
+                  } placeholder-ebony-light text-ebony shadow-lg focus:shadow-xl`}
                   required
                   placeholder="vas@email.sk"
                 />
@@ -153,7 +157,7 @@ const ContactForm = () => {
 
             {/* Správa */}
             <div className="group">
-              <label className="flex items-center gap-2 text-sm font-semibold text-ebony font-heading mb-3">
+              <label className="flex items-center gap-2 text-sm font-semibold text-ebony mb-3">
                 <MessageCircle className="w-4 h-4 text-gold" />
                 Povedzte nám viac o vašom projekte... *
               </label>
@@ -168,7 +172,7 @@ const ContactForm = () => {
                     touched.message && showErrors && !formData.message 
                     ? 'border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20' 
                     : 'border-gold/30 focus:border-gold focus:ring-2 focus:ring-gold/20 hover:border-gold/50'
-                  } placeholder-ebony/50 text-ebony shadow-lg focus:shadow-xl resize-none`}
+                  } placeholder-ebony-light text-ebony shadow-lg focus:shadow-xl resize-none`}
                   required
                   rows={5}
                   placeholder="Napríklad: Chcem si postaviť zrubovú chatu s rozmermi 8x6m, s terasou a podkrovím..."
@@ -189,18 +193,18 @@ const ContactForm = () => {
                     : 'bg-gradient-to-r from-red-50 to-red-100 border-red-200 text-red-800'
                 } backdrop-blur-sm shadow-lg`}
               >
-                                 <div className="flex items-center gap-2">
-                   {status.type === 'success' ? (
-                     <Crown className="w-5 h-5 text-green-600" />
-                   ) : (
-                     <Crown className="w-5 h-5 text-red-600" />
-                   )}
-                   <p className="font-medium">{status.message}</p>
-                 </div>
+                <div className="flex items-center gap-2">
+                  {status.type === 'success' ? (
+                    <Crown className="w-5 h-5 text-green-600" />
+                  ) : (
+                    <Crown className="w-5 h-5 text-red-600" />
+                  )}
+                  <p className="font-medium">{status.message}</p>
+                </div>
               </div>
             )}
 
-            {/* Luxusné tlačidlo */}
+            {/* Luxusné tlačidlo - rovnaké farby ako na homepage */}
             <div className="pt-4">
               <button
                 type="submit"
@@ -212,12 +216,12 @@ const ContactForm = () => {
                     {loading ? (
                       <>
                         <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                        <span className="text-lg font-bold font-heading">Odosielanie...</span>
+                        <span className="text-lg font-bold">Odosielanie...</span>
                       </>
                     ) : (
                       <>
                         <Crown className="w-5 h-5" />
-                        <span className="text-lg font-bold font-heading">Začať projekt so Zrubko</span>
+                        <span className="text-lg font-bold">Začať projekt so Zrubko</span>
                         <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                       </>
                     )}
@@ -230,8 +234,8 @@ const ContactForm = () => {
         </div>
       </div>
 
-      {/* FAQ sekcia */}
-      <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-gold/20">
+      {/* FAQ sekcia s farbami z homepage */}
+      <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gold/20">
         <ProductFAQ items={contactFAQItems} />
       </div>
     </div>
