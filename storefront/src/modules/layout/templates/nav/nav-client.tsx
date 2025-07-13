@@ -633,32 +633,32 @@ export default function NavClient({ regions, categories }: NavClientProps) {
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
       {/* TOPBAR */}
-      <div className="px-4 py-3 w-full text-xs text-white bg-gradient-to-r from-ebony via-ebony-dark to-ebony shadow-sm">
+      <div className="px-4 py-3 w-full text-xs text-primary bg-gradient-to-r from-white via-secondary to-white shadow-sm border-b border-primary/10">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-[13px] gap-y-2 text-center md:text-left">
           <div className="flex flex-wrap gap-6 justify-center items-center md:justify-start">
-            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-gold transition-colors duration-200">
-              <Phone size={18} /> <strong>+421 907 695 363</strong>
+            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-primary-dark transition-colors duration-200">
+              <Phone size={18} className="text-primary" /> <strong>+421 907 695 363</strong>
             </a>
-            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-gold transition-colors duration-200">
-              <Mail size={18} /> <strong>info@zrubko.sk</strong>
+            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-primary-dark transition-colors duration-200">
+              <Mail size={18} className="text-primary" /> <strong>info@zrubko.sk</strong>
             </a>
           </div>
           <div className="flex justify-center">
             <a
               href="/doprava"
-              className="flex items-center gap-2 bg-gold/20 hover:bg-gold/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-gold/20 hover:border-gold/40"
+              className="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-primary/10 hover:border-primary/20"
             >
-              <Truck size={16} /> Doprava zdarma po Slovensku od 30m²
+              <Truck size={16} className="text-primary" /> Doprava zdarma po Slovensku od 30m²
             </a>
           </div>
           <div className="hidden gap-2 justify-center items-center hide-store:flex hide-store:justify-end">
-            <MapPin size={18} />
+            <MapPin size={18} className="text-primary" />
             <span>
               <a
                 href="https://www.google.com/maps?q=Predajňa+Zrubko,+Žilina"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-gold transition-colors duration-200"
+                className="hover:text-primary-dark transition-colors duration-200"
               >
                 <strong>Predajňa</strong> <strong>Žilina</strong>
               </a>{" "}
@@ -669,8 +669,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto h-20 bg-champagne border-b border-gold/30 shadow-sm">
-        <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-ui-fg-subtle">
+      <header className="relative mx-auto h-20 bg-primary border-b border-primary/20 shadow-sm">
+        <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-white">
           <div className="flex items-center lg:hidden">
             <MobileCategoryMenu regions={regions} categories={categories} />
           </div>

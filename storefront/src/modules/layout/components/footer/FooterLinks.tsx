@@ -57,7 +57,7 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
               O spoločnosti
             </LocalizedClientLink>
             <LocalizedClientLink
-              href="/contact"
+              href="/kontakt"
               className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
             >
               Kontakt
