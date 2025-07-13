@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_22", "npm-9_x"]
+
+[phases.build]
+cmds = ["npm install", "npm run build:next"]
+
+[phases.start]
+cmd = "npm run launcher start"
+
+[variables]
+NODE_ENV = "production" 
