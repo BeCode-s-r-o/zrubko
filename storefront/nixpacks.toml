@@ -2,7 +2,7 @@
 nixPkgs = ["nodejs_22", "npm-9_x"]
 
 [phases.build]
-cmds = ["npm install", "npm run build:next"]
+cmds = ["npm run build:next"]
 
 [phases.start]
 cmd = "npm run launcher start"
