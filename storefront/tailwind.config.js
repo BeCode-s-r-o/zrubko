@@ -23,46 +23,39 @@ module.exports = {
       colors: {
         white: "#ffffff",
         black: "#000000",
-        // Luxusná paleta pre drevo e-shop
-        ebony: {
-          DEFAULT: "#2D1810", // tmavohnedá - hlavná luxusná farba
-          dark: "#1F0F08",    // tmavšia varianta
-          light: "#3D2418",   // svetlejšia varianta
+        primary: {
+          DEFAULT: "#1a2e1a", // hlavná tmavozelená
+          dark: "#162619",
+          light: "#2d4a2d",
         },
-        gold: {
-          DEFAULT: "#D4AF37", // zlatá - akcentová luxusná farba
-          dark: "#B8941F",    // tmavšia varianta
-          light: "#E6C757",   // svetlejšia varianta
+        secondary: {
+          DEFAULT: "#f8fafc", // svetlá šedá
+          dark: "#e2e8f0",
+          light: "#f1f5f9",
         },
-        champagne: {
-          DEFAULT: "#F7F3E9", // krémová šampanská - neutrálna farba
-          dark: "#EDE5D3",    // tmavšia varianta
-          light: "#FBFAF7",   // svetlejšia varianta
-        },
-        mahogany: {
-          DEFAULT: "#C04000", // mahagón - doplnková farba
-          dark: "#8B2C00",    // tmavšia varianta
-          light: "#D4651A",   // svetlejšia varianta
-        },
-        gray: {
-          DEFAULT: "#374151",   // farba pre topbar
-          light: "#6b7280",     // svetlejšia varianta pre texty
-        },
-        amber: {
-          50: "#FFFBEB",        // svetlé pozadie
-          100: "#FEF3C7",       // jemné ohraničenie
-          300: "#FCD34D",       // zvýraznenie pri focus
+        neutral: {
+          DEFAULT: "#64748b", // neutrálna šedá
+          dark: "#475569",
+          light: "#cbd5e1",
         },
         accent: {
-          DEFAULT: "#D4AF37",   // zlatá ako primárna značková farba
-          dark: "#B8941F",      // tmavšia pre hover/stlačenie
-          light: "#E6C757",     // svetlejšia pre pozadia/odznaky
+          DEFAULT: "#1a2e1a", // tmavozelená pre akcenty
+          dark: "#162619",
+          light: "#2d4a2d",
         },
         cta: {
-          DEFAULT: "#C04000",   // mahagón pre CTA tlačidlá
-          hover: "#8B2C00",     // tmavší mahagón pre hover na CTA
+          DEFAULT: "#1a2e1a", // tmavozelená pre CTA
+          hover: "#162619",
         },
-       
+        gray: {
+          DEFAULT: "#374151",
+          light: "#6b7280",
+        },
+        amber: {
+          50: "#FFFBEB",
+          100: "#FEF3C7",
+          300: "#FCD34D",
+        },
       },
       
       borderRadius: {
