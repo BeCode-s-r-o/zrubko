@@ -133,24 +133,27 @@ const VariantCard: React.FC<VariantCardProps> = ({
           </div>
           
           {/* Technické údaje z metadata */}
-          <div className="grid grid-cols-4 gap-2 mb-3">
-            <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || "-"}</p>
+          {/* Only render the grid if at least one value is present */}
+          {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie) ? (
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              <div className="bg-white rounded p-2 border border-accent/10 text-center">
+                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
+                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
+              </div>
+              <div className="bg-white rounded p-2 border border-accent/10 text-center">
+                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
+                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || ''}</p>
+              </div>
+              <div className="bg-white rounded p-2 border border-accent/10 text-center">
+                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">V balíku</span>
+                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || ''}</p>
+              </div>
+              <div className="bg-white rounded p-2 border border-accent/10 text-center">
+                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Použitie</span>
+                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
+              </div>
             </div>
-            <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || "-"}</p>
-            </div>
-            <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">V balíku</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || "-"}</p>
-            </div>
-            <div className="bg-white rounded p-2 border border-accent/10 text-center">
-              <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Použitie</span>
-              <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || "-"}</p>
-            </div>
-          </div>
+          ) : null}
 
           {/* Metadata section */}
           {Object.keys(variant.metadata).length > 0 && (

@@ -36,9 +36,9 @@ export default function ContactPage() {
           <div className="space-y-10">
             {/* Prémiové výhody */}
             <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-primary/10">
-                          <div className="mb-6">
-              <h2 className="text-2xl font-bold text-primary font-heading">Prečo si vybrať Zrubko?</h2>
-            </div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-primary font-heading">Prečo si vybrať Zrubko?</h2>
+              </div>
               <div className="grid gap-4">
                 <div className="flex items-start gap-3">
                   <Shield className="w-5 h-5 text-primary mt-1" />

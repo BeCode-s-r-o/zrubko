@@ -58,8 +58,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <div className="lg:col-span-4 space-y-8">
                 {/* Galéria v luxusnom rámčeku */}
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-transparent to-mahogany/20 rounded-3xl blur-xl"></div>
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
+                  <div className="relative">
                     <div className="p-2">
                       <ImageGallery images={product?.images || []} product={product} />
                     </div>
@@ -103,31 +102,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
 
       {/* Súvisiace produkty - presne rovnaký štýl ako featured collections na homepage */}
-      <div className="py-20 bg-gradient-to-br from-ebony/5 via-champagne to-gold/10 relative overflow-hidden">
-        {/* Luxusný pattern pozadie - rovnaký ako na homepage */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10L90 50L50 90L10 50Z' fill='%23D4AF37' fill-opacity='0.3'/%3E%3C/svg%3E")`,
-            backgroundSize: '80px 80px'
-          }} />
-        </div>
-        
-        <div className="content-container relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold bg-gradient-to-r from-ebony via-ebony-light to-gold bg-clip-text text-transparent mb-6 leading-tight">
-              Odporúčame Vám Tiež
-            </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-gold via-mahogany to-ebony rounded-full mx-auto mb-8"></div>
-            <p className="text-xl text-ebony-light max-w-3xl mx-auto leading-relaxed">
-              Objavte ďalšie prémiové drevené produkty z našej kolekcie
-            </p>
-          </div>
-          
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-gold/20">
-            <Suspense fallback={<SkeletonRelatedProducts />}>
-              <RelatedProducts product={product} countryCode={countryCode} />
-            </Suspense>
-          </div>
+      {/* Remove the bottom colored section and padding */}
+      <div className="content-container my-12">
+        <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gold/20">
+          <Suspense fallback={<SkeletonRelatedProducts />}>
+            <RelatedProducts product={product} countryCode={countryCode} />
+          </Suspense>
         </div>
       </div>
     </div>
