@@ -32,7 +32,7 @@ const ImageGallery = ({ images, product }: ImageGalleryProps) => {
             key={image.id}
             className={`relative aspect-square w-full overflow-hidden bg-ui-bg-subtle cursor-pointer transition-opacity ${
               selectedImageIndex === index 
-                ? 'ring-2 ring-ui-fg-interactive opacity-100' 
+                ? 'ring-2 ring-primary opacity-100' 
                 : 'opacity-70 hover:opacity-100'
             }`}
             onClick={() => setSelectedImageIndex(index)}
@@ -52,7 +52,7 @@ const ImageGallery = ({ images, product }: ImageGalleryProps) => {
 
       {/* Vpravo - hlavný obrázok */}
       <div className="flex flex-col flex-1">
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-ui-bg-subtle rounded-lg">
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
           {selectedImage?.url && (
             <Image
               src={selectedImage.url}

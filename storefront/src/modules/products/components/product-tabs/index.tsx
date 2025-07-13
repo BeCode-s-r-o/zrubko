@@ -3,10 +3,10 @@
 import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
-import { Crown, Sparkles, Star, Shield, Clock, Heart, Truck, Package, RefreshCw } from "lucide-react"
+import { Crown, Sparkles, Star, Shield, Clock, Heart, Truck, Package, RefreshCw, ChevronDown } from "lucide-react"
 
 import { HttpTypes } from "@medusajs/types"
-import Accordion from "./accordion"
+import { useState } from "react"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
@@ -16,59 +16,44 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
       label: "O technike SHOU SUGI BAN",
-      icon: <Crown className="w-5 h-5 text-gold" />,
       component: <ShouSugiBanInfoTab />,
     },
     {
       label: "Technické parametre",
-      icon: <Star className="w-5 h-5 text-gold" />,
       component: <TechnicalSpecsTab product={product} />,
     },
     {
       label: "Inštalácia a údržba",
-      icon: <Shield className="w-5 h-5 text-gold" />,
       component: <InstallationTab />,
     },
     {
       label: "Doprava a vrátenie",
-      icon: <Truck className="w-5 h-5 text-gold" />,
       component: <ShippingInfoTab />,
     },
   ]
 
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
   return (
     <div className="w-full max-w-4xl mx-auto">
-      {/* Luxusný nadpis - rovnaký štýl ako na homepage */}
-      <div className="text-center mb-10">
-        <h2 className="text-5xl font-bold bg-gradient-to-r from-ebony via-ebony-light to-gold bg-clip-text text-transparent mb-6 leading-tight">
-          Detailné Informácie
-        </h2>
-        <div className="w-32 h-1 bg-gradient-to-r from-gold via-mahogany to-ebony rounded-full mx-auto mb-8"></div>
-        <p className="text-xl text-ebony-light max-w-3xl mx-auto leading-relaxed">
-          Všetko, čo potrebujete vedieť o našich luxusných produktoch
-        </p>
-      </div>
-      
-      {/* Accordion v štýle homepage */}
-      <div className="space-y-4">
+      {/* Odstránený nadpis a zmenšené medzery */}
+      <div className="space-y-2 mt-0">
         {tabs.map((tab, i) => (
-          <div key={i} className="group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-transparent to-mahogany/10 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-white/80 backdrop-blur-sm rounded-2xl border border-gold/20 hover:border-gold/40 transition-all duration-300 overflow-hidden">
-                <Accordion type="multiple">
-                  <Accordion.Item
-                    key={i}
-                    title={tab.label}
-                    headingSize="medium"
-                    value={tab.label}
-                    className="border-none"
-                  >
-                    {tab.component}
-                  </Accordion.Item>
-                </Accordion>
+          <div key={i} className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+            <button
+              className={`w-full text-left px-6 py-4 font-medium text-lg text-black focus:outline-none flex items-center justify-between transition-colors duration-200 ${openIndex === i ? 'bg-primary/5' : ''}`}
+              onClick={() => setOpenIndex(openIndex === i ? null : i)}
+              aria-expanded={openIndex === i}
+              style={{marginBottom: 0}}
+            >
+              <span>{tab.label}</span>
+              <ChevronDown className={`w-5 h-5 ml-2 transition-transform duration-200 ${openIndex === i ? 'rotate-180' : ''}`} />
+            </button>
+            {openIndex === i && (
+              <div className="px-6 pb-6 pt-1 text-base text-gray-700 animate-fadeIn">
+                {tab.component}
               </div>
-            </div>
+            )}
           </div>
         ))}
       </div>
@@ -79,7 +64,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 const ShouSugiBanInfoTab = () => {
   return (
     <div className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="space-y-8">
         <div className="space-y-6">
           <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
             <div className="flex items-center gap-3 mb-4">
@@ -88,7 +73,7 @@ const ShouSugiBanInfoTab = () => {
             </div>
             <div className="space-y-4 text-ebony-light">
               <p className="leading-relaxed">
-                SHOU SUGI BAN je tradičná japonská technika spracования dreva pomocou ohňa. 
+                SHOU SUGI BAN je tradičná japonská technika spracovania dreva pomocou ohňa. 
                 Drevo sa kontrolovane spáli, čím sa vytvorí ochranná uhľová vrstva na povrchu.
               </p>
               <p className="leading-relaxed">
@@ -98,7 +83,6 @@ const ShouSugiBanInfoTab = () => {
             </div>
           </div>
         </div>
-        
         <div className="space-y-6">
           <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
             <div className="flex items-center gap-3 mb-4">
@@ -168,7 +152,7 @@ const TechnicalSpecsTab = ({ product }: { product: HttpTypes.StoreProduct }) => 
 
   return (
     <div className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="space-y-8">
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <Star className="w-6 h-6 text-gold" />
@@ -191,7 +175,6 @@ const TechnicalSpecsTab = ({ product }: { product: HttpTypes.StoreProduct }) => 
             ))}
           </div>
         </div>
-        
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <Package className="w-6 h-6 text-gold" />
@@ -246,7 +229,7 @@ const TechnicalSpecsTab = ({ product }: { product: HttpTypes.StoreProduct }) => 
 const InstallationTab = () => {
   return (
     <div className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="space-y-8">
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <Shield className="w-6 h-6 text-gold" />
@@ -282,7 +265,6 @@ const InstallationTab = () => {
             ))}
           </div>
         </div>
-        
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <RefreshCw className="w-6 h-6 text-gold" />
@@ -326,7 +308,7 @@ const InstallationTab = () => {
 const ShippingInfoTab = () => {
   return (
     <div className="py-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="space-y-8">
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <Truck className="w-6 h-6 text-gold" />
@@ -362,7 +344,6 @@ const ShippingInfoTab = () => {
             ))}
           </div>
         </div>
-        
         <div className="bg-champagne/50 backdrop-blur-sm rounded-2xl p-6 border border-gold/20">
           <div className="flex items-center gap-3 mb-6">
             <RefreshCw className="w-6 h-6 text-gold" />
