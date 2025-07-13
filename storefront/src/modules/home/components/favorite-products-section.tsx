@@ -22,7 +22,7 @@ function FavoriteProductCard({ product, region }: { product: HttpTypes.StoreProd
         {/* Product image container - fixed height */}
         <div className="relative overflow-hidden rounded-lg mb-4 bg-slate-50 h-36 flex-shrink-0">
           <img
-            src={product.thumbnail || "/placeholder.png"}
+            src={product.thumbnail || "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"}
             alt={product.title}
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             draggable={false}

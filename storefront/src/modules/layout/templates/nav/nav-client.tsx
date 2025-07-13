@@ -887,7 +887,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                     <div className="animate-fade-in">
                       <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
                         <img 
-                          src="/burnt-wood.jpg" 
+                          src="https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png" 
                           alt="Tatranský profil - SHOU SUGI BAN" 
                           className="w-full h-full object-cover rounded-lg"
                           onError={(e) => {
