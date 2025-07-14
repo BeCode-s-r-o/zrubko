@@ -15,25 +15,28 @@ function checkEnvVariables() {
   })
 
   if (missingEnvs.length > 0) {
-    console.error(
-      c.red.bold("\n🚫 Error: Missing required environment variables\n")
+    console.warn(
+      c.yellow.bold("\n⚠️  Warning: Missing environment variables\n")
     )
 
     missingEnvs.forEach(function (env) {
-      console.error(c.yellow(`  ${c.bold(env.key)}`))
+      console.warn(c.yellow(`  ${c.bold(env.key)}`))
       if (env.description) {
-        console.error(c.dim(`    ${env.description}\n`))
+        console.warn(c.dim(`    ${env.description}\n`))
       }
     })
 
-    console.error(
+    console.warn(
       c.yellow(
-        "\nPlease set these variables in your .env file or environment before starting the application.\n"
+        "\nApplication will continue but some features may not work properly.\n"
       )
     )
 
-    process.exit(1)
+    // Changed from process.exit(1) to just warning
+    return false
   }
+  
+  return true
 }
 
 module.exports = checkEnvVariables
