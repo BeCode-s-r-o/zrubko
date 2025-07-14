@@ -1,4 +1,28 @@
-const c = require("ansi-colors")
+// const c = require("ansi-colors")
+
+// Simple color functions without external dependency
+const colors = {
+  yellow: (text) => `\x1b[33m${text}\x1b[0m`,
+  bold: (text) => `\x1b[1m${text}\x1b[0m`,
+  dim: (text) => `\x1b[2m${text}\x1b[0m`
+}
+
+// Create helper object mimicking the subset of `ansi-colors` that we need
+const c = {
+  // Regular yellow text function
+  yellow: Object.assign(
+    (text) => colors.yellow(text),
+    {
+      // Yellow & bold
+      bold: (text) => colors.bold(colors.yellow(text)),
+      // Yellow & dimmed
+      dim: (text) => colors.dim(colors.yellow(text)),
+    }
+  ),
+  // Stand-alone bold and dim helpers
+  bold: colors.bold,
+  dim: colors.dim,
+}
 
 const requiredEnvs = [
   {
