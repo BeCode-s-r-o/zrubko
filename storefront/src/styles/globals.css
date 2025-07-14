@@ -1,9 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Sora:wght@100..800&display=swap");/* Manrope basic text*/
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");   /* Manrope heading*/
-
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer utilities {
 

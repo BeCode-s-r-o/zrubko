@@ -3,7 +3,7 @@ import { getProductsListWithSort } from "@lib/data/products"
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
+    const searchParams = request.nextUrl.searchParams
     const categoryId = searchParams.get('category_id')
     const countryCode = searchParams.get('country_code') || 'sk'
     const limit = parseInt(searchParams.get('limit') || '6')
