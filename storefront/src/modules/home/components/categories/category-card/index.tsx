@@ -8,9 +8,9 @@ export default function CategoryCard({
 }: {
   category: any
 }) {
-  // Použije obrázok kategórie ak existuje, inak fallback na SHOU SUGI BAN tematiku
-  const imageUrl = category.image || "/shou-sugi-ban-bg.png"
-
+  // Vždy použij obrázok z backendu, nikdy nie lokálny fallback
+  // Ak nie je image, použij univerzálny obrázok z backendu
+  const imageUrl = category.image || "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
 
 
   return (
@@ -23,9 +23,9 @@ export default function CategoryCard({
             alt={category.name}
             className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
-              // Fallback ak sa obrázok nenačíta
+              // Fallback na univerzálny obrázok z backendu
               const target = e.currentTarget;
-              target.src = "/shou-sugi-ban-bg.png";
+              target.src = "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png";
             }}
           />
           
