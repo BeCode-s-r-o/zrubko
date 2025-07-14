@@ -101,37 +101,37 @@ export default async function KvalitaABPage() {
                 title: "Suky",
                 value: "Max. 15mm",
                 description: "Zdravé suky bez prasklín",
-                image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               },
               {
                 title: "Praskliny",
                 value: "Žiadne",
                 description: "Bez povrchových prasklín",
-                image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               },
               {
                 title: "Farba",
                 value: "Rovnomerná",
                 description: "Konzistentný odtieň",
-                image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               },
               {
                 title: "Vlhkosť",
                 value: "8-12%",
                 description: "Optimálna pre použitie",
-                image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               },
               {
                 title: "Rovnosť",
                 value: "±0.5mm",
                 description: "Presné rozmery",
-                image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               },
               {
                 title: "Povrch",
                 value: "Hladký",
                 description: "Bez hrubých nerovností",
-                image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
               }
             ].map((param, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-lg border border-accent-light/20 overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -211,22 +211,22 @@ export default async function KvalitaABPage() {
                {
                  title: "Estetický vzhľad",
                  description: "Rovnomerná štruktúra a farba vytvárajú luxusný a harmonický vzhľad interiéru.",
-                 image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                 image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                },
                {
                  title: "Dlhá životnosť",
                  description: "Minimálne defekty znamenajú vyššiu odolnosť a dlhšiu životnosť materiálu.",
-                 image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                 image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                },
                {
                  title: "Jednoduchá údržba",
                  description: "Hladký povrch bez nerovností uľahčuje čistenie a údržbu.",
-                 image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                 image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                },
                {
                  title: "Investícia do kvality",
                  description: "Vyššia hodnota nehnuteľnosti vďaka použitiu prémiových materiálov.",
-                 image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                 image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                }
              ].map((advantage, index) => (
               <div key={index} className="bg-white rounded-2xl shadow-lg border border-accent-light/20 overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
@@ -257,22 +257,22 @@ export default async function KvalitaABPage() {
                  { 
                    title: "Obývačky", 
                    desc: "Reprezentačné priestory",
-                   image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                   image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                  },
                  { 
                    title: "Spálne", 
                    desc: "Útulné prostredie",
-                   image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                   image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                  },
                  { 
                    title: "Kancelárie", 
                    desc: "Profesionálny vzhľad",
-                   image: "/lightwoodinteriordiningroom26041710904800x533_1.jpg"
+                   image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                  },
                  { 
                    title: "Reštaurácie", 
                    desc: "Luxusná atmosféra",
-                   image: "/9pdbmtzg5xvsirgyplj6la120080.jpg"
+                   image: "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                  }
                ].map((use, index) => (
                 <div key={index} className="text-center group">

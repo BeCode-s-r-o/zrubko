@@ -22,7 +22,7 @@ export default function CategoryBanner({ category }: CategoryBannerProps) {
   const description = category.description || "Kvalitné drevené materiály pre stavbu, obklady a interiér. Široký výber rozmerov a druhov dreva."
   
   // Dynamický background obrázok z metadata
-  const backgroundImage = getMetadataString('background_img') || '/shou-sugi-ban-main.jpg'
+  const backgroundImage = getMetadataString('background_img') || 'https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png'
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
@@ -85,13 +85,13 @@ export default function CategoryBanner({ category }: CategoryBannerProps) {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 border border-gray-700">
               <img
-                src="/burnt-wood.jpg"
+                src="https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png"
                 alt="SHOU SUGI BAN - Skutočné spálené drevo"
                 className="w-full h-64 md:h-80 lg:h-96 object-cover"
                 onError={(e) => {
                   // Fallback ak sa obrázok nenačíta
                   const target = e.currentTarget;
-                  target.src = "/shou-sugi-ban-main.jpg";
+                  target.src = "https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png";
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
