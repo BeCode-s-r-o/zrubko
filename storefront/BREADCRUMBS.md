@@ -1,4 +1,4 @@
-# Breadcrumbs Implementácia
+alo# Breadcrumbs Implementácia
 
 Breadcrumbs (drobčekové navigácie) boli implementované pre váš e-shop s podporou slovenského jazyka.
 

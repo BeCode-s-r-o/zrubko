@@ -59,13 +59,13 @@ const SearchBar: React.FC = () => {
           onFocus={() => value && setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
           placeholder="Hľadať produkty..."
-          className="px-4 py-2 w-full rounded border focus:outline-none"
+          className="w-full px-4 py-2 rounded-lg bg-transparent text-white placeholder:text-white/60 border border-transparent focus:bg-white focus:text-black focus:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gold transition-colors duration-200"
           autoComplete="off"
         />
         {showDropdown && results.length > 0 && (
           <div
             ref={dropdownRef}
-            className="absolute right-0 left-0 z-10 mt-1 bg-white rounded border shadow"
+            className="absolute right-0 left-0 z-10 mt-1 bg-white text-black rounded border shadow"
           >
             {results.map((item: any) => (
               <SearchResultItem
@@ -79,7 +79,7 @@ const SearchBar: React.FC = () => {
           </div>
         )}
         {showDropdown && !loading && results.length === 0 && (
-          <div className="absolute right-0 left-0 z-10 p-4 mt-1 text-sm text-gray-500 bg-white rounded border shadow">
+          <div className="absolute right-0 left-0 z-10 p-4 mt-1 text-sm text-black bg-white rounded border shadow">
             No results found.
           </div>
         )}
