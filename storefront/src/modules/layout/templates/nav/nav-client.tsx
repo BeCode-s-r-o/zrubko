@@ -40,6 +40,8 @@ import {
   Wrench,
   Zap,
   ShoppingBag,
+  Facebook,
+  Instagram,
 } from "lucide-react"
 import { StoreRegion, HttpTypes } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
@@ -144,7 +146,7 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center justify-center w-12 h-12 text-ebony lg:hidden hover:bg-gold-light rounded-lg transition-all duration-200 border border-gold hover:border-ebony"
+        className="flex justify-center items-center w-12 h-12 rounded-lg border transition-all duration-200 text-ebony lg:hidden hover:bg-gold-light border-gold hover:border-ebony"
         aria-label="Otvoriť menu"
       >
         <Menu size={24} />
@@ -156,14 +158,14 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
           <div className="fixed inset-0 bg-black bg-opacity-50" onClick={closeMobile} />
           
           {/* Mobile menu panel */}
-          <div className="fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl overflow-y-auto">
+          <div className="overflow-y-auto fixed top-0 left-0 w-full max-w-sm h-full bg-white shadow-xl">
             <div className="p-4">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gold">
-                <h2 className="text-xl font-bold bg-gradient-to-r from-ebony to-ebony-light bg-clip-text text-transparent">Menu</h2>
+              <div className="flex justify-between items-center pb-4 mb-6 border-b border-gold">
+                <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-ebony to-ebony-light">Menu</h2>
                 <button 
                   onClick={closeMobile} 
-                  className="p-2 hover:bg-gold-light text-ebony hover:text-ebony-dark rounded-lg transition-all duration-200"
+                  className="p-2 rounded-lg transition-all duration-200 hover:bg-gold-light text-ebony hover:text-ebony-dark"
                   aria-label="Zavrieť menu"
                 >
                   <X size={24} />
@@ -173,7 +175,7 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
               {/* Navigation items */}
               <nav className="space-y-3">
                 {/* Produkty */}
-                <div className="border border-amber-200 rounded-lg overflow-hidden shadow-sm">
+                <div className="overflow-hidden rounded-lg border border-amber-200 shadow-sm">
                   <button
                     onClick={() => toggleMobile('products')}
                     className={`flex items-center justify-between w-full p-4 text-left transition-all duration-200 ${
@@ -182,8 +184,8 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                         : 'bg-white hover:bg-amber-50'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-lg">
+                    <div className="flex gap-3 items-center">
+                      <div className="flex justify-center items-center w-10 h-10 bg-amber-100 rounded-lg">
                         <ShoppingBag className="w-5 h-5 text-amber-600" />
                       </div>
                       <span className="font-semibold text-gray-900">Produkty</span>
@@ -199,12 +201,12 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                     <div className="bg-gray-50 border-t border-gray-200">
                       <div className="p-4 space-y-4">
                         {/* Drevené profily a dosky */}
-                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                        <div className="overflow-hidden bg-white rounded-lg border border-gray-200">
                           <button
                             onClick={() => toggleProducts('wood')}
-                            className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 transition-colors"
+                            className="flex justify-between items-center p-3 w-full text-left transition-colors hover:bg-gray-50"
                           >
-                            <div className="flex items-center gap-3">
+                            <div className="flex gap-3 items-center">
                               <TreePine className="w-5 h-5 text-amber-600" />
                               <span className="text-sm font-medium text-gray-700">Drevené profily a dosky</span>
                             </div>
@@ -216,13 +218,13 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           </button>
                           
                           {expandedProducts === 'wood' && (
-                            <div className="bg-gray-50 border-t border-gray-200 p-3 space-y-2">
+                            <div className="p-3 space-y-2 bg-gray-50 border-t border-gray-200">
                               <LocalizedClientLink
                                 href="/kategorie/tatransky-profil"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-amber-600 hover:bg-amber-50"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-amber-100 rounded-lg">
                                   <TreePine className="w-4 h-4 text-amber-600" />
                                 </div>
                                 <div className="flex-1">
@@ -233,10 +235,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                               
                               <LocalizedClientLink
                                 href="/kategorie/terasove-dosky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-blue-600 hover:bg-blue-50"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-blue-100 rounded-lg">
                                   <Waves className="w-4 h-4 text-blue-600" />
                                 </div>
                                 <div className="flex-1">
@@ -247,24 +249,24 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                               
                               <LocalizedClientLink
                                 href="/kategorie/fasadne-dosky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-green-600 hover:bg-green-50"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-green-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-green-100 rounded-lg">
                                   <Building2 className="w-4 h-4 text-green-600" />
                                 </div>
                                 <div className="flex-1">
                                   <span className="font-medium">Fasádne dosky</span>
-                                  <p className="text-xs text-gray-500">Obklady vonkajších stien</p>
+                                  <p className="text-sm text-ebony-light">Obklady vonkajších stien</p>
                                 </div>
                               </LocalizedClientLink>
                               
                               <LocalizedClientLink
                                 href="/kategorie/podlahove-dosky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-purple-600 hover:bg-purple-50"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-purple-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-purple-100 rounded-lg">
                                   <Square className="w-4 h-4 text-purple-600" />
                                 </div>
                                 <div className="flex-1">
@@ -277,12 +279,12 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                         </div>
 
                         {/* Konštrukčné prvky a doplnky */}
-                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                        <div className="overflow-hidden bg-white rounded-lg border border-gray-200">
                           <button
                             onClick={() => toggleProducts('construction')}
-                            className="flex items-center justify-between w-full p-3 text-left hover:bg-gray-50 transition-colors"
+                            className="flex justify-between items-center p-3 w-full text-left transition-colors hover:bg-gray-50"
                           >
-                            <div className="flex items-center gap-3">
+                            <div className="flex gap-3 items-center">
                               <Hammer className="w-5 h-5 text-gray-600" />
                               <span className="text-sm font-medium text-gray-700">Konštrukčné prvky</span>
                             </div>
@@ -294,13 +296,13 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           </button>
                           
                           {expandedProducts === 'construction' && (
-                            <div className="bg-gray-50 border-t border-gray-200 p-3 space-y-2">
+                            <div className="p-3 space-y-2 bg-gray-50 border-t border-gray-200">
                               <LocalizedClientLink
                                 href="/kategorie/hranoly"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-gray-900 hover:bg-gray-100"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-gray-100 rounded-lg">
                                   <Package className="w-4 h-4 text-gray-600" />
                                 </div>
                                 <div className="flex-1">
@@ -311,10 +313,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                               
                               <LocalizedClientLink
                                 href="/kategorie/plotovky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-gray-900 hover:bg-gray-100"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-gray-100 rounded-lg">
                                   <Fence className="w-4 h-4 text-gray-600" />
                                 </div>
                                 <div className="flex-1">
@@ -325,10 +327,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                               
                               <LocalizedClientLink
                                 href="/kategorie/stlpiky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-gray-900 hover:bg-gray-100"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-gray-100 rounded-lg">
                                   <Ruler className="w-4 h-4 text-gray-600" />
                                 </div>
                                 <div className="flex-1">
@@ -339,10 +341,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                               
                               <LocalizedClientLink
                                 href="/kategorie/latky"
-                                className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                                className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-gray-900 hover:bg-gray-100"
                                 onClick={closeMobile}
                               >
-                                <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                                <div className="flex justify-center items-center w-8 h-8 bg-gray-100 rounded-lg">
                                   <Wrench className="w-4 h-4 text-gray-600" />
                                 </div>
                                 <div className="flex-1">
@@ -359,7 +361,7 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                 </div>
 
                 {/* Miesto použitia */}
-                <div className="border border-orange-200 rounded-lg overflow-hidden shadow-sm">
+                <div className="overflow-hidden rounded-lg border border-orange-200 shadow-sm">
                   <button
                     onClick={() => toggleMobile('usage')}
                     className={`flex items-center justify-between w-full p-4 text-left transition-all duration-200 ${
@@ -368,8 +370,8 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                         : 'bg-white hover:bg-orange-50'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 bg-orange-100 rounded-lg">
+                    <div className="flex gap-3 items-center">
+                      <div className="flex justify-center items-center w-10 h-10 bg-orange-100 rounded-lg">
                         <Home className="w-5 h-5 text-orange-600" />
                       </div>
                       <span className="font-semibold text-gray-900">Miesto použitia</span>
@@ -385,20 +387,20 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                     <div className="bg-gray-50 border-t border-gray-200">
                       <div className="p-4 space-y-3">
                         {/* Interiér */}
-                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                        <div className="overflow-hidden bg-white rounded-lg border border-gray-200">
                           <button
                             onClick={() => toggleUsage('interior')}
-                            className="flex items-center justify-between w-full p-3 text-left hover:bg-blue-50 transition-colors"
+                            className="flex justify-between items-center p-3 w-full text-left transition-colors hover:bg-blue-50"
                           >
-                            <div className="flex items-center gap-3">
-                              <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                            <div className="flex gap-3 items-center">
+                              <div className="flex overflow-hidden justify-center items-center w-16 h-12 bg-blue-100 rounded-lg">
                                 {usageCategories.interior.category?.metadata?.image_url ? (
                                   <Image
                                     src={usageCategories.interior.category.metadata.image_url as string}
                                     alt="Interiér"
                                     width={64}
                                     height={48}
-                                    className="w-full h-full object-cover"
+                                    className="object-cover w-full h-full"
                                   />
                                 ) : (
                                   <Home className="w-6 h-6 text-blue-600" />
@@ -414,24 +416,24 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           </button>
                           
                           {expandedUsage === 'interior' && (
-                            <div className="bg-blue-50 border-t border-blue-200 p-3 space-y-2">
+                            <div className="p-3 space-y-2 bg-blue-50 border-t border-blue-200">
                               {usageCategories.interior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
                                 const CategoryIcon = getCategoryIcon(category.name)
                                 return (
                                   <LocalizedClientLink
                                     key={category.id}
                                     href={`/categories/${category.handle}`}
-                                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"
+                                    className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-blue-600 hover:bg-blue-100"
                                     onClick={closeMobile}
                                   >
-                                    <div className="flex items-center justify-center w-16 h-12 bg-blue-100 rounded-lg overflow-hidden">
+                                    <div className="flex overflow-hidden justify-center items-center w-16 h-12 bg-blue-100 rounded-lg">
                                       {category.metadata?.image_url ? (
                                         <Image
                                           src={category.metadata.image_url as string}
                                           alt={category.name}
                                           width={64}
                                           height={48}
-                                          className="w-full h-full object-cover"
+                                          className="object-cover w-full h-full"
                                         />
                                       ) : (
                                         <CategoryIcon className="w-6 h-6 text-blue-600" />
@@ -449,20 +451,20 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                         </div>
 
                         {/* Exteriér */}
-                        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                        <div className="overflow-hidden bg-white rounded-lg border border-gray-200">
                           <button
                             onClick={() => toggleUsage('exterior')}
-                            className="flex items-center justify-between w-full p-3 text-left hover:bg-green-50 transition-colors"
+                            className="flex justify-between items-center p-3 w-full text-left transition-colors hover:bg-green-50"
                           >
-                            <div className="flex items-center gap-3">
-                              <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                            <div className="flex gap-3 items-center">
+                              <div className="flex overflow-hidden justify-center items-center w-16 h-12 bg-green-100 rounded-lg">
                                 {usageCategories.exterior.category?.metadata?.image_url ? (
                                   <Image
                                     src={usageCategories.exterior.category.metadata.image_url as string}
                                     alt="Exteriér"
                                     width={64}
                                     height={48}
-                                    className="w-full h-full object-cover"
+                                    className="object-cover w-full h-full"
                                   />
                                 ) : (
                                   <Building className="w-6 h-6 text-green-600" />
@@ -478,24 +480,24 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                           </button>
                           
                           {expandedUsage === 'exterior' && (
-                            <div className="bg-green-50 border-t border-green-200 p-3 space-y-2">
+                            <div className="p-3 space-y-2 bg-green-50 border-t border-green-200">
                               {usageCategories.exterior.subcategories.map((category: HttpTypes.StoreProductCategory) => {
                                 const CategoryIcon = getCategoryIcon(category.name)
                                 return (
                                   <LocalizedClientLink
                                     key={category.id}
                                     href={`/categories/${category.handle}`}
-                                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:text-green-600 hover:bg-green-100 rounded-lg transition-colors"
+                                    className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:text-green-600 hover:bg-green-100"
                                     onClick={closeMobile}
                                   >
-                                    <div className="flex items-center justify-center w-16 h-12 bg-green-100 rounded-lg overflow-hidden">
+                                    <div className="flex overflow-hidden justify-center items-center w-16 h-12 bg-green-100 rounded-lg">
                                       {category.metadata?.image_url ? (
                                         <Image
                                           src={category.metadata.image_url as string}
                                           alt={category.name}
                                           width={64}
                                           height={48}
-                                          className="w-full h-full object-cover"
+                                          className="object-cover w-full h-full"
                                         />
                                       ) : (
                                         <CategoryIcon className="w-6 h-6 text-green-600" />
@@ -520,10 +522,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                 <div className="space-y-3">
                   <LocalizedClientLink
                     href="/kalkulacka"
-                    className="flex items-center gap-3 p-4 font-semibold hover:bg-amber-50 hover:border-amber-300 rounded-lg transition-all duration-200 border border-amber-200 shadow-sm"
+                    className="flex gap-3 items-center p-4 font-semibold rounded-lg border border-amber-200 shadow-sm transition-all duration-200 hover:bg-amber-50 hover:border-amber-300"
                     onClick={closeMobile}
                   >
-                    <div className="flex items-center justify-center w-10 h-10 bg-amber-100 rounded-lg">
+                    <div className="flex justify-center items-center w-10 h-10 bg-amber-100 rounded-lg">
                       <Calculator className="w-5 h-5 text-amber-600" />
                     </div>
                     <span className="text-gray-900">Kalkulačka</span>
@@ -531,10 +533,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                   
                   <LocalizedClientLink
                     href="/kontakt"
-                    className="flex items-center gap-3 p-4 font-semibold hover:bg-orange-50 hover:border-orange-300 rounded-lg transition-all duration-200 border border-orange-200 shadow-sm"
+                    className="flex gap-3 items-center p-4 font-semibold rounded-lg border border-orange-200 shadow-sm transition-all duration-200 hover:bg-orange-50 hover:border-orange-300"
                     onClick={closeMobile}
                   >
-                    <div className="flex items-center justify-center w-10 h-10 bg-orange-100 rounded-lg">
+                    <div className="flex justify-center items-center w-10 h-10 bg-orange-100 rounded-lg">
                       <Phone className="w-5 h-5 text-orange-600" />
                     </div>
                     <span className="text-gray-900">Kontakt</span>
@@ -542,13 +544,13 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                 </div>
 
                 {/* Pomocné linky */}
-                <div className="pt-4 mt-6 border-t border-gray-200 space-y-2">
+                <div className="pt-4 mt-6 space-y-2 border-t border-gray-200">
                   <LocalizedClientLink
                     href="/purchase-advisor"
-                    className="flex items-center gap-3 p-3 text-sm text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                    className="flex gap-3 items-center p-3 text-sm text-amber-600 rounded-lg transition-colors hover:bg-amber-50"
                     onClick={closeMobile}
                   >
-                    <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-lg">
+                    <div className="flex justify-center items-center w-8 h-8 bg-amber-100 rounded-lg">
                       <Zap className="w-4 h-4 text-amber-600" />
                     </div>
                     <span className="font-medium">Poradca nákupu</span>
@@ -556,10 +558,10 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
                   
                   <LocalizedClientLink
                     href="/najpredavanejsie"
-                    className="flex items-center gap-3 p-3 text-sm text-gray-600 hover:bg-gray-50 rounded-lg transition-colors"
+                    className="flex gap-3 items-center p-3 text-sm text-gray-600 rounded-lg transition-colors hover:bg-gray-50"
                     onClick={closeMobile}
                   >
-                    <div className="flex items-center justify-center w-8 h-8 bg-gray-100 rounded-lg">
+                    <div className="flex justify-center items-center w-8 h-8 bg-gray-100 rounded-lg">
                       <Star className="w-4 h-4 text-gray-600" />
                     </div>
                     <span className="font-medium">Najpredávanejšie</span>
@@ -632,75 +634,130 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
   return (
     <div className="sticky inset-x-0 top-0 z-50 group">
-      {/* TOPBAR */}
-      <div className="px-4 py-3 w-full text-xs text-primary bg-gradient-to-r from-white via-secondary to-white shadow-sm border-b border-primary/10">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center text-[13px] gap-y-2 text-center md:text-left">
-          <div className="flex flex-wrap gap-6 justify-center items-center md:justify-start">
-            <a href="tel:+421907695363" className="flex gap-2 items-center hover:text-primary-dark transition-colors duration-200">
-              <Phone size={18} className="text-primary" /> <strong>+421 907 695 363</strong>
-            </a>
-            <a href="mailto:info@zrubko.sk" className="flex gap-2 items-center hover:text-primary-dark transition-colors duration-200">
-              <Mail size={18} className="text-primary" /> <strong>info@zrubko.sk</strong>
-            </a>
+      {/* TOPBAR – static pages */}
+      <div className="py-2 w-full text-sm text-white bg-primary">
+        <div className="flex gap-4 justify-between items-center px-4 mx-auto w-full max-w-8xl">
+          {/* Static pages navigation */}
+          <div className="hidden gap-6 items-center whitespace-nowrap lg:flex">
+            <LocalizedClientLink href="/" className="transition-colors hover:text-gray-300">Domov</LocalizedClientLink>
+            <LocalizedClientLink href="/about" className="transition-colors hover:text-gray-300">O&nbsp;nás</LocalizedClientLink>
+            <LocalizedClientLink href="/vizualizacie" className="transition-colors hover:text-gray-300">Vizualizácie</LocalizedClientLink>
+            <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Projekty</LocalizedClientLink>
+            <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Služby</LocalizedClientLink>
+            <LocalizedClientLink href="/spolupraca" className="transition-colors hover:text-gray-300">Spolupráca</LocalizedClientLink>
+            <LocalizedClientLink href="/blog" className="transition-colors hover:text-gray-300">Blog</LocalizedClientLink>
+            <LocalizedClientLink href="/kontakt" className="transition-colors hover:text-gray-300">Kontakt</LocalizedClientLink>
           </div>
-          <div className="flex justify-center">
-            <a
-              href="/doprava"
-              className="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-full text-[12px] font-semibold transition-all duration-300 border border-primary/10 hover:border-primary/20"
-            >
-              <Truck size={16} className="text-primary" /> Doprava zdarma po Slovensku od 30m²
-            </a>
+
+          {/* Searchbar in the center (desktop) */}
+          <div className="hidden flex-1 justify-center lg:flex">
+            <div className="relative w-full max-w-md">
+              <SearchBar />
+            </div>
           </div>
-          <div className="hidden gap-2 justify-center items-center hide-store:flex hide-store:justify-end">
-            <MapPin size={18} className="text-primary" />
-            <span>
-              <a
-                href="https://www.google.com/maps?q=Predajňa+Zrubko,+Žilina"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary-dark transition-colors duration-200"
-              >
-                <strong>Predajňa</strong> <strong>Žilina</strong>
-              </a>{" "}
-              Po–Pi <strong>8:00–16:00</strong>
-            </span>
+
+          {/* Contact + socials */}
+          <div className="flex flex-wrap gap-4 justify-center items-center text-xs shrink-0 md:text-sm">
+            <a href="mailto:info@zrubko.sk" className="flex gap-1 items-center transition-colors hover:text-gray-300">
+              <Mail size={14} /> info@zrubko.sk
+            </a>
+            <a href="tel:+421907695363" className="flex gap-1 items-center transition-colors hover:text-gray-300">
+              <Phone size={14} /> +421&nbsp;907&nbsp;695&nbsp;363
+            </a>
+            <a href="#" aria-label="Facebook" className="p-1 transition-colors hover:text-gray-300">
+              <Facebook size={16} />
+            </a>
+            <a href="#" aria-label="Instagram" className="p-1 transition-colors hover:text-gray-300">
+              <Instagram size={16} />
+            </a>
           </div>
         </div>
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto h-20 bg-primary border-b border-primary/20 shadow-sm">
-        <nav className="flex relative justify-between items-center w-full h-full content-container text-small-regular text-white">
+      <header className="relative mx-auto h-20 bg-white border-b border-gray-100 shadow-sm">
+        <nav className="flex relative justify-between items-center px-4 mx-auto w-full h-full max-w-8xl text-small-regular text-ebony">
           <div className="flex items-center lg:hidden">
             <MobileCategoryMenu regions={regions} categories={categories} />
           </div>
-          <div className="flex flex-1 justify-center lg:justify-start">
+          <div className="flex flex-1 gap-6 items-center lg:gap-8">
+            {/* Logo */}
             <LocalizedClientLink
               href="/"
-              className="text-2xl font-bold bg-gradient-to-r from-ebony to-ebony-light bg-clip-text text-transparent hover:from-ebony-dark hover:to-ebony transition-all duration-300"
+              className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r transition-all duration-300 from-primary-dark to-primary hover:from-primary to-primary-light"
             >
               Zrubko.sk
             </LocalizedClientLink>
-          </div>
-          <div className="hidden absolute left-1/2 w-full max-w-md -translate-x-1/2 lg:flex">
-            <div className="relative w-full">
-              <SearchBar />
+
+            {/* E-shop navigation (desktop) */}
+            <div className="hidden gap-6 items-center ml-4 lg:flex">
+              <ModernNavbar categories={categories} />
+
+              <button
+                id="usage-menu-button"
+                onClick={() => {
+                  setIsUsageOpen((prev) => {
+                    if (!prev) setIsProductsOpen(false);
+                    return !prev;
+                  });
+                }}
+                className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
+                  isUsageOpen
+                    ? "bg-gold text-ebony"
+                    : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
+                }`}
+              >
+                Miesto použitia
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform duration-200 ${isUsageOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Additional static links */}
+              <LocalizedClientLink 
+                href="/kalkulacka" 
+                className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              >
+                Kalkulačka
+              </LocalizedClientLink>
+
+              <LocalizedClientLink 
+                href="/poradca" 
+                className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              >
+                Poradca
+              </LocalizedClientLink>
+
+              <LocalizedClientLink 
+                href="/najpredavanejsie" 
+                className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              >
+                Najpredávanejšie
+              </LocalizedClientLink>
+
+              <LocalizedClientLink 
+                href="/kontakt" 
+                className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              >
+                Kontakt
+              </LocalizedClientLink>
             </div>
           </div>
           <div className="flex gap-3 items-center">
             <LocalizedClientLink
               href="/account"
-              className="flex gap-2 items-center px-4 py-2 text-ebony rounded-lg border border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark transition-all duration-200"
+              className="flex gap-2 items-center px-4 py-2 rounded-lg border transition-all duration-200 text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"
               aria-label="Účet"
             >
               <User size={20} />
-              <span className="hidden md:inline font-medium">Účet</span>
+              <span className="hidden font-medium md:inline">Účet</span>
             </LocalizedClientLink>
             <Suspense
               fallback={
                 <LocalizedClientLink
                   href="/cart"
-                  className="flex gap-2 items-center px-4 py-2 text-white rounded-lg bg-gradient-to-r from-mahogany to-mahogany-dark hover:from-mahogany-dark hover:to-mahogany shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+                  className="flex gap-2 items-center px-4 py-2 text-white bg-gradient-to-r rounded-lg shadow-md transition-all duration-200 transform from-mahogany to-mahogany-dark hover:from-mahogany-dark hover:to-mahogany hover:shadow-lg hover:scale-105"
                 >
                   <ShoppingCart size={20} />
                   <span className="font-medium">(0)</span>
@@ -712,8 +769,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
           </div>
         </nav>
 
-        {/* SECOND NAV: DESKTOP MENU BAR */}
-        <nav className="hidden items-center w-full h-14 bg-gradient-to-r from-champagne-light to-champagne border-t lg:flex border-gold/30 shadow-sm">
+        {/* SECOND NAV hidden since content moved to header */}
+        <nav className="hidden">
           <div className="flex gap-8 items-center content-container">
             <ModernNavbar categories={categories} />
 
@@ -727,7 +784,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
               }}
               className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
                 isUsageOpen 
-                  ? "bg-gold text-ebony shadow-sm" 
+                  ? "shadow-sm bg-gold text-ebony" 
                   : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
               }`}
             >
@@ -740,13 +797,13 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
             <LocalizedClientLink 
               href="/kalkulacka" 
-              className="px-4 py-2 text-base font-semibold text-ebony hover:text-ebony-dark hover:bg-gold-light rounded-lg transition-all duration-200"
+              className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               Kalkulačka
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/kontakt" 
-              className="px-4 py-2 text-base font-semibold text-ebony hover:text-ebony-dark hover:bg-gold-light rounded-lg transition-all duration-200"
+              className="px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               Kontakt
             </LocalizedClientLink>
@@ -768,20 +825,20 @@ export default function NavClient({ regions, categories }: NavClientProps) {
               </div>
               
               {/* Desktop Layout - 2 columns */}
-              <div className="hidden lg:grid lg:grid-cols-5 gap-8 mb-8">
+              <div className="hidden gap-8 mb-8 lg:grid lg:grid-cols-5">
                 {/* Left Column - Product Types (40%) */}
-                <div className="lg:col-span-2 space-y-2">
-                  <h3 className="text-lg font-semibold text-ebony mb-4">Kategórie produktov</h3>
+                <div className="space-y-2 lg:col-span-2">
+                  <h3 className="mb-4 text-lg font-semibold text-ebony">Kategórie produktov</h3>
                   
                   {/* Tatranský profil */}
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/tatransky-profil"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
+                      className="flex gap-3 items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer border-gold/30 hover:border-ebony hover:bg-gold-light"
                       onMouseEnter={() => setHoveredProduct('tatransky')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold hover:bg-gold-dark">
                         <span className="text-xl">🪵</span>
                       </div>
                       <div className="flex-1">
@@ -795,11 +852,11 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/terasove-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
+                      className="flex gap-3 items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer border-gold/30 hover:border-ebony hover:bg-gold-light"
                       onMouseEnter={() => setHoveredProduct('terasove')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold hover:bg-gold-dark">
                         <span className="text-xl">🌊</span>
                       </div>
                       <div className="flex-1">
@@ -813,11 +870,11 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/fasadne-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
+                      className="flex gap-3 items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer border-gold/30 hover:border-ebony hover:bg-gold-light"
                       onMouseEnter={() => setHoveredProduct('fasadne')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold hover:bg-gold-dark">
                         <span className="text-xl">🧱</span>
                       </div>
                       <div className="flex-1">
@@ -831,11 +888,11 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   <div className="relative">
                     <LocalizedClientLink
                       href="/kategorie/podlahove-dosky"
-                      className="flex items-center gap-3 p-4 rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200 cursor-pointer"
+                      className="flex gap-3 items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer border-gold/30 hover:border-ebony hover:bg-gold-light"
                       onMouseEnter={() => setHoveredProduct('podlahove')}
                       onMouseLeave={() => setHoveredProduct(null)}
                     >
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg hover:bg-gold-dark transition-colors">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold hover:bg-gold-dark">
                         <span className="text-xl">🔲</span>
                       </div>
                       <div className="flex-1">
@@ -847,32 +904,32 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
                   {/* Konštrukčné prvky */}
                   <div className="mt-6">
-                    <h4 className="text-md font-medium text-ebony mb-3">Konštrukčné prvky</h4>
+                    <h4 className="mb-3 font-medium text-md text-ebony">Konštrukčné prvky</h4>
                     <div className="grid grid-cols-2 gap-2">
                       <LocalizedClientLink
                         href="/kategorie/hranoly"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
+                        className="flex gap-2 items-center p-3 rounded-lg transition-colors hover:bg-gold-light"
                       >
                         <span className="text-sm">🧱</span>
                         <span className="text-sm font-medium text-ebony">Hranoly</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/plotovky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
+                        className="flex gap-2 items-center p-3 rounded-lg transition-colors hover:bg-gold-light"
                       >
                         <span className="text-sm">🪚</span>
                         <span className="text-sm font-medium text-ebony">Plotovky</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/stlpiky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
+                        className="flex gap-2 items-center p-3 rounded-lg transition-colors hover:bg-gold-light"
                       >
                         <span className="text-sm">📏</span>
                         <span className="text-sm font-medium text-ebony">Stĺpiky</span>
                       </LocalizedClientLink>
                       <LocalizedClientLink
                         href="/kategorie/latky"
-                        className="flex items-center gap-2 p-3 rounded-lg hover:bg-gold-light transition-colors"
+                        className="flex gap-2 items-center p-3 rounded-lg transition-colors hover:bg-gold-light"
                       >
                         <span className="text-sm">🔧</span>
                         <span className="text-sm font-medium text-ebony">Latky</span>
@@ -882,14 +939,14 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                 </div>
 
                 {/* Right Column - Dynamic Preview Panel (60%) */}
-                <div className="lg:col-span-3 bg-gradient-to-br from-champagne to-champagne-light rounded-xl p-6">
+                <div className="p-6 bg-gradient-to-br rounded-xl lg:col-span-3 from-champagne to-champagne-light">
                   {hoveredProduct === 'tatransky' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
+                      <div className="flex justify-center items-center mb-4 w-full h-48 bg-gradient-to-br rounded-lg from-gold to-gold-dark">
                         <img 
                           src="https://bucket-production-b953.up.railway.app/medusa-media/hranol_product-01JZT329WRTGJ0A746ASXVE2E2.png" 
                           alt="Tatranský profil - SHOU SUGI BAN" 
-                          className="w-full h-full object-cover rounded-lg"
+                          className="object-cover w-full h-full rounded-lg"
                           onError={(e) => {
                             const target = e.currentTarget;
                             const nextElement = target.nextElementSibling as HTMLElement;
@@ -899,37 +956,37 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                             }
                           }}
                         />
-                        <div className="hidden w-full h-full bg-gradient-to-br from-gold to-gold-dark rounded-lg items-center justify-center">
+                        <div className="hidden justify-center items-center w-full h-full bg-gradient-to-br rounded-lg from-gold to-gold-dark">
                           <span className="text-6xl">🪵</span>
                         </div>
                       </div>
-                      <h4 className="text-2xl font-bold text-ebony mb-2">Tatranský profil</h4>
-                      <p className="text-ebony-light mb-4">Klasický drevený profil ideálny na obklady stien a stropov. Vytvára útulnú atmosféru v interiéri.</p>
+                      <h4 className="mb-2 text-2xl font-bold text-ebony">Tatranský profil</h4>
+                      <p className="mb-4 text-ebony-light">Klasický drevený profil ideálny na obklady stien a stropov. Vytvára útulnú atmosféru v interiéri.</p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="mb-6 space-y-3">
                         <div>
                           <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Borovica</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Smrek</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Borovica</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">BC</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Rozmery:</span>
-                          <p className="text-sm text-ebony-light mt-1">12,5 x 96 mm, 15 x 96 mm, 19 x 96 mm</p>
+                          <p className="mt-1 text-sm text-ebony-light">12,5 x 96 mm, 15 x 96 mm, 19 x 96 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
+                      <button className="px-4 py-2 w-full font-medium text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -937,36 +994,36 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
                   {hoveredProduct === 'terasove' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
+                      <div className="flex justify-center items-center mb-4 w-full h-48 bg-gradient-to-br rounded-lg from-gold to-gold-dark">
                         <span className="text-6xl">🌊</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-ebony mb-2">Terásové dosky</h4>
-                      <p className="text-ebony-light mb-4">Kvalitné dosky určené pre stavbu terás a balkónov. Odolné voči poveternostným vplyvom.</p>
+                      <h4 className="mb-2 text-2xl font-bold text-ebony">Terásové dosky</h4>
+                      <p className="mb-4 text-ebony-light">Kvalitné dosky určené pre stavbu terás a balkónov. Odolné voči poveternostným vplyvom.</p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="mb-6 space-y-3">
                         <div>
                           <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Céder</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Smrek</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Céder</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">A</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">AB</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Rozmery:</span>
-                          <p className="text-sm text-ebony-light mt-1">28 x 142 mm, 32 x 142 mm</p>
+                          <p className="mt-1 text-sm text-ebony-light">28 x 142 mm, 32 x 142 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
+                      <button className="px-4 py-2 w-full font-medium text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -974,36 +1031,36 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
                   {hoveredProduct === 'fasadne' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
+                      <div className="flex justify-center items-center mb-4 w-full h-48 bg-gradient-to-br rounded-lg from-gold to-gold-dark">
                         <span className="text-6xl">🧱</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-ebony mb-2">Fasádne dosky</h4>
-                      <p className="text-ebony-light mb-4">Dosky určené na obklady vonkajších stien. Poskytujú ochranu a estetický vzhľad budovy.</p>
+                      <h4 className="mb-2 text-2xl font-bold text-ebony">Fasádne dosky</h4>
+                      <p className="mb-4 text-ebony-light">Dosky určené na obklady vonkajších stien. Poskytujú ochranu a estetický vzhľad budovy.</p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="mb-6 space-y-3">
                         <div>
                           <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Borovica</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Smrek</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Borovica</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">BC</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Rozmery:</span>
-                          <p className="text-sm text-ebony-light mt-1">15 x 121 mm, 19 x 121 mm</p>
+                          <p className="mt-1 text-sm text-ebony-light">15 x 121 mm, 19 x 121 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
+                      <button className="px-4 py-2 w-full font-medium text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -1011,36 +1068,36 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
                   {hoveredProduct === 'podlahove' && (
                     <div className="animate-fade-in">
-                      <div className="w-full h-48 bg-gradient-to-br from-gold to-gold-dark rounded-lg mb-4 flex items-center justify-center">
+                      <div className="flex justify-center items-center mb-4 w-full h-48 bg-gradient-to-br rounded-lg from-gold to-gold-dark">
                         <span className="text-6xl">🔲</span>
                       </div>
-                      <h4 className="text-2xl font-bold text-ebony mb-2">Podlahové dosky</h4>
-                      <p className="text-ebony-light mb-4">Masívne drevené dosky na podlahy. Vytvoria teplý a prirodzený vzhľad interiéru.</p>
+                      <h4 className="mb-2 text-2xl font-bold text-ebony">Podlahové dosky</h4>
+                      <p className="mb-4 text-ebony-light">Masívne drevené dosky na podlahy. Vytvoria teplý a prirodzený vzhľad interiéru.</p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="mb-6 space-y-3">
                         <div>
                           <span className="text-sm font-medium text-ebony">Materiály:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Dub</span>
-                            <span className="px-2 py-1 text-xs bg-gold-light text-ebony rounded-full">Smrek</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Dub</span>
+                            <span className="px-2 py-1 text-xs rounded-full bg-gold-light text-ebony">Smrek</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Klasifikácia:</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
-                            <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">A</span>
+                            <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">AB</span>
                           </div>
                         </div>
                         
                         <div>
                           <span className="text-sm font-medium text-ebony">Rozmery:</span>
-                          <p className="text-sm text-ebony-light mt-1">20 x 140 mm, 25 x 140 mm</p>
+                          <p className="mt-1 text-sm text-ebony-light">20 x 140 mm, 25 x 140 mm</p>
                         </div>
                       </div>
                       
-                      <button className="w-full px-4 py-2 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium">
+                      <button className="px-4 py-2 w-full font-medium text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark">
                         Zobraziť produkty
                       </button>
                     </div>
@@ -1048,47 +1105,47 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
                   {!hoveredProduct && (
                     <div className="text-center">
-                      <div className="w-24 h-24 bg-gradient-to-br from-ebony to-ebony-dark rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <div className="flex justify-center items-center mx-auto mb-4 w-24 h-24 bg-gradient-to-br rounded-full from-ebony to-ebony-dark">
                         <span className="text-3xl text-gold">🪵</span>
                       </div>
-                      <h3 className="text-2xl font-bold text-ebony mb-2">Kvalitné drevené produkty</h3>
-                      <p className="text-ebony-light mb-6 max-w-md mx-auto">
+                      <h3 className="mb-2 text-2xl font-bold text-ebony">Kvalitné drevené produkty</h3>
+                      <p className="mx-auto mb-6 max-w-md text-ebony-light">
                         Prejdite myšou nad kategóriou v ľavom stĺpci pre zobrazenie detailných informácií o produktoch.
                       </p>
                       
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                        <div className="bg-white p-4 rounded-lg border border-gold/30">
-                          <div className="text-2xl mb-2">🌲</div>
-                          <h4 className="font-semibold text-ebony mb-1">Prírodné materiály</h4>
+                      <div className="grid grid-cols-1 gap-4 mb-6 sm:grid-cols-2">
+                        <div className="p-4 bg-white rounded-lg border border-gold/30">
+                          <div className="mb-2 text-2xl">🌲</div>
+                          <h4 className="mb-1 font-semibold text-ebony">Prírodné materiály</h4>
                           <p className="text-sm text-ebony-light">Smrek, borovica, dub a ďalšie kvalitné druhy dreva</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gold/30">
-                          <div className="text-2xl mb-2">⭐</div>
-                          <h4 className="font-semibold text-ebony mb-1">Rôzne kvality</h4>
+                        <div className="p-4 bg-white rounded-lg border border-gold/30">
+                          <div className="mb-2 text-2xl">⭐</div>
+                          <h4 className="mb-1 font-semibold text-ebony">Rôzne kvality</h4>
                           <p className="text-sm text-ebony-light">Klasifikácia A, AB, BC podľa kvality a vzhľadu</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gold/30">
-                          <div className="text-2xl mb-2">📏</div>
-                          <h4 className="font-semibold text-ebony mb-1">Rôzne rozmery</h4>
+                        <div className="p-4 bg-white rounded-lg border border-gold/30">
+                          <div className="mb-2 text-2xl">📏</div>
+                          <h4 className="mb-1 font-semibold text-ebony">Rôzne rozmery</h4>
                           <p className="text-sm text-ebony-light">Široký výber rozmerov pre rôzne účely použitia</p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gold/30">
-                          <div className="text-2xl mb-2">🚚</div>
-                          <h4 className="font-semibold text-ebony mb-1">Doprava zdarma</h4>
+                        <div className="p-4 bg-white rounded-lg border border-gold/30">
+                          <div className="mb-2 text-2xl">🚚</div>
+                          <h4 className="mb-1 font-semibold text-ebony">Doprava zdarma</h4>
                           <p className="text-sm text-ebony-light">Pri objednávke nad 30 bežných metrov</p>
                         </div>
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <div className="flex flex-col gap-3 justify-center sm:flex-row">
                         <LocalizedClientLink
                           href="/kalkulacka"
-                          className="px-6 py-3 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium"
+                          className="px-6 py-3 font-medium text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark"
                         >
                           Kalkulačka spotreby
                         </LocalizedClientLink>
                         <LocalizedClientLink
                           href="/poradca"
-                          className="px-6 py-3 bg-gold text-ebony rounded-lg hover:bg-gold-dark transition-colors font-medium"
+                          className="px-6 py-3 font-medium rounded-lg transition-colors bg-gold text-ebony hover:bg-gold-dark"
                         >
                           Poradca výberu
                         </LocalizedClientLink>
@@ -1099,14 +1156,14 @@ export default function NavClient({ regions, categories }: NavClientProps) {
               </div>
 
               {/* Mobile Layout - Vertical Stack */}
-              <div className="lg:hidden space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-4 lg:hidden">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <LocalizedClientLink
                     href="/kategorie/tatransky-profil"
-                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
+                    className="p-4 bg-white rounded-lg border transition-all duration-200 group border-gold/30 hover:border-ebony hover:bg-gold-light"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold group-hover:bg-gold-dark">
                         <span className="text-xl">🪵</span>
                       </div>
                       <div className="flex-1">
@@ -1115,18 +1172,18 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">BC</span>
                     </div>
                     <p className="text-xs text-ebony-light">Smrek, Borovica</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/terasove-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
+                    className="p-4 bg-white rounded-lg border transition-all duration-200 group border-gold/30 hover:border-ebony hover:bg-gold-light"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold group-hover:bg-gold-dark">
                         <span className="text-xl">🌊</span>
                       </div>
                       <div className="flex-1">
@@ -1135,18 +1192,18 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">A</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">AB</span>
                     </div>
                     <p className="text-xs text-ebony-light">Smrek, Céder</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/fasadne-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
+                    className="p-4 bg-white rounded-lg border transition-all duration-200 group border-gold/30 hover:border-ebony hover:bg-gold-light"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold group-hover:bg-gold-dark">
                         <span className="text-xl">🧱</span>
                       </div>
                       <div className="flex-1">
@@ -1155,18 +1212,18 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">AB</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">BC</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">BC</span>
                     </div>
                     <p className="text-xs text-ebony-light">Smrek, Borovica</p>
                   </LocalizedClientLink>
 
                   <LocalizedClientLink
                     href="/kategorie/podlahove-dosky"
-                    className="group p-4 bg-white rounded-lg border border-gold/30 hover:border-ebony hover:bg-gold-light transition-all duration-200"
+                    className="p-4 bg-white rounded-lg border transition-all duration-200 group border-gold/30 hover:border-ebony hover:bg-gold-light"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex items-center justify-center w-12 h-12 bg-gold rounded-lg group-hover:bg-gold-dark transition-colors">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="flex justify-center items-center w-12 h-12 rounded-lg transition-colors bg-gold group-hover:bg-gold-dark">
                         <span className="text-xl">🔲</span>
                       </div>
                       <div className="flex-1">
@@ -1175,24 +1232,24 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                       </div>
                     </div>
                     <div className="flex gap-1 mb-2">
-                      <span className="px-2 py-1 text-xs font-medium bg-gold text-ebony rounded-full">A</span>
-                      <span className="px-2 py-1 text-xs font-medium bg-gold-light text-ebony rounded-full">AB</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold text-ebony">A</span>
+                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-gold-light text-ebony">AB</span>
                     </div>
                     <p className="text-xs text-ebony-light">Dub, Smrek</p>
                   </LocalizedClientLink>
                 </div>
 
                 {/* Mobile CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                <div className="flex flex-col gap-3 pt-4 sm:flex-row">
                   <LocalizedClientLink
                     href="/kalkulacka"
-                    className="flex-1 px-4 py-3 bg-mahogany text-white rounded-lg hover:bg-mahogany-dark transition-colors font-medium text-center"
+                    className="flex-1 px-4 py-3 font-medium text-center text-white rounded-lg transition-colors bg-mahogany hover:bg-mahogany-dark"
                   >
                     Kalkulačka spotreby
                   </LocalizedClientLink>
                   <LocalizedClientLink
                     href="/poradca"
-                    className="flex-1 px-4 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium text-center"
+                    className="flex-1 px-4 py-3 font-medium text-center text-white bg-gray-600 rounded-lg transition-colors hover:bg-gray-700"
                   >
                     Poradca výberu
                   </LocalizedClientLink>
@@ -1206,20 +1263,20 @@ export default function NavClient({ regions, categories }: NavClientProps) {
         {isUsageOpen && (
           <div
             ref={usageMenuRef}
-            className="flex z-40 justify-center px-8 py-8 w-full bg-white border-t shadow-lg border-ui-border-base animate-fade-in relative"
+            className="flex relative z-40 justify-center px-8 py-8 w-full bg-white border-t shadow-lg border-ui-border-base animate-fade-in"
           >
-            <div className="w-full max-w-7xl relative">
+            <div className="relative w-full max-w-7xl">
               {/* Jednoduché absolute tlačidlá vpravo hore */}
-              <div className="absolute top-0 right-0 flex gap-2">
+              <div className="flex absolute top-0 right-0 gap-2">
                 <LocalizedClientLink
                   href="/purchase-advisor"
-                  className="px-4 py-2 text-sm font-medium text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-white bg-amber-500 rounded-lg transition-colors hover:bg-amber-600"
                 >
                   Poradca nákupu
                 </LocalizedClientLink>
                 <LocalizedClientLink
                   href="/najpredavanejsie"
-                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg transition-colors hover:bg-gray-200"
                 >
                   Najpredávanejšie
                 </LocalizedClientLink>
@@ -1240,16 +1297,16 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   }`}
                   onClick={() => setExpandedSection(expandedSection === 'interior' ? null : 'interior')}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-32 h-24 bg-blue-100 rounded-lg overflow-hidden">
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-3 items-center">
+                      <div className="flex overflow-hidden justify-center items-center w-32 h-24 bg-blue-100 rounded-lg">
                         {usageCategories.interior.category?.metadata?.image_url ? (
                           <Image
                             src={usageCategories.interior.category.metadata.image_url as string}
                             alt="Interiér"
                             width={128}
                             height={96}
-                            className="w-full h-full object-cover"
+                            className="object-cover w-full h-full"
                           />
                         ) : (
                           <Home className="w-12 h-12 text-blue-600" />
@@ -1260,8 +1317,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                         <p className="text-sm text-gray-600">Drevo do vnútorných priestorov</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 text-xs font-medium bg-blue-200 text-blue-800 rounded-full">
+                    <div className="flex gap-2 items-center">
+                      <span className="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-200 rounded-full">
                         {usageCategories.interior.subcategories.length} kategórií
                       </span>
                       <ChevronDown 
@@ -1275,7 +1332,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   {/* Rýchly náhľad kategórií */}
                   <div className="flex flex-wrap gap-2 mt-4">
                     {usageCategories.interior.subcategories.map((category: HttpTypes.StoreProductCategory) => (
-                      <span key={category.id} className="px-2 py-1 text-xs bg-blue-200 text-blue-800 rounded-full">
+                      <span key={category.id} className="px-2 py-1 text-xs text-blue-800 bg-blue-200 rounded-full">
                         {category.name}
                       </span>
                     ))}
@@ -1291,16 +1348,16 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   }`}
                   onClick={() => setExpandedSection(expandedSection === 'exterior' ? null : 'exterior')}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-32 h-24 bg-green-100 rounded-lg overflow-hidden">
+                  <div className="flex justify-between items-center">
+                    <div className="flex gap-3 items-center">
+                      <div className="flex overflow-hidden justify-center items-center w-32 h-24 bg-green-100 rounded-lg">
                         {usageCategories.exterior.category?.metadata?.image_url ? (
                           <Image
                             src={usageCategories.exterior.category.metadata.image_url as string}
                             alt="Exteriér"
                             width={128}
                             height={96}
-                            className="w-full h-full object-cover"
+                            className="object-cover w-full h-full"
                           />
                         ) : (
                           <Building className="w-12 h-12 text-green-600" />
@@ -1311,8 +1368,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                         <p className="text-sm text-gray-600">Drevo do vonkajších priestorov</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-3 py-1 text-xs font-medium bg-green-200 text-green-800 rounded-full">
+                    <div className="flex gap-2 items-center">
+                      <span className="px-3 py-1 text-xs font-medium text-green-800 bg-green-200 rounded-full">
                         {usageCategories.exterior.subcategories.length} kategórií
                       </span>
                       <ChevronDown 
@@ -1326,7 +1383,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   {/* Rýchly náhľad kategórií */}
                   <div className="flex flex-wrap gap-2 mt-4">
                     {usageCategories.exterior.subcategories.map((category: HttpTypes.StoreProductCategory) => (
-                      <span key={category.id} className="px-2 py-1 text-xs bg-green-200 text-green-800 rounded-full">
+                      <span key={category.id} className="px-2 py-1 text-xs text-green-800 bg-green-200 rounded-full">
                         {category.name}
                       </span>
                     ))}
@@ -1342,7 +1399,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                       ? 'bg-blue-50 border-blue-200' 
                       : 'bg-green-50 border-green-200'
                   }`}>
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex justify-between items-center mb-6">
                       <h4 className={`text-lg font-bold ${
                         expandedSection === 'interior' ? 'text-blue-900' : 'text-green-900'
                       }`}>
@@ -1390,7 +1447,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                                   alt={category.name}
                                   width={96}
                                   height={80}
-                                  className="w-full h-full object-cover"
+                                  className="object-cover w-full h-full"
                                 />
                               ) : (
                                 <CategoryIcon className={`w-10 h-10 ${
@@ -1402,10 +1459,10 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                             {/* Obsah vpravo */}
                             <div className="flex-1 min-w-0">
                               {/* Názov kategórie */}
-                              <h4 className="text-base font-semibold text-gray-900 mb-1">{category.name}</h4>
+                              <h4 className="mb-1 text-base font-semibold text-gray-900">{category.name}</h4>
                               
                               {/* Popis */}
-                              <p className="text-sm text-gray-500 mb-2 leading-snug line-clamp-2">{category.description}</p>
+                              <p className="mb-2 text-sm leading-snug text-gray-500 line-clamp-2">{category.description}</p>
                               
                               {/* Badge s počtom produktov alebo iné info */}
                               <div className="flex flex-wrap gap-1 mb-2">
@@ -1423,8 +1480,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                             </div>
                             
                             {/* CTA šípka */}
-                            <div className="flex flex-col items-center justify-center ml-2">
-                              <div className="flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300">
+                            <div className="flex flex-col justify-center items-center ml-2">
+                              <div className="flex justify-center items-center w-6 h-6 bg-gray-100 rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100">
                                 <ArrowRight className="w-3 h-3 text-gray-600" />
                               </div>
                             </div>

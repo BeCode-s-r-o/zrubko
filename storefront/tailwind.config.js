@@ -66,9 +66,9 @@ module.exports = {
         large: "16px",
         circle: "9999px",
       },
-      maxWidth: {
-        "8xl": "100rem",
-      },
+        maxWidth: {
+          "8xl": "100rem",
+        },
       screens: {
 
         'hide-store': '870px', // hide store on 870px topbar

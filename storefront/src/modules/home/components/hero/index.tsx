@@ -22,9 +22,9 @@ const Hero = () => {
   }, [images.length])
 
   return (
-    <section className="relative overflow-hidden pt-20 lg:pt-24 pb-8">
+    <section className="overflow-hidden relative pt-12 pb-6 lg:pt-16">
       <div className="px-0 sm:px-2 lg:px-4">
-        <div className="relative rounded-2xl overflow-hidden min-h-[700px] flex items-center max-w-[2024px] mx-auto">
+        <div className="relative rounded-2xl overflow-hidden h-[300px] md:h-[500px] flex items-center max-w-7xl w-full mx-auto">
           {/* Obrázky s jemným prechodom */}
           {images.map((image, index) => (
             <div
@@ -40,47 +40,47 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
           
           {/* Content */}
-          <div className="relative z-10 text-left px-8 py-20 lg:px-16 lg:py-24 max-w-4xl">
-            <h1 className="mb-6 text-4xl lg:text-6xl xl:text-7xl font-light leading-tight text-white tracking-tight">
+          <div className="relative z-10 px-6 py-10 md:px-8 md:py-12 max-w-4xl text-left">
+            <h1 className="mb-4 text-3xl font-light tracking-tight leading-tight text-white md:text-5xl lg:text-6xl">
               Staviate alebo <br />
               <span className="font-medium text-white">
                 Obkladáte?
               </span>
             </h1>
             
-            <p className="mb-16 text-xl lg:text-2xl text-white/80 leading-relaxed font-light max-w-2xl">
+            <p className="mb-10 max-w-2xl text-lg font-light leading-relaxed md:text-xl lg:text-2xl text-white/80">
               Luxusné drevo na mieru – vyberiete, vypočítate, objednáte. 
-              <span className="text-white font-normal">Doručíme až k vám domov.</span>
+              <span className="font-normal text-white">Doručíme až k vám domov.</span>
             </p>
 
             {/* Minimalistické štatistiky */}
-            <div className="flex flex-wrap gap-12 mb-16">
+            <div className="hidden md:flex flex-wrap gap-12 mb-12">
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-light text-white mb-2">15 000+</div>
-                <div className="text-sm text-white/60 uppercase tracking-wide">Spokojných zákazníkov</div>
+                <div className="mb-2 text-3xl font-light text-white lg:text-4xl">15 000+</div>
+                <div className="text-sm tracking-wide uppercase text-white/60">Spokojných zákazníkov</div>
               </div>
               
               <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-light text-white mb-2">25+</div>
-                <div className="text-sm text-white/60 uppercase tracking-wide">Rokov skúseností</div>
+                <div className="mb-2 text-3xl font-light text-white lg:text-4xl">25+</div>
+                <div className="text-sm tracking-wide uppercase text-white/60">Rokov skúseností</div>
               </div>
             </div>
 
             {/* Čisté buttony */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <button className="group bg-white text-black px-8 py-4 font-medium text-base transition-all duration-300 hover:bg-white/90 flex items-center justify-center">
+            <div className="flex flex-col gap-4 md:flex-row md:gap-6">
+              <button className="flex justify-center items-center px-8 py-4 text-base font-medium text-black bg-white transition-all duration-300 group hover:bg-white/90">
                 Začať s výberom
-                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
               </button>
               
-              <button className="bg-transparent text-white border border-white/30 hover:border-white px-8 py-4 font-medium text-base transition-all duration-300 flex items-center justify-center group">
+              <button className="flex justify-center items-center px-8 py-4 text-base font-medium text-white bg-transparent border transition-all duration-300 border-white/30 hover:border-white group">
                 Navštíviť showroom
               </button>
             </div>
           </div>
 
           {/* Minimalistické carousel indicators */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          <div className="flex absolute bottom-6 left-1/2 z-20 space-x-2 transform -translate-x-1/2">
             {images.map((_, index) => (
               <button
                 key={index}
