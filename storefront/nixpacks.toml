@@ -1,11 +1,14 @@
 [phases.setup]
-nixPkgs = ["nodejs_22", "npm-10_x"]
+nixPkgs = ["nodejs_20"]
 
 [phases.build]
-cmds = ["npm run build:next"]
+cmds = [
+  "npm ci",
+  "npm run build"
+]
 
 [phases.start]
-cmd = "npm run launcher start"
+cmd = "npm run start"
 
 [variables]
-NODE_ENV = "production" 
+NODE_ENV = "production"
