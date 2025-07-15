@@ -28,7 +28,7 @@ export default async function seedDemoData({ container }: ExecArgs) {
   const salesChannelModuleService = container.resolve(Modules.SALES_CHANNEL);
   const storeModuleService = container.resolve(Modules.STORE);
 
-  const countries = ["gb", "de", "dk", "se", "fr", "es", "it"];
+  const countries = ["sk", "gb", "de", "dk", "se", "fr", "es", "it"];
 
   logger.info("Seeding store data...");
   const [store] = await storeModuleService.listStores();
@@ -176,6 +176,10 @@ export default async function seedDemoData({ container }: ExecArgs) {
       {
         name: "Europe",
         geo_zones: [
+          {
+            country_code: "sk",
+            type: "country",
+          },
           {
             country_code: "gb",
             type: "country",
