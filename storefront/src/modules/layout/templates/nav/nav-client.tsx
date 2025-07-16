@@ -693,8 +693,8 @@ export default function NavClient({ regions, categories }: NavClientProps) {
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto h-20 bg-white border-b border-gray-100 shadow-sm">
-        <nav className="flex relative justify-between items-center px-6 w-full h-full text-small-regular text-ebony">
+      <header className="relative mx-auto bg-white border-b border-gray-100 shadow-sm min-h-20">
+        <nav className="flex relative justify-between items-center px-6 py-2 w-full min-h-20 text-small-regular text-ebony">
           <div className="flex items-center lg:hidden">
             <MobileCategoryMenu regions={regions} categories={categories} />
           </div>
@@ -702,13 +702,13 @@ export default function NavClient({ regions, categories }: NavClientProps) {
             {/* Logo */}
             <LocalizedClientLink
               href="/"
-              className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r transition-all duration-300 from-primary-dark to-primary hover:from-primary to-primary-light"
+              className="mr-auto ml-auto text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r transition-all duration-300 from-primary-dark to-primary hover:from-primary to-primary-light lg:ml-0 lg:mr-0"
             >
               Zrubko.sk
             </LocalizedClientLink>
 
             {/* E-shop navigation (desktop) */}
-            <div className="hidden flex-wrap gap-y-2 gap-x-6 items-center ml-4 lg:flex xl:gap-x-10">
+            <div className="hidden flex-wrap gap-y-1 gap-x-2 items-center ml-1 lg:flex xl:gap-x-3">
               <ModernNavbar categories={categories} />
 
               <button
@@ -719,7 +719,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                     return !prev;
                   });
                 }}
-                className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
+                className={`flex gap-1 items-center px-0 py-1 text-base font-semibold rounded-lg transition-all duration-200 ${
                   isUsageOpen
                     ? "bg-gold text-ebony"
                     : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
@@ -736,34 +736,38 @@ export default function NavClient({ regions, categories }: NavClientProps) {
               {/* Additional static links */}
               <LocalizedClientLink s
                 href="/kalkulacka" 
-                className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+                className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
               >
                 <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
                 Kategoria1
+                <ChevronDown size={14} />
               </LocalizedClientLink>
 
               <LocalizedClientLink 
                 href="/poradca" 
-                className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+                className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
               >
                 <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
                 Kategoria2
+                <ChevronDown size={14} />
               </LocalizedClientLink>
 
               <LocalizedClientLink 
                 href="/najpredavanejsie" 
-                className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+                className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
               >
                 <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
                 Kategoria3
+                <ChevronDown size={14} />
               </LocalizedClientLink>
 
               <LocalizedClientLink 
                 href="/kontakt" 
-                className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+                className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
               >
                 <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
                 Kategoria4
+                <ChevronDown size={14} />
               </LocalizedClientLink>
             </div>
           </div>
@@ -805,7 +809,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
                   return !prev
                 })
               }}
-              className={`flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 ${
+              className={`flex gap-1 items-center px-0 py-1 text-base font-semibold rounded-lg transition-all duration-200 ${
                 isUsageOpen 
                   ? "shadow-sm bg-gold text-ebony" 
                   : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
@@ -821,28 +825,28 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
             <LocalizedClientLink 
               href="/kalkulacka" 
-              className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
               Kalkulačka
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/poradca" 
-              className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
               Poradca
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/najpredavanejsie" 
-              className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
               Najpredávanejšie
             </LocalizedClientLink>
             <LocalizedClientLink 
               href="/kontakt" 
-              className="inline-flex gap-2 items-center px-4 py-2 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
+              className="inline-flex gap-1 items-center px-0 text-base font-semibold rounded-lg transition-all duration-200 text-ebony hover:text-ebony-dark hover:bg-gold-light"
             >
               <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="object-cover w-12 h-12 rounded" />
               Kontakt
