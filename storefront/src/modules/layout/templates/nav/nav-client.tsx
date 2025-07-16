@@ -599,6 +599,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
   const [isUsageOpen, setIsUsageOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<'interior' | 'exterior' | null>(null)
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const usageMenuRef = useRef<HTMLDivElement>(null)
   const productsMenuRef = useRef<HTMLDivElement>(null)
@@ -650,8 +651,19 @@ export default function NavClient({ regions, categories }: NavClientProps) {
     };
   }, [isProductsOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <div className="sticky inset-x-0 top-0 z-50 group">
+    <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out ${
+      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200' : 'bg-white'
+    }`}>
       {/* TOPBAR – static pages */}
       <div className="py-2 w-full text-sm text-white bg-primary">
         <div className="flex gap-4 justify-center items-center px-4 mx-auto w-full lg:justify-between max-w-8xl">

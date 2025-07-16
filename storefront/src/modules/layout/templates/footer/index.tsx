@@ -6,7 +6,7 @@ export default async function Footer() {
 
   return (
     <footer className="w-full bg-[#1a2e1a]">
-      <div className="content-container">
+      <div className="px-6 mx-auto max-w-8xl">
         <FooterLinks categories={product_categories} />
         <FooterContact />
         <FooterBottom />

@@ -22,9 +22,9 @@ const Hero = () => {
   }, [images.length])
 
   return (
-    <section className="overflow-hidden relative pt-12 pb-6 lg:pt-16">
-      <div className="px-0 sm:px-2 lg:px-4">
-        <div className="relative rounded-2xl overflow-hidden h-[300px] md:h-[500px] flex items-center max-w-7xl w-full mx-auto">
+    <section className="overflow-hidden relative pb-6 w-full lg:pt-16">
+      <div className="px-6 mx-auto max-w-8xl">
+        <div className="relative rounded-2xl overflow-hidden h-[300px] md:h-[500px] flex items-center w-full">
           {/* Obrázky s jemným prechodom */}
           {images.map((image, index) => (
             <div
@@ -40,7 +40,7 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
           
           {/* Content */}
-          <div className="relative z-10 px-6 py-10 md:px-8 md:py-12 max-w-4xl text-left">
+          <div className="relative z-10 px-6 py-10 max-w-4xl text-left md:px-8 md:py-12">
             <h1 className="mb-4 text-3xl font-light tracking-tight leading-tight text-white md:text-5xl lg:text-6xl">
               Staviate alebo <br />
               <span className="font-medium text-white">
@@ -54,7 +54,7 @@ const Hero = () => {
             </p>
 
             {/* Minimalistické štatistiky */}
-            <div className="hidden md:flex flex-wrap gap-12 mb-12">
+            <div className="hidden flex-wrap gap-12 mb-12 md:flex">
               <div className="text-center">
                 <div className="mb-2 text-3xl font-light text-white lg:text-4xl">15 000+</div>
                 <div className="text-sm tracking-wide uppercase text-white/60">Spokojných zákazníkov</div>

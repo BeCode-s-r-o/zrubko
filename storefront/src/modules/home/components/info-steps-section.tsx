@@ -27,8 +27,8 @@ const steps = [
 
 const InfoStepsSection = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="content-container">
+    <section className="py-16 bg-white w-full">
+      <div className="px-6 mx-auto max-w-8xl">
         <div className="mb-16 text-center">
           <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
             Prémiové drevo na mieru
