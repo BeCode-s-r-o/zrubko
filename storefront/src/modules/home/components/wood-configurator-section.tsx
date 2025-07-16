@@ -65,8 +65,8 @@ const WoodConfiguratorSection = () => {
   }
 
   return (
-    <section className="py-16 bg-slate-50">
-      <div className="content-container">
+    <section className="py-16 bg-slate-50 w-full">
+      <div className="px-6 mx-auto max-w-8xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
             Nájdite správne drevo pre váš projekt

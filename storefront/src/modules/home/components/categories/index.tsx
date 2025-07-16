@@ -13,8 +13,8 @@ export default function Categories({
   }
 
   return (
-    <section className="py-16">
-      <div className="content-container">
+    <section className="py-16 w-full">
+      <div className="px-6 mx-auto max-w-8xl">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8">
         <div className="max-w-2xl">
           <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">

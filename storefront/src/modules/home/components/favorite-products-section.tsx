@@ -62,8 +62,8 @@ const FavoriteProductsSection = async ({ countryCode, region }: { countryCode: s
   const { response: { products } } = await getProductsList({ countryCode, queryParams: { limit: 4 } })
 
   return (
-    <section className="py-16 bg-white">
-      <div className="content-container">
+    <section className="py-16 bg-white w-full">
+      <div className="px-6 mx-auto max-w-8xl">
         <div className="flex flex-col gap-12 items-start md:flex-row">
           {/* Left side: title, description, button */}
           <div className="flex-1 max-w-lg md:sticky md:top-24">
