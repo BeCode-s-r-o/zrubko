@@ -121,7 +121,7 @@ export default function ModernNavbar({ categories }: ModernNavbarProps) {
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         onMouseEnter={() => setIsMenuOpen(true)}
-        className={`flex items-center gap-2 px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 ${
+        className={`flex items-center gap-1 px-0 py-1 text-base font-semibold rounded-lg transition-all duration-300 ${
           isMenuOpen 
             ? "bg-gradient-to-r from-gold to-gold-dark text-ebony" 
             : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
