@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  zod: ^3.21.4
+
 importers:
 
   .:
@@ -1752,7 +1755,7 @@ packages:
       awilix: ^8.0.1
       express: ^4.21.0
       pg: ^8.13.0
-      zod: 3.22.4
+      zod: ^3.21.4
 
   '@mikro-orm/cli@6.4.3':
     resolution: {integrity: sha512-DWnYNxoyMgU6L90TGBlT0eziTu6yl15ArnnFoq0kyOjp8JEMRjin+8cizSrKyQ3QiQZ5iop5fB0i9Sp+Hbgd8Q==}
@@ -7358,7 +7361,7 @@ packages:
     resolution: {integrity: sha512-OT5Y8lbUadqVZCsnyFaTQ4/O2mys4tj7PqhdbBCp7McPwvIEKfPtdA6QfPeFQK2/Rz5LgwmAXRJTugBNBi0btw==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      zod: ^3.25.0 || ^4.0.0
+      zod: ^3.21.4
 
   zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
