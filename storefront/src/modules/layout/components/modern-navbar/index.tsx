@@ -123,11 +123,11 @@ export default function ModernNavbar({ categories }: ModernNavbarProps) {
         onMouseEnter={() => setIsMenuOpen(true)}
         className={`flex items-center gap-2 px-6 py-3 text-base font-semibold rounded-lg transition-all duration-300 ${
           isMenuOpen 
-            ? "bg-gradient-to-r from-gold to-gold-dark text-ebony shadow-lg" 
+            ? "bg-gradient-to-r from-gold to-gold-dark text-ebony" 
             : "text-ebony hover:text-ebony-dark hover:bg-gold-light"
         }`}
       >
-        <Package size={20} />
+        <img src="https://www.tatranskyprofil.sk/wp-content/uploads/2024/11/tatransky-profil-perodrazka.webp" alt="" className="w-12 h-12 object-cover rounded" />
         Produkty
         <ChevronDown
           size={16}
