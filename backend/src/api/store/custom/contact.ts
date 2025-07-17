@@ -1,13 +1,13 @@
 import type { 
   MedusaRequest, 
   MedusaResponse,
-} from "@medusajs/medusa/dist/types/router"
-import type { 
-  NotificationService 
-} from "@medusajs/medusa"
+} from "@medusajs/framework"
+import { INotificationModuleService } from "@medusajs/framework/types"
+import { Modules } from "@medusajs/framework/utils"
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
-  const { name, email, message } = req.body
+  const body = req.body as any
+  const { name, email, message } = body
 
   if (!name || !email || !message) {
     res.status(400).json({
@@ -16,23 +16,24 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     return
   }
 
-  const notificationService: NotificationService = req.scope.resolve(
-    'notificationService'
+  const notificationModuleService: INotificationModuleService = req.scope.resolve(
+    Modules.NOTIFICATION
   )
 
   try {
-    await notificationService.send({
+    await notificationModuleService.createNotifications({
       to: process.env.ADMIN_EMAIL!, // Make sure to set this in your .env
+      channel: 'email',
       template: 'contact-form',
       data: {
+        emailOptions: {
+          subject: `New Contact Form Submission from ${name}`,
+          replyTo: email,
+        },
         name,
         email,
         message,
-      },
-      emailOptions: {
-        subject: `New Contact Form Submission from ${name}`,
-        replyTo: email,
-      },
+      }
     })
 
     res.status(200).json({
@@ -41,7 +42,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   } catch (error) {
     res.status(500).json({
       message: 'Failed to send contact form',
-      error: error.message,
+      error: error instanceof Error ? error.message : 'Unknown error',
     })
   }
 } 
