@@ -67,11 +67,5 @@
   "engines": {
     "node": "22.x",
     "npm": "10.x"
-  },
-  "resolutions": {
-    "zod": "^3.21.4"
-  },
-  "overrides": {
-    "zod": "^3.21.4"
   }
 }
