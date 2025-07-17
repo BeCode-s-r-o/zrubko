@@ -1,6 +1,6 @@
-import { BaseEmail } from './base'
+import { Base } from './base'
 
-interface ContactFormEmailData {
+export interface ContactFormEmailData {
   name: string
   email: string
   message: string
@@ -12,7 +12,7 @@ export const ContactFormEmail = ({
   data: ContactFormEmailData
 }) => {
   return (
-    <BaseEmail>
+    <Base preview="New Contact Form Submission">
       <h2>New Contact Form Submission</h2>
       <div style={{ marginTop: '24px' }}>
         <p><strong>From:</strong> {data.name}</p>
@@ -20,6 +20,6 @@ export const ContactFormEmail = ({
         <p style={{ marginTop: '24px' }}><strong>Message:</strong></p>
         <p style={{ whiteSpace: 'pre-wrap' }}>{data.message}</p>
       </div>
-    </BaseEmail>
+    </Base>
   )
 } 
