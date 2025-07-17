@@ -3,6 +3,7 @@ import { clx } from "@medusajs/ui"
 
 type Variant = {
   id: string
+  title: string
   size: string
   treatment: string
   material: string
@@ -105,18 +106,18 @@ const VariantCard: React.FC<VariantCardProps> = ({
     >
       {/* Gradient pozadie pre selected */}
       {isSelected && (
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/3 via-transparent to-accent-light/3 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br via-transparent pointer-events-none from-accent/3 to-accent-light/3"></div>
       )}
 
-      <div className="relative flex items-center justify-between">
+      <div className="flex relative justify-between items-center">
         {/* Základné info - kompaktnejšie */}
         <div className="flex-1">
-          <div className="flex items-start justify-between mb-2">
+          <div className="flex justify-between items-start mb-2">
             <div>
-              <h4 className="font-bold text-base text-accent-dark mb-1">
-                {variant.metadata.rozmery} – {variant.metadata.povrch}
-              </h4>
-              <p className="text-gray-600 font-medium text-sm">
+              <h2 className="mb-1 text-xl font-bold text-accent-dark">
+                {variant.title}
+              </h2>
+              <p className="text-sm font-medium text-gray-600">
                 {variant.metadata.typ_dreva} {variant.metadata.trieda && (
                   <span className="text-amber-600">{variant.metadata.trieda}</span>
                 )}
@@ -124,7 +125,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
             </div>
             
             {/* Kompaktný dostupnosť badge */}
-            <div className="flex items-center gap-1">
+            <div className="flex gap-1 items-center">
               <div className={`w-2 h-2 rounded-full ${availabilityInfo.badgeColor}`}></div>
               <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${availabilityInfo.bgColor} ${availabilityInfo.color}`}>
                 {availabilityInfo.text}
@@ -136,20 +137,20 @@ const VariantCard: React.FC<VariantCardProps> = ({
           {/* Only render the grid if at least one value is present */}
           {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie) ? (
             <div className="grid grid-cols-4 gap-2 mb-3">
-              <div className="bg-white rounded p-2 border border-accent/10 text-center">
-                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Dĺžka</span>
+              <div className="p-2 text-center bg-white rounded border border-accent/10">
+                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Dĺžka</span>
                 <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
               </div>
-              <div className="bg-white rounded p-2 border border-accent/10 text-center">
-                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">€/m²</span>
+              <div className="p-2 text-center bg-white rounded border border-accent/10">
+                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">€/m²</span>
                 <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || ''}</p>
               </div>
-              <div className="bg-white rounded p-2 border border-accent/10 text-center">
-                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">V balíku</span>
+              <div className="p-2 text-center bg-white rounded border border-accent/10">
+                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">V balíku</span>
                 <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || ''}</p>
               </div>
-              <div className="bg-white rounded p-2 border border-accent/10 text-center">
-                <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">Použitie</span>
+              <div className="p-2 text-center bg-white rounded border border-accent/10">
+                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Použitie</span>
                 <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
               </div>
             </div>
@@ -158,12 +159,12 @@ const VariantCard: React.FC<VariantCardProps> = ({
           {/* Metadata section */}
           {Object.keys(variant.metadata).length > 0 && (
             <div className="space-y-2">
-              <h6 className="font-semibold text-accent-dark text-xs">Metadata</h6>
+              <h6 className="text-xs font-semibold text-accent-dark">Metadata</h6>
               <div className="grid grid-cols-2 gap-2">
                 {Object.entries(variant.metadata).map(([key, value]) => (
                   value && (
-                    <div key={key} className="bg-gray-50 rounded p-2 border border-gray-200 text-center">
-                      <span className="text-gray-500 text-xs font-medium uppercase tracking-wide block">{key}</span>
+                    <div key={key} className="p-2 text-center bg-gray-50 rounded border border-gray-200">
+                      <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">{key}</span>
                       <p className="font-bold text-accent-dark text-xs mt-0.5">
                         {String(value)}
                       </p>
@@ -179,15 +180,15 @@ const VariantCard: React.FC<VariantCardProps> = ({
         <div className="ml-4">
           <div
             className={clx(
-              "w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 shadow-sm",
+              "flex justify-center items-center w-6 h-6 rounded-full border-2 shadow-sm transition-all duration-200",
               {
-                "border-accent bg-gradient-to-br from-accent to-accent-light shadow-accent/20": isSelected,
-                "border-gray-300 bg-white hover:border-accent/50": !isSelected
+                "bg-gradient-to-br border-accent from-accent to-accent-light shadow-accent/20": isSelected,
+                "bg-white border-gray-300 hover:border-accent/50": !isSelected
               }
             )}
           >
             {isSelected && (
-              <div className="w-3 h-3 rounded-full bg-white"></div>
+              <div className="w-3 h-3 bg-white rounded-full"></div>
             )}
           </div>
         </div>
@@ -195,7 +196,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
 
       {/* Subtle hover overlay */}
       {!isSelected && (
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/0 to-accent-light/0 hover:from-accent/2 hover:to-accent-light/2 transition-all duration-200 pointer-events-none rounded-lg"></div>
+        <div className="absolute inset-0 bg-gradient-to-br rounded-lg transition-all duration-200 pointer-events-none from-accent/0 to-accent-light/0 hover:from-accent/2 hover:to-accent-light/2"></div>
       )}
     </div>
   )
