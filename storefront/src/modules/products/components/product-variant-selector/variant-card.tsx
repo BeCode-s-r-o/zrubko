@@ -28,6 +28,8 @@ type Variant = {
     dlzka_m?: string
     cena_m2_s_dph?: string
     kusov_v_baliku?: string
+    opracovanie_dreva?: string
+
     
     // Kalkulačné polia pre výpočty
     kalk_dlzka?: string
@@ -135,23 +137,34 @@ const VariantCard: React.FC<VariantCardProps> = ({
           
           {/* Technické údaje z metadata */}
           {/* Only render the grid if at least one value is present */}
-          {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie) ? (
-            <div className="grid grid-cols-4 gap-2 mb-3">
-              <div className="p-2 text-center bg-white rounded border border-accent/10">
-                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Dĺžka</span>
-                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
+          {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie || variant.metadata.opracovanie_dreva) ? (
+            <div className="mb-3 space-y-2">
+              {/* Prvý riadok - 3 polia */}
+              <div className="grid grid-cols-3 gap-2">
+                <div className="p-2 text-center bg-white rounded border border-accent/10">
+                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Dĺžka</span>
+                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
+                </div>
+                <div className="p-2 text-center bg-white rounded border border-accent/10">
+                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">€/m²</span>
+                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || ''}</p>
+                </div>
+                <div className="p-2 text-center bg-white rounded border border-accent/10">
+                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">V balíku</span>
+                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || ''}</p>
+                </div>
               </div>
-              <div className="p-2 text-center bg-white rounded border border-accent/10">
-                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">€/m²</span>
-                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || ''}</p>
-              </div>
-              <div className="p-2 text-center bg-white rounded border border-accent/10">
-                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">V balíku</span>
-                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || ''}</p>
-              </div>
-              <div className="p-2 text-center bg-white rounded border border-accent/10">
-                <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Použitie</span>
-                <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
+              
+              {/* Druhý riadok - 2 polia */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2 text-center bg-white rounded border border-accent/10">
+                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Použitie</span>
+                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
+                </div>
+                <div className="p-2 text-center bg-white rounded border border-accent/10">
+                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Opracovanie dreva</span>
+                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.opracovanie_dreva || ''}</p>
+                </div>
               </div>
             </div>
           ) : null}
