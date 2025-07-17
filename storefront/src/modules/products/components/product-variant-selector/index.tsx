@@ -46,6 +46,7 @@ type DisplayVariant = {
     dlzka_m?: string
     cena_m2_s_dph?: string
     kusov_v_baliku?: string
+    opracovanie_dreva?: string
     
     // Kalkulačné polia pre výpočty
     kalk_dlzka?: string
@@ -66,11 +67,17 @@ const getOptionValue = (variant: HttpTypes.StoreProductVariant, optionTitle: str
   return option?.value || ""
 }
 
-// Helper function to get availability status
+// Helper function to get availability status - fixed to not change after adding to cart
 const getAvailabilityStatus = (variant: HttpTypes.StoreProductVariant): "in_stock" | "available_soon" | "unavailable" => {
+  // If inventory is not managed, always show as in stock
   if (!variant.manage_inventory) return "in_stock"
+  
+  // If backorder is allowed, show as available soon
   if (variant.allow_backorder) return "available_soon"
+  
+  // If inventory is managed and no backorder, check if there's any inventory
   if ((variant.inventory_quantity || 0) > 0) return "in_stock"
+  
   return "unavailable"
 }
 
@@ -83,7 +90,6 @@ const ProductHeader = ({ product }: { product: HttpTypes.StoreProduct }) => (
     <p className="text-base leading-relaxed text-gray-600 md:text-lg lg:text-xl">
       {product.description}
     </p>
-
   </div>
 )
 
@@ -136,6 +142,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
           v_baliku: (variant.metadata?.v_baliku as string) || (product.metadata?.v_baliku as string) || undefined,
           typ_dreva: (variant.metadata?.typ_dreva as string) || (product.metadata?.typ_dreva as string) || undefined,
           cena_za_m_2: (variant.metadata?.cena_za_m_2 as string) || (product.metadata?.cena_za_m_2 as string) || undefined,
+          opracovanie_dreva: (variant.metadata?.opracovanie_dreva as string) || (product.metadata?.opracovanie_dreva as string) || undefined,
           ...variant.metadata
         }
       }
@@ -204,8 +211,8 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     <div className="flex flex-col gap-6 h-full">
       <ProductHeader product={product} />
 
-      {/* Variant selector */}
-      <div className="overflow-hidden flex-1 bg-white rounded-xl border shadow-md border-accent/10">
+      {/* Variant selector - ALWAYS FIRST on mobile */}
+      <div className="overflow-hidden bg-white rounded-xl border shadow-md border-accent/10">
         <div className="px-6 py-4 bg-gradient-to-r border-b from-accent/5 to-accent-light/5 border-accent/10">
           <p className="text-xl font-semibold lg:text-2xl text-accent-dark">Dostupné varianty</p>
           <p className="mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
@@ -233,11 +240,11 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
           
           <div className="p-6">
             <div className="space-y-6">
-              {/* Variant details */}
-              <div className="p-4 bg-white rounded-xl border shadow-sm md:p-6 border-accent/10">
-                <h5 className="mb-3 text-lg font-bold leading-tight md:text-xl lg:text-2xl text-accent-dark md:mb-4">
+              {/* Variant title above quantity selector */}
+              <div className="text-center">
+                <h2 className="text-lg font-bold text-accent-dark md:text-xl lg:text-2xl">
                   {selectedVariant.title}
-                </h5>
+                </h2>
               </div>
 
               {/* Quantity and price calculator */}
