@@ -10,7 +10,6 @@ import VariantCard from "./variant-card"
 import QuantitySelector from "./quantity-selector"
 import PriceCalculator from "./price-calculator"
 
-
 type ProductVariantSelectorProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
@@ -19,6 +18,7 @@ type ProductVariantSelectorProps = {
 
 type DisplayVariant = {
   id: string
+  title: string
   size: string
   treatment: string
   material: string
@@ -26,6 +26,7 @@ type DisplayVariant = {
   pricePerM2: number
   m2PerPiece: number
   availability: "in_stock" | "available_soon" | "unavailable"
+  inventoryQuantity: number
   image: string
   variantData: HttpTypes.StoreProductVariant
   availability_text: string
@@ -73,6 +74,19 @@ const getAvailabilityStatus = (variant: HttpTypes.StoreProductVariant): "in_stoc
   return "unavailable"
 }
 
+// Reusable component for product title and description
+const ProductHeader = ({ product }: { product: HttpTypes.StoreProduct }) => (
+  <div>
+    <h1 className="mb-2 text-2xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r md:text-3xl lg:text-4xl xl:text-5xl from-accent-dark to-accent md:mb-3">
+      {product.title}
+    </h1>
+    <p className="text-base leading-relaxed text-gray-600 md:text-lg lg:text-xl">
+      {product.description}
+    </p>
+
+  </div>
+)
+
 const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   product,
   region,
@@ -85,15 +99,28 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     return product.variants.map(variant => {
       const priceInfo = getProductPrice({ product, variantId: variant.id })
       const pricePerUnit = priceInfo.variantPrice?.calculated_price_number || 0
-      // Use backend price directly without conversion
+      
+      const rozmer = getOptionValue(variant, "Rozmer")
+      const typ = getOptionValue(variant, "Typ")
+      const title = variant.title || `${rozmer} ${typ}`.trim()
+      
+      console.log("Debug - Variant title creation:", {
+        variantId: variant.id,
+        variantTitle: variant.title,
+        rozmer,
+        typ,
+        finalTitle: title
+      })
       
       return {
         id: variant.id,
+        title: title,
         variantData: variant,
         size: getOptionValue(variant, "Rozmer"),
         treatment: getOptionValue(variant, "Typ"),
         material: getOptionValue(variant, "Materiál"),
         availability: getAvailabilityStatus(variant),
+        inventoryQuantity: variant.inventory_quantity || 0,
         pricePerM2: pricePerUnit,
         availability_text: getOptionValue(variant, "Dostupnosť"),
         length: 0,
@@ -116,7 +143,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   }, [product])
 
   const [selectedVariant, setSelectedVariant] = useState<DisplayVariant | null>(displayVariants[0] || null)
-  const [packages, setPackages] = useState(1) // Zmenené z quantity na packages
+  const [packages, setPackages] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
 
   // Calculations - now using backend price multiplied by packages
@@ -131,7 +158,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     try {
       await addToCart({
         variantId: selectedVariant.variantData.id,
-        quantity: packages, // Changed to packages
+        quantity: packages,
         countryCode,
       })
       // TODO: Add success notification
@@ -146,28 +173,17 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   if (!displayVariants.length) {
     return (
       <div className="flex flex-col gap-6 h-full">
-        {/* Dynamic product title and description */}
-        <div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2 md:mb-3 leading-tight">
-            {product.title}
-          </h1>
-          <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
-            {product.description}
-          </p>
-          <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4"></div>
-        </div>
-
-
+        <ProductHeader product={product} />
         
-        <div className="text-center p-8 bg-amber-50 border border-amber-200 rounded-lg">
-          <p className="text-amber-800 font-medium mb-2">Žiadne varianty nie sú k dispozícii</p>
-          <p className="text-amber-600 text-sm">
+        <div className="p-8 text-center bg-amber-50 rounded-lg border border-amber-200">
+          <p className="mb-2 font-medium text-amber-800">Žiadne varianty nie sú k dispozícii</p>
+          <p className="text-sm text-amber-600">
             Tento produkt nemá nakonfigurované varianty. Kontaktujte nás pre viac informácií.
           </p>
           {/* Debug info - remove in production */}
           <details className="mt-4 text-left">
-            <summary className="cursor-pointer text-sm text-gray-600">Debug info (pre vývojárov)</summary>
-            <pre className="mt-2 text-xs bg-gray-100 p-2 rounded overflow-auto">
+            <summary className="text-sm text-gray-600 cursor-pointer">Debug info (pre vývojárov)</summary>
+            <pre className="overflow-auto p-2 mt-2 text-xs bg-gray-100 rounded">
               {JSON.stringify({
                 productId: product.id,
                 hasVariants: !!product.variants,
@@ -186,22 +202,13 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
 
   return (
     <div className="flex flex-col gap-6 h-full">
-      {/* Dynamic product title and description */}
-      <div>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent mb-2 md:mb-3 leading-tight">
-          {product.title}
-        </h1>
-        <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed">
-          {product.description}
-        </p>
-        <div className="w-16 md:w-24 h-1 bg-gradient-to-r from-accent to-accent-light rounded-full mt-3 md:mt-4"></div>
-      </div>
+      <ProductHeader product={product} />
 
       {/* Variant selector */}
-      <div className="bg-white rounded-xl shadow-md border border-accent/10 overflow-hidden flex-1">
-        <div className="bg-gradient-to-r from-accent/5 to-accent-light/5 px-6 py-4 border-b border-accent/10">
-          <h3 className="text-xl lg:text-2xl font-semibold text-accent-dark">Dostupné varianty</h3>
-          <p className="text-sm lg:text-base text-gray-600 mt-1">Vyberte si rozmer a typ spracovania</p>
+      <div className="overflow-hidden flex-1 bg-white rounded-xl border shadow-md border-accent/10">
+        <div className="px-6 py-4 bg-gradient-to-r border-b from-accent/5 to-accent-light/5 border-accent/10">
+          <p className="text-xl font-semibold lg:text-2xl text-accent-dark">Dostupné varianty</p>
+          <p className="mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
         </div>
         
         <div className="p-6 space-y-4">
@@ -218,26 +225,22 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
 
       {/* Selected variant details */}
       {selectedVariant && (
-        <div className="bg-gradient-to-br from-white to-accent-light/10 rounded-xl shadow-md border border-accent/20 overflow-hidden">
-          <div className="bg-gradient-to-r from-accent to-accent-light px-6 py-4">
-            <h4 className="font-semibold text-xl lg:text-2xl text-white">Vybraný variant</h4>
-            <p className="text-white text-sm lg:text-base mt-1">Finalizujte svoju objednávku</p>
+        <div className="overflow-hidden bg-gradient-to-br from-white rounded-xl border shadow-md to-accent-light/10 border-accent/20">
+          <div className="px-6 py-4 bg-gradient-to-r from-accent to-accent-light">
+            <p className="text-xl font-semibold text-white lg:text-2xl">Vybraný variant</p>
+            <p className="mt-1 text-sm text-white lg:text-base">Finalizujte svoju objednávku</p>
           </div>
           
           <div className="p-6">
             <div className="space-y-6">
               {/* Variant details */}
-              {/* Only render the variant details card if at least one of rozmer or povrch is present */}
-              {(selectedVariant.metadata.rozmery || selectedVariant.metadata.povrch) && (
-                <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm border border-accent/10">
-                  <h5 className="font-bold text-lg md:text-xl lg:text-2xl text-accent-dark mb-3 md:mb-4 leading-tight">
-                    {selectedVariant.metadata.rozmery || ''}{selectedVariant.metadata.rozmery && selectedVariant.metadata.povrch ? ' – ' : ''}{selectedVariant.metadata.povrch || ''}
-                  </h5>
-                </div>
-              )}
+              <div className="p-4 bg-white rounded-xl border shadow-sm md:p-6 border-accent/10">
+                <h5 className="mb-3 text-lg font-bold leading-tight md:text-xl lg:text-2xl text-accent-dark md:mb-4">
+                  {selectedVariant.title}
+                </h5>
+              </div>
 
               {/* Quantity and price calculator */}
-              {/* Always vertical layout for quantity selector and price calculator */}
               <div className="flex flex-col gap-6">
                 <QuantitySelector
                   quantity={packages}
@@ -255,7 +258,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
               <Button
                 onClick={handleAddToCart}
                 disabled={selectedVariant.availability === "unavailable" || isAdding}
-                className="w-full bg-gradient-to-r from-accent to-accent-light hover:from-accent-dark hover:to-accent text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                className="px-8 py-4 w-full text-lg font-bold text-white bg-gradient-to-r rounded-xl shadow-lg transition-all duration-200 from-accent to-accent-light hover:from-accent-dark hover:to-accent disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl"
                 isLoading={isAdding}
               >
                 {isAdding ? "Pridávam..." : 
