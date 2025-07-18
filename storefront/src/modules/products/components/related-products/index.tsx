@@ -20,6 +20,8 @@ export default async function RelatedProducts({
 
   // Define related products logic based on collection
   const queryParams: any = {}
+
+  queryParams.limit = 4
   
   if (product.collection_id) {
     queryParams.collection_id = [product.collection_id]
@@ -40,16 +42,17 @@ export default async function RelatedProducts({
 
   return (
     <div className="product-page-constraint">
-      <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
-          Related products
-        </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          You might also want to check out these products.
-        </p>
+      <div className="flex flex-col items-center mb-16 text-center">
+      <h2 className="mb-2 text-xl font-semibold text-gray-900 lg:text-2xl">
+        Podobné produkty
+      </h2>
+      <p className="text-base leading-relaxed text-gray-600 md:text-lg lg:text-xl">
+        Môžu sa Vám páčiť aj tieto produkty.
+      </p>
+
       </div>
 
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
+      <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
         {products.map((product) => (
           <li key={product.id}>
             {region && <Product region={region} product={product} />}
