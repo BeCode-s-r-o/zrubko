@@ -28,6 +28,7 @@ type DisplayVariant = {
   availability: "in_stock" | "available_soon" | "unavailable"
   inventoryQuantity: number
   image: string
+  sku?: string
   variantData: HttpTypes.StoreProductVariant
   availability_text: string
   metadata: {
@@ -132,6 +133,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
         length: 0,
         m2PerPiece: 0,
         image: variant.product?.images?.[0]?.url || "",
+        sku: variant.sku || undefined, // Add SKU for inventory lookup, handle null case
         metadata: {
           dlzka: (variant.metadata?.dlzka as string) || (product.metadata?.dlzka as string) || undefined,
           obklad: (variant.metadata?.obklad as string) || (product.metadata?.obklad as string) || undefined,
@@ -225,6 +227,7 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
               variant={variant}
               isSelected={selectedVariant?.id === variant.id}
               onSelect={() => setSelectedVariant(variant)}
+              allVariants={displayVariants}
             />
           ))}
         </div>

@@ -1,77 +1,98 @@
-# Custom Workflows
+# Workflows
 
-A workflow is a series of queries and actions that complete a task.
+This directory contains workflow definitions for the Medusa backend.
 
-The workflow is created in a TypeScript or JavaScript file under the `src/workflows` directory.
+## Inventory Management Workflows
 
-For example:
+### `inventory-management.ts`
 
-```ts
-import { 
-  createStep,
-  createWorkflow,
-  StepResponse,
-} from "@medusajs/workflows-sdk"
+This file contains workflows for managing inventory in your Medusa store:
 
-const step1 = createStep("step-1", async () => {
-  return new StepResponse(`Hello from step one!`)
-})
+#### Available Workflows:
 
-type WorkflowInput = {
-  name: string
-}
+1. **`createInventoryItemWorkflow`**
+   - Creates a new inventory item
+   - Parameters:
+     - `sku`: Stock Keeping Unit
+     - `title`: Item title
+     - `requires_shipping`: Whether the item requires shipping
+     - `hs_code`: Harmonized System code
+     - `origin_country`: Country of origin
+     - `mid_code`: Manufacturer ID code
+     - `material`: Material description
+     - `weight`, `length`, `height`, `width`: Physical dimensions
 
-const step2 = createStep(
-  "step-2",
-  async ({ name }: WorkflowInput) => {
-    return new StepResponse(`Hello ${name} from step two!`)
-  }
-)
+2. **`createInventoryItemWithLevelsWorkflow`**
+   - Creates an inventory item with stock levels at a specific location
+   - Parameters:
+     - All parameters from `createInventoryItemWorkflow`
+     - `location_id`: Location where stock is stored
+     - `stocked_quantity`: Current stock quantity
+     - `incoming_quantity`: Quantity expected to arrive
 
-type WorkflowOutput = {
-  message: string
-}
+#### Usage Examples:
 
-const myWorkflow = createWorkflow<
-  WorkflowInput,
-  WorkflowOutput
->("hello-world", function (input) {
-  const str1 = step1()
-  // to pass input
-  step2(input)
-
-  return {
-    message: str1,
+```typescript
+// Create a simple inventory item
+const result = await createInventoryItemWorkflow.run({
+  input: {
+    sku: "SHIRT-001",
+    title: "Blue T-Shirt",
+    requires_shipping: true,
+    weight: 0.2,
   }
 })
 
-export default myWorkflow
+// Create inventory item with stock levels
+const result = await createInventoryItemWithLevelsWorkflow.run({
+  input: {
+    sku: "SHIRT-001",
+    title: "Blue T-Shirt",
+    requires_shipping: true,
+    location_id: "warehouse-1",
+    stocked_quantity: 100,
+    incoming_quantity: 50,
+  }
+})
 ```
 
-## Execute Workflow
+## API Endpoints
 
-You can execute the workflow from other resources, such as API routes, scheduled jobs, or subscribers.
+### `/admin/inventory`
 
-For example, to execute the workflow in an API route:
+- **POST**: Create inventory items
+  - Body: `{ "action": "create-item" | "create-item-with-levels", ...data }`
+- **GET**: Query inventory data
+  - Query params: `sku`, `location_id`
 
-```ts
-import type {
-  MedusaRequest,
-  MedusaResponse,
-} from "@medusajs/medusa"
-import myWorkflow from "../../../workflows/hello-world"
+## Subscribers
 
-export async function GET(
-  req: MedusaRequest,
-  res: MedusaResponse
-) {
-  const { result } = await myWorkflow(req.scope)
-    .run({
-      input: {
-        name: req.query.name as string,
-      },
-    })
+### `inventory-updates.ts`
 
-  res.send(result)
+Automatically handles inventory updates when:
+- New product variants are created
+- Orders are placed (reduces stock)
+- Orders are cancelled (restores stock)
+
+## Configuration
+
+The Inventory module is configured in `medusa-config.js`:
+
+```javascript
+{
+  key: Modules.INVENTORY,
+  resolve: '@medusajs/inventory',
+  options: {
+    // Optional configuration
+  }
 }
 ```
+
+## Features
+
+- ✅ Inventory Items Management
+- ✅ Inventory Across Locations  
+- ✅ Automatic Stock Updates
+- ✅ Order Integration
+- ✅ Workflow-based Operations
+- ✅ Error Handling & Rollback

@@ -51,6 +51,14 @@ const medusaConfig = {
   },
   modules: [
     {
+      key: Modules.INVENTORY,
+      resolve: '@medusajs/inventory',
+      options: {
+        // Optional: Configure inventory settings
+        // You can add custom options here if needed
+      }
+    },
+    {
       key: Modules.FILE,
       resolve: '@medusajs/file',
       options: {
@@ -161,5 +169,5 @@ const medusaConfig = {
 };
 
 console.log(JSON.stringify(medusaConfig, null, 2));
-const config = defineConfig(medusaConfig);
+const config = /** @type {import('@medusajs/utils').MedusaConfig} */ (defineConfig(medusaConfig));
 export default config;
