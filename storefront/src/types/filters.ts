@@ -3,7 +3,6 @@ export interface ProductFilters {
   pouzitie?: string[]
   typ_dreva?: string[]
   dlzka_m?: string[]
-  cena_m2_s_dph?: string[]
   kusov_v_baliku?: string[]
   kalk_plocha_balika_m2?: string[]
   rozmery_mm?: string[]
@@ -27,7 +26,6 @@ export interface ProductMetadata {
   pouzitie?: string
   typ_dreva?: string
   dlzka_m?: string
-  cena_m2_s_dph?: string
   kusov_v_baliku?: string
   kalk_plocha_balika_m2?: string
   rozmery_mm?: string

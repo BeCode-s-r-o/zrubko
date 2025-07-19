@@ -61,16 +61,16 @@ export default function ClientProductList({
   // Show "no products" message if no products match filters
   if (filteredProducts.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-16 px-4">
-        <div className="w-24 h-24 mb-6 rounded-full bg-gray-100 flex items-center justify-center">
+      <div className="flex flex-col justify-center items-center px-4 py-16">
+        <div className="flex justify-center items-center mb-6 w-24 h-24 bg-gray-100 rounded-full">
           <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        <h3 className="mb-2 text-xl font-semibold text-gray-900">
           Žiadne produkty nenájdené
         </h3>
-        <p className="text-gray-600 text-center max-w-md">
+        <p className="max-w-md text-center text-gray-600">
           Skúste zmeniť alebo resetovať filtre, aby ste našli produkty ktoré hľadáte.
         </p>
       </div>
@@ -80,24 +80,26 @@ export default function ClientProductList({
   return (
     <>
       {/* Results summary */}
-      <div className="mb-6 flex items-center justify-between">
-        <p className="text-sm text-gray-600">
-          Zobrazuje sa <span className="font-medium">{(currentPage - 1) * productsPerPage + 1}</span>
-          {" "}-{" "}
-          <span className="font-medium">
-            {Math.min(currentPage * productsPerPage, filteredProducts.length)}
-          </span>
-          {" "}z{" "}
-          <span className="font-medium">{filteredProducts.length}</span> produktov
-        </p>
+      <div className="flex justify-between items-center mb-2">
+      <p className="text-sm text-gray-600">
+  Zobrazené produkty{" "}
+  <span className="font-medium">{(currentPage - 1) * productsPerPage + 1}</span>
+  {" – "}
+  <span className="font-medium">
+    {Math.min(currentPage * productsPerPage, filteredProducts.length)}
+  </span>
+  {" "}z{" "}
+  <span className="font-medium">{filteredProducts.length}</span>
+</p>
+
         
         {/* Loading indicator while filtering */}
         {isPending && (
-          <div className="flex space-x-2 items-center">
+          <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce"></div>
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
             <div className="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-            <span className="text-sm text-gray-500 ml-2">Filtrujem...</span>
+            <span className="ml-2 text-sm text-gray-500">Filtrujem...</span>
           </div>
         )}
       </div>

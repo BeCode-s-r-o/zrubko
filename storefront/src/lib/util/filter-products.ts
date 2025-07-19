@@ -58,7 +58,6 @@ export function extractFiltersFromProducts(
     { key: 'pouzitie', title: 'Použitie' },
     { key: 'typ_dreva', title: 'Typ dreva' },
     { key: 'dlzka_m', title: 'Dĺžka (m)' },
-    { key: 'cena_m2_s_dph', title: 'Cena za m²' },
     { key: 'kusov_v_baliku', title: 'Kusov v balíku' },
     { key: 'kalk_plocha_balika_m2', title: 'Plocha balíka (m²)' },
     { key: 'rozmery_mm', title: 'Rozmery (mm)' },
@@ -135,7 +134,7 @@ function formatLabel(filterKey: string, value: string): string {
     case 'kalk_plocha_balika_m2':
       return `${value} m²`
     case 'rozmery_mm':
-      return `${value} mm`
+      return `${value} `
     case 'opracovanie_dreva':
       return value.charAt(0).toUpperCase() + value.slice(1)
     default:
