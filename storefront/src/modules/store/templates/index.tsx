@@ -22,25 +22,27 @@ const StoreTemplate = ({
 
   return (
     <>
-      <div className="content-container mt-4 md:mt-12 lg:mt-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-4 md:mt-12 lg:mt-20">
         <Breadcrumbs />
       </div>
-      <div
-        className="flex flex-col small:flex-row small:items-start py-6 content-container"
-        data-testid="category-container"
-      >
-      <RefinementList sortBy={sort} />
-      <div className="w-full">
-        <StoreTitle />
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            countryCode={countryCode}
-          />
-        </Suspense>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          className="flex flex-col small:flex-row small:items-start py-6"
+          data-testid="category-container"
+        >
+          <RefinementList availableFilters={[]} />
+          <div className="w-full">
+            <StoreTitle />
+            <Suspense fallback={<SkeletonProductGrid />}>
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                countryCode={countryCode}
+              />
+            </Suspense>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   )
 }
