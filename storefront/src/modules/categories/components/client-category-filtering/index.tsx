@@ -52,7 +52,7 @@ export default function ClientCategoryFiltering({
           <div className="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
             <button
               onClick={() => setIsMobileFiltersOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+              className="flex gap-2 items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg transition-colors duration-200 hover:bg-gray-200"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -81,7 +81,7 @@ export default function ClientCategoryFiltering({
         </div>
 
         {/* Desktop Metadata Filtre na ľavej strane - Hidden on mobile */}
-        <aside className="hidden lg:block flex-shrink-0 lg:w-80">
+        <aside className="hidden flex-shrink-0 lg:block lg:w-80">
           <RefinementList 
             availableFilters={metadataFilters}
             data-testid="metadata-filters" 
@@ -89,12 +89,11 @@ export default function ClientCategoryFiltering({
         </aside>
 
         {/* Produkty na pravej strane */}
-        <main className="flex-1 min-w-0 w-full lg:w-auto">
+        <main className="flex-1 w-full min-w-0 lg:w-auto">
           {/* Desktop Header with product count and sort dropdown - Hidden on mobile */}
-          <div className="hidden lg:flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
+          <div className="hidden justify-between items-center pb-4 mb-6 border-b border-gray-200 lg:flex">
             <div className="text-gray-700">
-              <span className="font-bold">{allProducts.length}</span>
-              <span className="ml-1">toodet</span>
+
             </div>
             
             {/* Sort dropdown on the right */}
@@ -136,13 +135,13 @@ export default function ClientCategoryFiltering({
           />
           
           {/* Filter Panel */}
-          <div className="absolute inset-y-0 left-0 w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
+          <div className="absolute inset-y-0 left-0 w-full max-w-md bg-white shadow-2xl transition-transform duration-300 ease-in-out transform">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
               <h2 className="text-lg font-bold text-gray-900">Filtrovanie</h2>
               <button
                 onClick={() => setIsMobileFiltersOpen(false)}
-                className="p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                className="p-2 text-gray-500 transition-colors duration-200 hover:text-gray-700"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -151,7 +150,7 @@ export default function ClientCategoryFiltering({
             </div>
             
             {/* Filter Content */}
-            <div className="h-full overflow-y-auto">
+            <div className="overflow-y-auto h-full">
               <RefinementList 
                 availableFilters={metadataFilters}
                 data-testid="mobile-filters" 
