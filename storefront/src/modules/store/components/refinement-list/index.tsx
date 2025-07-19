@@ -21,10 +21,13 @@ const RefinementList = ({
     hasActiveFilters 
   } = useFilters()
 
+  // Check if this is mobile filters (no border, different styling)
+  const isMobileFilters = dataTestId === 'mobile-filters'
+
   return (
-    <div className="overflow-y-auto p-6 w-80 h-full bg-white border-r border-gray-200">
-      {/* Header */}
-      <div className="pb-4 mb-6 border-b border-gray-200">
+    <div className={`bg-white ${isMobileFilters ? '':'border lg:border-r border-gray-200 lg:ml-4 lg:w-64 overflow-y-auto p-4 h-full'} lg:p-6`}>
+      {/* Header - Only show on desktop */}
+      <div className="hidden pb-4 mb-6 border-b border-gray-200 lg:block">
         <div className="flex gap-2 items-center mb-2">
           <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -84,7 +87,7 @@ const FilterSection = ({
         className="flex justify-between items-center py-2 cursor-pointer"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <h3 className="text-sm font-semibold tracking-wide text-gray-900">
+        <h3 className="text-sm font-bold tracking-wide text-gray-900 uppercase">
           {section.title}
         </h3>
         <svg 
@@ -127,4 +130,4 @@ const FilterSection = ({
   )
 }
 
-export default RefinementList
+export default RefinementList;

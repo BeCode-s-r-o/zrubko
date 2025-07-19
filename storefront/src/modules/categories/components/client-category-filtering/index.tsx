@@ -6,6 +6,7 @@ import { useFilters } from "@lib/hooks/use-filters"
 import RefinementList from "@modules/store/components/refinement-list"
 import ClientProductList from "@modules/products/components/client-product-list"
 import SortProducts, { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { useState, useEffect } from "react"
 
 interface ClientCategoryFilteringProps {
   allProducts: HttpTypes.StoreProduct[]
@@ -19,6 +20,7 @@ export default function ClientCategoryFiltering({
   availableFilters,
 }: ClientCategoryFilteringProps) {
   const { filters, sortBy, updateSort } = useFilters()
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
 
   // Filter out price-related filters from metadata filters
   const metadataFilters = availableFilters.filter(filter => 
@@ -29,49 +31,135 @@ export default function ClientCategoryFiltering({
     updateSort(value)
   }
 
-  return (
-    <div className="flex flex-col gap-8 items-start lg:flex-row" data-testid="category-container">
-      {/* Metadata Filtre na ľavej strane */}
-      <aside className="flex-shrink-0 lg:w-80">
-        <RefinementList 
-          availableFilters={metadataFilters}
-          data-testid="metadata-filters" 
-        />
-      </aside>
+  // Prevent body scroll when mobile filters are open
+  useEffect(() => {
+    if (isMobileFiltersOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
 
-      {/* Produkty na pravej strane */}
-      <main className="flex-1 min-w-0">
-        {/* Header with product count and sort dropdown */}
-        <div className="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
-        
-          
-          {/* Sort dropdown on the right */}
-          <div className="relative">
-            <select
-              value={sortBy}
-              onChange={(e) => handleSortChange("sortBy", e.target.value as SortOptions)}
-              className="px-3 py-1.5 pr-6 text-sm text-gray-700 bg-white rounded border border-gray-300 appearance-none focus:outline-none focus:border-gray-400"
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileFiltersOpen])
+
+  return (
+    <>
+      <div className="flex flex-col gap-8 items-start lg:flex-row" data-testid="category-container">
+        {/* Mobile Filter Button - Only visible on small screens */}
+        <div className="w-full lg:hidden">
+          <div className="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
+            <button
+              onClick={() => setIsMobileFiltersOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200"
             >
-              <option value="created_at">Odporúčané</option>
-              <option value="price_asc">Cena: Nízka → Vysoká</option>
-              <option value="price_desc">Cena: Vysoká → Nízka</option>
-            </select>
-            <div className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
               </svg>
+              <span className="font-medium">Filtrovanie</span>
+            </button>
+            
+            {/* Sort dropdown on mobile */}
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => handleSortChange("sortBy", e.target.value as SortOptions)}
+                className="px-3 py-2 pr-8 text-sm text-gray-700 bg-white rounded border border-gray-300 appearance-none focus:outline-none focus:border-gray-400"
+              >
+                <option value="created_at">Odporúčané</option>
+                <option value="price_asc">Cena: Nízka → Vysoká</option>
+                <option value="price_desc">Cena: Vysoká → Nízka</option>
+              </select>
+              <div className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
 
-        <ClientProductList
-          allProducts={allProducts}
-          region={region}
-          filters={filters}
-          sortBy={sortBy}
-          productsPerPage={12}
-        />
-      </main>
-    </div>
+        {/* Desktop Metadata Filtre na ľavej strane - Hidden on mobile */}
+        <aside className="hidden lg:block flex-shrink-0 lg:w-80">
+          <RefinementList 
+            availableFilters={metadataFilters}
+            data-testid="metadata-filters" 
+          />
+        </aside>
+
+        {/* Produkty na pravej strane */}
+        <main className="flex-1 min-w-0 w-full lg:w-auto">
+          {/* Desktop Header with product count and sort dropdown - Hidden on mobile */}
+          <div className="hidden lg:flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
+            <div className="text-gray-700">
+              <span className="font-bold">{allProducts.length}</span>
+              <span className="ml-1">toodet</span>
+            </div>
+            
+            {/* Sort dropdown on the right */}
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => handleSortChange("sortBy", e.target.value as SortOptions)}
+                className="px-3 py-1.5 pr-6 text-sm text-gray-700 bg-white rounded border border-gray-300 appearance-none focus:outline-none focus:border-gray-400"
+              >
+                <option value="created_at">Odporúčané</option>
+                <option value="price_asc">Cena: Nízka → Vysoká</option>
+                <option value="price_desc">Cena: Vysoká → Nízka</option>
+              </select>
+              <div className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
+                <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <ClientProductList
+            allProducts={allProducts}
+            region={region}
+            filters={filters}
+            sortBy={sortBy}
+            productsPerPage={12}
+          />
+        </main>
+      </div>
+
+      {/* Mobile Full-Screen Filter Overlay */}
+      {isMobileFiltersOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
+            onClick={() => setIsMobileFiltersOpen(false)}
+          />
+          
+          {/* Filter Panel */}
+          <div className="absolute inset-y-0 left-0 w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <h2 className="text-lg font-bold text-gray-900">Filtrovanie</h2>
+              <button
+                onClick={() => setIsMobileFiltersOpen(false)}
+                className="p-2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Filter Content */}
+            <div className="h-full overflow-y-auto">
+              <RefinementList 
+                availableFilters={metadataFilters}
+                data-testid="mobile-filters" 
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 } 
