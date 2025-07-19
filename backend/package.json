@@ -26,6 +26,7 @@
     "@medusajs/core-flows": "latest",
     "@medusajs/dashboard": "latest",
     "@medusajs/framework": "latest",
+    "@medusajs/inventory": "^2.8.7",
     "@medusajs/medusa": "latest",
     "@medusajs/notification-sendgrid": "latest",
     "@medusajs/payment-stripe": "latest",

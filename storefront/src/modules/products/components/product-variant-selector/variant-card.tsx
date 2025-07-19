@@ -1,5 +1,6 @@
 import React from "react"
 import { clx } from "@medusajs/ui"
+import { useInventory } from "@lib/hooks/use-inventory"
 
 type Variant = {
   id: string
@@ -12,6 +13,7 @@ type Variant = {
   m2PerPiece: number
   availability: "in_stock" | "available_soon" | "unavailable"
   image: string
+  sku?: string
   metadata: {
     // Základné metadata
     dlzka?: string
@@ -48,13 +50,14 @@ type VariantCardProps = {
   variant: Variant
   isSelected: boolean
   onSelect: () => void
+  allVariants?: Variant[] // Pass all variants for inventory fetching
 }
 
-const getAvailabilityInfo = (availability: string) => {
+const getAvailabilityInfo = (availability: string, availableQuantity?: number) => {
   switch (availability) {
     case "in_stock":
       return { 
-        text: "Na sklade", 
+        text: availableQuantity ? `${availableQuantity} ks na sklade` : "Na sklade", 
         color: "text-green-600", 
         bgColor: "bg-green-100", 
         icon: "●",
@@ -91,8 +94,19 @@ const VariantCard: React.FC<VariantCardProps> = ({
   variant,
   isSelected,
   onSelect,
+  allVariants = []
 }) => {
-  const availabilityInfo = getAvailabilityInfo(variant.availability)
+  // Use inventory hook to get real inventory data
+  const { getInventoryStatus, loading: inventoryLoading } = useInventory(allVariants)
+  
+  // Get inventory status for this specific variant
+  const inventoryStatus = getInventoryStatus(variant.sku)
+  
+  // Use real inventory status instead of static availability
+  const availabilityInfo = getAvailabilityInfo(
+    inventoryStatus.status, 
+    inventoryStatus.available_quantity
+  )
 
   return (
     <div
@@ -102,7 +116,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
         {
           "border-accent bg-gradient-to-br from-accent/5 to-accent-light/10 shadow-sm ring-1 ring-accent/20": isSelected,
           "border-gray-200 bg-white hover:border-accent/40 hover:shadow-sm": !isSelected,
-          "opacity-50 cursor-not-allowed": variant.availability === "unavailable"
+          "opacity-50 cursor-not-allowed": inventoryStatus.status === "unavailable"
         }
       )}
     >
@@ -126,12 +140,23 @@ const VariantCard: React.FC<VariantCardProps> = ({
               </p>
             </div>
             
-            {/* Kompaktný dostupnosť badge */}
+            {/* Kompaktný dostupnosť badge s loading stavom */}
             <div className="flex gap-1 items-center">
-              <div className={`w-2 h-2 rounded-full ${availabilityInfo.badgeColor}`}></div>
-              <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${availabilityInfo.bgColor} ${availabilityInfo.color}`}>
-                {availabilityInfo.text}
-              </span>
+              {inventoryLoading ? (
+                <div className="flex gap-1 items-center">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">
+                    Načítavam...
+                  </span>
+                </div>
+              ) : (
+                <>
+                  <div className={`w-2 h-2 rounded-full ${availabilityInfo.badgeColor}`}></div>
+                  <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${availabilityInfo.bgColor} ${availabilityInfo.color}`}>
+                    {availabilityInfo.text}
+                  </span>
+                </>
+              )}
             </div>
           </div>
           
@@ -168,6 +193,22 @@ const VariantCard: React.FC<VariantCardProps> = ({
               </div>
             </div>
           ) : null}
+
+          {/* Inventory details - show when available */}
+          {!inventoryLoading && inventoryStatus.available_quantity > 0 && (
+            <div className="p-2 mb-3 bg-green-50 rounded border border-green-200">
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-medium text-green-700">Dostupné množstvo:</span>
+                <span className="text-sm font-bold text-green-800">{inventoryStatus.available_quantity} ks</span>
+              </div>
+              {inventoryStatus.incoming_quantity > 0 && (
+                <div className="flex justify-between items-center mt-1">
+                  <span className="text-xs font-medium text-orange-700">Prichádza:</span>
+                  <span className="text-sm font-bold text-orange-800">{inventoryStatus.incoming_quantity} ks</span>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Metadata section */}
           {Object.keys(variant.metadata).length > 0 && (
