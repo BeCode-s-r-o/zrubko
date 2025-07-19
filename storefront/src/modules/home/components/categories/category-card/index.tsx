@@ -33,10 +33,10 @@ export default function CategoryCard({
           <div className="absolute inset-0 bg-gradient-to-t from-ebony/20 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100" />
         </div>
         
-        <div className="p-4 flex-1 flex flex-col justify-between">
+        <div className="p-4 flex-1 flex flex-col justify-between min-h-[120px]">
           <div className="flex-1">
             <div className="mb-2 flex items-center gap-2">
-              <Text className="transition-colors duration-200 text-lg font-bold group-hover:text-gold text-ebony">
+              <Text className="transition-colors duration-200 text-lg font-bold group-hover:text-gold text-ebony line-clamp-2">
                 {category.name}
               </Text>
             </div>

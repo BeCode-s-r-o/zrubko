@@ -57,7 +57,7 @@ export default async function CategoryTemplate({
 
   return (
     <>
-      <div className="content-container mt-4 md:mt-12 lg:mt-20">
+      <div className="mt-4 content-container md:mt-12 lg:mt-20">
         <Breadcrumbs categoryPath={categoryPath} />
       </div>
       
@@ -66,19 +66,19 @@ export default async function CategoryTemplate({
 
       {/* Podkategórie ak existujú */}
       {category.category_children && category.category_children.length > 0 && (
-        <div className="content-container pt-16 pb-8">
+        <div className="pt-16 pb-8 content-container">
           <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4 text-ui-fg-base">Podkategórie</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <h2 className="mb-4 text-xl font-semibold text-ui-fg-base">Podkategórie</h2>
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
               {category.category_children?.map((c) => (
                 <LocalizedClientLink 
                   key={c.id} 
                   href={`/categories/${c.handle}`}
-                  className="p-4 bg-ui-bg-subtle rounded-lg border border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm transition-all duration-200 block"
+                  className="block p-4 rounded-lg border transition-all duration-200 bg-ui-bg-subtle border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm"
                 >
                   <h3 className="font-medium text-ui-fg-base">{c.name}</h3>
                   {c.description && (
-                    <p className="text-sm text-ui-fg-subtle mt-1 line-clamp-2">
+                    <p className="mt-1 text-sm text-ui-fg-subtle line-clamp-2">
                       {c.description}
                     </p>
                   )}
