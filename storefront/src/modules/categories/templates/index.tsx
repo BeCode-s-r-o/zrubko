@@ -56,7 +56,7 @@ export default async function CategoryTemplate({
 
   return (
     <>
-      <div className="mt-4 content-container md:mt-12 lg:mt-20">
+      <div className="px-4 mt-4">
         <Breadcrumbs categoryPath={categoryPath} />
       </div>
       
