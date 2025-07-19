@@ -3,6 +3,8 @@
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "../thumbnail"
+import { getProductPrice } from "@lib/util/get-product-price"
+import { Button } from "@medusajs/ui"
 
 interface WoodProductCardProps {
   product: HttpTypes.StoreProduct
@@ -16,60 +18,86 @@ export default function WoodProductCard({ product, region }: WoodProductCardProp
     const value = metadata[key]
     return typeof value === 'string' ? value : undefined
   }
+
+  // Get official product price from backend
+  const { cheapestPrice } = getProductPrice({ product })
+  const hasPrice = cheapestPrice && cheapestPrice.calculated_price_number > 0
+  
+  // Get badge from product tags or other backend field
+  const badge = product.tags?.find(tag => tag.value)?.value || getMetadataString('stitka')
   
   return (
     <LocalizedClientLink 
-      href={`/products/${product.handle}`} 
-      className="group block bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all duration-200 overflow-hidden"
+      href={`/products/${product.handle}`}
+      className="block overflow-hidden bg-white transition-all duration-200 group hover:shadow-lg"
     >
-      {/* Veľký štvorec obrázok produktu */}
-      <div className="aspect-square overflow-hidden bg-gray-50">
+      {/* Product Image */}
+      <div className="aspect-[4/3] overflow-hidden bg-gray-50 relative">
         <Thumbnail
           thumbnail={product.thumbnail}
           images={product.images}
           size="full"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
         />
+        
+        {/* Price badge from backend */}
+        {badge && (
+          <div className="absolute top-2 left-2 px-2 py-1 text-xs font-semibold text-white bg-green-500 rounded">
+            {badge}
+          </div>
+        )}
       </div>
       
-      {/* Názov a metadata pod obrázkom */}
+      {/* Product Content */}
       <div className="p-4">
-        {/* Názov produktu */}
-        <h3 className="font-semibold text-gray-900 text-lg mb-4">
+        {/* Product Title */}
+        <h2 className="text-lg  mb-3 line-clamp-2 min-h-[2.5rem]">
           {product.title}
-        </h3>
+        </h2>
         
-        {/* Metadata riadky - slovenské názvy */}
-        <div className="space-y-2">
-          {/* Rozmery */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">Rozmery</span>
-            <span className="text-gray-900">{getMetadataString('rozmery_mm') || '-'}</span>
+        {/* Price Information from official backend price */}
+        {hasPrice && (
+          <div className="mb-4">
+            <div className="flex gap-2 items-center mb-2">
+              <span className="text-sm">
+                Od {cheapestPrice?.calculated_price_number} €
+              </span>
+              {cheapestPrice?.price_type === "sale" && (
+                <span className="text-sm text-gray-400 line-through">
+                  {cheapestPrice?.original_price_number} €
+                </span>
+              )}
+            </div>
           </div>
-          
-          {/* Trieda */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">Trieda</span>
-            <span className="text-gray-900">{getMetadataString('trieda') || '-'}</span>
+        )}
+        
+        {/* Key Metadata - Compact */}
+        <div className="mb-4 space-y-1">
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Rozmery</span>
+            <span className="font-medium text-gray-900">{getMetadataString('rozmery_mm') || '-'}</span>
           </div>
-          
-          {/* Opracovanie Dreva */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">Opracovanie Dreva</span>
-            <span className="text-gray-900">{getMetadataString('opracovanie_dreva') || '-'}</span>
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Trieda</span>
+            <span className="font-medium text-gray-900">{getMetadataString('trieda') || '-'}</span>
           </div>
-          
-          {/* Použitie */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">Použitie</span>
-            <span className="text-gray-900">{getMetadataString('pouzitie') || '-'}</span>
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Opracovanie</span>
+            <span className="font-medium text-gray-900">{getMetadataString('opracovanie_dreva') || '-'}</span>
           </div>
-          
-          {/* Typ Dreva */}
-          <div className="flex justify-between items-center">
-            <span className="text-gray-700 font-medium">Typ Dreva</span>
-            <span className="text-gray-900">{getMetadataString('typ_dreva') || '-'}</span>
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Použitie</span>
+            <span className="font-medium text-gray-900">{getMetadataString('pouzitie') || '-'}</span>
           </div>
+          <div className="flex justify-between items-center text-sm">
+            <span className="text-gray-600">Typ dreva</span>
+            <span className="font-medium text-gray-900">{getMetadataString('typ_dreva') || '-'}</span>
+          </div>
+        </div>
+        
+        {/* Action Button - now part of clickable card */}
+        <div className="px-4 py-2 w-full font-medium text-center text-white bg-amber-600 rounded transition-colors duration-200 hover:bg-amber-700">
+          Zobraziť rozmery
         </div>
       </div>
     </LocalizedClientLink>

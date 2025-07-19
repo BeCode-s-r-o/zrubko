@@ -6,7 +6,6 @@ import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-g
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
 import CategoryBanner from "@modules/categories/components/category-banner"
-import ShouSugiBanInfo from "@modules/categories/components/shou-sugi-ban-info"
 import { HttpTypes } from "@medusajs/types"
 import { getProductsListWithSort } from "@lib/data/products"
 import { extractFiltersFromProducts } from "@lib/util/filter-products"
@@ -66,9 +65,8 @@ export default async function CategoryTemplate({
 
       {/* Podkategórie ak existujú */}
       {category.category_children && category.category_children.length > 0 && (
-        <div className="pt-16 pb-8 content-container">
-          <div className="mb-8">
-            <h2 className="mb-4 text-xl font-semibold text-ui-fg-base">Podkategórie</h2>
+        <div className="px-4 pt-8 pb-8 mx-auto max-w-7xl content-container">
+          <div className="mb-2">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
               {category.category_children?.map((c) => (
                 <LocalizedClientLink 
@@ -76,12 +74,7 @@ export default async function CategoryTemplate({
                   href={`/categories/${c.handle}`}
                   className="block p-4 rounded-lg border transition-all duration-200 bg-ui-bg-subtle border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm"
                 >
-                  <h3 className="font-medium text-ui-fg-base">{c.name}</h3>
-                  {c.description && (
-                    <p className="mt-1 text-sm text-ui-fg-subtle line-clamp-2">
-                      {c.description}
-                    </p>
-                  )}
+                  <h2 className="font-medium text-ui-fg-base">{c.name}</h2>
                 </LocalizedClientLink>
               ))}
             </div>
@@ -90,7 +83,7 @@ export default async function CategoryTemplate({
       )}
 
       {/* Hlavný obsah s filtrami a produktmi - Client-side */}
-      <div className={`content-container ${category.category_children && category.category_children.length > 0 ? 'pb-32' : 'pt-32 pb-32'}`}>
+      <div className={`content-container ${category.category_children && category.category_children.length > 0 ? ' px-4 pb-8' : 'pt-8 pb-8'}`}>
         <ClientCategoryFiltering
           allProducts={allProducts}
           region={region}
@@ -98,11 +91,8 @@ export default async function CategoryTemplate({
         />
       </div>
     
-      {/* Metadata sekcia - NAD ikonkami */}
+      {/* Metadata sekcia */}
       <CategoryExpandableContent category={category} />
-      
-      {/* SHOU SUGI BAN informácie - ikonky */}
-      <ShouSugiBanInfo category={category} />
     </>
   )
 }
