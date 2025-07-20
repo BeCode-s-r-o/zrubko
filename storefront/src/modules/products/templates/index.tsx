@@ -1,8 +1,9 @@
 import React, { Suspense } from "react"
 
-import ImageGallery from "@modules/products/components/image-gallery"
+import ProductInfo from "@modules/products/components/product-info"
+import ProductImageGallery from "@modules/products/components/product-image-gallery"
 import ProductVariantSelector from "@modules/products/components/product-variant-selector"
-import ProductTabs from "@modules/products/components/product-tabs"
+import ProductDescription from "@modules/products/components/product-description"
 import RelatedProducts from "@modules/products/components/related-products"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
@@ -33,7 +34,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <div className="min-h-screen bg-gradient-to-b from-champagne-light via-champagne to-champagne-dark">
       {/* Hero sekcia s rovnakým pozadím ako homepage */}
-      <div className="relative overflow-hidden">
+      <div className="overflow-hidden relative">
         {/* Luxusný pattern pozadie - rovnaký ako na homepage */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -53,42 +54,98 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           </div>
 
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-12 md:pb-16 lg:pb-20">
-            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 lg:gap-12 items-start">
-              {/* Väčšia galéria obrázkov - 4 stĺpce z 7 */}
-              <div className="lg:col-span-4 space-y-8">
-                {/* Galéria v luxusnom rámčeku */}
+            {/* Mobile Layout: Single Column */}
+            <div className="space-y-8 lg:hidden">
+              {/* 1. Product Image Gallery */}
+              <div className="relative">
+                <div className="relative">
+                  <div className="p-2">
+                    <ProductImageGallery images={product?.images || []} product={product} />
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Product Info (Title, Price, etc.) */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
+                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
+                  <div className="p-6">
+                    <ProductInfo product={product} region={region} />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Variant Selector */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-mahogany/20 to-gold/20"></div>
+                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
+                  <div className="p-6">
+                    <ProductVariantSelector 
+                      product={product} 
+                      region={region}
+                      countryCode={countryCode}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Product Description */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
+                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
+                  <div className="p-6">
+                    <ProductDescription product={product} />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Layout: Two Column Grid */}
+            <div className="hidden gap-8 items-start lg:grid lg:grid-cols-7 lg:gap-12">
+              {/* Left Column: Image Gallery and Description */}
+              <div className="space-y-8 lg:col-span-4">
+                {/* Image Gallery */}
                 <div className="relative">
                   <div className="relative">
                     <div className="p-2">
-                      <ImageGallery images={product?.images || []} product={product} />
+                      <ProductImageGallery images={product?.images || []} product={product} />
                     </div>
                   </div>
                 </div>
                 
-                {/* ProductTabs v luxusnom dizajne */}
+                {/* Product Description */}
                 <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-ebony/10 via-transparent to-gold/10 rounded-3xl blur-xl"></div>
-                  <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
+                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
                     <div className="p-8">
-                      <ProductTabs product={product} />
+                      <ProductDescription product={product} />
                     </div>
                   </div>
                 </div>
               </div>
               
-              {/* Variant selector v luxusnom dizajne - 3 stĺpce z 7 */}
-              <div className="lg:col-span-3">
-                <div className="sticky top-8">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-mahogany/20 via-transparent to-gold/20 rounded-3xl blur-xl"></div>
-                    <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-gold/20 overflow-hidden">
-                      <div className="p-8">
-                        <ProductVariantSelector 
-                          product={product} 
-                          region={region}
-                          countryCode={countryCode}
-                        />
-                      </div>
+              {/* Right Column: Product Info and Variant Selector */}
+              <div className="space-y-8 lg:col-span-3">
+                {/* Product Info */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
+                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
+                    <div className="p-8">
+                      <ProductInfo product={product} region={region} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Variant Selector */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-mahogany/20 to-gold/20"></div>
+                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
+                    <div className="p-8">
+                      <ProductVariantSelector 
+                        product={product} 
+                        region={region}
+                        countryCode={countryCode}
+                      />
                     </div>
                   </div>
                 </div>
@@ -99,12 +156,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       {/* Luxusný rozdeľovač - rovnaký štýl ako na homepage */}
-      <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
+      <div className="h-px bg-gradient-to-r from-transparent to-transparent via-gold/40"></div>
 
       {/* Súvisiace produkty - presne rovnaký štýl ako featured collections na homepage */}
-      {/* Remove the bottom colored section and padding */}
-      <div className="content-container my-12">
-        <div className="bg-white rounded-3xl p-8 shadow-2xl border border-gold/20">
+      <div className="my-12 content-container">
+        <div className="p-8 bg-white rounded-3xl border shadow-2xl border-gold/20">
           <Suspense fallback={<SkeletonRelatedProducts />}>
             <RelatedProducts product={product} countryCode={countryCode} />
           </Suspense>
@@ -115,3 +171,4 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 }
 
 export default ProductTemplate
+

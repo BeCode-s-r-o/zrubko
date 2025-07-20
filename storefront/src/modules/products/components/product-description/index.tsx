@@ -8,11 +8,11 @@ import { Crown, Sparkles, Star, Shield, Clock, Heart, Truck, Package, RefreshCw,
 import { HttpTypes } from "@medusajs/types"
 import { useState } from "react"
 
-type ProductTabsProps = {
+type ProductDescriptionProps = {
   product: HttpTypes.StoreProduct
 }
 
-const ProductTabs = ({ product }: ProductTabsProps) => {
+const ProductDescription = ({ product }: ProductDescriptionProps) => {
   const tabs = [
     {
       label: "O produkte",
@@ -200,28 +200,14 @@ const TechnicalSpecsTab = ({ product }: { product: HttpTypes.StoreProduct }) => 
             )}
             {availableTypes.length > 0 && (
               <div className="flex justify-between items-center py-2 border-b border-gray-200">
-                <span className="text-gray-600">Typ:</span>
+                <span className="text-gray-600">Typy spracovania:</span>
                 <span className="font-medium text-gray-900">{availableTypes.join(", ")}</span>
               </div>
             )}
             {availableAvailability.length > 0 && (
-              <div className="mt-4">
-                <h5 className="flex gap-2 items-center mb-3 text-base font-semibold text-gray-900">
-                  <Clock className="w-4 h-4 text-gray-600" />
-                  Dostupnosť
-                </h5>
-                <div className="space-y-2">
-                  {availableAvailability.map((availability, index) => (
-                    <div key={index} className="flex gap-3 items-center p-2">
-                      <div className={`w-2 h-2 rounded-full ${
-                        availability === "Na sklade" ? "bg-green-500" :
-                        availability === "Do mesiaca" ? "bg-yellow-500" :
-                        "bg-red-500"
-                      }`}></div>
-                      <span className="text-gray-700">{availability}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="flex justify-between items-center py-2 border-b border-gray-200">
+                <span className="text-gray-600">Dostupnosť:</span>
+                <span className="font-medium text-gray-900">{availableAvailability.join(", ")}</span>
               </div>
             )}
           </div>
@@ -232,15 +218,14 @@ const TechnicalSpecsTab = ({ product }: { product: HttpTypes.StoreProduct }) => 
 }
 
 const InstallationTab = ({ product }: { product: HttpTypes.StoreProduct }) => {
-  // Helper function to get metadata value
   const getMetadataValue = (key: string, defaultValue: string = "") => {
     return product.metadata?.[key] as string || defaultValue
   }
 
-  const installationContent = getMetadataValue("installation_and_maintenance")
+  const installationInfo = getMetadataValue("installation_and_maintenance")
 
   // If no metadata is provided, show only heading
-  if (!installationContent) {
+  if (!installationInfo) {
     return (
       <div className="space-y-4">
         <h4 className="text-lg font-semibold text-gray-900">Inštalácia a údržba</h4>
@@ -253,22 +238,21 @@ const InstallationTab = ({ product }: { product: HttpTypes.StoreProduct }) => {
     <div className="space-y-4 text-gray-700">
       <div 
         className="max-w-none leading-relaxed prose prose-sm"
-        dangerouslySetInnerHTML={{ __html: installationContent }}
+        dangerouslySetInnerHTML={{ __html: installationInfo }}
       />
     </div>
   )
 }
 
 const ShippingInfoTab = ({ product }: { product: HttpTypes.StoreProduct }) => {
-  // Helper function to get metadata value
   const getMetadataValue = (key: string, defaultValue: string = "") => {
     return product.metadata?.[key] as string || defaultValue
   }
 
-  const shippingContent = getMetadataValue("shipping_and_returns")
+  const shippingInfo = getMetadataValue("shipping_and_returns")
 
   // If no metadata is provided, show only heading
-  if (!shippingContent) {
+  if (!shippingInfo) {
     return (
       <div className="space-y-4">
         <h4 className="text-lg font-semibold text-gray-900">Doprava</h4>
@@ -281,10 +265,10 @@ const ShippingInfoTab = ({ product }: { product: HttpTypes.StoreProduct }) => {
     <div className="space-y-4 text-gray-700">
       <div 
         className="max-w-none leading-relaxed prose prose-sm"
-        dangerouslySetInnerHTML={{ __html: shippingContent }}
+        dangerouslySetInnerHTML={{ __html: shippingInfo }}
       />
     </div>
   )
 }
 
-export default ProductTabs
+export default ProductDescription 

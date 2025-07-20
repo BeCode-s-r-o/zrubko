@@ -5,12 +5,12 @@ import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 import { useState } from "react"
 
-type ImageGalleryProps = {
+type ProductImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
   product?: HttpTypes.StoreProduct
 }
 
-const ImageGallery = ({ images, product }: ImageGalleryProps) => {
+const ProductImageGallery = ({ images, product }: ProductImageGalleryProps) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   
   if (!images || images.length === 0) {
@@ -83,4 +83,4 @@ const ImageGallery = ({ images, product }: ImageGalleryProps) => {
   )
 }
 
-export default ImageGallery
+export default ProductImageGallery 
