@@ -24,34 +24,12 @@ const ProductImageGallery = ({ images, product }: ProductImageGalleryProps) => {
   const selectedImage = images[selectedImageIndex]
 
   return (
-    <div className="flex w-full gap-4">
-      {/* Vľavo - malé náhľady */}
-      <div className="flex flex-col gap-3 w-20 md:w-24">
-        {images.slice(0, 4).map((image, index) => (
-          <Container
-            key={image.id}
-            className={`relative aspect-square w-full overflow-hidden bg-ui-bg-subtle cursor-pointer transition-opacity ${
-              selectedImageIndex === index 
-                ? 'ring-2 ring-primary opacity-100' 
-                : 'opacity-70 hover:opacity-100'
-            }`}
-            onClick={() => setSelectedImageIndex(index)}
-          >
-            {image.url && (
-              <Image
-                src={image.url}
-                alt={`Product thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 80px, 96px"
-              />
-            )}
-          </Container>
-        ))}
-      </div>
-
-      {/* Vpravo - hlavný obrázok */}
-      <div className="flex flex-col flex-1">
+    <div className="flex flex-col md:flex-row w-full gap-4">
+      {/* Mobile: Main image first, then thumbnails underneath */}
+      {/* Desktop: Thumbnails on left, main image on right */}
+      
+      {/* Main Image - Always first on mobile, right side on desktop */}
+      <div className="flex flex-col flex-1 order-1 md:order-2">
         <div className="relative aspect-[4/3] w-full overflow-hidden">
           {selectedImage?.url && (
             <Image
@@ -78,6 +56,31 @@ const ProductImageGallery = ({ images, product }: ProductImageGalleryProps) => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Thumbnails - Underneath on mobile, left side on desktop */}
+      <div className="flex flex-row md:flex-col gap-3 w-full md:w-20 lg:w-24 order-2 md:order-1">
+        {images.slice(0, 4).map((image, index) => (
+          <Container
+            key={image.id}
+            className={`relative aspect-square w-1/4 md:w-full overflow-hidden bg-ui-bg-subtle cursor-pointer transition-opacity ${
+              selectedImageIndex === index 
+                ? 'ring-2 ring-primary opacity-100' 
+                : 'opacity-70 hover:opacity-100'
+            }`}
+            onClick={() => setSelectedImageIndex(index)}
+          >
+            {image.url && (
+              <Image
+                src={image.url}
+                alt={`Product thumbnail ${index + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 25vw, 96px"
+              />
+            )}
+          </Container>
+        ))}
       </div>
     </div>
   )
