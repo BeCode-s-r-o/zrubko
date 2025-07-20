@@ -200,13 +200,13 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   return (
     <div className="flex flex-col gap-6 h-full">
       {/* Variant selector - ALWAYS FIRST on mobile */}
-      <div className="overflow-hidden bg-white rounded-xl border shadow-md border-accent/10">
-        <div className="px-6 py-4 bg-gradient-to-r border-b from-accent/5 to-accent-light/5 border-accent/10">
-          <p className="text-xl font-semibold lg:text-2xl text-accent-dark">Dostupné varianty</p>
-          <p className="mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
+      <div className="">
+        <div className="">
+          <p className="text-xl lg:text-2xl">Dostupné varianty</p>
+          <p className=" mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
         </div>
         
-        <div className="p-6 space-y-4">
+        <div className="">
           {displayVariants.map((variant) => (
             <VariantCard
               key={variant.id}

@@ -95,8 +95,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* 2. Product Info (Title, Price, etc.) */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
-                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                  <div className="p-6">
+                <div className="overflow-hidden relative ">
+                  <div className="">
                     <ProductInfo product={product} region={region} />
                   </div>
                 </div>
@@ -105,8 +105,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* 3. Variant Selector */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-mahogany/20 to-gold/20"></div>
-                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                  <div className="p-6">
+                <div className="overflow-hidden relative">
+                  <div className="">
                     <ProductVariantSelector 
                       product={product} 
                       region={region}
@@ -119,8 +119,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {/* 4. Product Description */}
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
-                <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                  <div className="p-6">
+                <div className="overflow-hidden relative">
+                  <div className="">
                     <ProductDescription product={product} />
                   </div>
                 </div>
@@ -143,8 +143,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 {/* Product Description */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
-                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                    <div className="p-8">
+                  <div className="overflow-hidden relative">
+                    <div className="p-2">
                       <ProductDescription product={product} />
                     </div>
                   </div>
@@ -156,8 +156,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 {/* Product Info */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-ebony/10 to-gold/10"></div>
-                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                    <div className="p-8">
+                  <div className="overflow-hidden relative">
+                    <div className="p-2">
                       <ProductInfo product={product} region={region} />
                     </div>
                   </div>
@@ -166,8 +166,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 {/* Variant Selector */}
                 <div className="relative">
                   <div className="absolute inset-0 bg-gradient-to-br via-transparent rounded-3xl blur-xl from-mahogany/20 to-gold/20"></div>
-                  <div className="overflow-hidden relative rounded-3xl border shadow-2xl backdrop-blur-sm bg-white/80 border-gold/20">
-                    <div className="p-8">
+                  <div className="overflow-hidden relative">
+                    <div className="p-2">   
                       <ProductVariantSelector 
                         product={product} 
                         region={region}
