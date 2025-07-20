@@ -14,22 +14,49 @@ type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
   countryCode: string
+  sourceCategory?: string
 }
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
   product,
   region,
   countryCode,
+  sourceCategory,
 }) => {
   if (!product || !product.id) {
     return notFound()
   }
 
-  // Príprava kategórií pre breadcrumbs
-  const categoryPath = product.categories?.map(category => ({
-    name: category.name,
-    handle: category.handle
-  })) || []
+  // Príprava kategórií pre breadcrumbs s hierarchiou
+  const buildCategoryPath = (category: any): Array<{ name: string; handle: string }> => {
+    const path: Array<{ name: string; handle: string }> = []
+    
+    // Pridaj rodičovské kategórie ak existujú
+    if (category.parent_category) {
+      path.push(...buildCategoryPath(category.parent_category))
+    }
+    
+    // Pridaj aktuálnu kategóriu
+    path.push({
+      name: category.name,
+      handle: category.handle
+    })
+    
+    return path
+  }
+
+  // Zober kategóriu na základe sourceCategory alebo prvú kategóriu produktu
+  let selectedCategory = product.categories?.[0]
+  
+  // Ak je zadaný sourceCategory, nájdi tú kategóriu
+  if (sourceCategory && product.categories) {
+    const sourceCat = product.categories.find(cat => cat.handle === sourceCategory)
+    if (sourceCat) {
+      selectedCategory = sourceCat
+    }
+  }
+  
+  const categoryPath = selectedCategory ? buildCategoryPath(selectedCategory) : []
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-champagne-light via-champagne to-champagne-dark">
@@ -45,7 +72,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         
         <div className="relative z-10">
           <div className="max-w-[1600px] mx-auto px-6 lg:px-12 pt-4 md:pt-6 lg:pt-8">
-            <div className="mb-8">
+            <div className="">
               <Breadcrumbs 
                 productTitle={product.title}
                 categoryPath={categoryPath}

@@ -5,6 +5,7 @@ import LegalPageTemplate, {
   LegalList, 
   LegalSubsection 
 } from "@modules/layout/components/legal-page-template"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Zásady používania cookies - Zrubko",
@@ -13,11 +14,19 @@ export const metadata: Metadata = {
 
 export default async function CookiesPage() {
   return (
-    <LegalPageTemplate
-      title="Zásady používania cookies"
-      subtitle="Informácie o tom, aké cookies používame na našej webovej stránke a ako ich môžete spravovať."
-      lastUpdated="15. január 2024"
-    >
+    <>
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Cookies", isActive: true }
+        ]}
+      />
+
+      <LegalPageTemplate
+        title="Zásady používania cookies"
+        subtitle="Informácie o tom, aké cookies používame na našej webovej stránke a ako ich môžete spravovať."
+        lastUpdated="15. január 2024"
+      >
       <LegalSection title="1. Čo sú cookies">
         <LegalParagraph>
           Cookies sú malé textové súbory, ktoré sa ukladajú vo vašom prehliadači pri návšteve 
@@ -156,6 +165,7 @@ export default async function CookiesPage() {
           cookies@zrubko.sk alebo prostredníctvom kontaktného formulára na našej stránke.
         </LegalParagraph>
       </LegalSection>
-    </LegalPageTemplate>
+      </LegalPageTemplate>
+    </>
   )
 } 

@@ -15,6 +15,7 @@ interface ClientProductListProps {
   filters: ProductFilters
   sortBy: SortOptions
   productsPerPage?: number
+  sourceCategory?: string
 }
 
 export default function ClientProductList({
@@ -22,7 +23,8 @@ export default function ClientProductList({
   region,
   filters,
   sortBy,
-  productsPerPage = 12
+  productsPerPage = 12,
+  sourceCategory
 }: ClientProductListProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const [isPending, startTransition] = useTransition()
@@ -117,7 +119,7 @@ export default function ClientProductList({
             className="animate-fadeIn"
             style={{ animationDelay: `${index * 0.05}s` }}
           >
-            <WoodProductCard product={product} region={region} />
+            <WoodProductCard product={product} region={region} sourceCategory={sourceCategory} />
           </li>
         ))}
       </ul>

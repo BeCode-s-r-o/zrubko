@@ -5,6 +5,7 @@ import LegalPageTemplate, {
   LegalList, 
   LegalSubsection 
 } from "@modules/layout/components/legal-page-template"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Doprava a dodanie - Zrubko",
@@ -13,11 +14,19 @@ export const metadata: Metadata = {
 
 export default async function ShippingPage() {
   return (
-    <LegalPageTemplate
-      title="Doprava a dodanie"
-      subtitle="Všetko, čo potrebujete vedieť o doprave, dodacích lehotách a nákladoch na dopravu našich drevených produktov."
-      lastUpdated="15. január 2024"
-    >
+    <>
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Doprava a dodanie", isActive: true }
+        ]}
+      />
+
+      <LegalPageTemplate
+        title="Doprava a dodanie"
+        subtitle="Všetko, čo potrebujete vedieť o doprave, dodacích lehotách a nákladoch na dopravu našich drevených produktov."
+        lastUpdated="15. január 2024"
+      >
       <LegalSection title="1. Spôsoby dopravy">
         <LegalParagraph>
           Ponúkame niekoľko možností dopravy prispôsobených rôznym typom produktov a vašim potrebám.
@@ -168,6 +177,7 @@ export default async function ShippingPage() {
           "Kontaktný formulár v sekcii Kontakt"
         ]} />
       </LegalSection>
-    </LegalPageTemplate>
+      </LegalPageTemplate>
+    </>
   )
 } 

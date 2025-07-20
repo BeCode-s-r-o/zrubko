@@ -11,7 +11,7 @@ interface WoodProductCardProps {
   region: HttpTypes.StoreRegion
 }
 
-export default function WoodProductCard({ product, region }: WoodProductCardProps) {
+export default function WoodProductCard({ product, region, sourceCategory }: WoodProductCardProps & { sourceCategory?: string }) {
   // Extraktuj metadata z produktu a pretypuj na string
   const metadata = product.metadata || {}
   const getMetadataString = (key: string): string | undefined => {
@@ -26,9 +26,14 @@ export default function WoodProductCard({ product, region }: WoodProductCardProp
   // Get badge from product tags or other backend field
   const badge = product.tags?.find(tag => tag.value)?.value || getMetadataString('stitka')
   
+  // Build product URL with source category if provided
+  const productUrl = sourceCategory 
+    ? `/products/${product.handle}?sourceCategory=${sourceCategory}`
+    : `/products/${product.handle}`
+
   return (
     <LocalizedClientLink 
-      href={`/products/${product.handle}`}
+      href={productUrl}
       className="block overflow-hidden bg-white transition-all duration-200 group hover:shadow-lg"
     >
       {/* Product Image */}
