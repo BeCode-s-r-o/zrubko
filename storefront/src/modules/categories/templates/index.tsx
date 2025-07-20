@@ -88,6 +88,7 @@ export default async function CategoryTemplate({
           allProducts={allProducts}
           region={region}
           availableFilters={availableFilters}
+          currentCategoryHandle={category.handle}
         />
       </div>
     

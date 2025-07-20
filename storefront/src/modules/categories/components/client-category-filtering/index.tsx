@@ -12,12 +12,14 @@ interface ClientCategoryFilteringProps {
   allProducts: HttpTypes.StoreProduct[]
   region: HttpTypes.StoreRegion
   availableFilters: FilterSection[]
+  currentCategoryHandle?: string
 }
 
 export default function ClientCategoryFiltering({
   allProducts,
   region,
   availableFilters,
+  currentCategoryHandle,
 }: ClientCategoryFilteringProps) {
   const { filters, sortBy, updateSort } = useFilters()
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
@@ -121,6 +123,7 @@ export default function ClientCategoryFiltering({
             filters={filters}
             sortBy={sortBy}
             productsPerPage={12}
+            sourceCategory={currentCategoryHandle}
           />
         </main>
       </div>

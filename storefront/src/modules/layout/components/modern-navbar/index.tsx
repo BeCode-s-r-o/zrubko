@@ -364,7 +364,7 @@ function CategoryDetails({
               {products.map((product) => (
                 <LocalizedClientLink
                   key={product.id}
-                  href={`/products/${product.handle}`}
+                  href={`/products/${product.handle}?sourceCategory=${category.handle}`}
                   className="group p-2 bg-gradient-to-r from-champagne-light to-champagne rounded-lg border border-gold/20 hover:border-gold hover:shadow-md transition-all duration-300 hover:scale-[1.02]"
                 >
                   <div className="flex items-center gap-2">

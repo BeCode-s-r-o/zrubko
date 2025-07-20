@@ -381,7 +381,7 @@ export default function MobileCategoryMenu({ regions, categories }: MobileCatego
                                   {products.map((product) => (
                                     <LocalizedClientLink
                                       key={product.id}
-                                      href={`/products/${product.handle}`}
+                                      href={`/products/${product.handle}?sourceCategory=${category.handle}`}
                                       onClick={closeMobile}
                                       className="flex items-center gap-3 p-3 bg-white rounded-lg border border-gold/10 hover:border-gold/30 hover:shadow-sm transition-all duration-200"
                                     >

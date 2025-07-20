@@ -1,9 +1,17 @@
 import { ArrowRight, Users, Award, Truck, Heart } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export default function AboutPage() {
   return (
     <div className="w-full">
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "O nás", isActive: true }
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-primary to-primary-dark">
         <div className="px-6 mx-auto max-w-8xl">

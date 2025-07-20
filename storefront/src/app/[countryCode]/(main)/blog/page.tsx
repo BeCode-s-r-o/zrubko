@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { ArrowRight, Calendar, User, Tag } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Blog - Zrubko.sk",
@@ -77,6 +78,13 @@ const categories = [
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Blog", isActive: true }
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-primary to-primary-dark">
         <div className="px-6 mx-auto max-w-8xl">

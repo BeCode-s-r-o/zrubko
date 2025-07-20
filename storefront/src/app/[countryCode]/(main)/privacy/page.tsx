@@ -5,6 +5,7 @@ import LegalPageTemplate, {
   LegalList, 
   LegalSubsection 
 } from "@modules/layout/components/legal-page-template"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Zásady ochrany osobných údajov - Zrubko",
@@ -13,11 +14,19 @@ export const metadata: Metadata = {
 
 export default async function PrivacyPage() {
   return (
-    <LegalPageTemplate
-      title="Zásady ochrany osobných údajov"
-      subtitle="Informácie o tom, ako zhromažďujeme, používame a chránime vaše osobné údaje pri nákupe drevených produktov."
-      lastUpdated="15. január 2024"
-    >
+    <>
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Ochrana osobných údajov", isActive: true }
+        ]}
+      />
+
+      <LegalPageTemplate
+        title="Zásady ochrany osobných údajov"
+        subtitle="Informácie o tom, ako zhromažďujeme, používame a chránime vaše osobné údaje pri nákupe drevených produktov."
+        lastUpdated="15. január 2024"
+      >
       <LegalSection title="1. Správca osobných údajov">
         <LegalParagraph>
           Správcom vašich osobných údajov je spoločnosť Zrubko s.r.o., so sídlom Bratislava, 
@@ -119,6 +128,7 @@ export default async function PrivacyPage() {
           informovať prostredníctvom e-mailu alebo oznámenia na webovej stránke.
         </LegalParagraph>
       </LegalSection>
-    </LegalPageTemplate>
+      </LegalPageTemplate>
+    </>
   )
 } 

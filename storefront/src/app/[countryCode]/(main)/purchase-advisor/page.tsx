@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import PurchaseAdvisorPage from "@modules/pages/purchase-advisor-page"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Sprievodca nákupom dreva - Zrubko",
@@ -11,5 +12,16 @@ export default async function PurchaseAdvisor({
 }: {
   params: { countryCode: string }
 }) {
-  return <PurchaseAdvisorPage />
+  return (
+    <>
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Sprievodca nákupom", isActive: true }
+        ]}
+      />
+
+      <PurchaseAdvisorPage />
+    </>
+  )
 } 

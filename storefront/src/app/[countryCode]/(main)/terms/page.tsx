@@ -5,6 +5,7 @@ import LegalPageTemplate, {
   LegalList, 
   LegalSubsection 
 } from "@modules/layout/components/legal-page-template"
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata: Metadata = {
   title: "Obchodné podmienky - Zrubko",
@@ -13,11 +14,19 @@ export const metadata: Metadata = {
 
 export default async function TermsPage() {
   return (
-    <LegalPageTemplate
-      title="Obchodné podmienky"
-      subtitle="Tieto obchodné podmienky upravujú vzťahy medzi spoločnosťou Zrubko a zákazníkmi pri nákupe drevených produktov."
-      lastUpdated="15. január 2024"
-    >
+    <>
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Obchodné podmienky", isActive: true }
+        ]}
+      />
+
+      <LegalPageTemplate
+        title="Obchodné podmienky"
+        subtitle="Tieto obchodné podmienky upravujú vzťahy medzi spoločnosťou Zrubko a zákazníkmi pri nákupe drevených produktov."
+        lastUpdated="15. január 2024"
+      >
       <LegalSection title="1. Základné ustanovenia">
         <LegalParagraph>
           Tieto obchodné podmienky (ďalej len "podmienky") upravujú vzájomné práva a povinnosti 
@@ -92,6 +101,7 @@ export default async function TermsPage() {
           právo kedykoľvek tieto podmienky zmeniť alebo doplniť.
         </LegalParagraph>
       </LegalSection>
-    </LegalPageTemplate>
+      </LegalPageTemplate>
+    </>
   )
 } 

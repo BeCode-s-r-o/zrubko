@@ -1,5 +1,6 @@
 import ContactForm from '@modules/common/components/contact-form'
 import { Mail, MapPin, Phone, Crown, Sparkles, Clock, Shield, Heart, Star } from 'lucide-react'
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
 
 export const metadata = {
   title: 'Kontakt - Zrubko',
@@ -9,6 +10,13 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-white to-primary/10">
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs 
+        items={[
+          { label: "Kontakt", isActive: true }
+        ]}
+      />
+
       {/* Hero sekcia */}
       <div className="relative overflow-hidden pt-[88px] min-h-[220px]">
         {/* Drevené pozadie */}
