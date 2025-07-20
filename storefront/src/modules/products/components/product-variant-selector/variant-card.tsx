@@ -210,24 +210,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
             </div>
           )}
 
-          {/* Metadata section */}
-          {Object.keys(variant.metadata).length > 0 && (
-            <div className="space-y-2">
-              <h6 className="text-xs font-semibold text-accent-dark">Metadata</h6>
-              <div className="grid grid-cols-2 gap-2">
-                {Object.entries(variant.metadata).map(([key, value]) => (
-                  value && (
-                    <div key={key} className="p-2 text-center bg-gray-50 rounded border border-gray-200">
-                      <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">{key}</span>
-                      <p className="font-bold text-accent-dark text-xs mt-0.5">
-                        {String(value)}
-                      </p>
-                    </div>
-                  )
-                ))}
-              </div>
-            </div>
-          )}
+       
         </div>
 
         {/* Kompaktný výber indikátor */}

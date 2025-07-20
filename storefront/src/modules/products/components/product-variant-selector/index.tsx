@@ -82,17 +82,7 @@ const getAvailabilityStatus = (variant: HttpTypes.StoreProductVariant): "in_stoc
   return "unavailable"
 }
 
-// Reusable component for product title and description
-const ProductHeader = ({ product }: { product: HttpTypes.StoreProduct }) => (
-  <div>
-    <h1 className="mb-2 text-2xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r md:text-3xl lg:text-4xl xl:text-5xl from-accent-dark to-accent md:mb-3">
-      {product.title}
-    </h1>
-    <p className="text-base leading-relaxed text-gray-600 md:text-lg lg:text-xl">
-      {product.description}
-    </p>
-  </div>
-)
+// ProductHeader component removed - now handled by ProductInfo component
 
 const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   product,
@@ -182,8 +172,6 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
   if (!displayVariants.length) {
     return (
       <div className="flex flex-col gap-6 h-full">
-        <ProductHeader product={product} />
-        
         <div className="p-8 text-center bg-amber-50 rounded-lg border border-amber-200">
           <p className="mb-2 font-medium text-amber-800">Žiadne varianty nie sú k dispozícii</p>
           <p className="text-sm text-amber-600">
@@ -211,8 +199,6 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
 
   return (
     <div className="flex flex-col gap-6 h-full">
-      <ProductHeader product={product} />
-
       {/* Variant selector - ALWAYS FIRST on mobile */}
       <div className="overflow-hidden bg-white rounded-xl border shadow-md border-accent/10">
         <div className="px-6 py-4 bg-gradient-to-r border-b from-accent/5 to-accent-light/5 border-accent/10">
