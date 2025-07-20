@@ -662,7 +662,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
 
   return (
     <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out ${
-      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg border-b border-gray-200' : 'bg-white'
+      isScrolled ? 'border-b border-gray-200 shadow-lg backdrop-blur-sm bg-white/95' : 'bg-white'
     }`}>
       {/* TOPBAR – static pages */}
       <div className="py-2 w-full text-sm text-white bg-primary">
@@ -670,10 +670,9 @@ export default function NavClient({ regions, categories }: NavClientProps) {
           {/* Static pages navigation */}
           <div className="hidden gap-6 items-center whitespace-nowrap lg:flex">
             <LocalizedClientLink href="/" className="transition-colors hover:text-gray-300">Domov</LocalizedClientLink>
-            <LocalizedClientLink href="/about" className="transition-colors hover:text-gray-300">O&nbsp;nás</LocalizedClientLink>
-            <LocalizedClientLink href="/vizualizacie" className="transition-colors hover:text-gray-300">Vizualizácie</LocalizedClientLink>
+            <LocalizedClientLink href="/about" className="transition-colors hover:text-gray-300">O nás</LocalizedClientLink>
             <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Projekty</LocalizedClientLink>
-            <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Služby</LocalizedClientLink>
+            <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Doprava a Služby</LocalizedClientLink>
             <LocalizedClientLink href="/spolupraca" className="transition-colors hover:text-gray-300">Spolupráca</LocalizedClientLink>
             <LocalizedClientLink href="/blog" className="transition-colors hover:text-gray-300">Blog</LocalizedClientLink>
             <LocalizedClientLink href="/kontakt" className="transition-colors hover:text-gray-300">Kontakt</LocalizedClientLink>
