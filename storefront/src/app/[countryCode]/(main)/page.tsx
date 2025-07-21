@@ -45,6 +45,9 @@ export default async function Home({
         </div>
       </div>
       
+      {/* Inšpirácia pre váš projekt */}
+      <InspirationSection />
+      
       {/* Info Steps */}
       <InfoStepsSection />
       
@@ -53,9 +56,6 @@ export default async function Home({
       
       {/* Favorite Products */}
       <FavoriteProductsSection countryCode={countryCode} region={region} />
-      
-      {/* Inšpirácia pre váš projekt */}
-      <InspirationSection />
 
       {/* Blog a inšpirácie */}
       <BlogSection />

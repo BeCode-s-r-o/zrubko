@@ -13,24 +13,24 @@ export default function Categories({
   }
 
   return (
-    <section className="py-16 w-full">
-      <div className="px-6 mx-auto max-w-8xl">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8">
+    <section className="py-12 w-full">
+      <div className="px-4 mx-auto max-w-8xl">
+      <div className="flex flex-col gap-6 justify-between items-start mb-12 lg:flex-row lg:items-center">
         <div className="max-w-2xl">
-          <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
+          <h2 className="mb-4 text-3xl font-light leading-tight text-black lg:text-4xl">
             Kategórie produktov
           </h2>
           
-          <div className="w-24 h-px bg-black mb-6"></div>
+          <div className="mb-4 w-20 h-px bg-black"></div>
           
-          <Text className="text-xl text-black/60 leading-relaxed font-light">
+          <Text className="text-lg font-light leading-relaxed text-black/60">
             Preskúmajte naše starostlivo kurátorované kolekcie prémiových drevených produktov
           </Text>
         </div>
         
         <div className="hidden lg:block">
           <LightButton href="/categories">
-            <span className="flex items-center gap-3">
+            <span className="flex gap-3 items-center">
               <span className="font-medium">Zobraziť všetky</span>
               <ArrowUpRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
             </span>
@@ -38,10 +38,10 @@ export default function Categories({
         </div>
       </div>
       
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
-        {categories.slice(0, 8).map((category) => (
-          <div key={category.id} className="group relative flex flex-col h-full">
-            <div className="bg-white rounded-lg border border-black/10 shadow-sm hover:shadow-md transition-all duration-300 flex-1 flex flex-col h-full">
+      <div className="grid grid-cols-2 gap-6 mb-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {categories.slice(0, 10).map((category) => (
+          <div key={category.id} className="flex relative flex-col group">
+            <div className="flex flex-col h-32 bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:border-[#1a2e1a] hover:shadow-lg hover:scale-105 sm:h-36">
               <CategoryCard category={category} />
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function Categories({
       
       <div className="flex justify-center lg:hidden">
         <LightButton href="/categories">
-          <span className="flex items-center gap-3">
+          <span className="flex gap-3 items-center">
             <span className="font-medium">Zobraziť všetky kategórie</span>
             <ArrowUpRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </span>

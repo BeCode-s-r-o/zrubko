@@ -1,97 +1,146 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Star, Shield, Truck, Clock, CheckCircle, Home, Square, Box, Layers } from "lucide-react"
 import { useState, useEffect } from "react"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   
-  // Minimalistické obrázky zamerané na čistý drevený dizajn
+  // public images
   const images = [
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    "/landing_banner_1.png",
+    "/landing_banner.png",
+    "/chata.jpg"
+  ]
+
+  // Product categories with icons and links
+  const productCategories = [
+    {
+      name: "Drevený obklad",
+      icon: Home,
+      href: "/categories/dreveny-obklad"
+    },
+    {
+      name: "Drevená podlaha", 
+      icon: Layers,
+      href: "/categories/drevena-podlaha"
+    },
+    {
+      name: "Terasové dosky",
+      icon: Square,
+      href: "/categories/terasove-dosky"
+    },
+    {
+      name: "Hranoly",
+      icon: Box,
+      href: "/categories/hranoly"
+    }
   ]
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
-    }, 8000) // Pomalší, luxusnejší prechod
+    }, 8000)
 
     return () => clearInterval(interval)
   }, [images.length])
 
   return (
-    <section className="overflow-hidden relative pb-6 w-full lg:pt-16">
-      <div className="px-6 mx-auto max-w-8xl">
-        <div className="relative rounded-2xl overflow-hidden h-[300px] md:h-[500px] flex items-center w-full">
-          {/* Obrázky s jemným prechodom */}
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-2000 ease-in-out ${
-                index === currentImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-              }`}
-              style={{ backgroundImage: `url('${image}')` }}
-            />
-          ))}
-          
-          {/* Minimalistický gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30"></div>
-          
-          {/* Content */}
-          <div className="relative z-10 px-6 py-10 max-w-4xl text-left md:px-8 md:py-12">
-            <h1 className="mb-4 text-3xl font-light tracking-tight leading-tight text-white md:text-5xl lg:text-6xl">
-              Staviate alebo <br />
-              <span className="font-medium text-white">
-                Obkladáte?
-              </span>
-            </h1>
-            
-            <p className="mb-10 max-w-2xl text-lg font-light leading-relaxed md:text-xl lg:text-2xl text-white/80">
-              Luxusné drevo na mieru – vyberiete, vypočítate, objednáte. 
-              <span className="font-normal text-white">Doručíme až k vám domov.</span>
-            </p>
-
-            {/* Minimalistické štatistiky */}
-            <div className="hidden flex-wrap gap-12 mb-12 md:flex">
-              <div className="text-center">
-                <div className="mb-2 text-3xl font-light text-white lg:text-4xl">15 000+</div>
-                <div className="text-sm tracking-wide uppercase text-white/60">Spokojných zákazníkov</div>
-              </div>
-              
-              <div className="text-center">
-                <div className="mb-2 text-3xl font-light text-white lg:text-4xl">25+</div>
-                <div className="text-sm tracking-wide uppercase text-white/60">Rokov skúseností</div>
-              </div>
-            </div>
-
-            {/* Čisté buttony */}
-            <div className="flex flex-col gap-4 md:flex-row md:gap-6">
-              <button className="flex justify-center items-center px-8 py-4 text-base font-medium text-black bg-white transition-all duration-300 group hover:bg-white/90">
-                Začať s výberom
-                <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
-              </button>
-              
-              <button className="flex justify-center items-center px-8 py-4 text-base font-medium text-white bg-transparent border transition-all duration-300 border-white/30 hover:border-white group">
-                Navštíviť showroom
-              </button>
-            </div>
-          </div>
-
-          {/* Minimalistické carousel indicators */}
-          <div className="flex absolute bottom-6 left-1/2 z-20 space-x-2 transform -translate-x-1/2">
-            {images.map((_, index) => (
-              <button
+    <section className="relative w-full bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Hero Banner */}
+      <div className="overflow-hidden relative">
+        <div className="px-0 mx-auto w-full sm:px-6 sm:max-w-7xl lg:px-8">
+          <div className="relative overflow-hidden h-[600px] sm:h-[450px] lg:h-[550px] lg:my-8 flex items-center w-full sm:rounded-2xl shadow-lg">
+            {/* Background Images with Carousel */}
+            {images.map((image, index) => (
+              <div
                 key={index}
-                onClick={() => setCurrentImageIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentImageIndex 
-                    ? 'bg-white scale-125' 
-                    : 'bg-white/30 hover:bg-white/60'
+                className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-2000 ease-in-out ${
+                  index === currentImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
                 }`}
+                style={{ backgroundImage: `url('${image}')` }}
               />
             ))}
+            
+            {/* Enhanced Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-black/35 to-black/50"></div>
+            
+            {/* Content Container */}
+            <div className="relative z-10 px-6 mx-auto w-full max-w-sm sm:max-w-4xl sm:px-8 lg:px-12">
+              <div className="pt-12 pb-8 text-center lg:text-left sm:pt-0 sm:pb-0">
+          
+
+                {/* Main Headline */}
+                <h1 className="mb-4 text-xl font-light tracking-tight leading-tight text-white drop-shadow-lg sm:text-3xl md:text-4xl lg:text-5xl xl:text-čxl">
+                   Obklad - Podlaha - Terasovky
+                  <br />
+                  <span className="font-medium text-white">
+                    Všetko na jednom mieste.
+                  </span>
+                </h1>
+                
+                {/* Value Proposition */}
+                <p className="mx-auto mb-6 max-w-2xl text-base font-light leading-relaxed lg:mx-0 text-white/90 sm:text-lg md:text-xl">
+                  Vyberiete, vypočítate, objednáte. 
+                  <span className="font-normal text-white">Doručíme až k vám domov.</span>
+                </p>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 lg:justify-start">
+                  <LocalizedClientLink href="/categories">
+                    <button className="flex justify-center items-center px-4 py-2.5 w-full text-sm font-medium text-black bg-white rounded-lg shadow-md transition-all duration-300 group sm:px-6 sm:py-3 sm:text-base sm:w-auto hover:bg-white/95 hover:shadow-lg">
+                      Začať s výberom
+                      <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </LocalizedClientLink>
+                  
+                  <LocalizedClientLink href="/kontakt">
+                    <button className="flex justify-center items-center px-4 py-2.5 w-full text-sm font-medium text-white rounded-lg border backdrop-blur-sm transition-all duration-300 group bg-white/10 sm:px-6 sm:py-3 sm:text-base sm:w-auto border-white/30 hover:border-white hover:bg-white/15">
+                      Bezplatné poradenstvo
+                      <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
+                    </button>
+                  </LocalizedClientLink>
+                </div>
+
+                {/* Product Categories */}
+                <div className="mt-6 sm:mt-8 lg:mt-12 lg:mb-8">
+                  <p className="mb-4 text-sm font-medium tracking-wider uppercase text-white/80">Čo predávame:</p>
+                  <div className="grid grid-cols-1 gap-3 max-w-xl sm:grid-cols-2">
+                    {productCategories.map((category, index) => {
+                      const IconComponent = category.icon
+                      return (
+                        <LocalizedClientLink key={index} href={category.href}>
+                          <div className="flex gap-3 items-center p-3 text-white rounded-lg border backdrop-blur-sm transition-all duration-300 group bg-white/10 border-white/20 hover:bg-white/15 hover:border-white/30">
+                            <IconComponent className="w-4 h-4 text-white/90" />
+                            <span className="flex-1 text-sm font-medium">{category.name}</span>
+                            <ArrowRight className="w-4 h-4 transition-colors duration-300 text-white/60 group-hover:text-white" />
+                          </div>
+                        </LocalizedClientLink>
+                      )
+                    })}
+                  </div>
+                </div>
+
+              
+               
+              </div>
+            </div>
+
+            {/* Enhanced Carousel Indicators */}
+            <div className="flex absolute bottom-6 left-1/2 z-20 space-x-2 transform -translate-x-1/2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex 
+                      ? 'bg-white scale-125' 
+                      : 'bg-white/40 hover:bg-white/70'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

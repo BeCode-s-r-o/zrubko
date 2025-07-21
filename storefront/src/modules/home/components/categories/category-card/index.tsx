@@ -16,7 +16,7 @@ export default function CategoryCard({
   return (
     <div className="h-full flex flex-col">
       <LocalizedClientLink href={`/categories/${category.handle}`} className="h-full flex flex-col">
-        <div className="aspect-[4/3] relative overflow-hidden rounded-lg">
+        <div className="aspect-[3/5] relative overflow-hidden rounded-t-lg">
           {/* Category image */}
           <img 
             src={imageUrl}
@@ -30,37 +30,37 @@ export default function CategoryCard({
           />
           
           {/* Overlay effect on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-ebony/20 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a2e1a]/20 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100" />
         </div>
         
-        <div className="p-4 flex-1 flex flex-col justify-between min-h-[120px]">
+        <div className="p-2 flex-1 flex flex-col justify-between min-h-[60px]">
           <div className="flex-1">
             <div className="mb-2 flex items-center gap-2">
-              <Text className="transition-colors duration-200 text-lg font-bold group-hover:text-gold text-ebony line-clamp-2">
+              <Text className="transition-colors duration-200 text-sm font-bold group-hover:text-[#1a2e1a] text-ebony line-clamp-1">
                 {category.name}
               </Text>
             </div>
             
             {category.description && (
-              <Text className="text-sm text-gray-600 line-clamp-2 mb-3">
+              <Text className="text-sm text-gray-600 line-clamp-1 mb-2">
                 {category.description}
               </Text>
             )}
           </div>
           
           {category.category_children && category.category_children.length > 0 && (
-            <div className="flex flex-wrap gap-1 mt-auto">
-              {category.category_children.slice(0, 3).map((child: any) => (
+            <div className="flex flex-wrap gap-1 mt-auto overflow-hidden">
+              {category.category_children.slice(0, 2).map((child: any) => (
                 <span 
                   key={child.id}
-                  className="inline-block px-2 py-1 text-xs text-ebony bg-champagne/50 rounded-full border border-gold/20"
+                  className="inline-block px-1.5 py-0.5 text-xs text-[#1a2e1a] bg-[#1a2e1a]/10 rounded-full border border-[#1a2e1a]/20 truncate max-w-[80px] group-hover:bg-[#1a2e1a]/20 group-hover:border-[#1a2e1a]/40 transition-all duration-300"
                 >
                   {child.name}
                 </span>
               ))}
-              {category.category_children.length > 3 && (
-                <span className="inline-block px-2 py-1 text-xs text-gray-600 bg-gray-100 rounded-full">
-                  +{category.category_children.length - 3} viac
+              {category.category_children.length > 2 && (
+                <span className="inline-block px-1.5 py-0.5 text-xs text-gray-600 bg-gray-100 rounded-full">
+                  +{category.category_children.length - 2}
                 </span>
               )}
             </div>
