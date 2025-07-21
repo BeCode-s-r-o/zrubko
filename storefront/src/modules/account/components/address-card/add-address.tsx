@@ -131,7 +131,7 @@ const AddAddress = ({ region }: { region: HttpTypes.StoreRegion }) => {
             </div>
             {formState.error && (
               <div
-                className="text-rose-500 text-small-regular py-2"
+                className="py-2 text-rose-500 text-small-regular"
                 data-testid="address-error"
               >
                 {formState.error}
