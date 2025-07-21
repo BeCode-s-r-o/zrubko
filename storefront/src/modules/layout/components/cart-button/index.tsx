@@ -5,10 +5,12 @@ import { ShoppingCart } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { retrieveCart } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
+import { useRegion } from "@lib/context/region-context"
 
 export default function CartButton() {
   const [itemCount, setItemCount] = useState(0)
   const [total, setTotal] = useState<{amount: number; currency_code: string} | null>(null)
+  const { currentCountryCode } = useRegion()
 
   useEffect(() => {
     const getCart = async () => {
@@ -28,7 +30,7 @@ export default function CartButton() {
     const interval = setInterval(getCart, 2000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [currentCountryCode]) // Re-run when country code changes
 
   return (
     <LocalizedClientLink
