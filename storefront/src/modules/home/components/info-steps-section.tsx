@@ -27,14 +27,14 @@ const steps = [
 
 const InfoStepsSection = () => {
   return (
-    <section className="py-16 bg-white w-full">
+    <section className="py-16 w-full bg-white">
       <div className="px-6 mx-auto max-w-8xl">
         <div className="mb-16 text-center">
-          <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
-            Prémiové drevo na mieru
+          <h2 className="mb-6 text-4xl font-light leading-tight text-black lg:text-4xl">
+            Ako to u nás funguje?
           </h2>
-          <div className="w-24 h-px bg-black mx-auto mb-6"></div>
-          <p className="mx-auto max-w-2xl text-xl text-black/60 leading-relaxed font-light">
+          <div className="mx-auto mb-6 w-24 h-px bg-black"></div>
+          <p className="mx-auto max-w-2xl text-lg font-light leading-relaxed text-black/60">
             Ponúkame kvalitné drevené profily a materiál pre stavbu, obklady aj interiér
           </p>
         </div>
@@ -43,7 +43,7 @@ const InfoStepsSection = () => {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="flex relative flex-col items-center p-8 text-center bg-white rounded-lg border border-black/10 shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex relative flex-col items-center p-8 text-center bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:shadow-md"
             >
               <LocalizedClientLink
                 href={step.badgeHref}
@@ -60,7 +60,7 @@ const InfoStepsSection = () => {
               </div>
               
               <h3 className="mb-4 text-xl font-medium text-black">{step.title}</h3>
-              <p className="text-base text-black/60 font-light leading-relaxed">{step.description}</p>
+              <p className="text-base font-light leading-relaxed text-black/60">{step.description}</p>
             </div>
           ))}
         </div>

@@ -671,7 +671,7 @@ export default function NavClient({ regions, categories }: NavClientProps) {
           <div className="hidden gap-6 items-center whitespace-nowrap lg:flex">
             <LocalizedClientLink href="/" className="transition-colors hover:text-gray-300">Domov</LocalizedClientLink>
             <LocalizedClientLink href="/about" className="transition-colors hover:text-gray-300">O nás</LocalizedClientLink>
-            <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Projekty</LocalizedClientLink>
+            <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Realizácie</LocalizedClientLink>
             <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Doprava a Služby</LocalizedClientLink>
             <LocalizedClientLink href="/spolupraca" className="transition-colors hover:text-gray-300">Spolupráca</LocalizedClientLink>
             <LocalizedClientLink href="/blog" className="transition-colors hover:text-gray-300">Blog</LocalizedClientLink>
