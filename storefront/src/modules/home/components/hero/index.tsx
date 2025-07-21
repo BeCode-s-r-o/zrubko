@@ -11,7 +11,7 @@ const Hero = () => {
   const images = [
     "/landing_banner_1.png",
     "/landing_banner.png",
-    "/chata.jpg"
+
   ]
 
   // Product categories with icons and links
@@ -50,8 +50,8 @@ const Hero = () => {
     <section className="relative w-full bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Hero Banner */}
       <div className="overflow-hidden relative">
-        <div className="px-0 mx-auto w-full sm:px-6 sm:max-w-7xl lg:px-8">
-          <div className="relative overflow-hidden h-[600px] sm:h-[450px] lg:h-[550px] lg:my-8 flex items-center w-full sm:rounded-2xl shadow-lg">
+        <div className="px-0 mx-auto w-full sm:px-6 sm:max-w-8xl lg:px-8">
+          <div className="relative overflow-hidden h-[600px] sm:h-[450px] lg:h-[550px] lg:my-8 flex items-center w-full max-w-none sm:rounded-2xl shadow-lg">
             {/* Background Images with Carousel */}
             {images.map((image, index) => (
               <div
@@ -67,21 +67,19 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-black/35 to-black/50"></div>
             
             {/* Content Container */}
-            <div className="relative z-10 px-6 mx-auto w-full max-w-sm sm:max-w-4xl sm:px-8 lg:px-12">
+            <div className="relative z-10 px-6 mx-auto w-full max-w-4xl sm:max-w-7xl sm:px-8 lg:px-12">
               <div className="pt-12 pb-8 text-center lg:text-left sm:pt-0 sm:pb-0">
-          
-
                 {/* Main Headline */}
-                <h1 className="mb-4 text-xl font-light tracking-tight leading-tight text-white drop-shadow-lg sm:text-3xl md:text-4xl lg:text-5xl xl:text-čxl">
-                   Obklad - Podlaha - Terasovky
-                  <br />
-                  <span className="font-medium text-white">
-                    Všetko na jednom mieste.
+                <h1 className="pt-4 mb-4 text-4xl font-light tracking-tight leading-tight text-white drop-shadow-lg sm:text-4xl md:text-4xl lg:text-6xl">
+                   Obklad - Podlaha - Terasovky <br />
+                  
+                  <span className="pt-2 font-medium text-white">
+                    Všetko na jednom mieste. 
                   </span>
                 </h1>
                 
                 {/* Value Proposition */}
-                <p className="mx-auto mb-6 max-w-2xl text-base font-light leading-relaxed lg:mx-0 text-white/90 sm:text-lg md:text-xl">
+                <p className="mx-auto mb-6 max-w-3xl text-base font-light leading-relaxed lg:mx-0 text-white/90 sm:text-lg md:text-xl">
                   Vyberiete, vypočítate, objednáte. 
                   <span className="font-normal text-white">Doručíme až k vám domov.</span>
                 </p>
@@ -106,7 +104,7 @@ const Hero = () => {
                 {/* Product Categories */}
                 <div className="mt-6 sm:mt-8 lg:mt-12 lg:mb-8">
                   <p className="mb-4 text-sm font-medium tracking-wider uppercase text-white/80">Čo predávame:</p>
-                  <div className="grid grid-cols-1 gap-3 max-w-xl sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-3 max-w-2xl sm:grid-cols-2">
                     {productCategories.map((category, index) => {
                       const IconComponent = category.icon
                       return (
@@ -121,9 +119,6 @@ const Hero = () => {
                     })}
                   </div>
                 </div>
-
-              
-               
               </div>
             </div>
 
