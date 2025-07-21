@@ -11,13 +11,13 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
 
   return (
     <div className="py-12 border-b border-white/10">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
         
         {/* Produkty */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex gap-2 items-center mb-4">
             <Package className="w-4 h-4 text-white" />
-            <h4 className="font-medium text-base text-white">
+            <h4 className="text-base font-medium text-white">
               Produkty
             </h4>
           </div>
@@ -26,14 +26,14 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
               <LocalizedClientLink
                 key={category.id}
                 href={`/categories/${category.handle}`}
-                className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+                className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
               >
                 {category.name}
               </LocalizedClientLink>
             ))}
             <LocalizedClientLink
               href="/categories"
-              className="flex items-center gap-1 text-sm text-white hover:text-white/80 font-medium transition-colors duration-200 pt-2 border-t border-white/10"
+              className="flex gap-1 items-center pt-2 text-sm font-medium text-white border-t transition-colors duration-200 hover:text-white/80 border-white/10"
             >
               <span>Všetky kategórie</span>
               <ArrowRight className="w-3 h-3" />
@@ -43,34 +43,34 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
 
         {/* O spoločnosti */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex gap-2 items-center mb-4">
             <Info className="w-4 h-4 text-white" />
-            <h4 className="font-medium text-base text-white">
+            <h4 className="text-base font-medium text-white">
               O nás
             </h4>
           </div>
           <div className="space-y-2">
             <LocalizedClientLink
               href="/about"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               O spoločnosti
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/kontakt"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Kontakt
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/purchase-advisor"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Sprievodca nákupom
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/kalkulacka"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Kalkulačka
             </LocalizedClientLink>
@@ -79,28 +79,28 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
 
         {/* Právne */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex gap-2 items-center mb-4">
             <Shield className="w-4 h-4 text-white" />
-            <h4 className="font-medium text-base text-white">
+            <h4 className="text-base font-medium text-white">
               Právne
             </h4>
           </div>
           <div className="space-y-2">
             <LocalizedClientLink
               href="/terms"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Obchodné podmienky
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/privacy"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Ochrana údajov
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/cookies"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Cookies
             </LocalizedClientLink>
@@ -109,28 +109,28 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
 
         {/* Služby */}
         <div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex gap-2 items-center mb-4">
             <Truck className="w-4 h-4 text-white" />
-            <h4 className="font-medium text-base text-white">
+            <h4 className="text-base font-medium text-white">
               Služby
             </h4>
           </div>
           <div className="space-y-2">
             <LocalizedClientLink
               href="/shipping"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Doprava a dodanie
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/store"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Kamenná predajňa
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/quality"
-              className="block text-sm text-white/70 hover:text-white transition-colors duration-200"
+              className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               Kvalita dreva
             </LocalizedClientLink>

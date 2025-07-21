@@ -1,6 +1,7 @@
 import { ArrowRight, Users, Award, Truck, Heart } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
+import LandingBanner from "@modules/common/components/landing-banner"
 
 export default function AboutPage() {
   return (
@@ -12,19 +13,13 @@ export default function AboutPage() {
         ]}
       />
 
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary to-primary-dark">
-        <div className="px-6 mx-auto max-w-8xl">
-          <div className="text-center text-white">
-            <h1 className="text-5xl lg:text-7xl font-light mb-6 leading-tight">
-              O našej spoločnosti
-            </h1>
-            <p className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
-              Viac ako 25 rokov sa venujeme kvalitnému drevu a pomáhame zákazníkom vytvárať jedinečné priestory
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section - using reusable component */}
+      <LandingBanner
+        title="O našej spoločnosti"
+        subtitle="Viac ako 25 rokov sa venujeme kvalitnému drevu a pomáhame zákazníkom vytvárať jedinečné priestory"
+        backgroundColor="from-primary to-primary-dark"
+        textColor="text-white"
+      />
 
       {/* Main Content */}
       <section className="py-20 bg-white">
@@ -117,7 +112,7 @@ export default function AboutPage() {
               <div className="flex justify-center items-center w-16 h-16 bg-primary rounded-xl mx-auto mb-4">
                 <Heart className="w-8 h-8 text-white" />
               </div>
-              <div className="text-3xl lg:text-4xl font-light text-black mb-2">99%</div>
+              <div className="text-3xl lg:text-4xl font-light text-black mb-2">98%</div>
               <div className="text-black/60 font-light">Spokojnosť zákazníkov</div>
             </div>
           </div>
@@ -146,7 +141,7 @@ export default function AboutPage() {
               },
               {
                 name: "Mária Kováčová",
-                position: "Vedúca predaja",
+                position: "Obchodná riaditeľka",
                 image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face"
               },
               {
@@ -164,7 +159,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <h3 className="text-xl font-medium text-black mb-2">{member.name}</h3>
-                <p className="text-black/60 font-light">{member.position}</p>
+                <p className="text-black/60">{member.position}</p>
               </div>
             ))}
           </div>

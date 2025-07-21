@@ -3,6 +3,9 @@
 import React from "react"
 import { HttpTypes } from "@medusajs/types"
 import { getProductPrice } from "@lib/util/get-product-price"
+import FastDelivery from "@modules/common/icons/fast-delivery"
+import Package from "@modules/common/icons/package"
+import MapPin from "@modules/common/icons/map-pin"
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
@@ -39,18 +42,61 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product, region }) => {
         </div>
       )}
 
-    
+      {/* Product Features with Icons */}
+      <div className="grid grid-cols-1 gap-4 pt-2 sm:grid-cols-3">
+        {/* Doprava */}
+        <a 
+          href="/doprava" 
+          className="flex flex-col items-center p-4 rounded-lg border transition-all duration-200 group border-accent/10 hover:border-accent/30 hover:bg-accent/5"
+        >
+          <div className="p-2 mb-2 rounded-full transition-colors bg-accent/10 group-hover:bg-accent/20">
+            <FastDelivery size="24" color="#1f2937" />
+          </div>
+          <div className="text-center">
+            <div className="text-sm font-semibold transition-colors text-accent-dark group-hover:text-accent">
+              Doprava zdarma
+            </div>
+            <div className="mt-1 text-xs text-gray-600">
+              od 150 €
+            </div>
+          </div>
+        </a>
 
-      {/* Quick Product Stats */}
-      <div className="grid grid-cols-2 gap-4 pt-2">
-        <div className="text-center">
-        
-          <div className="text-base text-gray-600">Dostupné</div>
-        </div>
-        <div className="text-center">
-          
-          <div className="text-base text-gray-600">Doprava zdarma od XY </div>
-        </div>
+        {/* Dostupnosť */}
+        <a 
+          href="/sklad" 
+          className="flex flex-col items-center p-4 rounded-lg border transition-all duration-200 group border-accent/10 hover:border-accent/30 hover:bg-accent/5"
+        >
+          <div className="p-2 mb-2 bg-green-100 rounded-full transition-colors group-hover:bg-green-200">
+            <Package size="24" color="#059669" />
+          </div>
+          <div className="text-center">
+            <div className="text-sm font-semibold transition-colors text-accent-dark group-hover:text-accent">
+              Na sklade
+            </div>
+            <div className="mt-1 text-xs text-gray-600">
+              okamžité odoslanie
+            </div>
+          </div>
+        </a>
+
+        {/* Lokácia/Služby */}
+        <a 
+          href="/kontakt" 
+          className="flex flex-col items-center p-4 rounded-lg border transition-all duration-200 group border-accent/10 hover:border-accent/30 hover:bg-accent/5"
+        >
+          <div className="p-2 mb-2 bg-blue-100 rounded-full transition-colors group-hover:bg-blue-200">
+            <MapPin size="24" color="#2563eb" />
+          </div>
+          <div className="text-center">
+            <div className="text-sm font-semibold transition-colors text-accent-dark group-hover:text-accent">
+              Poradenstvo
+            </div>
+            <div className="mt-1 text-xs text-gray-600">
+              osobné konzultácie
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   )

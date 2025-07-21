@@ -114,7 +114,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
       className={clx(
         "border-2 rounded-lg p-3 cursor-pointer transition-all duration-200 hover:shadow-md transform hover:scale-101 relative overflow-hidden",
         {
-          "border-accent bg-gradient-to-br from-accent/5 to-accent-light/10 shadow-sm ring-1 ring-accent/20": isSelected,
+          "border-accent  from-accent/5 to-accent-light/10 shadow-sm ring-1 ring-accent/20": isSelected,
           "border-gray-200 bg-white hover:border-accent/40 hover:shadow-sm": !isSelected,
           "opacity-50 cursor-not-allowed": inventoryStatus.status === "unavailable"
         }
@@ -122,50 +122,33 @@ const VariantCard: React.FC<VariantCardProps> = ({
     >
       {/* Gradient pozadie pre selected */}
       {isSelected && (
-        <div className="absolute inset-0 bg-gradient-to-br via-transparent pointer-events-none from-accent/3 to-accent-light/3"></div>
+        <div className="absolute inset-0 via-transparent pointer-events-none from-accent/3 to-accent-light/3"></div>
       )}
 
-      <div className="flex relative justify-between items-center">
+      <div className="flex relative justify-between items-start">
         {/* Základné info - kompaktnejšie */}
         <div className="flex-1">
-          <div className="flex justify-between items-start mb-2">
-            <div>
-              <h2 className="mb-1 text-xl font-bold text-accent-dark">
+          <div className="flex flex-col mb-3 sm:flex-row sm:justify-between sm:items-start">
+            <div className="mb-2 sm:mb-0">
+              <h2 className="text-2xl font-bold leading-tight sm:text-xl text-accent-dark">
                 {variant.title}
               </h2>
-              <p className="text-sm font-medium text-gray-600">
+              <p className="mt-1 text-sm font-medium text-gray-600">
                 {variant.metadata.typ_dreva} {variant.metadata.trieda && (
                   <span className="text-amber-600">{variant.metadata.trieda}</span>
                 )}
               </p>
             </div>
             
-            {/* Kompaktný dostupnosť badge s loading stavom */}
-            <div className="flex gap-1 items-center">
-              {inventoryLoading ? (
-                <div className="flex gap-1 items-center">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">
-                    Načítavam...
-                  </span>
-                </div>
-              ) : (
-                <>
-                  <div className={`w-2 h-2 rounded-full ${availabilityInfo.badgeColor}`}></div>
-                  <span className={`text-xs font-semibold px-1.5 py-0.5 rounded ${availabilityInfo.bgColor} ${availabilityInfo.color}`}>
-                    {availabilityInfo.text}
-                  </span>
-                </>
-              )}
-            </div>
+            
           </div>
           
-          {/* Technické údaje z metadata */}
+          {/* Technické údaje z metadata - mobile responsive */}
           {/* Only render the grid if at least one value is present */}
           {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie || variant.metadata.opracovanie_dreva) ? (
             <div className="mb-3 space-y-2">
-              {/* Prvý riadok - 3 polia */}
-              <div className="grid grid-cols-3 gap-2">
+              {/* Prvý riadok - mobile: 1 col, tablet+: 3 cols */}
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                 <div className="p-2 text-center bg-white rounded border border-accent/10">
                   <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Dĺžka</span>
                   <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
@@ -180,8 +163,8 @@ const VariantCard: React.FC<VariantCardProps> = ({
                 </div>
               </div>
               
-              {/* Druhý riadok - 2 polia */}
-              <div className="grid grid-cols-2 gap-2">
+              {/* Druhý riadok - mobile: 1 col, tablet+: 2 cols */}
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div className="p-2 text-center bg-white rounded border border-accent/10">
                   <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Použitie</span>
                   <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
@@ -214,7 +197,7 @@ const VariantCard: React.FC<VariantCardProps> = ({
         </div>
 
         {/* Kompaktný výber indikátor */}
-        <div className="ml-4">
+        <div className="flex-shrink-0 ml-3 sm:ml-4">
           <div
             className={clx(
               "flex justify-center items-center w-6 h-6 rounded-full border-2 shadow-sm transition-all duration-200",
