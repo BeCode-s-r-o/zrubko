@@ -2,6 +2,7 @@ import React from "react"
 
 type Variant = {
   id: string
+  title: string // Add title to variant type
   size: string
   treatment: string
   material: string
@@ -38,50 +39,66 @@ const PriceCalculator: React.FC<PriceCalculatorProps> = ({
   const totalPieces = packages * (parseFloat(variant.metadata.kalk_kusy_v_baliku || "0") || 0)
   const totalArea = packages * (parseFloat(variant.metadata.kalk_plocha_balika_m2 || "0") || 0)
   const totalLength = packages * (parseFloat(variant.metadata.kalk_dlzka_m || "0") || 0)
+  const pricePerPackage = parseFloat(variant.metadata.systemova_cena_baliku || "0") || 0
 
   return (
-    <div className="bg-white border border-accent/20 rounded-lg p-4 shadow-sm">
-      <h5 className="font-semibold text-base mb-3 text-accent-dark">Výpočet ceny</h5>
+    <div className="p-4 bg-white rounded-lg border shadow-sm border-accent/20">
+      {/* Simple title and subtitle */}
+      <div className="mb-4">
+
+        <p className="mt-1 text-sm text-gray-600">
+          Výpočet ceny
+        </p>
+      </div>
       
-      <div className="space-y-2 text-sm">
-        {/* Počet balíkov */}
-        <div className="flex justify-between items-center py-1">
+      {/* Divider */}
+      <div className="mb-4 border-t border-accent/20"></div>
+      
+      {/* Simple calculation details */}
+      <div className="space-y-3 text-sm">
+        <div className="flex justify-between items-center">
           <span className="text-gray-600">Počet balíkov:</span>
-          <span className="font-semibold text-accent-dark">{packages} ks</span>
+          <span className="font-medium text-accent-dark">{packages} balík</span>
         </div>
         
-        {/* Kalkulačné údaje */}
         {variant.metadata.kalk_kusy_v_baliku && (
-          <div className="flex justify-between items-center py-1">
+          <div className="flex justify-between items-center">
             <span className="text-gray-600">Celkom kusov:</span>
-            <span className="font-semibold text-accent-dark">{totalPieces.toFixed(0)} ks</span>
+            <span className="font-medium text-accent-dark">{totalPieces.toFixed(0)} ks</span>
           </div>
         )}
         
         {variant.metadata.kalk_plocha_balika_m2 && (
-          <div className="flex justify-between items-center py-1">
+          <div className="flex justify-between items-center">
             <span className="text-gray-600">Celková plocha:</span>
-            <span className="font-semibold text-accent-dark">{totalArea.toFixed(2)} m²</span>
+            <span className="font-medium text-accent-dark">{totalArea.toFixed(2)} m²</span>
           </div>
         )}
         
         {variant.metadata.kalk_dlzka_m && (
-          <div className="flex justify-between items-center py-1">
+          <div className="flex justify-between items-center">
             <span className="text-gray-600">Celková dĺžka:</span>
-            <span className="font-semibold text-accent-dark">{totalLength.toFixed(2)} m</span>
+            <span className="font-medium text-accent-dark">{totalLength.toFixed(2)} m</span>
           </div>
         )}
         
-        {/* Deliac čiara */}
-        <div className="border-t border-accent/20 my-2"></div>
-        
-        {/* Celková suma */}
-        <div className="flex justify-between items-center py-2 bg-gradient-to-r from-accent/5 to-accent-light/5 rounded-lg px-3">
-          <span className="font-bold text-accent-dark">Celková cena:</span>
-          <span className="font-bold text-xl text-accent">
-            {totalPrice.toFixed(2)} €
-          </span>
-        </div>
+        {pricePerPackage > 0 && (
+          <div className="flex justify-between items-center">
+            <span className="text-gray-600">Cena za balík:</span>
+            <span className="font-medium text-accent-dark">{pricePerPackage.toFixed(2)} €</span>
+          </div>
+        )}
+      </div>
+      
+      {/* Divider */}
+      <div className="my-4 border-t border-accent/20"></div>
+      
+      {/* Total price - prominent */}
+      <div className="flex justify-between items-center">
+        <span className="font-bold text-accent-dark">Celková cena:</span>
+        <span className="text-lg font-bold text-accent-dark">
+          {totalPrice.toFixed(2)} €
+        </span>
       </div>
     </div>
   )

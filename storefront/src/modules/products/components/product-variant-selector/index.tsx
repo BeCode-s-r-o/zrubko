@@ -201,9 +201,9 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
     <div className="flex flex-col gap-6 h-full">
       {/* Variant selector - ALWAYS FIRST on mobile */}
       <div className="">
-        <div className="">
+        <div className="my-2">
           <p className="text-xl lg:text-2xl">Dostupné varianty</p>
-          <p className=" mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
+          <p className="mt-1 text-sm text-gray-600 lg:text-base">Vyberte si rozmer a typ spracovania</p>
         </div>
         
         <div className="">
@@ -221,46 +221,56 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
 
       {/* Selected variant details */}
       {selectedVariant && (
-        <div className="overflow-hidden bg-gradient-to-br from-white rounded-xl border shadow-md to-accent-light/10 border-accent/20">
-          <div className="px-6 py-4 bg-gradient-to-r from-accent to-accent-light">
-            <p className="text-xl font-semibold text-white lg:text-2xl">Vybraný variant</p>
-            <p className="mt-1 text-sm text-white lg:text-base">Finalizujte svoju objednávku</p>
+        <div className="overflow-hidden bg-white rounded-2xl border shadow-xl border-accent/10">
+          {/* Professional header with enhanced design */}
+          <div className="relative px-6 py-4 bg-gradient-to-r from-accent-dark via-accent to-accent-light">
+            {/* Subtle pattern overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-dark/20 to-accent-light/20"></div>
+            
+            {/* Content with proper layering */}
+            <div className="relative z-10">
+              {/* Vybraný variant: [title] on one row with enhanced typography */}
+              <div className="flex justify-between items-center">
+                <div className="flex items-center">
+                  <span className="text-xl tracking-tight text-white">
+                    Vybraný variant:
+                  </span>
+                  <span className="ml-3 max-w-xs text-xl font-bold truncate text-white/95">
+                    {selectedVariant.title}
+                  </span>
+                </div>
+                {/* Professional badge/indicator */}
+                <div className="hidden items-center px-3 py-1 rounded-full backdrop-blur-sm sm:flex bg-white/20">
+                  <div className="mr-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-medium text-white">Aktívny</span>
+                </div>
+              </div>
+              
+            
+             
+            </div>
           </div>
           
-          <div className="p-6">
+          {/* Enhanced content area */}
+          <div className="p-6 lg:p-8">
             <div className="space-y-6">
-              {/* Variant title above quantity selector */}
-              <div className="text-center">
-                <h2 className="text-lg font-bold text-accent-dark md:text-xl lg:text-2xl">
-                  {selectedVariant.title}
-                </h2>
-              </div>
+              {/* Quantity selector with integrated Add to cart button */}
+              <QuantitySelector
+                quantity={packages}
+                onQuantityChange={setPackages}
+                availability={selectedVariant.availability}
+                variantTitle={selectedVariant.title}
+                onAddToCart={handleAddToCart}
+                isAdding={isAdding}
+                totalPrice={totalPrice}
+              />
 
-              {/* Quantity and price calculator */}
-              <div className="flex flex-col gap-6">
-                <QuantitySelector
-                  quantity={packages}
-                  onQuantityChange={setPackages}
-                  availability={selectedVariant.availability}
-                />
-                <PriceCalculator
-                  variant={selectedVariant}
-                  packages={packages}
-                  totalPrice={totalPrice}
-                />
-              </div>
-
-              {/* Add to cart button */}
-              <Button
-                onClick={handleAddToCart}
-                disabled={selectedVariant.availability === "unavailable" || isAdding}
-                className="px-8 py-4 w-full text-lg font-bold text-white bg-gradient-to-r rounded-xl shadow-lg transition-all duration-200 from-accent to-accent-light hover:from-accent-dark hover:to-accent disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-xl"
-                isLoading={isAdding}
-              >
-                {isAdding ? "Pridávam..." : 
-                 selectedVariant.availability === "unavailable" ? "Nedostupné" :
-                 `Pridať do košíka - ${totalPrice.toFixed(2)} €`}
-              </Button>
+              {/* Price calculator below for better UX */}
+              <PriceCalculator
+                variant={selectedVariant}
+                packages={packages}
+                totalPrice={totalPrice}
+              />
             </div>
           </div>
         </div>

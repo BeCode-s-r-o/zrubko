@@ -1,4 +1,4 @@
-import Product from "../product-preview"
+import WoodProductCard from "../wood-product-card"
 import { getRegion } from "@lib/data/regions"
 import { getProductsList } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
@@ -41,24 +41,27 @@ export default async function RelatedProducts({
   }
 
   return (
-    <div className="product-page-constraint">
-      <div className="flex flex-col items-center mb-16 text-center">
-      <h2 className="mb-2 text-xl font-semibold text-gray-900 lg:text-2xl">
-        Podobné produkty
-      </h2>
-      <p className="text-base leading-relaxed text-gray-600 md:text-lg lg:text-xl">
-        Môžu sa Vám páčiť aj tieto produkty.
-      </p>
+    <section className="">
+      <div className="">
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <h4 className="mb-4 text-3xl text-gray-900">
+            Podobné produkty
+          </h4>
+          <p className="mx-auto max-w-2xl text-lg text-gray-600">
+            Môžu sa Vám páčiť aj tieto produkty.
+          </p>
+        </div>
 
+        {/* 4 wider cards grid */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {products.map((product) => (
+            <div key={product.id} className="bg-white rounded-xl transition-all duration-300 overflow-hidden min-h-[600px]">
+              <WoodProductCard product={product} region={region} />
+            </div>
+          ))}
+        </div>
       </div>
-
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
-        {products.map((product) => (
-          <li key={product.id}>
-            {region && <Product region={region} product={product} />}
-          </li>
-        ))}
-      </ul>
-    </div>
+    </section>
   )
 }
