@@ -48,10 +48,12 @@ import SearchBar from "@modules/search/components/SearchBar"
 import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
 import ModernNavbar from "@modules/layout/components/modern-navbar"
 import MobileCategoryMenu from "@modules/layout/components/mobile-category-menu"
+import RegionSwitcher from "@modules/layout/components/region-switcher"
 
 type NavClientProps = {
   regions: StoreRegion[]
   categories: HttpTypes.StoreProductCategory[]
+  currentRegion: StoreRegion
 }
 
 // Helper functions to get categories from backend data
@@ -594,7 +596,7 @@ const MobileSideMenu = ({ regions, categories }: { regions: StoreRegion[], categ
   )
 }
 
-export default function NavClient({ regions, categories }: NavClientProps) {
+export default function NavClient({ regions, categories, currentRegion }: NavClientProps) {
   const [isProductsOpen, setIsProductsOpen] = useState(false)
   const [isUsageOpen, setIsUsageOpen] = useState(false)
   const [expandedSection, setExpandedSection] = useState<'interior' | 'exterior' | null>(null)
@@ -783,6 +785,9 @@ export default function NavClient({ regions, categories }: NavClientProps) {
             </div>
           </div>
           <div className="flex gap-3 items-center">
+            {/* Region Switcher */}
+            <RegionSwitcher regions={regions} currentRegion={currentRegion} />
+            
             <LocalizedClientLink
               href="/account"
               className="flex gap-2 items-center px-4 py-2 rounded-lg border transition-all duration-200 text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"

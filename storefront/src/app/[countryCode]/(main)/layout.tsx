@@ -9,12 +9,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
 }
 
-export default async function PageLayout(props: { children: React.ReactNode }) {
+interface PageLayoutProps {
+  children: React.ReactNode
+  params: {
+    countryCode: string
+  }
+}
+
+export default async function PageLayout({ children, params }: PageLayoutProps) {
   return (
     <>
-      <Nav />
+      <Nav countryCode={params.countryCode} />
       <main className="min-h-[calc(100vh-64px)]">
-        {props.children}
+        {children}
       </main>
       <Footer />
       <FloatingChatButton />
