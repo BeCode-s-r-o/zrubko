@@ -50,13 +50,15 @@ export default async function Home({
       
       {/* Info Steps */}
       <InfoStepsSection />
+
+        {/* Favorite Products */}
+        <FavoriteProductsSection countryCode={countryCode} region={region} />
+
       
       {/* Wood Configurator */}
       <WoodConfiguratorSection />
       
-      {/* Favorite Products */}
-      <FavoriteProductsSection countryCode={countryCode} region={region} />
-
+    
       {/* Blog a inšpirácie */}
       <BlogSection />
       
