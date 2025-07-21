@@ -33,57 +33,57 @@ export default function BlogSection() {
   ]
 
   return (
-    <section className="py-20 bg-white w-full">
+    <section className="py-20 w-full bg-white">
       <div className="px-6 mx-auto max-w-8xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
+        <div className="mb-16 text-center">
+          <h2 className="mb-6 text-4xl font-light leading-tight text-black">
             Blog a inšpirácie
           </h2>
-          <div className="w-24 h-px bg-black mx-auto mb-6"></div>
-          <p className="text-xl text-black/60 max-w-2xl mx-auto leading-relaxed font-light">
+          <div className="mx-auto mb-6 w-24 h-px bg-black"></div>
+          <p className="mx-auto max-w-2xl text-xl font-light leading-relaxed text-black/60">
             Užitočné články, tipy a inšpirácie pre vaše drevené projekty
           </p>
         </div>
 
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (
             <article key={post.id} className="group">
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="overflow-hidden bg-white rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl">
                 {/* Image */}
                 <div className="aspect-[3/2] overflow-hidden">
                   <img 
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
                   {/* Category */}
-                  <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm rounded-full mb-4">
+                  <div className="inline-block px-3 py-1 mb-4 text-sm rounded-full bg-primary/10 text-primary">
                     {post.category}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-medium text-black mb-3 leading-tight group-hover:text-primary transition-colors">
+                  <h3 className="mb-3 text-xl font-medium leading-tight text-black transition-colors group-hover:text-primary">
                     {post.title}
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-black/60 mb-4 leading-relaxed font-light">
+                  <p className="mb-4 font-light leading-relaxed text-black/60">
                     {post.excerpt}
                   </p>
 
                   {/* Meta */}
-                  <div className="flex items-center gap-4 text-sm text-black/40 mb-4">
-                    <div className="flex items-center gap-1">
+                  <div className="flex gap-4 items-center mb-4 text-sm text-black/40">
+                    <div className="flex gap-1 items-center">
                       <User size={14} />
                       {post.author}
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex gap-1 items-center">
                       <Calendar size={14} />
                       {post.date}
                     </div>
@@ -91,7 +91,7 @@ export default function BlogSection() {
 
                   {/* Read More */}
                   <LocalizedClientLink href={`/blog/${post.id}`}>
-                    <button className="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors group">
+                    <button className="flex gap-2 items-center transition-colors text-primary hover:text-primary-dark group">
                       Čítať viac
                       <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
                     </button>
@@ -105,7 +105,7 @@ export default function BlogSection() {
         {/* View All Button */}
         <div className="text-center">
           <LocalizedClientLink href="/blog">
-            <button className="flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-lg hover:bg-primary-dark transition-all duration-300 group mx-auto">
+            <button className="flex gap-3 items-center px-8 py-4 mx-auto text-white rounded-lg transition-all duration-300 bg-primary hover:bg-primary-dark group">
               Zobraziť všetky články
               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
             </button>

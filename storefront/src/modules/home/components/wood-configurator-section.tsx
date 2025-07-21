@@ -65,14 +65,14 @@ const WoodConfiguratorSection = () => {
   }
 
   return (
-    <section className="py-16 bg-slate-50 w-full">
+    <section className="py-16 w-full bg-slate-50">
       <div className="px-6 mx-auto max-w-8xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-light text-black mb-6 leading-tight">
+        <div className="mb-16 text-center">
+          <h2 className="mb-6 text-4xl font-light leading-tight text-black">
             Nájdite správne drevo pre váš projekt
           </h2>
-          <div className="w-24 h-px bg-black mx-auto mb-6"></div>
-          <p className="text-xl text-black/60 max-w-2xl mx-auto leading-relaxed font-light">
+          <div className="mx-auto mb-6 w-24 h-px bg-black"></div>
+          <p className="mx-auto max-w-2xl text-xl font-light leading-relaxed text-black/60">
             Postupujte cez náš jednoduchý 3-krokový proces a objavte perfektné drevené materiály pre váš projekt.
           </p>
         </div>
@@ -100,24 +100,24 @@ const WoodConfiguratorSection = () => {
         </div>
 
         {/* Step Content */}
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl">
           
           {/* Step 1: Interior/Exterior Selection */}
           {currentStep === 1 && (
             <div className="space-y-8">
               <div className="text-center">
-                <h3 className="text-2xl font-medium text-black mb-4">Vyberte typ projektu</h3>
+                <h3 className="mb-4 text-2xl font-medium text-black">Vyberte typ projektu</h3>
                 <p className="text-black/60">Kde plánujete použiť drevené materiály?</p>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 gap-8 mx-auto max-w-6xl lg:grid-cols-2">
                 <button
                   onClick={() => handleTypeSelect('interior')}
                   className="group relative overflow-hidden rounded-lg border border-black/10 hover:border-[#1a2e1a] hover:shadow-md transition-all duration-300 min-h-[300px]"
                 >
                   <div className="absolute inset-0 bg-[#1a2e1a]/5 group-hover:bg-[#1a2e1a]/10 transition-all duration-300" />
                   
-                  <div className="relative z-10 p-12 text-left h-full flex flex-col justify-between">
+                  <div className="flex relative z-10 flex-col justify-between p-12 h-full text-left">
                     <div>
                       <div className="w-16 h-16 bg-[#1a2e1a]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1a2e1a]/20 transition-all duration-300">
                         <Home className="w-8 h-8 text-[#1a2e1a]" />
@@ -125,14 +125,14 @@ const WoodConfiguratorSection = () => {
                       <h4 className="text-3xl font-medium text-black mb-4 group-hover:text-[#1a2e1a] transition-colors">
                         Interiér
                       </h4>
-                      <p className="text-black/60 text-lg leading-relaxed mb-6 font-light">
+                      <p className="mb-6 text-lg font-light leading-relaxed text-black/60">
                         Vytvorte jedinečný interiér s prémiovými drevenými obkladmi, podlahami a saunovými materiálmi
                       </p>
                     </div>
                     
                     <div className="flex items-center text-[#1a2e1a] group-hover:text-[#2d4a2d] transition-colors">
-                      <span className="font-medium mr-2">Objaviť produkty</span>
-                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <span className="mr-2 font-medium">Objaviť produkty</span>
+                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </button>
@@ -143,7 +143,7 @@ const WoodConfiguratorSection = () => {
                 >
                   <div className="absolute inset-0 bg-[#1a2e1a]/5 group-hover:bg-[#1a2e1a]/10 transition-all duration-300" />
                   
-                  <div className="relative z-10 p-12 text-left h-full flex flex-col justify-between">
+                  <div className="flex relative z-10 flex-col justify-between p-12 h-full text-left">
                     <div>
                       <div className="w-16 h-16 bg-[#1a2e1a]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1a2e1a]/20 transition-all duration-300">
                         <Trees className="w-8 h-8 text-[#1a2e1a]" />
@@ -151,14 +151,14 @@ const WoodConfiguratorSection = () => {
                       <h4 className="text-3xl font-medium text-black mb-4 group-hover:text-[#1a2e1a] transition-colors">
                         Exteriér
                       </h4>
-                      <p className="text-black/60 text-lg leading-relaxed mb-6 font-light">
+                      <p className="mb-6 text-lg font-light leading-relaxed text-black/60">
                         Ochráňte a skrášlite svoj domov s odolnými terasami, fasádami a záhradnými riešeniami
                       </p>
                     </div>
                     
                     <div className="flex items-center text-[#1a2e1a] group-hover:text-[#2d4a2d] transition-colors">
-                      <span className="font-medium mr-2">Objaviť produkty</span>
-                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      <span className="mr-2 font-medium">Objaviť produkty</span>
+                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </button>
@@ -172,17 +172,17 @@ const WoodConfiguratorSection = () => {
               <div className="text-center">
                 <button 
                   onClick={resetWizard}
-                  className="text-black/60 hover:text-black text-sm font-medium mb-4"
+                  className="mb-4 text-sm font-medium text-black/60 hover:text-black"
                 >
                   ← Späť na výber typu
                 </button>
-                <h3 className="text-2xl font-medium text-black mb-4">
+                <h3 className="mb-4 text-2xl font-medium text-black">
                   Vyberte kategóriu ({selectedType === 'interior' ? 'Interiér' : 'Exteriér'})
                 </h3>
                 <p className="text-black/60">Pre aký účel potrebujete drevo?</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {categories[selectedType].map((category) => {
                   const IconComponent = category.icon
                   return (
@@ -210,34 +210,34 @@ const WoodConfiguratorSection = () => {
               <div className="text-center">
                 <button 
                   onClick={() => setCurrentStep(2)}
-                  className="text-black/60 hover:text-black text-sm font-medium mb-4"
+                  className="mb-4 text-sm font-medium text-black/60 hover:text-black"
                 >
                   ← Späť na kategórie
                 </button>
-                <h3 className="text-2xl font-medium text-black mb-4">Odporúčané produkty</h3>
+                <h3 className="mb-4 text-2xl font-medium text-black">Odporúčané produkty</h3>
                 <p className="text-black/60">Vyberte si z našich najlepších produktov pre vašu kategóriu</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <div className="grid grid-cols-1 gap-6 mx-auto max-w-2xl md:grid-cols-2">
                 {products[selectedCategory as keyof typeof products]?.map((product) => (
-                  <div key={product.id} className="bg-white rounded-lg shadow-sm p-6 border border-black/10 hover:shadow-md transition-all duration-300">
+                  <div key={product.id} className="p-6 bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:shadow-md">
                     <div className="text-center">
-                      <div className="text-4xl mb-4">{product.image}</div>
-                      <h4 className="text-lg font-medium text-black mb-2">{product.name}</h4>
+                      <div className="mb-4 text-4xl">{product.image}</div>
+                      <h4 className="mb-2 text-lg font-medium text-black">{product.name}</h4>
                       <p className="text-2xl font-medium text-[#1a2e1a] mb-4">{product.price}</p>
                       <button className="w-full bg-[#1a2e1a] hover:bg-[#2d4a2d] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300">
                         Zobraziť detail
-                        <ChevronRight className="w-4 h-4 inline ml-2" />
+                        <ChevronRight className="inline ml-2 w-4 h-4" />
                       </button>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="text-center pt-8">
+              <div className="pt-8 text-center">
                 <button 
                   onClick={resetWizard}
-                  className="bg-white hover:bg-black text-black hover:text-white px-8 py-3 rounded-lg font-medium border border-black/10 transition-all duration-300"
+                  className="px-8 py-3 font-medium text-black bg-white rounded-lg border transition-all duration-300 hover:bg-black hover:text-white border-black/10"
                 >
                   Začať znovu
                 </button>
