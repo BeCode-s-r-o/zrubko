@@ -92,13 +92,7 @@ const Hero = () => {
                       <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
                     </button>
                   </LocalizedClientLink>
-                  
-                  <LocalizedClientLink href="/kontakt">
-                    <button className="flex justify-center items-center px-4 py-2.5 w-full text-sm font-medium text-white rounded-lg border backdrop-blur-sm transition-all duration-300 group bg-white/10 sm:px-6 sm:py-3 sm:text-base sm:w-auto border-white/30 hover:border-white hover:bg-white/15">
-                      Bezplatné poradenstvo
-                      <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
-                    </button>
-                  </LocalizedClientLink>
+                
                 </div>
 
                 {/* Product Categories */}

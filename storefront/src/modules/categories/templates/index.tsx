@@ -10,6 +10,8 @@ import { HttpTypes } from "@medusajs/types"
 import { getProductsListWithSort } from "@lib/data/products"
 import { extractFiltersFromProducts } from "@lib/util/filter-products"
 import { getRegion } from "@lib/data/regions"
+import RefinementList from "@modules/store/components/refinement-list"
+import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 // Import client components
 import CategoryExpandableContent from "@modules/categories/components/category-expandable-content"
@@ -18,11 +20,16 @@ import ClientCategoryFiltering from "@modules/categories/components/client-categ
 interface CategoryTemplateProps {
   categories: HttpTypes.StoreProductCategory[]
   countryCode: string
+  searchParams?: {
+    sortBy?: SortOptions
+    page?: string
+  }
 }
 
 export default async function CategoryTemplate({
   categories,
   countryCode,
+  searchParams,
 }: CategoryTemplateProps) {
   const category = categories[categories.length - 1]
   const parents = categories.slice(0, categories.length - 1)
@@ -56,16 +63,17 @@ export default async function CategoryTemplate({
 
   return (
     <>
-      <div className="px-4 mt-4">
+      {/* Breadcrumbs */}
+      <div className="px-4 mx-auto mt-2 max-w-7xl sm:px-6 lg:px-8">
         <Breadcrumbs categoryPath={categoryPath} />
       </div>
-      
+
       {/* Banner */}
       <CategoryBanner category={category} />
 
       {/* Podkategórie ak existujú */}
       {category.category_children && category.category_children.length > 0 && (
-        <div className="px-4 pt-8 pb-8 mx-auto max-w-7xl content-container">
+        <div className="px-4 pt-8 pb-8 mx-auto max-w-7xl">
           <div className="mb-2">
             <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
               {category.category_children?.map((c) => (
@@ -82,14 +90,25 @@ export default async function CategoryTemplate({
         </div>
       )}
 
-      {/* Hlavný obsah s filtrami a produktmi - Client-side */}
-      <div className={`content-container ${category.category_children && category.category_children.length > 0 ? ' px-4 pb-8' : 'pt-8 pb-8'}`}>
-        <ClientCategoryFiltering
-          allProducts={allProducts}
-          region={region}
-          availableFilters={availableFilters}
-          currentCategoryHandle={category.handle}
-        />
+      {/* Main Content - Store-like Layout */}
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div
+          className="flex flex-col py-6 small:flex-row small:items-start"
+          data-testid="category-container"
+        >
+          {/* Right Side - Products */}
+          <div className="w-full">
+            <Suspense fallback={<SkeletonProductGrid />}>
+              <ClientCategoryFiltering
+                allProducts={allProducts}
+                region={region}
+                availableFilters={availableFilters}
+                currentCategoryHandle={category.handle}
+                searchParams={searchParams}
+              />
+            </Suspense>
+          </div>
+        </div>
       </div>
     
       {/* Metadata sekcia */}

@@ -13,6 +13,10 @@ interface ClientCategoryFilteringProps {
   region: HttpTypes.StoreRegion
   availableFilters: FilterSection[]
   currentCategoryHandle?: string
+  searchParams?: {
+    sortBy?: SortOptions
+    page?: string
+  }
 }
 
 export default function ClientCategoryFiltering({
@@ -20,14 +24,17 @@ export default function ClientCategoryFiltering({
   region,
   availableFilters,
   currentCategoryHandle,
+  searchParams,
 }: ClientCategoryFilteringProps) {
   const { filters, sortBy, updateSort } = useFilters()
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false)
 
-  // Filter out price-related filters from metadata filters
+  // Filter out price-related filters from metadata filters, but keep category filter
   const metadataFilters = availableFilters.filter(filter => 
     !filter.key.includes('cena') && !filter.key.includes('price')
   )
+  
+
 
   const handleSortChange = (name: string, value: SortOptions) => {
     updateSort(value)
@@ -54,7 +61,7 @@ export default function ClientCategoryFiltering({
           <div className="flex justify-between items-center pb-4 mb-6 border-b border-gray-200">
             <button
               onClick={() => setIsMobileFiltersOpen(true)}
-              className="flex gap-2 items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg transition-colors duration-200 hover:bg-gray-200"
+              className="flex gap-2 items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-lg transition-all duration-200 hover:bg-gray-200 hover:scale-105 active:scale-95"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -95,7 +102,6 @@ export default function ClientCategoryFiltering({
           {/* Desktop Header with product count and sort dropdown - Hidden on mobile */}
           <div className="hidden justify-between items-center pb-4 mb-6 border-b border-gray-200 lg:flex">
             <div className="text-gray-700">
-
             </div>
             
             {/* Sort dropdown on the right */}
@@ -129,39 +135,43 @@ export default function ClientCategoryFiltering({
       </div>
 
       {/* Mobile Full-Screen Filter Overlay */}
-      {isMobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
-            onClick={() => setIsMobileFiltersOpen(false)}
-          />
+      <div className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${
+        isMobileFiltersOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      }`}>
+        {/* Backdrop */}
+        <div 
+          className={`absolute inset-0 bg-black transition-opacity duration-300 ${
+            isMobileFiltersOpen ? 'bg-opacity-50' : 'bg-opacity-0'
+          }`}
+          onClick={() => setIsMobileFiltersOpen(false)}
+        />
+        
+        {/* Filter Panel */}
+        <div className={`absolute inset-y-0 left-0 w-full max-w-md bg-white shadow-2xl transition-transform duration-300 ease-in-out transform ${
+          isMobileFiltersOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}>
+          {/* Header */}
+          <div className="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 className="text-lg font-bold text-gray-900">Filtrovanie</h2>
+            <button
+              onClick={() => setIsMobileFiltersOpen(false)}
+              className="p-2 text-gray-500 transition-colors duration-200 hover:text-gray-700"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
           
-          {/* Filter Panel */}
-          <div className="absolute inset-y-0 left-0 w-full max-w-md bg-white shadow-2xl transition-transform duration-300 ease-in-out transform">
-            {/* Header */}
-            <div className="flex justify-between items-center p-4 border-b border-gray-200">
-              <h2 className="text-lg font-bold text-gray-900">Filtrovanie</h2>
-              <button
-                onClick={() => setIsMobileFiltersOpen(false)}
-                className="p-2 text-gray-500 transition-colors duration-200 hover:text-gray-700"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            
-            {/* Filter Content */}
-            <div className="overflow-y-auto h-full">
-              <RefinementList 
-                availableFilters={metadataFilters}
-                data-testid="mobile-filters" 
-              />
-            </div>
+          {/* Filter Content */}
+          <div className="overflow-y-auto h-full p-6">
+            <RefinementList 
+              availableFilters={metadataFilters}
+              data-testid="mobile-filters" 
+            />
           </div>
         </div>
-      )}
+      </div>
     </>
   )
 } 

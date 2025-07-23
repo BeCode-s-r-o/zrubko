@@ -32,6 +32,13 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
               </LocalizedClientLink>
             ))}
             <LocalizedClientLink
+              href="/store"
+              className="flex gap-1 items-center pt-2 text-sm font-medium text-white border-t transition-colors duration-200 hover:text-white/80 border-white/10"
+            >
+              <span>Všetky produkty</span>
+              <ArrowRight className="w-3 h-3" />
+            </LocalizedClientLink>
+            <LocalizedClientLink
               href="/categories"
               className="flex gap-1 items-center pt-2 text-sm font-medium text-white border-t transition-colors duration-200 hover:text-white/80 border-white/10"
             >

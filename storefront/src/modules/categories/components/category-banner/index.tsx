@@ -51,23 +51,23 @@ export default function CategoryBanner({ category }: CategoryBannerProps) {
   return (
     <div className="overflow-hidden relative bg-gray-900">
       {/* Main Gallery Container */}
-      <div className="relative px-6 py-12 lg:px-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 items-center lg:grid-cols-2">
+      <div className="relative px-6 py-8 lg:px-8 lg:py-12 mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-6 items-center lg:grid-cols-2">
           {/* Ľavá strana - text */}
-          <div className="space-y-6 text-white">
-            <div className="space-y-4">
+          <div className="space-y-4 text-white">
+            <div className="space-y-3">
               <h1 className="text-3xl font-bold tracking-wide leading-tight lg:text-4xl">
                 {title}
               </h1>
               {description && (
-                <p className="max-w-xl text-base leading-relaxed text-gray-200 lg:text-lg">
+                <p className="max-w-lg text-base leading-relaxed text-gray-200 lg:text-lg">
                   {description}
                 </p>
               )}
             </div>
             
             {/* Action buttons - smaller and more compact */}
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
               <Button 
                 size="small"
                 className="px-6 py-2 text-sm font-medium text-black bg-white shadow-sm transition-all duration-300 hover:bg-gray-100 hover:shadow-md"

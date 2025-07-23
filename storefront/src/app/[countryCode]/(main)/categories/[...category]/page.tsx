@@ -80,6 +80,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     <CategoryTemplate
       categories={product_categories}
       countryCode={params.countryCode}
+      searchParams={searchParams}
     />
   )
 }

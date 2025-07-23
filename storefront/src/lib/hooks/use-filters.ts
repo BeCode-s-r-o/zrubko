@@ -24,7 +24,7 @@ export function useFilters(): UseFiltersReturn {
     const filters: ProductFilters = {}
     
     const filterKeys: (keyof ProductFilters)[] = [
-      'trieda', 'pouzitie', 'typ_dreva', 'dlzka_m',
+      'category_id', 'trieda', 'pouzitie', 'typ_dreva', 'dlzka_m',
       'kusov_v_baliku', 'kalk_plocha_balika_m2', 'rozmery_mm', 'opracovanie_dreva'
     ]
 
