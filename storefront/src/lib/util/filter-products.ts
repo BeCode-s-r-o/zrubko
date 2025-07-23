@@ -24,6 +24,16 @@ export function filterProducts(
     for (const [filterKey, filterValues] of Object.entries(filters)) {
       if (!filterValues || filterValues.length === 0) continue
       
+      // Handle category filtering separately
+      if (filterKey === 'category_id') {
+        const productCategoryIds = product.categories?.map(cat => cat.id) || []
+        const hasCategoryMatch = filterValues.some((categoryId: string) => 
+          productCategoryIds.includes(categoryId)
+        )
+        if (!hasCategoryMatch) return false
+        continue
+      }
+      
       const productValue = metadata[filterKey as keyof ProductMetadata]
       
       // If product doesn't have this metadata, exclude it

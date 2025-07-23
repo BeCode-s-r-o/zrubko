@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState, useTransition } from "react"
+import { useMemo, useState, useTransition, useEffect } from "react"
 import { HttpTypes } from "@medusajs/types"
 import { ProductFilters } from "../../../../types/filters"
 import { filterProducts } from "@lib/util/filter-products"
@@ -54,7 +54,7 @@ export default function ClientProductList({
   }, [filteredProducts, currentPage, productsPerPage])
 
   // Reset to page 1 when filters change
-  useMemo(() => {
+  useEffect(() => {
     startTransition(() => {
       setCurrentPage(1)
     })

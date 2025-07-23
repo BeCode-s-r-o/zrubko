@@ -111,7 +111,7 @@ const FilterSection = ({
                   onChange={(e) => 
                     onFilterChange(section.key, option.value, e.target.checked)
                   }
-                  className="w-4 h-4 text-gray-600 rounded border-gray-300 focus:ring-gray-500"
+                  className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-2"
                 />
                 <span className="ml-3 text-sm text-gray-700">
                   {option.label}

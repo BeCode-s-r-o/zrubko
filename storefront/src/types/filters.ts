@@ -1,4 +1,5 @@
 export interface ProductFilters {
+  category_id?: string[]
   trieda?: string[]
   pouzitie?: string[]
   typ_dreva?: string[]
