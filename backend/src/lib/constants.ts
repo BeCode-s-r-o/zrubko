@@ -91,6 +91,15 @@ export const MEILISEARCH_HOST = process.env.MEILISEARCH_HOST;
 export const MEILISEARCH_ADMIN_KEY = process.env.MEILISEARCH_ADMIN_KEY;
 
 /**
+ * Strapi configuration
+ */
+export const STRAPI_URL = process.env.STRAPI_URL;
+export const STRAPI_USERNAME = process.env.STRAPI_USERNAME;
+export const STRAPI_PASSWORD = process.env.STRAPI_PASSWORD;
+export const STRAPI_PROTOCOL = process.env.STRAPI_PROTOCOL || 'http';
+export const STRAPI_PORT = process.env.STRAPI_PORT || '1337';
+
+/**
  * Worker mode
  */
 export const WORKER_MODE =

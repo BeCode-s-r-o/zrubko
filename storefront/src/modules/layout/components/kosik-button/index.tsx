@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { ShoppingCart } from "lucide-react"
-import LocalizedClientLink from "../../common/components/localized-client-link"
-import { retrieveCart } from "../../../lib/data/cart"
-import { convertToLocale } from "../../../lib/util/money"
-import { useRegion } from "../../../lib/context/region-context"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { retrieveCart } from "@lib/data/cart"
+import { convertToLocale } from "@lib/util/money"
+import { useRegion } from "@lib/context/region-context"
 
 export default function CartButton() {
   const [itemCount, setItemCount] = useState(0)

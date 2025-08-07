@@ -81,7 +81,13 @@ module.exports = {
         "2xlarge": "1920px",
       },
       fontSize: {
-        "3xl": "2rem",
+        "xs": "0.75rem",      // 12px - malý text
+        "sm": "0.875rem",     // 14px - menší text  
+        "base": "1rem",       // 16px - základný text
+        "lg": "1.125rem",     // 18px - väčší text
+        "xl": "1.25rem",      // 20px - veľký text
+        "2xl-mobile": "1.5rem", // 24px - pre mobile nadpisy
+        "3xl": "2rem",        // 32px - pre desktop nadpisy
       },
       fontFamily: {
         sans: ["Sora", "sans-serif"],

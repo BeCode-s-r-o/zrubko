@@ -31,15 +31,8 @@ const RegionSwitcher = ({ regions, currentRegion }: RegionSwitcherProps) => {
   }, [])
 
   const getRegionFlag = (countryCode: string) => {
-    const flagMap: { [key: string]: string } = {
-      "sk": "🇸🇰",
-      "cz": "🇨🇿", 
-      "at": "🇦🇹",
-      "de": "🇩🇪",
-      "hu": "🇭🇺",
-      "pl": "🇵🇱"
-    }
-    return flagMap[countryCode.toLowerCase()] || "🌍"
+    // Používame jednoduché textové kódy namiesto emoji vlajok
+    return countryCode.toUpperCase()
   }
 
   const getRegionName = (countryCode: string) => {
@@ -70,7 +63,25 @@ const RegionSwitcher = ({ regions, currentRegion }: RegionSwitcherProps) => {
       })
     })
     
-    return countries.sort((a, b) => a.name.localeCompare(b.name))
+    // Vlastné poradie: SK, CZ, AT, potom ostatné alfabeticky
+    const preferredOrder = ['sk', 'cz', 'at']
+    
+    return countries.sort((a, b) => {
+      const aIndex = preferredOrder.indexOf(a.countryCode)
+      const bIndex = preferredOrder.indexOf(b.countryCode)
+      
+      // Ak sú oba v preferovanom zozname, usporiadaj podľa indexu
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex
+      }
+      
+      // Ak je len jeden v preferovanom zozname, daj ho prvý
+      if (aIndex !== -1) return -1
+      if (bIndex !== -1) return 1
+      
+      // Ostatné usporiadaj alfabeticky
+      return a.name.localeCompare(b.name)
+    })
   }
 
   const handleRegionChange = async (countryCode: string) => {
@@ -116,12 +127,10 @@ const RegionSwitcher = ({ regions, currentRegion }: RegionSwitcherProps) => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isUpdating}
-        className="flex items-center gap-x-2 text-sm text-gray-700 hover:text-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className={`flex items-center text-sm text-gray-700 transition-colors font-sans gap-x-2 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed ${isOpen ? 'text-mahogany underline' : ''}`}
       >
-        <span className="text-sm">Shipping to:</span>
         <div className="flex items-center gap-x-2">
-          <span className="text-lg">{getRegionFlag(currentCountryCode)}</span>
-          <span className="text-sm font-medium">{getRegionName(currentCountryCode)}</span>
+          <span className="text-sm font-medium">{currentCountryCode.toUpperCase()}</span>
           <ChevronUp 
             size={14} 
             className={`transition-transform duration-200 ${isOpen ? "rotate-0" : "rotate-180"}`}
@@ -131,19 +140,19 @@ const RegionSwitcher = ({ regions, currentRegion }: RegionSwitcherProps) => {
 
       {/* Dropdown panel */}
       {isOpen && (
-        <div className="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-          <div className="max-h-96 overflow-y-auto">
+        <div className="absolute left-0 z-50 w-64 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg top-full">
+          <div className="overflow-y-auto max-h-96">
             {availableCountries.map((country) => (
               <button
                 key={country.countryCode}
                 onClick={() => handleRegionChange(country.countryCode)}
                 disabled={isUpdating || country.countryCode === currentCountryCode}
-                className="flex items-center gap-x-3 w-full px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed border-b border-gray-100 last:border-b-0"
+                className="flex items-center w-full px-4 py-3 font-sans text-sm text-left text-gray-700 transition-colors border-b border-gray-100 gap-x-3 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed last:border-b-0"
               >
-                <span className="text-lg flex-shrink-0">{getRegionFlag(country.countryCode)}</span>
+                <span className="flex-shrink-0 text-sm">{getRegionFlag(country.countryCode)}</span>
                 <span className="font-medium">{country.name}</span>
                 {country.countryCode === currentCountryCode && (
-                  <div className="ml-auto w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                  <div className="flex-shrink-0 w-2 h-2 ml-auto bg-blue-500 rounded-full"></div>
                 )}
               </button>
             ))}
