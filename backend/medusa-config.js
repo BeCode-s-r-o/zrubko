@@ -21,7 +21,12 @@ import {
   MINIO_SECRET_KEY,
   MINIO_BUCKET,
   MEILISEARCH_HOST,
-  MEILISEARCH_ADMIN_KEY
+  MEILISEARCH_ADMIN_KEY,
+  STRAPI_URL,
+  STRAPI_USERNAME,
+  STRAPI_PASSWORD,
+  STRAPI_PROTOCOL,
+  STRAPI_PORT
 } from 'lib/constants';
 
 loadEnv(process.env.NODE_ENV, process.cwd());
@@ -163,6 +168,16 @@ const medusaConfig = {
             primaryKey: 'id',
           }
         }
+      }
+    }] : []),
+    ...(STRAPI_URL && STRAPI_USERNAME && STRAPI_PASSWORD ? [{
+      resolve: 'medusa-plugin-strapi',
+      options: {
+        strapi_medusa_user: STRAPI_USERNAME,
+        strapi_medusa_password: STRAPI_PASSWORD,
+        strapi_url: STRAPI_URL,
+        strapi_protocol: STRAPI_PROTOCOL,
+        strapi_port: STRAPI_PORT
       }
     }] : [])
   ]

@@ -2,6 +2,27 @@ import React from "react"
 import { clx } from "@medusajs/ui"
 import { useInventory } from "@lib/hooks/use-inventory"
 
+// Konfigurácia pre rôzne typy produktov
+const PRODUCT_TYPE_CONFIGS = {
+  'podlaha': {
+    primaryFields: ['typ_dreva', 'trieda', 'spoj'],
+    technicalFields: ['dlzka_m', 'cena_m2_s_dph', 'kusov_v_baliku', 'pouzitie', 'opracovanie_dreva'],
+    fieldStyles: {
+      typ_dreva: { color: 'text-gray-600', hoverColor: 'text-accent-dark' },
+      trieda: { color: 'text-amber-600', hoverColor: 'text-amber-700' },
+      spoj: { color: 'text-blue-600', hoverColor: 'text-blue-700' }
+    }
+  },
+  'default': {
+    primaryFields: ['typ_dreva', 'trieda'],
+    technicalFields: ['dlzka_m', 'cena_m2_s_dph', 'kusov_v_baliku', 'pouzitie', 'opracovanie_dreva'],
+    fieldStyles: {
+      typ_dreva: { color: 'text-gray-600', hoverColor: 'text-accent-dark' },
+      trieda: { color: 'text-amber-600', hoverColor: 'text-amber-700' }
+    }
+  }
+}
+
 type Variant = {
   id: string
   title: string
@@ -51,6 +72,21 @@ type VariantCardProps = {
   isSelected: boolean
   onSelect: () => void
   allVariants?: Variant[] // Pass all variants for inventory fetching
+}
+
+// Helper function to get field labels
+const getFieldLabel = (field: string): string => {
+  const labels: Record<string, string> = {
+    'dlzka_m': 'Dĺžka',
+    'cena_m2_s_dph': '€/m²',
+    'kusov_v_baliku': 'V balíku',
+    'pouzitie': 'Použitie',
+    'opracovanie_dreva': 'Opracovanie dreva',
+    'typ_dreva': 'Typ dreva',
+    'trieda': 'Trieda',
+    'spoj': 'Spoj'
+  }
+  return labels[field] || field
 }
 
 const getAvailabilityInfo = (availability: string, availableQuantity?: number) => {
@@ -108,6 +144,10 @@ const VariantCard: React.FC<VariantCardProps> = ({
     inventoryStatus.available_quantity
   )
 
+  // Get product type configuration
+  const productType = (variant.metadata.typ_produktu as string) || 'default'
+  const config = PRODUCT_TYPE_CONFIGS[productType as keyof typeof PRODUCT_TYPE_CONFIGS] || PRODUCT_TYPE_CONFIGS.default
+
   return (
     <div
       onClick={onSelect}
@@ -134,9 +174,23 @@ const VariantCard: React.FC<VariantCardProps> = ({
                 {variant.title}
               </h2>
               <p className="mt-1 text-sm font-medium text-gray-600">
-                {variant.metadata.typ_dreva} {variant.metadata.trieda && (
-                  <span className="text-amber-600">{variant.metadata.trieda}</span>
-                )}
+                {config.primaryFields.map((field, index) => {
+                  const value = variant.metadata[field]
+                  if (!value) return null
+                  
+                  const fieldStyle = config.fieldStyles[field as keyof typeof config.fieldStyles]
+                  const colorClass = fieldStyle?.color || 'text-gray-600'
+                  const hoverColorClass = fieldStyle?.hoverColor || 'hover:text-accent-dark'
+                  
+                  return (
+                    <span 
+                      key={field}
+                      className={`${index > 0 ? 'ml-1' : ''} ${colorClass} transition-colors duration-200 cursor-pointer ${hoverColorClass}`}
+                    >
+                      {value}
+                    </span>
+                  )
+                })}
               </p>
             </div>
             
@@ -145,35 +199,43 @@ const VariantCard: React.FC<VariantCardProps> = ({
           
           {/* Technické údaje z metadata - mobile responsive */}
           {/* Only render the grid if at least one value is present */}
-          {(variant.metadata.dlzka_m || variant.metadata.cena_m2_s_dph || variant.metadata.kusov_v_baliku || variant.metadata.pouzitie || variant.metadata.opracovanie_dreva) ? (
+          {config.technicalFields.some(field => variant.metadata[field]) ? (
             <div className="mb-3 space-y-2">
-              {/* Prvý riadok - mobile: 1 col, tablet+: 3 cols */}
+              {/* Dynamické technical fields */}
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                <div className="p-2 text-center bg-white rounded border border-accent/10">
-                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Dĺžka</span>
-                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.dlzka_m || ''}</p>
-                </div>
-                <div className="p-2 text-center bg-white rounded border border-accent/10">
-                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">€/m²</span>
-                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.cena_m2_s_dph || ''}</p>
-                </div>
-                <div className="p-2 text-center bg-white rounded border border-accent/10">
-                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">V balíku</span>
-                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.kusov_v_baliku || ''}</p>
-                </div>
+                {config.technicalFields.slice(0, 3).map(field => {
+                  const value = variant.metadata[field]
+                  if (!value) return null
+                  
+                  return (
+                    <div key={field} className="p-2 text-center bg-white rounded border border-accent/10">
+                      <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">
+                        {getFieldLabel(field)}
+                      </span>
+                      <p className="font-bold text-accent-dark text-xs mt-0.5">{value}</p>
+                    </div>
+                  )
+                })}
               </div>
               
-              {/* Druhý riadok - mobile: 1 col, tablet+: 2 cols */}
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                <div className="p-2 text-center bg-white rounded border border-accent/10">
-                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Použitie</span>
-                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.pouzitie || ''}</p>
+              {/* Druhý riadok ak sú ďalšie polia */}
+              {config.technicalFields.length > 3 && (
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {config.technicalFields.slice(3, 5).map(field => {
+                    const value = variant.metadata[field]
+                    if (!value) return null
+                    
+                    return (
+                      <div key={field} className="p-2 text-center bg-white rounded border border-accent/10">
+                        <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">
+                          {getFieldLabel(field)}
+                        </span>
+                        <p className="font-bold text-accent-dark text-xs mt-0.5">{value}</p>
+                      </div>
+                    )
+                  })}
                 </div>
-                <div className="p-2 text-center bg-white rounded border border-accent/10">
-                  <span className="block text-xs font-medium tracking-wide text-gray-500 uppercase">Opracovanie dreva</span>
-                  <p className="font-bold text-accent-dark text-xs mt-0.5">{variant.metadata.opracovanie_dreva || ''}</p>
-                </div>
-              </div>
+              )}
             </div>
           ) : null}
 

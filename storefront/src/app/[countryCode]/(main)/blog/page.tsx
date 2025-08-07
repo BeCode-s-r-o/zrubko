@@ -2,80 +2,78 @@ import { Metadata } from "next"
 import { ArrowRight, Calendar, User, Tag } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Blog - Zrubko.sk",
   description: "Užitočné články, tipy a inšpirácie pre vaše drevené projekty",
 }
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "Ako vybrať správny drevený materiál pre váš projekt",
-    excerpt: "Praktický návod na výber drevených materiálov podľa typu projektu, prostredia a rozpočtu. Dozviete sa, ktoré drevo je najvhodnejšie pre interiéry, exteriéry a špeciálne aplikácie.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Peter Novák",
-    date: "15. január 2024",
-    category: "Poradenstvo",
-    readTime: "5 min"
-  },
-  {
-    id: 2,
-    title: "Trendy v drevených interiéroch 2024",
-    excerpt: "Objavte najnovšie trendy v používaní dreva v interiérovom dizajne a ako ich aplikovať vo vašom dome. Od prírodných tónov po moderné kombinácie.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Mária Kováčová",
-    date: "10. január 2024",
-    category: "Trendy",
-    readTime: "7 min"
-  },
-  {
-    id: 3,
-    title: "Údržba drevených podláh počas zimy",
-    excerpt: "Tipy a triky na správnu údržbu drevených podláh v chladných mesiacoch. Ako chrániť drevo pred vlhkosťou a teplotnými zmenami.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Ján Svoboda",
-    date: "5. január 2024",
-    category: "Údržba",
-    readTime: "4 min"
-  },
-  {
-    id: 4,
-    title: "Výhody cédrového dreva pre sauny",
-    excerpt: "Prečo je cédrové drevo ideálne pre stavbu saún? Pozrieme si jeho vlastnosti, výhody a ako správne vybrať materiál pre váš wellness priestor.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Anna Horváthová",
-    date: "1. január 2024",
-    category: "Wellness",
-    readTime: "6 min"
-  },
-  {
-    id: 5,
-    title: "Drevené fasády - moderné riešenia",
-    excerpt: "Súčasné možnosti drevených fasád a ako ich správne navrhnúť. Od tradičných po moderné systémy a ich výhody.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Martin Kováč",
-    date: "28. december 2023",
-    category: "Exteriér",
-    readTime: "8 min"
-  },
-  {
-    id: 6,
-    title: "Ekológia a udržateľnosť v drevenom stavebníctve",
-    excerpt: "Ako drevo prispieva k udržateľnému stavebníctvu a prečo je ekologickou voľbou pre vaše projekty.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
-    author: "Eva Novotná",
-    date: "20. december 2023",
-    category: "Ekológia",
-    readTime: "9 min"
+type Props = {
+  params: { countryCode: string }
+}
+
+type BlogPost = {
+  id: number
+  title: string
+  slug: string
+  excerpt: string
+  content: string
+  featuredImage: string
+  author: string
+  category: string
+  tags: string[]
+  featured: boolean
+  publishedAt: string
+}
+
+// Helper function to get blog posts from Strapi
+async function getBlogPosts(): Promise<BlogPost[]> {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}/api/blogs?populate=cover&sort=publishedAt:desc`, {
+      next: { revalidate: 30 }, // Cache for 30 seconds
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    
+    if (response.ok) {
+      const data = await response.json()
+      console.log('Strapi blog data:', data)
+      
+      return data.data?.map((post: any): BlogPost => ({
+        id: post.id,
+        title: post.attributes.title,
+        slug: post.attributes.slug,
+        excerpt: post.attributes.excerpt || 'Bez popisu...',
+        content: post.attributes.content,
+        featuredImage: post.attributes.cover?.data?.attributes?.url 
+          ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${post.attributes.cover.data.attributes.url}`
+          : "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
+        author: post.attributes.author || 'Autor',
+        category: post.attributes.category || 'Všeobecné',
+        tags: post.attributes.tags || [],
+        featured: post.attributes.featured || false,
+        publishedAt: post.attributes.publishedAt || post.attributes.createdAt,
+      })) || []
+    } else {
+      console.error('Strapi response error:', response.status, response.statusText)
+    }
+  } catch (error) {
+    console.error('Error fetching from Strapi:', error)
   }
-]
+
+  // Fallback if Strapi is not available
+  return []
+}
 
 const categories = [
   "Všetky", "Poradenstvo", "Trendy", "Údržba", "Wellness", "Exteriér", "Ekológia"
 ]
 
-export default function BlogPage() {
+export default async function BlogPage({ params }: Props) {
+  const blogPosts = await getBlogPosts()
+
   return (
     <div className="min-h-screen bg-white">
       {/* Breadcrumbs */}
@@ -95,6 +93,11 @@ export default function BlogPage() {
             <p className="text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
               Užitočné články, tipy a inšpirácie pre vaše drevené projekty
             </p>
+            <div className="mt-8">
+              <p className="text-white/60">
+                📝 {blogPosts.length} článkov | ✨ Obsah zo Strapi CMS
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -119,79 +122,94 @@ export default function BlogPage() {
           </div>
 
           {/* Blog Posts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <article key={post.id} className="group">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                  {/* Image */}
-                  <div className="aspect-[3/2] overflow-hidden">
-                    <img 
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6">
-                    {/* Category */}
-                    <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm rounded-full mb-4">
-                      {post.category}
+          {blogPosts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <article key={post.id} className="group">
+                  <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    {/* Image */}
+                    <div className="aspect-[3/2] overflow-hidden">
+                      <Image 
+                        src={post.featuredImage}
+                        alt={post.title}
+                        width={600}
+                        height={400}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-xl font-medium text-black mb-3 leading-tight group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
+                    {/* Content */}
+                    <div className="p-6">
+                      {/* Category */}
+                      <div className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm rounded-full mb-4">
+                        {post.category}
+                      </div>
 
-                    {/* Excerpt */}
-                    <p className="text-black/60 mb-4 leading-relaxed font-light">
-                      {post.excerpt}
-                    </p>
+                      {/* Title */}
+                      <h3 className="text-xl font-medium text-black mb-3 leading-tight group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h3>
 
-                    {/* Meta */}
-                    <div className="flex items-center gap-4 text-sm text-black/40 mb-4">
-                      <div className="flex items-center gap-1">
-                        <User size={14} />
-                        {post.author}
+                      {/* Excerpt */}
+                      <p className="text-black/60 mb-4 leading-relaxed font-light">
+                        {post.excerpt}
+                      </p>
+
+                      {/* Meta */}
+                      <div className="flex items-center gap-4 text-sm text-black/40 mb-4">
+                        <div className="flex items-center gap-1">
+                          <User size={14} />
+                          {post.author}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Calendar size={14} />
+                          {new Date(post.publishedAt).toLocaleDateString('sk-SK')}
+                        </div>
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="flex items-center gap-1">
+                            <Tag size={14} />
+                            #{post.tags[0]}
+                          </div>
+                        )}
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Calendar size={14} />
-                        {post.date}
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Tag size={14} />
-                        {post.readTime}
-                      </div>
+
+                      {/* Read More */}
+                      <LocalizedClientLink href={`/blog/${post.slug}`}>
+                        <button className="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors group">
+                          Čítať viac
+                          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                        </button>
+                      </LocalizedClientLink>
                     </div>
-
-                    {/* Read More */}
-                    <LocalizedClientLink href={`/blog/${post.id}`}>
-                      <button className="flex items-center gap-2 text-primary hover:text-primary-dark transition-colors group">
-                        Čítať viac
-                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                      </button>
-                    </LocalizedClientLink>
                   </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="mb-8">
+                <h3 className="text-2xl font-medium text-black mb-4">Načítavam blogy zo Strapi...</h3>
+                <p className="text-black/60 mb-6">
+                  Pokiaľ sa blogy nezobrazujú, skontrolujte či je Strapi spustené na porte 1337.
+                </p>
+                <div className="bg-gray-50 rounded-lg p-4 text-left max-w-md mx-auto">
+                  <p className="text-sm text-black/70 mb-2">
+                    <strong>Strapi URL:</strong> {process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}
+                  </p>
+                  <p className="text-xs text-black/50">
+                    Môžete vytvoriť nové blogy v Strapi admin paneli.
+                  </p>
                 </div>
-              </article>
-            ))}
-          </div>
-
-          {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-16">
-            <button className="px-4 py-2 text-black/60 hover:text-primary transition-colors">
-              Predchádzajúca
-            </button>
-            <button className="px-4 py-2 bg-primary text-white rounded-lg">1</button>
-            <button className="px-4 py-2 text-black/60 hover:text-primary transition-colors">2</button>
-            <button className="px-4 py-2 text-black/60 hover:text-primary transition-colors">3</button>
-            <button className="px-4 py-2 text-black/60 hover:text-primary transition-colors">
-              Ďalšia
-            </button>
-          </div>
+              </div>
+              <LocalizedClientLink href="/">
+                <button className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
+                  Späť na hlavnú stránku
+                </button>
+              </LocalizedClientLink>
+            </div>
+          )}
         </div>
       </section>
     </div>
   )
-} 
+}

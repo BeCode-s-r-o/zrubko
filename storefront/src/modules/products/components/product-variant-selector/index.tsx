@@ -135,6 +135,8 @@ const ProductVariantSelector: React.FC<ProductVariantSelectorProps> = ({
           typ_dreva: (variant.metadata?.typ_dreva as string) || (product.metadata?.typ_dreva as string) || undefined,
           cena_za_m_2: (variant.metadata?.cena_za_m_2 as string) || (product.metadata?.cena_za_m_2 as string) || undefined,
           opracovanie_dreva: (variant.metadata?.opracovanie_dreva as string) || (product.metadata?.opracovanie_dreva as string) || undefined,
+          spoj: (variant.metadata?.spoj as string) || (product.metadata?.spoj as string) || undefined,
+          typ_produktu: (variant.metadata?.typ_produktu as string) || (product.metadata?.typ_produktu as string) || undefined,
           ...variant.metadata
         }
       }
