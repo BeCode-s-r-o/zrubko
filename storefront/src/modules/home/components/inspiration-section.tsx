@@ -8,7 +8,7 @@ const images = [
 
 export default function InspirationSection() {
   return (
-    <section className="py-20 w-full bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-8 md:py-12 lg:py-20 w-full bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="px-6 mx-auto max-w-8xl">
         <div className="grid grid-cols-1 gap-16 items-center lg:grid-cols-2">
           {/* Photo */}

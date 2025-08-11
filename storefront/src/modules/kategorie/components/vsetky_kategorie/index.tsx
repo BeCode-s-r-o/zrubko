@@ -1,5 +1,5 @@
 import { Text } from "@medusajs/ui"
-import CategoryCard from "@modules/home/components/categories/category-card"
+import CategoryCard from "@modules/home/components/kategorie_sekcia/category-card"
 
 export default function CategoriesPage({
   categories,

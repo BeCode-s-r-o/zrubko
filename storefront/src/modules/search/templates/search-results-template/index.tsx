@@ -33,7 +33,7 @@ const SearchResultsTemplate = ({
           </Heading>
         </div>
         <LocalizedClientLink
-          href="/store"
+                        href="/produkty"
           className="txt-medium text-ui-fg-subtle hover:text-ui-fg-base"
         >
           Clear

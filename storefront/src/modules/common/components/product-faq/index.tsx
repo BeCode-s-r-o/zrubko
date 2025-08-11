@@ -28,7 +28,7 @@ export const defaultProductFAQItems: FAQItem[] = [
 export const contactFAQItems: FAQItem[] = [
   {
     title: "Ako vás môžem kontaktovať?",
-    content: "Môžete nás kontaktovať emailom na info@zrubko.sk, telefonicky na +421 907 695 363, alebo nás navštívte osobne v našej predajni v Žiline."
+    content: "Môžete nás kontaktovať emailom na info@zrubko.sk, telefonicky na +421 911 869 777, alebo nás navštívte osobne v našej predajni v Žiline."
   },
   {
     title: "Aká je vaša otváracía doba?",

@@ -8,7 +8,7 @@ import { getProductsListWithSort } from "@lib/data/products"
 import { extractFiltersFromProducts } from "@lib/util/filter-products"
 import { getRegion } from "@lib/data/regions"
 import { listCategories } from "@lib/data/categories"
-import ClientCategoryFiltering from "@modules/categories/components/client-category-filtering"
+import ClientCategoryFiltering from "@modules/kategorie/components/kategorie_filtrovanie"
 import { FilterSection, ProductFilters } from "../../../types/filters"
 
 import PaginatedProducts from "./paginated-products"

@@ -21,7 +21,7 @@ const PageBreadcrumbs: React.FC<PageBreadcrumbsProps> = ({
   }
 
   return (
-    <nav className={`flex items-center px-6 mt-2 mb-2 space-x-2 text-sm relative ${className}`} aria-label="Breadcrumb">
+    <nav className={`flex items-center mx-auto max-w-7xl mt-4 mb-4 space-x-2 text-sm relative ${className}`} aria-label="Breadcrumb">
       {/* Domov - vždy prvá položka */}
       <Link 
         href="/"

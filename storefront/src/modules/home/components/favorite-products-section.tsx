@@ -16,7 +16,7 @@ const FavoriteProductsSection = async ({ countryCode, region }: { countryCode: s
   })
 
   return (
-    <section className="py-16 w-full bg-gradient-to-br from-[#1a2e1a]/5 to-[#1a2e1a]/10">
+    <section className="py-8 md:py-12 lg:py-20 w-full bg-gradient-to-br from-[#1a2e1a]/5 to-[#1a2e1a]/10">
       <div className="px-6 mx-auto max-w-8xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
           {/* Left side: title, description, button */}

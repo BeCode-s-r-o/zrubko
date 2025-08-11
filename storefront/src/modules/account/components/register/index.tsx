@@ -25,7 +25,7 @@ const Register = ({ setCurrentView }: Props) => {
         <div className="bg-white border border-primary/10 rounded-xl p-6">
           <h1 className="text-2xl font-light text-primary mb-2 text-center">Vytvorte si účet</h1>
           <p className="text-gray-600 text-sm leading-relaxed text-center mb-6">
-            Zaregistrujte sa a získajte prístup k najkvalitnejším dreveným produktom s výhodnými cenami.
+            Zaregistrujte sa a získajte prístup k naším exkluzívnym ponukám.
           </p>
           <form className="space-y-4" action={formAction} data-testid="register-page">
             <div className="grid grid-cols-2 gap-4">
@@ -105,7 +105,7 @@ const Register = ({ setCurrentView }: Props) => {
                   onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
                   className="text-primary hover:underline transition-colors"
                 >
-                  Prihláste sa
+                  Prihlásiť sa
                 </button>
               </p>
             </div>

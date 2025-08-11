@@ -70,7 +70,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
 
   const staticPages = [
     { href: '/', title: 'Domov' },
-    { href: '/about', title: 'O nás' },
+    { href: '/o-nas', title: 'O nás' },
     { href: '/projekty', title: 'Realizácie' },
     { href: '/sluzby', title: 'Doprava a Služby' },
     { href: '/spolupraca', title: 'Spolupráca' },
@@ -216,7 +216,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
                 href="tel:+421907695363" 
                 className="flex items-center gap-2 font-sans text-sm text-gray-600 transition-colors hover:text-mahogany"
               >
-                <span>📞</span> +421 907 695 363
+                <span>📞</span> +421 907 695 3644
               </a>
             </div>
           </div>

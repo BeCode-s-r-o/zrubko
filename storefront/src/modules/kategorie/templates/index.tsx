@@ -5,7 +5,7 @@ import InteractiveLink from "@modules/common/components/interactive-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Breadcrumbs from "@modules/common/components/breadcrumbs"
-import CategoryBanner from "@modules/categories/components/category-banner"
+import CategoryBanner from "@modules/kategorie/components/banner_kategorie"
 import { HttpTypes } from "@medusajs/types"
 import { getProductsListWithSort } from "@lib/data/products"
 import { extractFiltersFromProducts } from "@lib/util/filter-products"
@@ -14,8 +14,8 @@ import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 // Import client components
-import CategoryExpandableContent from "@modules/categories/components/category-expandable-content"
-import ClientCategoryFiltering from "@modules/categories/components/client-category-filtering"
+import CategoryExpandableContent from "@modules/kategorie/components/kategorie_spodny_text"
+import ClientCategoryFiltering from "@modules/kategorie/components/kategorie_filtrovanie"
 
 interface CategoryTemplateProps {
   categories: HttpTypes.StoreProductCategory[]

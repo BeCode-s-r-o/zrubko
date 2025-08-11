@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { listCategories } from "@lib/data/categories"
-import CategoriesPageComponent from "@modules/categories/components/categories-page"
+import CategoriesPageComponent from "@modules/kategorie/components/vsetky_kategorie"
 
 export const metadata: Metadata = {
   title: "Kategórie produktov - Zrubko.sk",
@@ -33,7 +33,7 @@ export default async function CategoriesPage({
 
       {/* Categories Section */}
       <div className="w-full">
-        <div className="px-6 mx-auto max-w-8xl">
+        <div className=" mx-auto max-w-8xl">
           <CategoriesPageComponent categories={categories} />
         </div>
       </div>

@@ -213,66 +213,91 @@ export default function MobileCategoryMenu({ regions, categories }: MobileCatego
                   <h3 className="text-lg font-bold text-ebony">Produkty</h3>
                 </div>
 
-                {/* Horizontal Scrollable Categories */}
-                <div className="overflow-x-auto pb-2 -mx-4 px-4">
-                  <div className="flex gap-3 min-w-max">
-                    {mainCategories.map((category) => {
-                      const subcategories = getSubcategories(category.id)
-                      const hasSubcategories = subcategories.length > 0
-                      const imageUrl = getCategoryImageUrl(category)
-                      const isExpanded = expandedCategory === category.id
+                {/* Vertical Categories Grid */}
+                <div className="grid grid-cols-2 gap-4">
+                  {mainCategories.map((category) => {
+                    const subcategories = getSubcategories(category.id)
+                    const hasSubcategories = subcategories.length > 0
+                    const imageUrl = getCategoryImageUrl(category)
+                    const isExpanded = expandedCategory === category.id
 
-                      return (
-                        <div key={category.id} className="flex-shrink-0 w-32">
-                          {/* Category Card */}
-                          <button
-                            onClick={() => handleCategoryClick(category.id)}
-                            className={`w-full p-3 rounded-xl border-2 transition-all duration-300 ${
-                              isExpanded
-                                ? 'border-gold bg-gold-light shadow-lg scale-105'
-                                : 'border-gold/20 bg-white hover:border-gold/50 hover:shadow-md'
-                            }`}
-                          >
-                            {/* Category Image */}
-                            <div className="w-16 h-16 mx-auto mb-2 rounded-lg overflow-hidden bg-gold-light">
-                              {imageUrl ? (
-                                <Image
-                                  src={imageUrl}
-                                  alt={category.name}
-                                  width={64}
-                                  height={64}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center">
-                                  <Package size={24} className="text-gold-dark" />
-                                </div>
-                              )}
-                            </div>
-                            
-                            {/* Category Name */}
-                            <h4 className="font-semibold text-sm text-ebony line-clamp-2 text-center leading-tight">
+                    return (
+                      <div key={category.id} className="w-full">
+                        {/* Category Card */}
+                        <button
+                          onClick={() => handleCategoryClick(category.id)}
+                          className={`w-full h-48 rounded-xl border-2 transition-all duration-300 overflow-hidden relative ${
+                            isExpanded
+                              ? 'border-gold bg-gold-light shadow-lg scale-105'
+                              : 'border-gold/20 bg-white hover:border-gold/50 hover:shadow-md'
+                          }`}
+                        >
+                          {/* Category Image with Overlay */}
+                          <div className="w-full h-32 relative">
+                            {imageUrl ? (
+                              <Image
+                                src={imageUrl}
+                                alt={category.name}
+                                fill
+                                className="object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-gold-light flex items-center justify-center">
+                                <Package size={32} className="text-gold-dark" />
+                              </div>
+                            )}
+                            {/* Dark Overlay */}
+                            <div className="absolute inset-0 bg-black/30" />
+                          </div>
+                          
+                          {/* Category Name - Centered and Uppercase */}
+                          <div className="absolute top-16 left-0 right-0 px-3">
+                            <h4 className="font-bold text-sm text-white uppercase text-center leading-tight drop-shadow-lg">
                               {category.name}
                             </h4>
-                            
-                            {/* Category Indicator */}
-                            <div className="flex items-center justify-center mt-2">
-                              {hasSubcategories ? (
-                                <div className="flex items-center gap-1">
-                                  <Star size={12} className="text-gold" />
-                                  <span className="text-xs text-gold-dark font-medium">
-                                    {subcategories.length}
-                                  </span>
-                                </div>
-                              ) : (
-                                <ShoppingBag size={14} className="text-gold" />
-                              )}
+                          </div>
+                          
+                          {/* Subcategories List - Below the name */}
+                          {hasSubcategories && (
+                            <div className="absolute bottom-3 left-0 right-0 px-3">
+                              <div className="space-y-1">
+                                {subcategories.slice(0, 3).map((subcategory) => (
+                                  <div key={subcategory.id} className="text-center">
+                                    <span className="text-xs text-ebony font-medium">
+                                      {subcategory.name}
+                                    </span>
+                                  </div>
+                                ))}
+                                {subcategories.length > 3 && (
+                                  <div className="text-center">
+                                    <span className="text-xs text-gold-dark font-medium">
+                                      +{subcategories.length - 3} viac
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
                             </div>
-                          </button>
-                        </div>
-                      )
-                    })}
-                  </div>
+                          )}
+                          
+                          {/* Category Indicator - Top Right */}
+                          <div className="absolute top-2 right-2">
+                            {hasSubcategories ? (
+                              <div className="flex items-center gap-1 bg-white/90 rounded-full px-2 py-1">
+                                <Star size={10} className="text-gold" />
+                                <span className="text-xs text-gold-dark font-medium">
+                                  {subcategories.length}
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="bg-white/90 rounded-full p-1">
+                                <ShoppingBag size={12} className="text-gold" />
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      </div>
+                    )
+                  })}
                 </div>
 
                 {/* Expanded Category Details */}

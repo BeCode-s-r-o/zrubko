@@ -23,18 +23,18 @@ export default function FooterContact() {
             <div className="flex items-start gap-3">
               <Phone className="w-4 h-4 text-white mt-0.5" />
               <div>
-                <a href="tel:+421900000000" className="text-white hover:text-white/80 font-medium transition-colors text-sm">
-                  +421 900 000 000
+                <a href="tel:+421 911 869 777" className="text-white hover:text-white/80 font-medium transition-colors text-sm">
+                +421 911 869 777
                 </a>
-                <p className="text-xs text-white/70">Pondelok - Piatok</p>
+
               </div>
             </div>
             
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-white mt-0.5" />
               <div>
-                <span className="text-white font-medium text-sm">Drevená ulica 123</span>
-                <p className="text-xs text-white/70">Bratislava 12345, Slovensko</p>
+                <span className="text-white font-medium text-sm">Hviezdoslavova 1118</span>
+                <p className="text-xs text-white/70">Kysucké Nové Mesto 024 01, Slovensko</p>
               </div>
             </div>
             
@@ -42,8 +42,7 @@ export default function FooterContact() {
               <Clock className="w-4 h-4 text-white mt-0.5" />
               <div>
                 <span className="text-white font-medium text-sm">Otváracie hodiny</span>
-                <p className="text-xs text-white/70">Po-Pia: 8:00 - 18:00</p>
-                <p className="text-xs text-white/70">So: 9:00 - 14:00</p>
+                <p className="text-xs text-white/70">Po-Pia: 7:00 - 17:00</p>
               </div>
             </div>
           </div>

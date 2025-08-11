@@ -75,7 +75,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
           {/* Static pages navigation */}
           <div className="items-center hidden gap-6 font-sans whitespace-nowrap lg:flex">
            
-            <LocalizedClientLink href="/about" className="transition-colors hover:text-gray-300">O nás</LocalizedClientLink>
+            <LocalizedClientLink href="/o-nas" className="transition-colors hover:text-gray-300">O nás</LocalizedClientLink>
             <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Realizácie</LocalizedClientLink>
             <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Doprava a Služby</LocalizedClientLink>
             <LocalizedClientLink href="/spolupraca" className="transition-colors hover:text-gray-300">Spolupráca</LocalizedClientLink>
@@ -95,8 +95,8 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
             <a href="mailto:info@zrubko.sk" className="items-center hidden gap-1 transition-colors sm:flex hover:text-gray-300">
               <Mail size={14} /> <span className="hidden md:inline">info@zrubko.sk</span>
             </a>
-            <a href="tel:+421907695363" className="flex items-center gap-1 transition-colors hover:text-gray-300">
-              <Phone size={14} /> <span className="hidden sm:inline">+421&nbsp;907&nbsp;695&nbsp;363</span>
+            <a href="tel:+421 911 869 777" className="flex items-center gap-1 transition-colors hover:text-gray-300">
+              <Phone size={14} /> <span className="hidden sm:inline">+421 911 869 777</span>
             </a>
             <a href="#" aria-label="Facebook" className="p-1 transition-colors hover:text-gray-300">
               <Facebook size={16} />
