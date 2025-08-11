@@ -11,7 +11,11 @@ export default async function AccountPageLayout({
   const customer = await getCustomer().catch(() => null)
 
   return (
-    <AccountLayout customer={customer}>
+    <AccountLayout 
+      customer={customer}
+      showBreadcrumbs={!!customer} // Show breadcrumbs only for logged-in users (dashboard)
+      currentPage="Môj účet"
+    >
       {customer ? dashboard : login}
     </AccountLayout>
   )

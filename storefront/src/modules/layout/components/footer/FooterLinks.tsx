@@ -32,7 +32,7 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
               </LocalizedClientLink>
             ))}
             <LocalizedClientLink
-              href="/store"
+              href="/produkty"
               className="flex gap-1 items-center pt-2 text-sm font-medium text-white border-t transition-colors duration-200 hover:text-white/80 border-white/10"
             >
               <span>Všetky produkty</span>
@@ -58,7 +58,7 @@ export default function FooterLinks({ categories }: FooterLinksProps) {
           </div>
           <div className="space-y-2">
             <LocalizedClientLink
-              href="/about"
+              href="/o-nas"
               className="block text-sm transition-colors duration-200 text-white/70 hover:text-white"
             >
               O spoločnosti

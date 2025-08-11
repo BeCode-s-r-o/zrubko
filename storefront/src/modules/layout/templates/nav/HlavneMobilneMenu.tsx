@@ -220,7 +220,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
                 href="tel:+421907695363" 
                 className="flex items-center gap-2 font-sans text-sm text-gray-600 hover:text-mahogany transition-colors"
               >
-                <span>📞</span> +421 907 695 363
+                <span>📞</span> +421 911 869 777
               </a>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 import { getCategoryByHandle, listCategories } from "@lib/data/categories"
 import { listRegions } from "@lib/data/regions"
 import { StoreProductCategory, StoreRegion } from "@medusajs/types"
-import CategoryTemplate from "@modules/categories/templates"
+import CategoryTemplate from "@modules/kategorie/templates"
 
 type Props = {
   params: { category: string[]; countryCode: string }

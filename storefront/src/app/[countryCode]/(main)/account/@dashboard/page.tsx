@@ -18,5 +18,6 @@ export default async function OverviewTemplate() {
     notFound()
   }
 
+  // This will be wrapped by AccountLayout with breadcrumbs
   return <Overview customer={customer} orders={orders} />
 }
