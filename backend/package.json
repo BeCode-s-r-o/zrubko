@@ -21,17 +21,17 @@
     "email:dev": "email dev --dir=./src/modules/email-notifications/templates --port=3002"
   },
   "dependencies": {
-    "@medusajs/admin-sdk": "latest",
-    "@medusajs/cli": "latest",
-    "@medusajs/core-flows": "latest",
-    "@medusajs/dashboard": "latest",
-    "@medusajs/framework": "latest",
+    "@medusajs/admin-sdk": "^2.8.7",
+    "@medusajs/cli": "^2.8.7",
+    "@medusajs/core-flows": "^2.8.7",
+    "@medusajs/dashboard": "^2.8.7",
+    "@medusajs/framework": "^2.8.7",
     "@medusajs/inventory": "^2.8.7",
-    "@medusajs/medusa": "latest",
-    "@medusajs/notification-sendgrid": "latest",
-    "@medusajs/payment-stripe": "latest",
-    "@medusajs/workflow-engine-redis": "latest",
-    "@medusajs/event-bus-local": "latest",
+    "@medusajs/medusa": "^2.8.7",
+    "@medusajs/notification-sendgrid": "^2.8.7",
+    "@medusajs/payment-stripe": "^2.8.7",
+    "@medusajs/workflow-engine-redis": "^2.8.7",
+    "@medusajs/event-bus-local": "^2.8.7",
     "@medusajs/workflows-sdk": "^2.8.7",
     "@mikro-orm/core": "6.4.3",
     "@mikro-orm/knex": "6.4.3",
@@ -50,7 +50,7 @@
     "zod": "^4.0.5"
   },
   "devDependencies": {
-    "@medusajs/test-utils": "latest",
+    "@medusajs/test-utils": "^2.8.7",
     "@mikro-orm/cli": "6.4.3",
     "@swc/core": "1.5.7",
     "@swc/jest": "^0.2.37",
@@ -64,8 +64,7 @@
     "react-dom": "^18.3.1",
     "react-email": "^3.0.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.2",
-    "vite": "^5.4.11"
+    "typescript": "^5.7.2"
   },
   "packageManager": "pnpm@9.10.0",
   "engines": {
