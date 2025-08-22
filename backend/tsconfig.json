@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2019",
+    "target": "es2020",
+    "lib": ["es2020"],
     "allowJs": true,
     "esModuleInterop": true,
     "module": "node16",
@@ -20,7 +21,10 @@
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "checkJs": false
+    "checkJs": false,
+    "strict": false,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true
   },
   "ts-node": {
     "swc": true
@@ -31,6 +35,7 @@
     "**/__fixtures__",
     "node_modules",
     "build",
-    ".cache"
+    ".cache",
+    ".medusa"
   ]
 }
