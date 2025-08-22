@@ -208,18 +208,14 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
             {[
               {
                 name: "Ján Mindek",
                 position: "CEO / konateľ",
                 image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
               },
-              {
-                name: "Dušan Kurčina",
-                position: "CEO / konateľ",
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face"
-              },
+              
             ].map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden bg-gray-100">
