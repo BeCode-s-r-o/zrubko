@@ -92,7 +92,12 @@ const medusaConfig = {
       key: Modules.EVENT_BUS,
       resolve: '@medusajs/event-bus-redis',
       options: {
-        redisUrl: REDIS_URL
+        redisUrl: REDIS_URL,
+        retryDelayOnFailover: 100,
+        maxRetriesPerRequest: 3,
+        lazyConnect: true,
+        connectTimeout: 10000,
+        commandTimeout: 5000
       }
     },
     {
@@ -101,9 +106,18 @@ const medusaConfig = {
       options: {
         redis: {
           url: REDIS_URL,
+          retryDelayOnFailover: 100,
+          maxRetriesPerRequest: 3,
+          lazyConnect: true,
+          connectTimeout: 10000,
+          commandTimeout: 5000
         }
       }
-    }] : []),
+    }] : [{
+      key: Modules.EVENT_BUS,
+      resolve: '@medusajs/event-bus-local',
+      options: {}
+    }]),
     ...(SENDGRID_API_KEY && SENDGRID_FROM_EMAIL || RESEND_API_KEY && RESEND_FROM_EMAIL ? [{
       key: Modules.NOTIFICATION,
       resolve: '@medusajs/notification',

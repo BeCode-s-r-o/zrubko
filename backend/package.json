@@ -31,6 +31,7 @@
     "@medusajs/notification-sendgrid": "latest",
     "@medusajs/payment-stripe": "latest",
     "@medusajs/workflow-engine-redis": "latest",
+    "@medusajs/event-bus-local": "latest",
     "@medusajs/workflows-sdk": "^2.8.7",
     "@mikro-orm/core": "6.4.3",
     "@mikro-orm/knex": "6.4.3",
