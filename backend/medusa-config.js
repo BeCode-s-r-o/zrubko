@@ -93,11 +93,7 @@ const medusaConfig = {
       resolve: '@medusajs/event-bus-redis',
       options: {
         redisUrl: REDIS_URL,
-        retryDelayOnFailover: 100,
-        maxRetriesPerRequest: 3,
-        lazyConnect: true,
-        connectTimeout: 10000,
-        commandTimeout: 5000
+  
       }
     },
     {
@@ -106,11 +102,7 @@ const medusaConfig = {
       options: {
         redis: {
           url: REDIS_URL,
-          retryDelayOnFailover: 100,
-          maxRetriesPerRequest: 3,
-          lazyConnect: true,
-          connectTimeout: 10000,
-          commandTimeout: 5000
+
         }
       }
     }] : [{
