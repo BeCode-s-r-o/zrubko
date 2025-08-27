@@ -1,6 +1,6 @@
 import { loadEnv } from '@medusajs/framework/utils'
-
 import { assertValue } from 'utils/assert-value'
+
 
 loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 
@@ -10,9 +10,14 @@ loadEnv(process.env.NODE_ENV || 'development', process.cwd())
 export const IS_DEV = process.env.NODE_ENV === 'development'
 
 /**
- * Public URL for the backend
+ * Public URL for the backenda
  */
 export const BACKEND_URL = process.env.BACKEND_PUBLIC_URL ?? process.env.RAILWAY_PUBLIC_DOMAIN_VALUE ?? 'http://localhost:9000'
+
+/**
+ * Public URL for the storefront
+ */
+export const STOREFRONT_URL = process.env.STOREFRONT_URL ?? 'http://localhost:8000'
 
 /**
  * Database URL for Postgres instance used by the backend
@@ -89,15 +94,6 @@ export const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
  */
 export const MEILISEARCH_HOST = process.env.MEILISEARCH_HOST;
 export const MEILISEARCH_ADMIN_KEY = process.env.MEILISEARCH_ADMIN_KEY;
-
-/**
- * Strapi configuration
- */
-export const STRAPI_URL = process.env.STRAPI_URL;
-export const STRAPI_USERNAME = process.env.STRAPI_USERNAME;
-export const STRAPI_PASSWORD = process.env.STRAPI_PASSWORD;
-export const STRAPI_PROTOCOL = process.env.STRAPI_PROTOCOL || 'http';
-export const STRAPI_PORT = process.env.STRAPI_PORT || '1337';
 
 /**
  * Worker mode
