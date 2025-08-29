@@ -3,6 +3,7 @@ import {
   ADMIN_CORS,
   AUTH_CORS,
   BACKEND_URL,
+  STOREFRONT_URL,
   COOKIE_SECRET,
   DATABASE_URL,
   JWT_SECRET,
@@ -44,17 +45,29 @@ const medusaConfig = {
       jwtSecret: JWT_SECRET,
       cookieSecret: COOKIE_SECRET
     },
-    build: {
-      rollupOptions: {
-        external: ["@medusajs/dashboard"]
-      }
-    }
+
   },
   admin: {
     backendUrl: BACKEND_URL,
     disable: SHOULD_DISABLE_ADMIN,
+    vite: () => ({
+      optimizeDeps: {
+        include: ["qs"],
+      },
+      resolve: {
+        dedupe: ["react", "react-dom", "@tanstack/react-query"],
+      },
+    }),
   },
   modules: [
+    {
+      resolve: "./src/modules/blog",
+      options: {
+        blog: {
+          enabled: true,
+        }
+      }
+    },
     {
       key: Modules.INVENTORY,
       resolve: '@medusajs/inventory',
