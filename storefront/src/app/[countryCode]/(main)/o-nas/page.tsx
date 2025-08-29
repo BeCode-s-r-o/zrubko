@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="py-5 mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Content - First on mobile, first on desktop */}
-            <div className="space-y-8 p-4 md:p-0 order-1 lg:order-1">
+            <div className="space-y-8 px-4  order-1 lg:order-1">
               <div>
                 <h2 className="mb-4 text-3xl font-light leading-tight text-black lg:text-4xl">
                   O nás
@@ -83,7 +83,7 @@ export default function AboutPage() {
             </div>
 
             {/* Photo - Second on mobile, second on desktop */}
-            <div className="relative order-2 lg:order-2">
+            <div className="relative px-4 order-2 lg:order-2">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 max-w-md mx-auto lg:max-w-none">
                 <img 
                   src="https://console-production-f027.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=o-nas%2Fo-onas_banner_2.webp&version_id=null"
