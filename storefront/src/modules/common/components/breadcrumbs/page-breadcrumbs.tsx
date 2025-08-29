@@ -21,7 +21,7 @@ const PageBreadcrumbs: React.FC<PageBreadcrumbsProps> = ({
   }
 
   return (
-    <nav className={`flex items-center mx-auto max-w-7xl mt-4 mb-4 space-x-2 text-sm relative ${className}`} aria-label="Breadcrumb">
+    <nav className={`flex px-2 items-center mx-auto max-w-7xl mt-4 mb-4 space-x-2 text-sm relative ${className}`} aria-label="Breadcrumb">
       {/* Domov - vždy prvá položka */}
       <Link 
         href="/"
@@ -36,7 +36,7 @@ const PageBreadcrumbs: React.FC<PageBreadcrumbsProps> = ({
           <span className="mx-[4px] text-ui-fg-muted">/</span>
           
           {item.isActive ? (
-            <span className="font-medium text-ui-fg-base text-small-regular">
+            <span className="font-medium text-ui-fg-base underline text-small-regular">
               {item.label}
             </span>
           ) : item.href ? (

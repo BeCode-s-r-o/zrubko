@@ -64,9 +64,11 @@ export default function ContactPage() {
                 <div className="flex gap-3 items-center">
                   <MapPin className="w-5 h-5 text-primary" />
                   <div>
+                    <p className="text-gray-700">Hviezdoslavova 1118</p>
                     <p className="font-medium text-gray-900">Kysucké Nové Mesto</p>
                     <p className="text-gray-700">024 01</p>
-                    <p className="text-gray-700">Hviezdoslavova 1118</p>
+                    
+                    <p className="text-gray-700">Slovenska republika</p>
                   </div>
                 </div>
               </div>
@@ -102,8 +104,8 @@ export default function ContactPage() {
                   <MapPin className="w-5 h-5 text-primary" />
                   <div>
                     <p className="font-medium text-gray-900">Zrubko s.r.o.</p>
-                    <p className="text-gray-700">010 01 Žilina</p>
                     <p className="text-gray-700">Pribinova 3030/30</p>
+                    <p className="text-gray-700">010 01 Žilina</p>
                     <p className="text-gray-700">Slovensko</p>
                   </div>
                 </div>

@@ -4,7 +4,16 @@ import CountrySelect from "../country-select"
 import { HttpTypes } from "@medusajs/types"
 
 const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
-  const [formData, setFormData] = useState<any>({})
+  const [formData, setFormData] = useState<any>({
+    "billing_address.first_name": "",
+    "billing_address.last_name": "",
+    "billing_address.address_1": "",
+    "billing_address.company": "",
+    "billing_address.city": "",
+    "billing_address.country_code": "",
+    "billing_address.province": "",
+    "billing_address.phone": "",
+  })
 
   useEffect(() => {
     setFormData({
