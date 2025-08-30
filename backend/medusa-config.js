@@ -59,6 +59,11 @@ const medusaConfig = {
       },
     }),
   },
+  build: {
+    rollupOptions: {
+      external: ["@medusajs/dashboard", "@medusajs/ui", "@medusajs/icons"]
+    }
+  },
   modules: [
     {
       resolve: "./src/modules/blog",
