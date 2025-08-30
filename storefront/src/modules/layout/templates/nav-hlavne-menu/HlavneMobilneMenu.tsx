@@ -81,7 +81,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 xl:hidden">
+    <div className="fixed inset-0 z-50 md:hidden">
       {/* Backdrop */}
       <div 
         className="fixed inset-0 transition-opacity bg-black bg-opacity-50"
@@ -195,12 +195,12 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
             {/* Account Link */}
             <div className="pb-4 mb-4 border-b border-gray-200">
               <LocalizedClientLink
-                href="/account"
+                href="/prihlasit-sa"
                 onClick={onClose}
                 className="flex items-center gap-3 p-3 font-sans text-base transition-colors rounded-lg text-ebony hover:bg-gray-100 hover:text-mahogany"
               >
                 <User size={20} />
-                <span>Môj účet</span>
+                <span>Prihlásiť sa</span>
               </LocalizedClientLink>
             </div>
 

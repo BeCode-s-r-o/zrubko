@@ -11,6 +11,7 @@ import Package from "@modules/common/icons/package"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 import { signout } from "@lib/data/customer"
+import { useTranslations } from "next-intl"
 
 const AccountNav = ({
   customer,
@@ -19,17 +20,21 @@ const AccountNav = ({
 }) => {
   const route = usePathname()
   const { countryCode } = useParams() as { countryCode: string }
+  const tAcc = useTranslations("account")
+  const tCommon = useTranslations("common")
 
   const handleLogout = async () => {
     await signout(countryCode)
   }
 
+  const hasCompanyData = customer?.metadata?.company_name || customer?.metadata?.ico || customer?.metadata?.dic || customer?.metadata?.ic_dph
+
   return (
     <div>
       <div className="small:hidden" data-testid="mobile-account-nav">
-        {route !== `/${countryCode}/account` ? (
+        {route !== `/${countryCode}/ucet` ? (
           <LocalizedClientLink
-            href="/account"
+            href="/ucet"
             className="flex items-center gap-x-2 text-small-regular py-2"
             data-testid="account-main-link"
           >
@@ -47,14 +52,14 @@ const AccountNav = ({
               <ul>
                 <li>
                   <LocalizedClientLink
-                    href="/account/profile"
+                    href="/ucet/profile"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                     data-testid="profile-link"
                   >
                     <>
                       <div className="flex items-center gap-x-2">
                         <User size={20} />
-                        <span>Profile</span>
+                        <span>{tAcc.has("profile") ? tAcc("profile") : "Profil"}</span>
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
@@ -62,14 +67,14 @@ const AccountNav = ({
                 </li>
                 <li>
                   <LocalizedClientLink
-                    href="/account/addresses"
+                    href="/ucet/adresy"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                     data-testid="addresses-link"
                   >
                     <>
                       <div className="flex items-center gap-x-2">
                         <MapPin size={20} />
-                        <span>Addresses</span>
+                        <span>{tAcc.has("addresses") ? tAcc("addresses") : "Adresy"}</span>
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
@@ -77,13 +82,13 @@ const AccountNav = ({
                 </li>
                 <li>
                   <LocalizedClientLink
-                    href="/account/orders"
+                    href="/ucet/orders"
                     className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
                     data-testid="orders-link"
                   >
                     <div className="flex items-center gap-x-2">
                       <Package size={20} />
-                      <span>Orders</span>
+                      <span>{tAcc.has("orders") ? tAcc("orders") : "Objednávky"}</span>
                     </div>
                     <ChevronDown className="transform -rotate-90" />
                   </LocalizedClientLink>
@@ -97,7 +102,7 @@ const AccountNav = ({
                   >
                     <div className="flex items-center gap-x-2">
                       <ArrowRightOnRectangle />
-                      <span>Log out</span>
+                      <span>{tAcc.has("logout") ? tAcc("logout") : "Odhlásiť sa"}</span>
                     </div>
                     <ChevronDown className="transform -rotate-90" />
                   </button>
@@ -108,55 +113,53 @@ const AccountNav = ({
         )}
       </div>
       <div className="hidden small:block" data-testid="account-nav">
-        <div>
-          <div className="pb-4">
-            <h3 className="text-base-semi">Account</h3>
-          </div>
+        <div className="max-w-2xl mx-auto">
           <div className="text-base-regular">
-            <ul className="flex mb-0 justify-start items-start flex-col gap-y-4">
+            <ul className="flex mb-4 justify-center text-white bg-secondary items-center flex-row gap-x-6 p-4 rounded-lg">
               <li>
                 <AccountNavLink
-                  href="/account"
+                  href="/ucet"
                   route={route!}
                   data-testid="overview-link"
                 >
-                  Overview
+                  {tAcc.has("overview") ? tAcc("overview") : "Prehľad"}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink
-                  href="/account/profile"
+                  href="/ucet/profile"
                   route={route!}
                   data-testid="profile-link"
                 >
-                  Profile
+                  {tAcc.has("profile") ? tAcc("profile") : "Profil"}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink
-                  href="/account/addresses"
+                  href="/ucet/adresy"
                   route={route!}
                   data-testid="addresses-link"
                 >
-                  Addresses
+                  {tAcc.has("addresses") ? tAcc("addresses") : "Adresy"}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink
-                  href="/account/orders"
+                  href="/ucet/orders"
                   route={route!}
                   data-testid="orders-link"
                 >
-                  Orders
+                  {tAcc.has("orders") ? tAcc("orders") : "Objednávky"}
                 </AccountNavLink>
               </li>
               <li className="text-grey-700">
                 <button
                   type="button"
                   onClick={handleLogout}
+                  className="text-white underline hover:no-underline w-full text-left"
                   data-testid="logout-button"
                 >
-                  Log out
+                  {tAcc.has("logout") ? tAcc("logout") : "Odhlásiť sa"}
                 </button>
               </li>
             </ul>
@@ -186,9 +189,12 @@ const AccountNavLink = ({
   return (
     <LocalizedClientLink
       href={href}
-      className={clx("text-ui-fg-subtle hover:text-ui-fg-base", {
-        "text-ui-fg-base font-semibold": active,
-      })}
+      className={clx(
+        "text-gray-100 hover:text-gray-900 transition-colors duration-200 px-3 py-2 rounded-md hover:bg-gray-100",
+        {
+          "text-gray-900 font-semibold bg-gray-100": active,
+        }
+      )}
       data-testid={dataTestId}
     >
       {children}

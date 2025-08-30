@@ -35,7 +35,7 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
 
   return (
     <div className="flex-1" data-testid="account-page">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto pb-12 max-w-7xl">
         {/* Breadcrumbs - Only show when needed */}
         {showBreadcrumbs && (
           <div className="py-4 px-4">

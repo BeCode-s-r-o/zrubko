@@ -108,7 +108,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
         <div className="mx-auto max-w-8xl">
           <nav className="relative flex items-center justify-between w-full px-2 xl:px-6 min-h-20 text-small-regular text-ebony">
             {/* Mobile hamburger menu - Show when logo is centered */}
-            <div className="flex items-center xl:hidden">
+            <div className="flex items-center md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="p-2 transition-colors text-ebony hover:text-mahogany"
@@ -146,13 +146,13 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               </div>
             </LocalizedClientLink>
 
-            {/* E-shop navigation s pevnými kategóriami - DESKTOP XL+ ONLY */}
-            <div className="items-center justify-center flex-1 hidden xl:flex gap-x-6">
+            {/* E-shop navigation s pevnými kategóriami - TABLET & DESKTOP */}
+            <div className="items-center justify-center flex-1 hidden md:flex gap-x-4 lg:gap-x-6">
               
               {/* 1. Obklady */}
               <div className="relative dropdown-container">
                 <span
-                  className={`flex items-center px-3 py-2 font-sans text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'obklady' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'obklady' ? 'text-mahogany underline' : ''}`}
                   onClick={() => handleClick('obklady')}
                 >
                   Drevené Obklady
@@ -205,7 +205,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               {/* 2. Podlahy */}
               <div className="relative dropdown-container">
                 <span
-                  className={`flex items-center px-3 py-2 font-sans text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'podlahy' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'podlahy' ? 'text-mahogany underline' : ''}`}
                   onClick={() => handleClick('podlahy')}
                 >
                    Drevené Podlahy
@@ -251,7 +251,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               {/* 3. Exteriér */}
               <div className="relative dropdown-container">
                 <span
-                  className={`flex items-center px-3 py-2 font-sans text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'exterior' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'exterior' ? 'text-mahogany underline' : ''}`}
                   onClick={() => handleClick('exterior')}
                 >
                   Exteriér a Interiér
@@ -297,7 +297,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               {/* 4. Konštrukčné drevo */}
               <div className="relative dropdown-container">
                 <span
-                  className={`flex items-center px-3 py-2 font-sans text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'konstrukcne-drevo' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'konstrukcne-drevo' ? 'text-mahogany underline' : ''}`}
                   onClick={() => handleClick('konstrukcne-drevo')}
                 >
                   Konštrukčné drevo
@@ -343,16 +343,16 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
             </div>
           </div>
           <div className="flex items-center gap-3">
-            {/* Region Switcher - Hidden on mobile */}
-            <div className="hidden xl:block">
+                        {/* Region Switcher - Hidden on mobile */}
+            <div className="hidden md:block">
               <RegionSwitcher regions={regions} currentRegion={currentRegion} />
             </div>
-            
+
             {/* Account - Hidden on mobile */}
             <LocalizedClientLink
-              href="/account"
-              className="items-center hidden gap-2 mx-2 transition-all duration-200 rounded-lg xl:flex text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"
-              aria-label="Účet"
+              href="/prihlasit-sa"
+              className="items-center hidden gap-2 mx-2 transition-all duration-200 rounded-lg md:flex text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"
+              aria-label="Prihlásiť sa"
             >
               <User size={20} />
             </LocalizedClientLink>

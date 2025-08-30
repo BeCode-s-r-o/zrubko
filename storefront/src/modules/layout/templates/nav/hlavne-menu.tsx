@@ -16,8 +16,9 @@ import {
 } from "lucide-react"
 import { StoreRegion, HttpTypes } from "@medusajs/types"
 import SearchBar from "@modules/search/components/SearchBar"
-import RegionSwitcher from "./prepinanie-regionu"
+import RegionSwitcher from "../../components/prepinanie-regionu"
 import HlavneMobilneMenu from "./HlavneMobilneMenu"
+import { retrieveCustomer } from "@lib/data/customer"
 
 type NavClientProps = {
   regions: StoreRegion[]
@@ -32,6 +33,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
   const [isLogoHovered, setIsLogoHovered] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [customer, setCustomer] = useState<HttpTypes.StoreCustomer | null>(null)
 
   // Iba click handling - žiadne hover
   const handleClick = (dropdownId: string) => {
@@ -64,6 +66,36 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Fetch customer data
+  useEffect(() => {
+    const fetchCustomer = async () => {
+      try {
+        const customerData = await retrieveCustomer()
+        setCustomer(customerData)
+      } catch (error) {
+        console.error('Error fetching customer:', error)
+        setCustomer(null)
+      }
+    }
+
+    fetchCustomer()
+  }, [])
+
+  // Helper function to get display name
+  const getDisplayName = () => {
+    if (!customer) return "Účet"
+
+    if (customer.first_name && customer.last_name) {
+      return `${customer.first_name} ${customer.last_name}`
+    } else if (customer.first_name) {
+      return customer.first_name
+    } else if (customer.email) {
+      return customer.email.split('@')[0]
+    }
+
+    return "Účet"
+  }
 
   return (
     <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out ${
@@ -354,13 +386,24 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
             </div>
             
             {/* Account - Hidden on mobile */}
-            <LocalizedClientLink
-              href="/account"
-              className="items-center hidden gap-2 mx-2 transition-all duration-200 rounded-lg xl:flex text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"
-              aria-label="Účet"
-            >
-              <User size={20} />
-            </LocalizedClientLink>
+            <div className="hidden lg:flex items-center">
+              {customer ? (
+                <a
+                  href="/ucet"
+                  className="login-link"
+                  title={getDisplayName()}
+                >
+                  <User size={16} className="inline mr-2" />{getDisplayName()}
+                </a>
+              ) : (
+                <a
+                  href="/prihlasit-sa"
+                  className="login-link"
+                >
+                  <User size={16} className="inline mr-2" />Prihlásiť sa
+                </a>
+              )}
+            </div>
             
             {/* Cart - Always visible */}
             <Suspense
