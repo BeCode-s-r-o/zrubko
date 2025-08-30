@@ -55,8 +55,8 @@ const categoryPath = [
 ```tsx
 const customBreadcrumbs = [
   { label: "Domov", href: "/", isActive: false },
-  { label: "Môj účet", href: "/account", isActive: false },
-  { label: "Objednávky", href: "/account/orders", isActive: true }
+  { label: "Môj účet", href: "/ucet", isActive: false },
+  { label: "Objednávky", href: "/ucet/orders", isActive: true }
 ]
 
 <Breadcrumbs customBreadcrumbs={customBreadcrumbs} />

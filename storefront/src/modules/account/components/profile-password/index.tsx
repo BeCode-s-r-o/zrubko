@@ -43,28 +43,37 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-password-editor"
       >
-        <div className="grid grid-cols-2 gap-4">
-          <Input
-            label="Old password"
-            name="old_password"
-            required
-            type="password"
-            data-testid="old-password-input"
-          />
-          <Input
-            label="New password"
-            type="password"
-            name="new_password"
-            required
-            data-testid="new-password-input"
-          />
-          <Input
-            label="Confirm password"
-            type="password"
-            name="confirm_password"
-            required
-            data-testid="confirm-password-input"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-gray-700">Súčasné heslo</h3>
+            <Input
+              label=""
+              name="old_password"
+              required
+              type="password"
+              data-testid="old-password-input"
+            />
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-gray-700">Nové heslo</h3>
+            <Input
+              label=""
+              type="password"
+              name="new_password"
+              required
+              data-testid="new-password-input"
+            />
+          </div>
+          <div className="space-y-2 md:col-span-2 lg:col-span-1">
+            <h3 className="text-sm font-medium text-gray-700">Potvrdenie hesla</h3>
+            <Input
+              label=""
+              type="password"
+              name="confirm_password"
+              required
+              data-testid="confirm-password-input"
+            />
+          </div>
         </div>
       </AccountInfo>
     </form>

@@ -25,36 +25,11 @@ module.exports = {
         black: "#000000",
         primary: {
           DEFAULT: "#1a2e1a", // hlavná tmavozelená
-          dark: "#162619",
-          light: "#2d4a2d",
+
         },
         secondary: {
-          DEFAULT: "#f8fafc", // svetlá šedá
-          dark: "#e2e8f0",
-          light: "#f1f5f9",
-        },
-        neutral: {
-          DEFAULT: "#64748b", // neutrálna šedá
-          dark: "#475569",
-          light: "#cbd5e1",
-        },
-        accent: {
-          DEFAULT: "#1a2e1a", // tmavozelená pre akcenty
-          dark: "#162619",
-          light: "#2d4a2d",
-        },
-        cta: {
-          DEFAULT: "#1a2e1a", // tmavozelená pre CTA
-          hover: "#162619",
-        },
-        gray: {
-          DEFAULT: "#374151",
-          light: "#6b7280",
-        },
-        amber: {
-          50: "#FFFBEB",
-          100: "#FEF3C7",
-          300: "#FCD34D",
+          DEFAULT: "#AB7941",
+
         },
       },
       

@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { X, ChevronDown, ChevronRight, User } from "lucide-react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import RegionSwitcher from "./prepinanie-regionu"
 import Image from "next/image"
-import { StoreRegion } from "@medusajs/types"
+import { StoreRegion, HttpTypes } from "@medusajs/types"
+import { retrieveCustomer } from "@lib/data/customer"
 
 type MobilneMenuProps = {
   isOpen: boolean
@@ -20,6 +21,23 @@ type ExpandedSections = {
 
 export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentRegion }: MobilneMenuProps) {
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({})
+  const [customer, setCustomer] = useState<HttpTypes.StoreCustomer | null>(null)
+
+  // Fetch customer data
+  useEffect(() => {
+    const fetchCustomer = async () => {
+      try {
+        const customerData = await retrieveCustomer()
+
+        setCustomer(customerData)
+      } catch (error) {
+        console.error('Error fetching customer in mobile:', error)
+        setCustomer(null)
+      }
+    }
+
+    fetchCustomer()
+  }, [])
 
   const toggleSection = (sectionKey: string) => {
     setExpandedSections(prev => ({
@@ -199,12 +217,19 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
             {/* Account Link */}
             <div className="mb-4 pb-4 border-b border-gray-200">
               <LocalizedClientLink
-                href="/account"
+                href={customer ? "/ucet" : "/prihlasit-sa"}
                 onClick={onClose}
-                className="flex items-center gap-3 p-3 font-sans text-base text-ebony transition-colors rounded-lg hover:bg-gray-100 hover:text-mahogany"
+                className={`flex items-center gap-3 p-3 font-sans text-base transition-colors rounded-lg ${
+                  customer
+                    ? "text-mahogany hover:bg-mahogany/10 hover:text-mahogany-dark"
+                    : "text-gray-400 opacity-60 hover:bg-gray-50 hover:text-gray-600"
+                }`}
               >
-                <User size={20} />
-                <span>Môj účet</span>
+                <User
+                  size={20}
+                  className={customer ? "text-mahogany" : "text-gray-400"}
+                />
+                <span>{customer ? "Môj účet" : "Prihlásiť sa"}</span>
               </LocalizedClientLink>
             </div>
 
