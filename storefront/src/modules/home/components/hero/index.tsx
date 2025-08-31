@@ -22,7 +22,7 @@ const Hero = () => {
       buttonText: "Začať s výberom",
       buttonLink: "/categories",
       showCategories: true,
-      categoriesTitle: "Čo predávame:"
+      categoriesTitle: "Čo ponúkame:"
     },
     {
       headline: "Kvalitné drevené materiály",
@@ -90,7 +90,7 @@ const Hero = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-cente py-8 md:p-4    lg:p-8">
+        <div className="relative z-10 flex-1 flex flex-col justify-center items-center py-8 md:p-4 lg:p-8">
           <div className="max-w-7xl mx-auto w-full">
             {/* Main Content */}
             <div className="text-center lg:text-left lg:max-w-4xl">

@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 import { BlogGridClient } from './blog-grid-client'
+import PageBreadcrumbs from "@modules/common/components/breadcrumbs/page-breadcrumbs"
+import LandingBanner from "@modules/common/components/landing-banner"
 
 interface BlogPageClientProps {
   params: { countryCode: string }
@@ -12,26 +14,33 @@ export default function BlogPageClient({ params, searchParams }: BlogPageClientP
   const t = useTranslations('blog')
 
   return (
-    <div className="page-wrapper">
-      {/* Hero Section */}
-      <div className="bg-gray-100 py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              {t('title')}
-            </h1>
-            <p className="text-xl text-gray-600">
-              {t('subtitle')}
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white">
 
-      <main className="main py-12">
-        <div className="container mx-auto px-4">
-          <BlogGridClient searchParams={searchParams} countryCode={params.countryCode} />
-        </div>
-      </main>
+      {/* Hero Section - using reusable component */}
+      <LandingBanner
+        title={t('title')}
+        subtitle={t('subtitle')}
+        backgroundImage="https://console-production-f027.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=blog%2Fblog_banner.webp&version_id=null"
+        backgroundColor="from-primary/70 via-transparent to-primary/80"
+        textColor="text-white"
+        overlay="dark"
+      />
+
+      {/* Breadcrumbs */}
+      <PageBreadcrumbs className='max-w-7xl mx-auto'
+        items={[
+          { label: "Blog", isActive: true }
+        ]}
+      />
+
+      {/* Main Content */}
+      <div className="mx-auto max-w-7xl">
+        <main className="py-12">
+          <div className="px-4 lg:px-8">
+            <BlogGridClient searchParams={searchParams} countryCode={params.countryCode} />
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

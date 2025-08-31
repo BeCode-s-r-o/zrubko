@@ -279,7 +279,7 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
 
             {/* Action Buttons */}
             <div className="space-y-6">
-              <LocalizedClientLink href="/cart">
+              <LocalizedClientLink href="/kosik">
                 <button
                   onClick={onClose}
                   className="w-full h-12 bg-white border-2 border-primary text-primary py-3 px-4 rounded-xl hover:bg-primary hover:text-white transition-all duration-300 font-medium flex items-center justify-center"
