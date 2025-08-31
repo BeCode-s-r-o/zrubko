@@ -108,7 +108,7 @@ export default function ClientProductList({
 
       {/* Product grid */}
       <ul
-        className={`grid grid-cols-1 w-full small:grid-cols-2 medium:grid-cols-3 gap-x-6 gap-y-8 mb-12 product-grid-transition ${
+        className={`grid grid-cols-1 w-full gap-x-3 gap-y-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 product-grid-transition ${
           isPending ? 'opacity-70' : 'opacity-100'
         }`}
         data-testid="products-list"

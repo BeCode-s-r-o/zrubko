@@ -131,7 +131,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
   const additionalLinks = [
     { href: '/produkty', title: 'Všetky produkty', icon: '🛍️' },
     { href: '/search', title: 'Vyhľadávanie', icon: '🔍' },
-    { href: '/cart', title: 'Košík', icon: '🛒' },
+    { href: '/kosik', title: 'Košík', icon: '🛒' },
     { href: '/prihlasit-sa', title: 'Prihlásiť sa', icon: '👤' },
     { href: '/registrovat-sa', title: 'Registrovať sa', icon: '📝' },
     { href: '/cookies', title: 'Cookies', icon: '🍪' },
@@ -361,7 +361,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
                   {/* Quick Actions */}
                   <div className="space-y-3">
                     <LocalizedClientLink
-                      href="/cart"
+                      href="/kosik"
                       onClick={onClose}
                       className="flex items-center gap-4 p-4 bg-white hover:bg-primary hover:text-white rounded-xl transition-all duration-200 group border border-gray-200"
                     >

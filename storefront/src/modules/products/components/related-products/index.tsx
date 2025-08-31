@@ -53,8 +53,8 @@ export default async function RelatedProducts({
           </p>
         </div>
 
-        {/* 4 wider cards grid */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Related products grid with progressive enhancement */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
           {products.map((product) => (
             <div key={product.id} className="bg-white rounded-xl transition-all duration-300 overflow-hidden min-h-[600px]">
               <WoodProductCard product={product} region={region} />

@@ -500,7 +500,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  href="/cart"
+                  href="/kosik"
                   className="flex items-center gap-2 mx-2 px-3 py-2 text-white rounded-xl bg-secondary hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium"
                 >
                   <ShoppingCart size={20} className="text-secondary-foreground" />

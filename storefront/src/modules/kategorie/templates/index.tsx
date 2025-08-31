@@ -73,16 +73,17 @@ export default async function CategoryTemplate({
 
       {/* Podkategórie ak existujú */}
       {category.category_children && category.category_children.length > 0 && (
-        <div className="px-4 pt-8 pb-8 mx-auto max-w-7xl">
-          <div className="mb-2">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="px-3 pt-6 pb-6 mx-auto max-w-7xl sm:px-4 sm:pt-8 sm:pb-8">
+          <div className="mb-4">
+            <h2 className="mb-4 text-lg font-semibold text-gray-900">Podkategórie</h2>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
               {category.category_children?.map((c) => (
-                <LocalizedClientLink 
-                  key={c.id} 
+                <LocalizedClientLink
+                  key={c.id}
                   href={`/categories/${c.handle}`}
-                  className="block p-4 rounded-lg border transition-all duration-200 bg-ui-bg-subtle border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm"
+                  className="block p-2 rounded-md border transition-all duration-200 bg-ui-bg-subtle border-ui-border-base hover:border-ui-border-interactive hover:shadow-sm sm:p-3 md:p-4"
                 >
-                  <h2 className="font-medium text-ui-fg-base">{c.name}</h2>
+                  <h3 className="font-medium text-ui-fg-base text-sm sm:text-base leading-tight">{c.name}</h3>
                 </LocalizedClientLink>
               ))}
             </div>
