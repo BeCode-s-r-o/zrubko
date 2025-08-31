@@ -21,6 +21,8 @@ type ExpandedSections = {
 export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentRegion }: MobilneMenuProps) {
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({})
   const [activeTab, setActiveTab] = useState<'categories' | 'search' | 'account'>('categories')
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
   const toggleSection = (sectionKey: string) => {
     setExpandedSections(prev => ({
@@ -29,11 +31,41 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
     }))
   }
 
-  // Prevent background scroll when menu opens
+  // Touch handlers for swipe to close
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+
+    const distance = touchStart - touchEnd
+    const isRightSwipe = distance < -75 // Increased sensitivity for easier closing
+
+    // Swipe right to close (common mobile pattern)
+    if (isRightSwipe) {
+      onClose()
+    }
+  }
+
+  // Prevent background scroll and keyboard navigation when menu opens
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+
     if (isOpen) {
       // Prevent background scroll
       document.body.style.overflow = 'hidden'
+      // Add keyboard listener
+      document.addEventListener('keydown', handleKeyDown)
     } else {
       // Restore scroll when menu closes
       document.body.style.overflow = 'unset'
@@ -42,8 +74,9 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
     // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset'
+      document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen])
+  }, [isOpen, onClose])
 
   const menuSections = [
     {
@@ -118,16 +151,25 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
     <div className="fixed inset-0 z-[100] md:hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300 z-[105]"
+        className={`fixed inset-0 bg-black/60 transition-all duration-300 z-[105] ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
         onClick={onClose}
       />
 
       {/* Modern Menu Panel */}
-      <div className="fixed inset-0 left-0 w-full max-w-sm bg-white shadow-2xl transform transition-transform duration-300 z-[110]">
+      <div
+        className={`fixed inset-0 left-0 w-full max-w-sm bg-white shadow-2xl z-[110] transform transition-all duration-300 ease-out h-screen ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="flex flex-col h-full">
 
           {/* Modern Header with Logo and Close */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gradient-to-r from-primary to-primary-dark">
+          <div className="relative flex items-center justify-center p-6 border-b border-gray-100 bg-white">
             <div className="flex items-center gap-3">
               <div className="relative w-[100px] h-[40px]">
                 <Image
@@ -141,10 +183,10 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+              className="absolute right-6 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
               aria-label="Zavrieť menu"
             >
-              <X size={20} className="text-white" />
+              <X size={20} className="text-gray-600" />
             </button>
           </div>
 
@@ -169,7 +211,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
           </div>
 
           {/* Content Area */}
-          <div className="flex-1 overflow-y-auto min-h-0 bg-gray-50" style={{ maxHeight: 'calc(100vh - 180px)', minHeight: 'calc(100vh - 180px)' }}>
+          <div className="flex-1 overflow-y-auto min-h-0 bg-gray-50 h-full">
 
             {/* Categories Tab */}
             {activeTab === 'categories' && (

@@ -39,11 +39,6 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown)
       document.body.style.overflow = 'hidden' // Prevent background scroll
-
-      // Fix for mobile - ensure cart is visible by scrolling to top
-      if (window.innerWidth < 768) {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }
     }
 
     return () => {
@@ -53,12 +48,16 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
   }, [isOpen, onClose])
 
   const fetchCart = async () => {
+    setLoading(true)
     try {
       const cartData = await retrieveCart()
       setCart(cartData)
       onItemCountChange(cartData?.items?.length || 0)
     } catch (error) {
       console.error('Failed to fetch cart:', error)
+      setCart(null)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -138,7 +137,7 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
           <div className="flex items-center gap-2 md:gap-3">
             <ShoppingBag className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
             <h2 className="text-lg md:text-xl font-semibold text-gray-900">
-              Košík ({itemCount})
+              Košík ({cart?.items?.length || 0})
             </h2>
           </div>
 
@@ -154,13 +153,18 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
         {/* Cart Content */}
         <div className="flex-1 overflow-y-auto min-h-0 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400 transition-colors bg-gray-50"
              style={{
-               maxHeight: 'calc(100dvh - 250px)',
-               minHeight: '500px',
+               maxHeight: 'calc(100dvh - 200px)',
                scrollbarWidth: 'thin',
                scrollbarColor: '#d1d5db #f9fafb'
              }}>
 
-          {!cart?.items || cart.items.length === 0 ? (
+          {loading ? (
+            /* Loading State */
+            <div className="flex flex-col items-center justify-center py-16 px-6">
+              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-gray-500 text-sm">Načítavam košík...</p>
+            </div>
+          ) : !cart?.items || cart.items.length === 0 ? (
             /* Empty State */
             <div className="flex flex-col items-center justify-center py-16 px-6">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -294,12 +298,6 @@ export default function MiniCart({ isOpen, onClose, itemCount, onItemCountChange
               </LocalizedClientLink>
             </div>
 
-            {/* Free Shipping Notice */}
-            <div className="mt-4 p-3 bg-primary/5 rounded-lg border border-primary/10">
-              <p className="text-xs text-primary font-medium text-center">
-                🚚 Doprava zadarmo pri nákupe nad 200€
-              </p>
-            </div>
           </div>
         )}
       </div>

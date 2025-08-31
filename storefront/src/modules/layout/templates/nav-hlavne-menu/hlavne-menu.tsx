@@ -118,9 +118,9 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
   }, [isHeaderHidden])
 
   return (
-    <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out transform ${
-      isScrolled ? 'border-b border-gray-200 shadow-lg backdrop-blur-sm bg-white/95' : 'bg-white'
-    } ${isHeaderHidden ? '-translate-y-full' : 'translate-y-0'}`}>
+    <div className={`sticky inset-x-0 top-0 z-50 ${
+      isScrolled ? 'border-b border-gray-200 shadow-lg bg-white' : 'bg-white'
+    }`}>
       {/* TOPBAR – static pages */}
       <div className="w-full py-3 text-xs text-white lg:text-sm bg-gradient-to-r from-primary to-primary-dark shadow-md">
         <div className="flex items-center justify-center w-full gap-4 px-4 mx-auto lg:justify-between max-w-8xl">

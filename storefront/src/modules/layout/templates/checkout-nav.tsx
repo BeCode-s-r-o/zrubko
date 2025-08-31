@@ -37,8 +37,8 @@ export default function CheckoutNav({ countryCode }: CheckoutNavProps) {
   ) || regions[0]
 
   return (
-    <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out ${
-      isLoaded ? 'border-b border-gray-200 shadow-lg backdrop-blur-sm bg-white/95' : 'bg-white'
+    <div className={`sticky inset-x-0 top-0 z-50 ${
+      isLoaded ? 'border-b border-gray-200 shadow-lg bg-white' : 'bg-white'
     }`}>
       {/* TOPBAR – simplified for checkout */}
       <div className="w-full py-2 text-xs text-white lg:text-sm bg-primary">
