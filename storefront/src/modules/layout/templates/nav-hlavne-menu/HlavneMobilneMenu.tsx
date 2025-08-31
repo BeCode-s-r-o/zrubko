@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { X, ChevronDown, ChevronRight, User } from "lucide-react"
+import { useState, useEffect } from "react"
+import { X, ChevronDown, ChevronRight, User, Search, ShoppingBag, Home, Phone, Mail, Grid3X3, Menu as MenuIcon } from "lucide-react"
 import LocalizedClientLink from "../../../common/components/localized-client-link"
 import RegionSwitcher from "./prepinanie-regionu"
 import Image from "next/image"
@@ -20,6 +20,7 @@ type ExpandedSections = {
 
 export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentRegion }: MobilneMenuProps) {
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({})
+  const [activeTab, setActiveTab] = useState<'categories' | 'search' | 'account'>('categories')
 
   const toggleSection = (sectionKey: string) => {
     setExpandedSections(prev => ({
@@ -27,6 +28,22 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
       [sectionKey]: !prev[sectionKey]
     }))
   }
+
+  // Prevent background scroll when menu opens
+  useEffect(() => {
+    if (isOpen) {
+      // Prevent background scroll
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Restore scroll when menu closes
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
 
   const menuSections = [
     {
@@ -78,148 +95,280 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
     { href: '/kontakt', title: 'Kontakt' }
   ]
 
+  const additionalLinks = [
+    { href: '/produkty', title: 'Všetky produkty', icon: '🛍️' },
+    { href: '/search', title: 'Vyhľadávanie', icon: '🔍' },
+    { href: '/cart', title: 'Košík', icon: '🛒' },
+    { href: '/prihlasit-sa', title: 'Prihlásiť sa', icon: '👤' },
+    { href: '/registrovat-sa', title: 'Registrovať sa', icon: '📝' },
+    { href: '/cookies', title: 'Cookies', icon: '🍪' },
+    { href: '/privacy', title: 'Ochrana súkromia', icon: '🔒' },
+    { href: '/terms', title: 'Obchodné podmienky', icon: '📋' }
+  ]
+
+  const socialLinks = [
+    { href: 'https://facebook.com', title: 'Facebook', icon: '📘' },
+    { href: 'https://instagram.com', title: 'Instagram', icon: '📷' },
+    { href: 'https://linkedin.com', title: 'LinkedIn', icon: '💼' }
+  ]
+
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 md:hidden">
+    <div className="fixed inset-0 z-[100] md:hidden">
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 transition-opacity bg-black bg-opacity-50"
+      <div
+        className="fixed inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-300 z-[105]"
         onClick={onClose}
       />
-      
-      {/* Menu Panel - Slide from left, responsive width */}
-      <div className="fixed inset-y-0 left-0 w-full max-w-sm transition-transform transform bg-white shadow-xl md:max-w-md lg:max-w-lg">
+
+      {/* Modern Menu Panel */}
+      <div className="fixed inset-0 left-0 w-full max-w-sm bg-white shadow-2xl transform transition-transform duration-300 z-[110]">
         <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center justify-center relative p-4 border-b border-gray-200 bg-primary">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+
+          {/* Modern Header with Logo and Close */}
+          <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-gradient-to-r from-primary to-primary-dark">
+            <div className="flex items-center gap-3">
+              <div className="relative w-[100px] h-[40px]">
+                <Image
+                  src="/domov/brown_black_logo_zrubko.png"
+                  alt="Zrubko.sk"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors duration-200"
+              aria-label="Zavrieť menu"
+            >
+              <X size={20} className="text-white" />
+            </button>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="flex border-b border-gray-200 bg-gray-50">
+            {[
+              { id: 'categories', label: 'ESHOP' },
+              { id: 'account', label: 'Menu' }
+            ].map((tab) => (
               <button
-                onClick={onClose}
-                className="p-2 text-white transition-colors hover:text-gray-300"
-                aria-label="Zavrieť menu"
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex-1 flex items-center justify-center py-4 px-2 transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? 'text-primary border-b-2 border-primary bg-white'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
+                }`}
               >
-                <X size={24} />
+                <span className="text-sm font-medium">{tab.label}</span>
               </button>
-            </div>
-            <div className="mx-auto relative w-[120px] h-[48px]">
-              <Image
-                src="/domov/brown_black_logo_zrubko.png"
-                alt="Zrubko.sk"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+            ))}
           </div>
 
-          {/* Content */}
-          <div className="flex-1 overflow-y-auto">
-            {/* Product Categories Section FIRST */}
-            <div className="p-4 border-b border-gray-100">
-              <div className="space-y-2">
-                {menuSections.map((section) => (
-                  <div key={section.key} className="overflow-hidden border border-gray-100 rounded-lg">
-                    {/* Section Header */}
-                    <button
-                      onClick={() => toggleSection(section.key)}
-                      className="flex items-center justify-between w-full p-3 transition-colors bg-gray-50 hover:bg-gray-100"
+          {/* Content Area */}
+          <div className="flex-1 overflow-y-auto min-h-0 bg-gray-50" style={{ maxHeight: 'calc(100vh - 180px)', minHeight: 'calc(100vh - 180px)' }}>
+
+            {/* Categories Tab */}
+            {activeTab === 'categories' && (
+              <div className="p-6">
+                <div className="space-y-4">
+                  {menuSections.map((section) => (
+                    <div
+                      key={section.key}
+                      className="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="relative w-8 h-8 overflow-hidden rounded">
-                          <Image
-                            src={section.image}
-                            alt={section.title}
-                            fill
-                            className="object-cover"
-                          />
+                      <LocalizedClientLink
+                        href={section.links[0]?.href || '#'}
+                        onClick={onClose}
+                        className="block"
+                      >
+                        <div className="flex items-center gap-4 p-4">
+                          <div className="relative w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                            <Image
+                              src={section.image}
+                              alt={section.title}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-semibold text-gray-800 group-hover:text-primary transition-colors">
+                              {section.title}
+                            </h3>
+                            <p className="text-sm text-gray-600">
+                              {section.links.length} produkt{section.links.length > 1 ? 'ov' : section.links.length === 0 ? '' : 'a'}
+                            </p>
+                          </div>
+                          <ChevronRight size={20} className="text-gray-400 group-hover:text-primary transition-colors flex-shrink-0" />
                         </div>
-                        <span className="font-sans text-sm font-medium text-ebony">
-                          {section.title}
-                        </span>
-                      </div>
-                      {expandedSections[section.key] ? (
-                        <ChevronDown size={18} className="text-gray-500" />
-                      ) : (
-                        <ChevronRight size={18} className="text-gray-500" />
+                      </LocalizedClientLink>
+
+                      {expandedSections[section.key] && section.links.length > 1 && (
+                        <div className="border-t border-gray-100 bg-gray-50">
+                          {section.links.slice(1).map((link, index) => (
+                            <LocalizedClientLink
+                              key={index}
+                              href={link.href}
+                              onClick={onClose}
+                              className="block px-4 py-3 text-sm text-gray-700 hover:text-primary hover:bg-white transition-colors border-b border-gray-100 last:border-b-0"
+                            >
+                              {link.title}
+                            </LocalizedClientLink>
+                          ))}
+                        </div>
                       )}
-                    </button>
 
-                    {/* Section Links */}
-                    {expandedSections[section.key] && (
-                      <div className="bg-white">
-                        {section.links.map((link, index) => (
-                          <LocalizedClientLink
-                            key={index}
-                            href={link.href}
-                            onClick={onClose}
-                            className="block px-6 py-3 font-sans text-sm text-gray-700 transition-colors border-t border-gray-100 hover:bg-gray-50 hover:text-mahogany"
-                          >
-                            {link.title}
-                          </LocalizedClientLink>
-                        ))}
-                      </div>
-                    )}
+                      {section.links.length > 1 && (
+                        <button
+                          onClick={() => toggleSection(section.key)}
+                          className="w-full px-4 py-2 text-xs text-gray-500 hover:text-gray-700 hover:bg-gray-50 transition-colors border-t border-gray-100"
+                        >
+                          {expandedSections[section.key] ? 'Menej' : 'Viac'}
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Vyhľadávanie v ESHOP */}
+                <div className="mt-8">
+                  <div className="bg-white border border-gray-200 rounded-xl p-4">
+                    <div className="relative">
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                      <input
+                        type="text"
+                        placeholder="Čo hľadáte..."
+                        className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 text-base"
+                      />
+                    </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Static Pages Section SECOND */}
-            <div className="p-4">
-              <div className="space-y-1">
-                {staticPages.map((page) => (
-                  <LocalizedClientLink
-                    key={page.href}
-                    href={page.href}
-                    onClick={onClose}
-                    className="block px-3 py-2 font-sans text-base transition-colors rounded-lg text-ebony hover:bg-gray-50 hover:text-mahogany"
-                  >
-                    {page.title}
-                  </LocalizedClientLink>
-                ))}
+            {/* Search Tab */}
+            {activeTab === 'search' && (
+              <div className="p-6">
+                <div className="space-y-6">
+                  {/* Custom Search Input */}
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                    <input
+                      type="text"
+                      placeholder="Čo hľadáte..."
+                      className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 text-base shadow-sm"
+                    />
+                  </div>
+
+                  {/* Popular Searches */}
+                  <div>
+                    <h3 className="text-base font-semibold text-gray-800 mb-4">Populárne vyhľadávania</h3>
+                    <div className="flex flex-wrap gap-3">
+                      {['Drevené obklady', 'Podlahy', 'Terásové dosky', 'Sauna'].map((term) => (
+                        <button
+                          key={term}
+                          className="px-4 py-3 bg-gray-100 hover:bg-primary hover:text-white rounded-lg text-sm font-medium transition-all duration-200 border border-gray-200"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Menu Tab */}
+            {activeTab === 'account' && (
+              <div className="p-6">
+                <div className="space-y-6">
+                  {/* Hlavné stránky */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Hlavné stránky</h3>
+                    <div className="grid grid-cols-2 gap-3">
+                      {staticPages.slice(0, 6).map((page) => (
+                        <LocalizedClientLink
+                          key={page.href}
+                          href={page.href}
+                          onClick={onClose}
+                          className="flex items-center gap-3 p-4 bg-white hover:bg-primary hover:text-white rounded-xl transition-all duration-200 group border border-gray-200"
+                        >
+                          <Home size={18} className="text-primary group-hover:text-white" />
+                          <span className="text-sm font-medium">{page.title}</span>
+                        </LocalizedClientLink>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Login/Register */}
+                  <div className="bg-gradient-to-r from-primary to-primary-dark rounded-xl p-6 text-white">
+                    <h3 className="text-lg font-semibold mb-2">Prihláste sa</h3>
+                    <p className="text-sm opacity-90 mb-4">Pre prístup k vašim objednávkam a preferenciám</p>
+                    <LocalizedClientLink
+                      href="/prihlasit-sa"
+                      onClick={onClose}
+                      className="inline-block bg-white text-primary px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                    >
+                      Prihlásiť sa
+                    </LocalizedClientLink>
+                  </div>
+
+                  {/* Quick Actions */}
+                  <div className="space-y-3">
+                    <LocalizedClientLink
+                      href="/cart"
+                      onClick={onClose}
+                      className="flex items-center gap-4 p-4 bg-white hover:bg-primary hover:text-white rounded-xl transition-all duration-200 group border border-gray-200"
+                    >
+                      <ShoppingBag size={20} className="text-primary group-hover:text-white" />
+                      <div>
+                        <div className="font-semibold">Košík</div>
+                        <div className="text-sm text-gray-500 group-hover:text-white/80">Zobraziť položky</div>
+                      </div>
+                    </LocalizedClientLink>
+
+                    <LocalizedClientLink
+                      href="/produkty"
+                      onClick={onClose}
+                      className="flex items-center gap-4 p-4 bg-white hover:bg-primary hover:text-white rounded-xl transition-all duration-200 group border border-gray-200"
+                    >
+                      <Grid3X3 size={20} className="text-primary group-hover:text-white" />
+                      <div>
+                        <div className="font-semibold">Všetky produkty</div>
+                        <div className="text-sm text-gray-500 group-hover:text-white/80">Prehľad ponuky</div>
+                      </div>
+                    </LocalizedClientLink>
+                  </div>
+
+                  {/* Contact Info */}
+                  <div className="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Kontaktujte nás</h3>
+                    <div className="space-y-3">
+                      <a
+                        href="tel:+421 911 869 777"
+                        className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors"
+                      >
+                        <Phone size={20} />
+                        <span>+421 911 869 777</span>
+                      </a>
+                      <a
+                        href="mailto:info@zrubko.sk"
+                        className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors"
+                      >
+                        <Mail size={20} />
+                        <span>info@zrubko.sk</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Footer */}
-          <div className="p-4 border-t border-gray-200 bg-gray-50">
-            {/* Region Switcher */}
-            <div className="pb-4 mb-4 border-b border-gray-200">
-              <h4 className="mb-2 font-sans text-xs font-semibold tracking-wider text-gray-600 uppercase">
-                Región
-              </h4>
-              <RegionSwitcher regions={regions} currentRegion={currentRegion} />
-            </div>
 
-            {/* Account Link */}
-            <div className="pb-4 mb-4 border-b border-gray-200">
-              <LocalizedClientLink
-                href="/prihlasit-sa"
-                onClick={onClose}
-                className="flex items-center gap-3 p-3 font-sans text-base transition-colors rounded-lg text-ebony hover:bg-gray-100 hover:text-mahogany"
-              >
-                <User size={20} />
-                <span>Prihlásiť sa</span>
-              </LocalizedClientLink>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-2">
-              <a 
-                href="mailto:info@zrubko.sk" 
-                className="flex items-center gap-2 font-sans text-sm text-gray-600 transition-colors hover:text-mahogany"
-              >
-                <span>📧</span> info@zrubko.sk
-              </a>
-              <a 
-                href="tel:+421907695363" 
-                className="flex items-center gap-2 font-sans text-sm text-gray-600 transition-colors hover:text-mahogany"
-              >
-                <span>📞</span> +421 907 695 3644
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </div>

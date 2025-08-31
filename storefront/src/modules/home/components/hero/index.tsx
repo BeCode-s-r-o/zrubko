@@ -1,20 +1,41 @@
 "use client"
 
-import { ArrowRight, Star, Shield, Truck, Clock, CheckCircle, Home, Square, Box, Layers } from "lucide-react"
+import { ArrowRight, Home, Square, Box, Layers } from "lucide-react"
 import { useState, useEffect } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  
-  // public images
+
+  // Background images
   const images = [
     "/landing_banner_1.png",
     "/landing_banner.png",
-
   ]
 
-  // Product categories with icons and links
+  // Content for each slide
+  const slidesContent = [
+    {
+      headline: "Obklad - Podlaha - Terasovky",
+      subheadline: "Všetko na jednom mieste.",
+      description: "Vyberiete, vypočítate, objednáte. Doručíme až k vám domov.",
+      buttonText: "Začať s výberom",
+      buttonLink: "/categories",
+      showCategories: true,
+      categoriesTitle: "Čo predávame:"
+    },
+    {
+      headline: "Kvalitné drevené materiály",
+      subheadline: "Tradičná remeselná kvalita.",
+      description: "Objavte našu širokú ponuku prémiových drevených materiálov pre váš domov.",
+      buttonText: "Prezrieť produkty",
+      buttonLink: "/categories",
+      showCategories: true,
+      categoriesTitle: "Naše produkty:"
+    }
+  ]
+
+  // Product categories
   const productCategories = [
     {
       name: "Drevený obklad",
@@ -22,7 +43,7 @@ const Hero = () => {
       href: "/categories/dreveny-obklad"
     },
     {
-      name: "Drevená podlaha", 
+      name: "Drevená podlaha",
       icon: Layers,
       href: "/categories/drevena-podlaha"
     },
@@ -38,6 +59,7 @@ const Hero = () => {
     }
   ]
 
+  // Auto-slide functionality
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length)
@@ -47,90 +69,92 @@ const Hero = () => {
   }, [images.length])
 
   return (
-    <section className="relative w-full bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Hero Banner */}
-      <div className="overflow-hidden relative">
-        <div className="px-0 mx-auto w-full sm:px-6 sm:max-w-8xl lg:px-8">
-          <div className="relative overflow-hidden h-[600px] sm:h-[450px] lg:h-[550px] lg:my-8 flex items-center w-full max-w-none sm:rounded-2xl shadow-lg">
-            {/* Background Images with Carousel */}
-            {images.map((image, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-2000 ease-in-out ${
-                  index === currentImageIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                }`}
-                style={{ backgroundImage: `url('${image}')` }}
-              />
-            ))}
-            
-            {/* Enhanced Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/25 via-black/35 to-black/50"></div>
-            
-            {/* Content Container */}
-            <div className="relative z-10 px-6 mx-auto w-full max-w-4xl sm:max-w-7xl sm:px-8 lg:px-12">
-              <div className="pt-12 pb-8 text-center lg:text-left sm:pt-0 sm:pb-0">
-                {/* Main Headline */}
-                <h1 className="pt-4 mb-4 text-4xl font-light tracking-tight leading-tight text-white drop-shadow-lg sm:text-4xl md:text-4xl lg:text-6xl">
-                   Obklad - Podlaha - Terasovky <br />
-                  
-                  <span className="pt-2 font-medium text-white">
-                    Všetko na jednom mieste. 
-                  </span>
-                </h1>
-                
-                {/* Value Proposition */}
-                <p className="mx-auto mb-6 max-w-3xl text-base font-light leading-relaxed lg:mx-0 text-white/90 sm:text-lg md:text-xl">
-                  Vyberiete, vypočítate, objednáte. 
-                  <span className="font-normal text-white">Doručíme až k vám domov.</span>
-                </p>
+    <section className="relative w-full overflow-hidden sm:px-6 sm:pt-6 sm:pb-6 lg:px-8 lg:pt-8 lg:pb-8 xl:px-12 xl:pt-10 xl:pb-10 sm:rounded-2xl">
+      {/* Hero Container */}
+      <div className="relative h-[70vh] flex flex-col">
+        {/* Background Carousel */}
+        <div className="absolute inset-0 sm:rounded-2xl overflow-hidden">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-[3000ms] ease-in-out ${
+                index === currentImageIndex
+                  ? 'opacity-100 scale-100 blur-0'
+                  : 'opacity-0 scale-105 blur-sm'
+              }`}
+              style={{ backgroundImage: `url('${image}')` }}
+            />
+          ))}
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40 sm:rounded-2xl" />
+        </div>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col gap-3 justify-center sm:flex-row sm:gap-4 lg:justify-start">
-                  <LocalizedClientLink href="/categories">
-                    <button className="flex justify-center items-center px-4 py-2.5 w-full text-sm font-medium text-black bg-white rounded-lg shadow-md transition-all duration-300 group sm:px-6 sm:py-3 sm:text-base sm:w-auto hover:bg-white/95 hover:shadow-lg">
-                      Začať s výberom
-                      <ArrowRight size={14} className="ml-2 transition-transform group-hover:translate-x-1" />
-                    </button>
-                  </LocalizedClientLink>
-                
-                </div>
+        {/* Content */}
+        <div className="relative z-10 flex-1 flex flex-col justify-center py-8 sm:py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto w-full">
+            {/* Main Content */}
+            <div className="text-center lg:text-left lg:max-w-4xl">
+              {/* Headline */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light tracking-tight text-white leading-tight mb-3 sm:mb-4">
+                {slidesContent[currentImageIndex].headline}
+                <span className="block text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-medium mt-2">
+                  {slidesContent[currentImageIndex].subheadline}
+                </span>
+              </h1>
 
-                {/* Product Categories */}
-                <div className="mt-6 sm:mt-8 lg:mt-12 lg:mb-8">
-                  <p className="mb-4 text-sm font-medium tracking-wider uppercase text-white/80">Čo predávame:</p>
-                  <div className="grid grid-cols-1 gap-3 max-w-2xl sm:grid-cols-2">
-                    {productCategories.map((category, index) => {
-                      const IconComponent = category.icon
-                      return (
-                        <LocalizedClientLink key={index} href={category.href}>
-                          <div className="flex gap-3 items-center p-3 text-white rounded-lg border backdrop-blur-sm transition-all duration-300 group bg-white/10 border-white/20 hover:bg-white/15 hover:border-white/30">
-                            <IconComponent className="w-4 h-4 text-white/90" />
-                            <span className="flex-1 text-sm font-medium">{category.name}</span>
-                            <ArrowRight className="w-4 h-4 transition-colors duration-300 text-white/60 group-hover:text-white" />
-                          </div>
-                        </LocalizedClientLink>
-                      )
-                    })}
-                  </div>
-                </div>
+              {/* Description */}
+              <p className="text-base sm:text-lg lg:text-xl text-white/90 font-light leading-relaxed max-w-3xl mx-auto lg:mx-0 mb-6 sm:mb-8 lg:mb-10">
+                {slidesContent[currentImageIndex].description}
+              </p>
+
+              {/* CTA Button */}
+              <div className="flex justify-center lg:justify-start mb-8 sm:mb-10 lg:mb-12">
+                <LocalizedClientLink href={slidesContent[currentImageIndex].buttonLink}>
+                  <button className="group bg-white text-black px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/95 hover:shadow-xl active:scale-95 flex items-center gap-2">
+                    {slidesContent[currentImageIndex].buttonText}
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </LocalizedClientLink>
               </div>
             </div>
 
-            {/* Enhanced Carousel Indicators */}
-            <div className="flex absolute bottom-6 left-1/2 z-20 space-x-2 transform -translate-x-1/2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex 
-                      ? 'bg-white scale-125' 
-                      : 'bg-white/40 hover:bg-white/70'
-                  }`}
-                />
-              ))}
-            </div>
+            {/* Product Categories */}
+            {slidesContent[currentImageIndex].showCategories && (
+              <div className="mt-auto">
+                <p className="text-white/80 font-medium text-xs sm:text-sm uppercase tracking-wider mb-4 sm:mb-6 text-center lg:text-left">
+                  {slidesContent[currentImageIndex].categoriesTitle}
+                </p>
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto lg:mx-0">
+                  {productCategories.map((category, index) => {
+                    const IconComponent = category.icon
+                    return (
+                      <LocalizedClientLink key={index} href={category.href}>
+                        <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 sm:p-4 hover:bg-white/15 hover:border-white/30 transition-all duration-300 active:scale-95 text-center">
+                          <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-white mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                          <span className="text-white font-medium text-xs sm:text-sm block">{category.name}</span>
+                        </div>
+                      </LocalizedClientLink>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </div>
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="absolute right-6 sm:right-8 lg:right-10 xl:right-14 top-1/2 transform -translate-y-1/2 z-20 flex flex-col gap-3">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentImageIndex
+                  ? 'bg-white scale-125'
+                  : 'bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>

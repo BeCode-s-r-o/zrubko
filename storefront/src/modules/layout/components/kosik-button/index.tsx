@@ -6,10 +6,13 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { retrieveCart } from "@lib/data/cart"
 import { convertToLocale } from "@lib/util/money"
 import { useRegion } from "@lib/context/region-context"
+import MiniCart from "../mini-cart"
+
 
 export default function CartButton() {
   const [itemCount, setItemCount] = useState(0)
   const [total, setTotal] = useState<{amount: number; currency_code: string} | null>(null)
+  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false)
   const { currentCountryCode } = useRegion()
 
   useEffect(() => {
@@ -33,20 +36,33 @@ export default function CartButton() {
   }, [currentCountryCode]) // Re-run when country code changes
 
   return (
-    <LocalizedClientLink
-      href="/cart"
-      className="flex gap-1 items-center px-2 py-1 text-white rounded-md bg-cta hover:bg-cta-hover text-sm md:gap-2 md:px-3 md:py-2 md:text-base"
-    >
-      <ShoppingCart size={16} className="md:size-5" />
-      <span>({itemCount})</span>
-      {total && (
-        <span className="hidden pl-2 ml-2 border-l md:inline border-white/30">
-          {convertToLocale({
-            amount: total.amount,
-            currency_code: total.currency_code
-          })}
-        </span>
-      )}
-    </LocalizedClientLink>
+    <>
+      <button
+        onClick={() => setIsMiniCartOpen(true)}
+        className="flex gap-2 items-center px-3 py-2 text-white rounded-xl bg-secondary hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm md:gap-3 md:px-4 md:py-3 md:text-base font-medium"
+        aria-label={`Košík s ${itemCount} položkami`}
+      >
+        <ShoppingCart
+          size={18}
+          className="md:size-5 text-secondary-foreground transition-colors duration-300"
+        />
+        <span className="font-semibold">({itemCount})</span>
+        {total && (
+          <span className="hidden pl-3 ml-3 border-l md:inline border-white/30 text-sm">
+            {convertToLocale({
+              amount: total.amount,
+              currency_code: total.currency_code
+            })}
+          </span>
+        )}
+      </button>
+
+      <MiniCart
+        isOpen={isMiniCartOpen}
+        onClose={() => setIsMiniCartOpen(false)}
+        itemCount={itemCount}
+        onItemCountChange={setItemCount}
+      />
+    </>
   )
 }

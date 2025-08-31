@@ -12,6 +12,7 @@ import {
   Facebook,
   Instagram,
   ChevronDown,
+  ChevronRight,
   Menu,
 } from "lucide-react"
 import { StoreRegion, HttpTypes } from "@medusajs/types"
@@ -32,13 +33,35 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
   const [isLogoHovered, setIsLogoHovered] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
-  // Iba click handling - žiadne hover
+  // Enhanced dropdown handling with hover support
   const handleClick = (dropdownId: string) => {
     if (activeDropdown === dropdownId) {
       setActiveDropdown(null)
     } else {
       setActiveDropdown(dropdownId)
+    }
+  }
+
+  const handleMouseEnter = (dropdownId: string) => {
+    // Only use hover on desktop, mobile uses click
+    if (window.innerWidth >= 768) {
+      setActiveDropdown(dropdownId)
+    }
+  }
+
+  const handleMouseLeave = (dropdownId: string) => {
+    // Only use hover on desktop
+    if (window.innerWidth >= 768) {
+      // Add delay before closing to prevent accidental closes
+      setTimeout(() => {
+        // Only close if we're still not hovering over the dropdown
+        if (!document.querySelector('.dropdown-container:hover')) {
+          setActiveDropdown(null)
+        }
+      }, 150) // 150ms delay
     }
   }
 
@@ -56,21 +79,50 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
+  // Enhanced scroll handling with auto-hide functionality
   useEffect(() => {
+    let ticking = false
+    let lastScrollY = window.scrollY
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY
+          const scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up'
+          const scrollDelta = Math.abs(currentScrollY - lastScrollY)
+
+          // Update background change state
+          setIsScrolled(currentScrollY > 10)
+
+          // Auto-hide/show logic - only when scrolled past header height
+          if (currentScrollY > 100 && scrollDelta > 10) {
+            if (scrollDirection === 'down' && !isHeaderHidden) {
+              setIsHeaderHidden(true)
+            } else if (scrollDirection === 'up' && isHeaderHidden) {
+              setIsHeaderHidden(false)
+            }
+          } else if (currentScrollY <= 100) {
+            // Always show header when near top
+            setIsHeaderHidden(false)
+          }
+
+          lastScrollY = currentScrollY
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isHeaderHidden])
 
   return (
-    <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out ${
+    <div className={`sticky inset-x-0 top-0 z-50 group transition-all duration-300 ease-in-out transform ${
       isScrolled ? 'border-b border-gray-200 shadow-lg backdrop-blur-sm bg-white/95' : 'bg-white'
-    }`}>
+    } ${isHeaderHidden ? '-translate-y-full' : 'translate-y-0'}`}>
       {/* TOPBAR – static pages */}
-      <div className="w-full py-2 text-xs text-white lg:text-sm bg-primary">
+      <div className="w-full py-3 text-xs text-white lg:text-sm bg-gradient-to-r from-primary to-primary-dark shadow-md">
         <div className="flex items-center justify-center w-full gap-4 px-4 mx-auto lg:justify-between max-w-8xl">
           {/* Static pages navigation */}
           <div className="items-center hidden gap-6 font-sans whitespace-nowrap lg:flex">
@@ -104,17 +156,17 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
       </div>
 
       {/* HEADER */}
-      <header className="relative mx-auto bg-white border-b border-gray-100 shadow-sm min-h-20">
+      <header className="relative mx-auto bg-white border-b border-gray-100 shadow-lg min-h-20">
         <div className="mx-auto max-w-8xl">
-          <nav className="relative flex items-center justify-between w-full px-2 xl:px-6 min-h-20 text-small-regular text-ebony">
+          <nav className="relative flex items-center justify-between w-full px-2 xl:px-6 min-h-20 text-small-regular text-gray-800">
             {/* Mobile hamburger menu - Show when logo is centered */}
             <div className="flex items-center md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="p-2 transition-colors text-ebony hover:text-mahogany"
+                className="p-3 rounded-xl transition-all duration-300 text-white bg-secondary hover:bg-secondary/90 shadow-md hover:shadow-lg transform hover:scale-105"
                 aria-label="Otvoriť menu"
               >
-                <Menu size={24} />
+                <Menu size={20} />
               </button>
             </div>
 
@@ -151,51 +203,74 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               
               {/* 1. Obklady */}
               <div className="relative dropdown-container">
+                {/* Invisible hover area above the trigger */}
+                <div
+                  className="absolute -top-4 left-0 right-0 h-4"
+                  onMouseEnter={() => handleMouseEnter('obklady')}
+                />
                 <span
-                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'obklady' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer text-ebony hover:text-mahogany hover:bg-gray-50 rounded-lg ${activeDropdown === 'obklady' ? 'text-mahogany bg-gray-50' : ''}`}
                   onClick={() => handleClick('obklady')}
+                  onMouseEnter={() => handleMouseEnter('obklady')}
+                  onMouseLeave={() => handleMouseLeave('obklady')}
+                  role="button"
+                  aria-expanded={activeDropdown === 'obklady'}
+                  aria-haspopup="true"
                 >
                   Drevené Obklady
-                  <ChevronDown className="w-3 h-3 ml-1" />
+                  <ChevronDown className={`w-3 h-3 ml-1 transition-transform duration-300 ${activeDropdown === 'obklady' ? 'rotate-180' : ''}`} />
                 </span>
-                
+
                 {activeDropdown === 'obklady' && (
-                  <div 
-                    className="absolute z-50 mt-4 transform -translate-x-1/2 bg-white border border-gray-200 shadow-xl rounded-lg w-[500px] left-1/2 top-full"
+                  <div
+                    className="absolute z-50 mt-2 transform -translate-x-1/2 bg-white border border-gray-200 shadow-2xl rounded-2xl w-[520px] left-1/2 top-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400"
+                    onMouseEnter={() => handleMouseEnter('obklady')}
+                    onMouseLeave={() => handleMouseLeave('obklady')}
+                    style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#d1d5db #f9fafb'
+                    }}
                   >
                       <div className="flex">
                         {/* Ľavá strana - kategórie */}
-                        <div className="flex flex-col flex-1 py-6 space-y-2">
-                          <LocalizedClientLink 
+                        <div className="flex flex-col flex-1 py-6 space-y-1">
+                          <LocalizedClientLink
                             href="/categories/tatransky-profil"
-                            className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                            className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                            onClick={() => setActiveDropdown(null)}
                           >
-                            Tatranský profil
-                          </LocalizedClientLink>
-                          
-                          <LocalizedClientLink 
-                            href="/categories/tatransky-profil-soft"
-                            className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
-                          >
-                            Tatranský profil soft
+                            <span className="group-hover:underline decoration-2 underline-offset-2">Tatranský profil</span>
+                            <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                           </LocalizedClientLink>
 
-                          <LocalizedClientLink 
-                            href="/categories/drevene-obklady-termodrevo"
-                            className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          <LocalizedClientLink
+                            href="/categories/tatransky-profil-soft"
+                            className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                            onClick={() => setActiveDropdown(null)}
                           >
-                            Drevené obklady Termodrevo
+                            <span className="group-hover:underline decoration-2 underline-offset-2">Tatranský profil soft</span>
+                            <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
+                          </LocalizedClientLink>
+
+                          <LocalizedClientLink
+                            href="/categories/drevene-obklady-termodrevo"
+                            className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                            onClick={() => setActiveDropdown(null)}
+                          >
+                            <span className="group-hover:underline decoration-2 underline-offset-2">Drevené obklady Termodrevo</span>
+                            <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                           </LocalizedClientLink>
                         </div>
                         
                         {/* Pravá strana - obrázok na celú výšku */}
-                        <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg">
+                        <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg group-hover:scale-105 transition-transform duration-500">
                           <Image
                             src="/shou-sugi-ban-1.jpg"
                             alt="Drevené obklady"
                             fill
-                            className="object-cover"
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
                           />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                       </div>
                     </div>
@@ -204,44 +279,65 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
 
               {/* 2. Podlahy */}
               <div className="relative dropdown-container">
+                {/* Invisible hover area above the trigger */}
+                <div
+                  className="absolute -top-4 left-0 right-0 h-4"
+                  onMouseEnter={() => handleMouseEnter('podlahy')}
+                />
                 <span
-                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'podlahy' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer text-ebony hover:text-mahogany hover:bg-gray-50 rounded-lg ${activeDropdown === 'podlahy' ? 'text-mahogany bg-gray-50' : ''}`}
                   onClick={() => handleClick('podlahy')}
+                  onMouseEnter={() => handleMouseEnter('podlahy')}
+                  onMouseLeave={() => handleMouseLeave('podlahy')}
+                  role="button"
+                  aria-expanded={activeDropdown === 'podlahy'}
+                  aria-haspopup="true"
                 >
                    Drevené Podlahy
-                  <ChevronDown className="w-3 h-3 ml-1" />
+                  <ChevronDown className={`w-3 h-3 ml-1 transition-transform duration-300 ${activeDropdown === 'podlahy' ? 'rotate-180' : ''}`} />
                 </span>
-                
+
                 {activeDropdown === 'podlahy' && (
-                  <div 
-                    className="absolute z-50 mt-4 transform -translate-x-1/2 bg-white border border-gray-200 shadow-xl rounded-lg w-[500px] left-1/2 top-full"
+                  <div
+                    className="absolute z-50 mt-2 transform -translate-x-1/2 bg-white border border-gray-200 shadow-2xl rounded-2xl w-[520px] left-1/2 top-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400"
+                    onMouseEnter={() => handleMouseEnter('podlahy')}
+                    onMouseLeave={() => handleMouseLeave('podlahy')}
+                    style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#d1d5db #f9fafb'
+                    }}
                   >
                     <div className="flex">
                       {/* Ľavá strana - kategórie */}
-                      <div className="flex flex-col flex-1 py-6 space-y-2">
-                        <LocalizedClientLink 
+                      <div className="flex flex-col flex-1 py-6 space-y-1">
+                        <LocalizedClientLink
                           href="/categories/drevene-podlahy"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          Drevené podlahy
+                          <span className="group-hover:underline decoration-2 underline-offset-2">Drevené podlahy</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
-                        
-                        <LocalizedClientLink 
+
+                        <LocalizedClientLink
                           href="/categories/drevene-podlahy-termodrevo"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          Drevené podlahy Termodrevo
+                          <span className="group-hover:underline decoration-2 underline-offset-2">Drevené podlahy Termodrevo</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
                       </div>
-                      
+
                       {/* Pravá strana - obrázok na celú výšku */}
-                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg">
+                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg group-hover:scale-105 transition-transform duration-500">
                         <Image
                           src="/drevo.jpeg"
                           alt="Drevené podlahy"
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                     </div>
                   </div>
@@ -250,44 +346,65 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
 
               {/* 3. Exteriér */}
               <div className="relative dropdown-container">
+                {/* Invisible hover area above the trigger */}
+                <div
+                  className="absolute -top-4 left-0 right-0 h-4"
+                  onMouseEnter={() => handleMouseEnter('exterior')}
+                />
                 <span
-                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'exterior' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer text-ebony hover:text-mahogany hover:bg-gray-50 rounded-lg ${activeDropdown === 'exterior' ? 'text-mahogany bg-gray-50' : ''}`}
                   onClick={() => handleClick('exterior')}
+                  onMouseEnter={() => handleMouseEnter('exterior')}
+                  onMouseLeave={() => handleMouseLeave('exterior')}
+                  role="button"
+                  aria-expanded={activeDropdown === 'exterior'}
+                  aria-haspopup="true"
                 >
                   Exteriér a Interiér
-                  <ChevronDown className="w-3 h-3 ml-1" />
+                  <ChevronDown className={`w-3 h-3 ml-1 transition-transform duration-300 ${activeDropdown === 'exterior' ? 'rotate-180' : ''}`} />
                 </span>
-                
+
                 {activeDropdown === 'exterior' && (
-                  <div 
-                    className="absolute z-50 mt-4 transform -translate-x-1/2 bg-white border border-gray-200 shadow-xl rounded-lg w-[500px] left-1/2 top-full"
+                  <div
+                    className="absolute z-50 mt-2 transform -translate-x-1/2 bg-white border border-gray-200 shadow-2xl rounded-2xl w-[520px] left-1/2 top-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400"
+                    onMouseEnter={() => handleMouseEnter('exterior')}
+                    onMouseLeave={() => handleMouseLeave('exterior')}
+                    style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#d1d5db #f9fafb'
+                    }}
                   >
                     <div className="flex">
                       {/* Ľavá strana - kategórie */}
-                      <div className="flex flex-col flex-1 py-6 space-y-2">
-                        <LocalizedClientLink 
+                      <div className="flex flex-col flex-1 py-6 space-y-1">
+                        <LocalizedClientLink
                           href="/categories/terasove-dosky"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          Terásové dosky
+                          <span className="group-hover:underline decoration-2 underline-offset-2">Terásové dosky</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
-                        
-                        <LocalizedClientLink 
+
+                        <LocalizedClientLink
                           href="/categories/drevo-do-sauny"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          Drevo do sauny
+                          <span className="group-hover:underline decoration-2 underline-offset-2">Drevo do sauny</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
                       </div>
-                      
+
                       {/* Pravá strana - obrázok na celú výšku */}
-                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg">
+                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg group-hover:scale-105 transition-transform duration-500">
                         <Image
                           src="/chata.jpg"
                           alt="Exteriér a Interiér"
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                     </div>
                   </div>
@@ -296,44 +413,65 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
 
               {/* 4. Konštrukčné drevo */}
               <div className="relative dropdown-container">
+                {/* Invisible hover area above the trigger */}
+                <div
+                  className="absolute -top-4 left-0 right-0 h-4"
+                  onMouseEnter={() => handleMouseEnter('konstrukcne-drevo')}
+                />
                 <span
-                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-colors duration-200 cursor-pointer text-ebony hover:text-mahogany ${activeDropdown === 'konstrukcne-drevo' ? 'text-mahogany underline' : ''}`}
+                  className={`flex items-center px-2 md:px-3 py-2 font-sans text-xs md:text-sm font-medium transition-all duration-300 cursor-pointer text-ebony hover:text-mahogany hover:bg-gray-50 rounded-lg ${activeDropdown === 'konstrukcne-drevo' ? 'text-mahogany bg-gray-50' : ''}`}
                   onClick={() => handleClick('konstrukcne-drevo')}
+                  onMouseEnter={() => handleMouseEnter('konstrukcne-drevo')}
+                  onMouseLeave={() => handleMouseLeave('konstrukcne-drevo')}
+                  role="button"
+                  aria-expanded={activeDropdown === 'konstrukcne-drevo'}
+                  aria-haspopup="true"
                 >
                   Konštrukčné drevo
-                  <ChevronDown className="w-3 h-3 ml-1" />
+                  <ChevronDown className={`w-3 h-3 ml-1 transition-transform duration-300 ${activeDropdown === 'konstrukcne-drevo' ? 'rotate-180' : ''}`} />
                 </span>
-                
+
                 {activeDropdown === 'konstrukcne-drevo' && (
-                  <div 
-                    className="absolute z-50 mt-4 transform -translate-x-1/2 bg-white border border-gray-200 shadow-xl rounded-lg w-[500px] left-1/2 top-full"
+                  <div
+                    className="absolute z-50 mt-2 transform -translate-x-1/2 bg-white border border-gray-200 shadow-2xl rounded-2xl w-[520px] left-1/2 top-full overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 hover:scrollbar-thumb-gray-400"
+                    onMouseEnter={() => handleMouseEnter('konstrukcne-drevo')}
+                    onMouseLeave={() => handleMouseLeave('konstrukcne-drevo')}
+                    style={{
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#d1d5db #f9fafb'
+                    }}
                   >
                     <div className="flex">
                       {/* Ľavá strana - kategórie */}
-                      <div className="flex flex-col flex-1 py-6 space-y-2">
-                        <LocalizedClientLink 
+                      <div className="flex flex-col flex-1 py-6 space-y-1">
+                        <LocalizedClientLink
                           href="/categories/drevene-hranoldy-a-listy"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          Drevené hranoly a lišty
+                          <span className="group-hover:underline decoration-2 underline-offset-2">Drevené hranoly a lišty</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
-                        
-                        <LocalizedClientLink 
+
+                        <LocalizedClientLink
                           href="/categories/kvh-hranoly"
-                          className="block px-6 py-4 font-sans text-base text-gray-700 transition-colors rounded-lg hover:text-gray-900 hover:bg-gray-50 hover:underline"
+                          className="group flex items-center px-6 py-4 font-sans text-base text-gray-700 transition-all duration-300 rounded-lg hover:text-mahogany hover:bg-gradient-to-r hover:from-gray-50 hover:to-white hover:shadow-sm hover:translate-x-1"
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          KVH hranoly
+                          <span className="group-hover:underline decoration-2 underline-offset-2">KVH hranoly</span>
+                          <ChevronRight className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-mahogany" />
                         </LocalizedClientLink>
                       </div>
-                      
+
                       {/* Pravá strana - obrázok na celú výšku */}
-                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg">
+                      <div className="relative self-stretch w-48 overflow-hidden rounded-r-lg group-hover:scale-105 transition-transform duration-500">
                         <Image
                           src="/lightwoodinteriordiningroom26041710904800x533_1.jpg"
                           alt="Konštrukčné drevo"
                           fill
-                          className="object-cover"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                     </div>
                   </div>
@@ -351,10 +489,11 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
             {/* Account - Hidden on mobile */}
             <LocalizedClientLink
               href="/prihlasit-sa"
-              className="items-center hidden gap-2 mx-2 transition-all duration-200 rounded-lg md:flex text-ebony border-gold hover:bg-gold-light hover:border-ebony hover:text-ebony-dark"
+              className="items-center hidden gap-2 mx-2 px-3 py-2 transition-all duration-300 rounded-xl md:flex text-white bg-primary hover:bg-primary/90 shadow-md hover:shadow-lg transform hover:scale-105 font-medium"
               aria-label="Prihlásiť sa"
             >
-              <User size={20} />
+              <User size={18} className="text-primary-foreground" />
+              <span className="text-sm">Prihlásiť sa</span>
             </LocalizedClientLink>
             
             {/* Cart - Always visible */}
@@ -362,10 +501,10 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
               fallback={
                 <LocalizedClientLink
                   href="/cart"
-                  className="flex items-center gap-2 mx-2 text-white transition-all duration-200 transform rounded-lg shadow-md bg-gradient-to-r from-mahogany to-mahogany-dark hover:from-mahogany-dark hover:to-mahogany hover:shadow-lg hover:scale-105"
+                  className="flex items-center gap-2 mx-2 px-3 py-2 text-white rounded-xl bg-secondary hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 font-medium"
                 >
-                  <ShoppingCart size={20} />
-                  <span className="font-medium">(0)</span>
+                  <ShoppingCart size={20} className="text-secondary-foreground" />
+                  <span className="font-semibold">(0)</span>
                 </LocalizedClientLink>
               }
             >

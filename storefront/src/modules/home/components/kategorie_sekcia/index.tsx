@@ -72,12 +72,10 @@ export default function Categories({
           </button>
 
           {/* Scrolling Container */}
-          <div ref={scrollContainerRef} className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth ">
+          <div ref={scrollContainerRef} className="flex gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-4">
             {categories.slice(0, 6).map((category, index) => (
-              <div key={category.id} className="flex-shrink-0 w-64">
-                <div className="aspect-square bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:border-[#1a2e1a] hover:shadow-lg hover:scale-105">
-                  <CategoryCard category={category} index={index} />
-                </div>
+              <div key={category.id} className="flex-shrink-0 w-72 h-[420px]">
+                <CategoryCard category={category} index={index} />
               </div>
             ))}
           </div>
@@ -95,12 +93,10 @@ export default function Categories({
       </div>
       
       {/* Desktop Grid Layout */}
-      <div className="hidden lg:grid grid-cols-2 gap-6 mb-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="hidden lg:grid grid-cols-2 gap-6 mb-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-fr">
         {categories.slice(0, 10).map((category, index) => (
-          <div key={category.id} className="flex relative flex-col group">
-            <div className="flex flex-col aspect-square bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:border-[#1a2e1a] hover:shadow-lg hover:scale-105">
-              <CategoryCard category={category} index={index} />
-            </div>
+          <div key={category.id} className="h-full">
+            <CategoryCard category={category} index={index} />
           </div>
         ))}
       </div>

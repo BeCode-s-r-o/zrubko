@@ -118,7 +118,7 @@ export default function ProductCarousel({ products, region }: ProductCarouselPro
         <button
           onClick={prevSlide}
           disabled={currentIndex === 0}
-          className="absolute left-2 top-1/2 z-10 hidden sm:flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 -translate-y-1/2 bg-white rounded-full shadow-lg border border-[#1a2e1a]/20 text-[#1a2e1a] hover:bg-[#1a2e1a] hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute left-2 top-1/2 z-10 hidden sm:flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 -translate-y-1/2 bg-white rounded-full shadow-lg border border-secondary/20 text-secondary hover:bg-secondary hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ChevronLeft size={16} className="sm:w-5 sm:h-5" />
         </button>
@@ -126,7 +126,7 @@ export default function ProductCarousel({ products, region }: ProductCarouselPro
         <button
           onClick={nextSlide}
           disabled={currentIndex >= maxIndex}
-          className="absolute right-2 top-1/2 z-10 hidden sm:flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 -translate-y-1/2 bg-white rounded-full shadow-lg border border-[#1a2e1a]/20 text-[#1a2e1a] hover:bg-[#1a2e1a] hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute right-2 top-1/2 z-10 hidden sm:flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 -translate-y-1/2 bg-white rounded-full shadow-lg border border-secondary/20 text-secondary hover:bg-secondary hover:text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <ChevronRight size={16} className="sm:w-5 sm:h-5" />
         </button>
@@ -168,8 +168,8 @@ export default function ProductCarousel({ products, region }: ProductCarouselPro
               onClick={() => setCurrentIndex(i)}
               className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                 i === currentIndex
-                  ? 'bg-[#1a2e1a] scale-125'
-                  : 'bg-[#1a2e1a]/30 hover:bg-[#1a2e1a]/60'
+                  ? 'bg-secondary scale-125'
+                  : 'bg-secondary/30 hover:bg-secondary/60'
               }`}
             />
           ))}

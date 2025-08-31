@@ -37,31 +37,29 @@ export default async function Home({
       
       {/* Scrolling Bar */}
       <ScrollingBar />
-      
-      {/* Kategórie produktov */}
+
+            {/* Kategórie produktov */}
       <div className="w-full">
         <div className="px-6 mx-auto max-w-8xl">
           <Categories categories={categories} />
         </div>
       </div>
-      
-      {/* Inšpirácia pre váš projekt */}
-      <InspirationSection />
-      
+
+      {/* Wood Configurator */}
+      <WoodConfiguratorSection />
+
+      {/* Favorite Products */}
+      <FavoriteProductsSection countryCode={countryCode} region={region} />
+
       {/* Info Steps */}
       <InfoStepsSection />
 
-        {/* Favorite Products */}
-        <FavoriteProductsSection countryCode={countryCode} region={region} />
+      {/* Inšpirácia pre váš projekt */}
+      <InspirationSection />
 
-      
-      {/* Wood Configurator */}
-      <WoodConfiguratorSection />
-      
-    
       {/* Blog a inšpirácie */}
       <BlogSection />
-      
+
       {/* FAQ */}
       <div className="py-16 bg-white">
         <HomepageAccordion />

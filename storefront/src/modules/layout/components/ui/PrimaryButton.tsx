@@ -17,7 +17,7 @@ const PrimaryButton = ({ href, children, className, icon, type = "button", disab
       type={type}
       disabled={disabled}
       className={clsx(
-        "px-8 py-4 text-black bg-white border border-black/10 hover:bg-black hover:text-white font-medium text-base transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black",
+        "px-8 py-4 text-white bg-primary border border-primary hover:bg-primary/90 hover:border-primary/90 font-medium text-base transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:border-primary",
         className
       )}
     >
