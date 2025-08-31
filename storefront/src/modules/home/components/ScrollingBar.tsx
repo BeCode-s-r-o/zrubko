@@ -13,7 +13,7 @@ const messages = [
 
 const ScrollingBar = () => {
   return (
-    <div className="overflow-hidden w-full bg-[#1a2e1a] border-y border-[#2d4a2d]/30">
+    <div className="overflow-hidden w-full bg-secondary border-y border-secondary/30">
       <style jsx>{`
         @keyframes marquee {
           0% {
@@ -24,7 +24,12 @@ const ScrollingBar = () => {
           }
         }
         .animate-marquee {
-          animation: marquee 60s linear infinite;
+          animation: marquee 40s linear infinite;
+        }
+        @media (max-width: 768px) {
+          .animate-marquee {
+            animation: marquee 20s linear infinite;
+          }
         }
       `}</style>
       <div className="flex items-center py-6 whitespace-nowrap animate-marquee">
@@ -35,15 +40,15 @@ const ScrollingBar = () => {
               return (
                 <span
                   key={j}
-                  className="mx-8 text-base font-medium text-white tracking-wide md:text-lg hover:text-[#4a6741] transition-colors duration-300 flex items-center gap-3"
+                  className="mx-8 text-base font-medium text-white tracking-wide md:text-lg hover:text-secondary transition-colors duration-300 flex items-center gap-3"
                 >
-                  <IconComponent size={20} className="text-[#4a6741] flex-shrink-0" />
+                  <IconComponent size={20} className="text-secondary flex-shrink-0" />
                   {msg.text}
                 </span>
               )
             })}
             {i < 2 && (
-              <span className="mx-8 text-[#4a6741] text-xl font-medium">•</span>
+              <span className="mx-8 text-secondary text-xl font-medium">•</span>
             )}
           </React.Fragment>
         ))}

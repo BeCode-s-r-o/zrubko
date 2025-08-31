@@ -30,7 +30,7 @@ const InfoStepsSection = () => {
     <section className="py-16 w-full bg-white">
       <div className="px-6 mx-auto max-w-8xl">
         <div className="mb-16 text-center">
-          <h2 className="mb-6 text-4xl font-light leading-tight text-black lg:text-4xl">
+          <h2 className="mb-6 text-4xl font-normal leading-tight text-black lg:text-4xl">
             Ako to u nás funguje?
           </h2>
           <div className="mx-auto mb-6 w-24 h-px bg-black"></div>
@@ -47,7 +47,7 @@ const InfoStepsSection = () => {
             >
               <LocalizedClientLink
                 href={step.badgeHref}
-                className="flex absolute top-6 left-6 gap-1 items-center px-3 py-1 text-xs font-medium text-white bg-[#1a2e1a] rounded-full hover:bg-[#2d4a2d] transition-all duration-300 cursor-pointer"
+                className="flex absolute top-6 left-6 gap-1 items-center px-3 py-1 text-xs font-normal text-white bg-secondary rounded-full hover:bg-secondary/90 transition-all duration-300 cursor-pointer"
                 style={{ zIndex: 2 }}
                 tabIndex={0}
               >
@@ -55,11 +55,11 @@ const InfoStepsSection = () => {
                 {step.badge}
               </LocalizedClientLink>
               
-              <div className="flex justify-center items-center mt-2 mb-6 w-24 h-24 rounded-lg bg-[#1a2e1a]/5 border border-[#1a2e1a]/10">
-                <step.icon size={40} strokeWidth={1.5} className="text-[#1a2e1a]" />
+              <div className="flex justify-center items-center mt-2 mb-6 w-24 h-24 rounded-lg bg-secondary/5 border border-secondary/10">
+                <step.icon size={40} strokeWidth={1.5} className="text-secondary" />
               </div>
               
-              <h3 className="mb-4 text-xl font-medium text-black">{step.title}</h3>
+              <h3 className="mb-4 text-xl font-normal text-black">{step.title}</h3>
               <p className="text-base font-light leading-relaxed text-black/60">{step.description}</p>
             </div>
           ))}

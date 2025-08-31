@@ -1,97 +1,216 @@
 "use client"
 
-import { Home, Trees, Waves, Flame, Grid3X3, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { Home, Trees, Waves, Flame, Grid3X3, ChevronRight, Sparkles, ArrowRight, CheckCircle, XCircle, Loader2 } from "lucide-react"
+import { useState, useEffect } from "react"
+import { listCategories } from "@lib/data/categories"
+import { getProductsListWithSort } from "@lib/data/products"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useRegion } from "@lib/context/region-context"
+import { HttpTypes } from "@medusajs/types"
+
+type Category = HttpTypes.StoreProductCategory
+type Product = HttpTypes.StoreProduct
 
 const WoodConfiguratorSection = () => {
+  const { currentCountryCode } = useRegion()
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedType, setSelectedType] = useState<'interior' | 'exterior' | null>(null)
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+  const [categories, setCategories] = useState<Category[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const categories = {
-    interior: [
-      { id: 'wall-panels', name: 'Obklady stien', icon: Grid3X3 },
-      { id: 'floor', name: 'Podlahy', icon: Home },
-      { id: 'sauna', name: 'Sauna', icon: Flame },
-    ],
-    exterior: [
-      { id: 'terrace', name: 'Terasy', icon: Waves },
-      { id: 'facade', name: 'Fasády', icon: Home },
-      { id: 'garden', name: 'Záhrada', icon: Trees },
-    ]
-  }
+  // Load categories on component mount
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        setLoading(true)
+        const fetchedCategories = await listCategories()
+        setCategories(fetchedCategories || [])
+      } catch (err) {
+        console.error('Failed to load categories:', err)
+        setError('Nepodarilo sa načítať kategórie')
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  const products = {
-    'wall-panels': [
-      { id: 1, name: 'Dubové obklady', price: '€89/m²', image: '🌰' },
-      { id: 2, name: 'Borovicové panely', price: '€45/m²', image: '🌲' },
-    ],
-    'floor': [
-      { id: 1, name: 'Dubová podlaha', price: '€120/m²', image: '🪵' },
-      { id: 2, name: 'Javorová podlaha', price: '€95/m²', image: '🍂' },
-    ],
-    'sauna': [
-      { id: 1, name: 'Cédrové dosky', price: '€150/m²', image: '🔥' },
-      { id: 2, name: 'Smrekové dosky', price: '€85/m²', image: '🌿' },
-    ],
-    'terrace': [
-      { id: 1, name: 'Teak terasy', price: '€180/m²', image: '🌊' },
-      { id: 2, name: 'Bangkirai dosky', price: '€95/m²', image: '🏖️' },
-    ],
-    'facade': [
-      { id: 1, name: 'Cédrové fasády', price: '€110/m²', image: '🏡' },
-      { id: 2, name: 'Smrekové dosky', price: '€65/m²', image: '🌲' },
-    ],
-    'garden': [
-      { id: 1, name: 'Akáciové dosky', price: '€75/m²', image: '🌳' },
-      { id: 2, name: 'Borovicové hranoly', price: '€35/m²', image: '🌲' },
-    ],
+    loadCategories()
+  }, [])
+
+  // Load products when category is selected
+  useEffect(() => {
+    const loadProducts = async () => {
+      if (!selectedCategory) return
+
+      try {
+        const { response: { products: fetchedProducts } } = await getProductsListWithSort({
+          page: 1,
+          queryParams: {
+            limit: 6,
+            category_id: [selectedCategory.id]
+          } as any,
+          countryCode: currentCountryCode
+        })
+        setProducts(fetchedProducts || [])
+      } catch (err) {
+        console.error('Failed to load products:', err)
+        setError('Nepodarilo sa načítať produkty')
+      }
+    }
+
+    if (selectedCategory) {
+      loadProducts()
+    }
+  }, [selectedCategory, currentCountryCode])
+
+  // Filter categories by type
+  const getCategoriesByType = (type: 'interior' | 'exterior') => {
+    return categories.filter(category =>
+      (category.metadata as any)?.type === type ||
+      // Fallback: check category names for type identification
+      (type === 'interior' && ['obklady', 'podlahy', 'sauna', 'stien', 'podlah'].some(keyword =>
+        category.name.toLowerCase().includes(keyword)
+      )) ||
+      (type === 'exterior' && ['terasy', 'fasády', 'záhrada', 'exteriér', 'vonku'].some(keyword =>
+        category.name.toLowerCase().includes(keyword)
+      ))
+    )
   }
 
   const handleTypeSelect = (type: 'interior' | 'exterior') => {
     setSelectedType(type)
     setCurrentStep(2)
+    setError(null)
   }
 
-  const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId)
+  const handleCategorySelect = (category: Category) => {
+    setSelectedCategory(category)
     setCurrentStep(3)
+    setError(null)
   }
 
   const resetWizard = () => {
     setCurrentStep(1)
     setSelectedType(null)
     setSelectedCategory(null)
+    setError(null)
+  }
+
+  const getIconForType = (type: 'interior' | 'exterior') => {
+    return type === 'interior' ? Home : Trees
+  }
+
+  const getIconForCategory = (categoryName: string) => {
+    const name = categoryName.toLowerCase()
+    if (name.includes('obklady') || name.includes('stien')) return Grid3X3
+    if (name.includes('podlah')) return Home
+    if (name.includes('sauna')) return Flame
+    if (name.includes('terasy')) return Waves
+    if (name.includes('fasád')) return Home
+    if (name.includes('záhrad')) return Trees
+    return Grid3X3
+  }
+
+  const formatPrice = (product: Product) => {
+    const variant = product.variants?.[0]
+    if (variant?.calculated_price) {
+      const amount = variant.calculated_price.calculated_amount
+      const currency = variant.calculated_price.currency_code
+      if (amount && currency) {
+        return `${(amount / 100).toFixed(2)} ${currency.toUpperCase()}`
+      }
+    }
+    return 'Cena na vyžiadanie'
+  }
+
+  const getCategoryDescription = (categoryName: string) => {
+    const name = categoryName.toLowerCase()
+
+    if (name.includes('obklady') || name.includes('stien')) {
+      return 'dub • borovica • smrek • thermo'
+    }
+    if (name.includes('podlah')) {
+      return 'masívne • trojvrstvé • parkety'
+    }
+    if (name.includes('sauna') || name.includes('saunov')) {
+      return 'cédrové • smrekové • thermo'
+    }
+    if (name.includes('terasy') || name.includes('terasa')) {
+      return 'teak • bangkirai • smrek • thermo'
+    }
+    if (name.includes('fasád') || name.includes('fasady')) {
+      return 'cédrové • smrekové • thermo'
+    }
+    if (name.includes('záhrad') || name.includes('zahrada')) {
+      return 'akácie • borovica • smrek'
+    }
+    if (name.includes('hranoly') || name.includes('lišty')) {
+      return 'dub • borovica • smrek • thermo'
+    }
+
+    return 'kvalitné drevené materiály'
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 w-full bg-slate-50">
+        <div className="px-6 mx-auto max-w-4xl text-center">
+          <div className="bg-red-50 border border-red-200 rounded-2xl p-8">
+            <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+            <h3 className="text-xl font-normal text-red-800 mb-2">Nastala chyba</h3>
+            <p className="text-red-600 mb-6">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-normal transition-colors duration-200"
+            >
+              Skúsiť znovu
+            </button>
+          </div>
+        </div>
+      </section>
+    )
   }
 
   return (
-    <section className="py-16 w-full bg-slate-50">
-      <div className="px-6 mx-auto max-w-8xl">
-        <div className="mb-16 text-center">
-          <h2 className="mb-6 text-4xl font-light leading-tight text-black">
-            Nájdite správne drevo pre váš projekt
+    <section className="py-8 lg:py-12 w-full bg-gradient-to-br from-slate-50 via-white to-slate-100">
+      <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-8xl">
+        {/* Header */}
+        <div className="mb-6 lg:mb-8 text-center">
+          <h2 className="mb-3 text-xl sm:text-2xl lg:text-3xl font-light leading-tight text-black">
+            Výber materiálov
           </h2>
-          <div className="mx-auto mb-6 w-24 h-px bg-black"></div>
-          <p className="mx-auto max-w-2xl text-xl font-light leading-relaxed text-black/60">
-            Postupujte cez náš jednoduchý 3-krokový proces a objavte perfektné drevené materiály pre váš projekt.
+
+          <div className="mx-auto mb-3 w-12 h-px bg-secondary"></div>
+
+          <p className="mx-auto max-w-xl text-sm sm:text-base font-light leading-relaxed text-black/70">
+            Jednoduchý 3-krokový proces pre výber materiálov.
           </p>
         </div>
 
         {/* Progress Steps */}
-        <div className="flex justify-center mb-12">
-          <div className="flex items-center space-x-4">
-            {[1, 2, 3].map((step) => (
+        <div className="flex justify-center mb-8 lg:mb-10">
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            {[1, 2, 3].map((step, index) => (
               <div key={step} className="flex items-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all duration-300 ${
-                  currentStep >= step 
-                    ? 'bg-black text-white' 
+                <div className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-normal text-xs sm:text-sm transition-all duration-500 ${
+                  currentStep >= step
+                    ? 'bg-primary text-white shadow-lg scale-105'
+                    : currentStep === step - 1 && currentStep > 0
+                    ? 'bg-primary/20 text-primary border-2 border-primary'
                     : 'bg-gray-200 text-gray-600'
                 }`}>
-                  {step}
+                  {currentStep > step ? (
+                    <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                  ) : (
+                    step
+                  )}
                 </div>
+
                 {step < 3 && (
-                  <div className={`w-16 h-1 mx-2 rounded-full transition-all duration-300 ${
-                    currentStep > step ? 'bg-black' : 'bg-gray-200'
+                  <div className={`w-8 sm:w-12 lg:w-16 h-1 mx-1 sm:mx-2 lg:mx-3 rounded-full transition-all duration-500 ${
+                    currentStep > step ? 'bg-primary' : 'bg-gray-200'
                   }`} />
                 )}
               </div>
@@ -100,102 +219,66 @@ const WoodConfiguratorSection = () => {
         </div>
 
         {/* Step Content */}
-        <div className="mx-auto max-w-4xl">
-          
-          {/* Step 1: Interior/Exterior Selection */}
-          {currentStep === 1 && (
-            <div className="space-y-8">
-              <div className="text-center">
-                <h3 className="mb-4 text-2xl font-medium text-black">Vyberte typ projektu</h3>
-                <p className="text-black/60">Kde plánujete použiť drevené materiály?</p>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-8 mx-auto max-w-6xl lg:grid-cols-2">
-                <button
-                  onClick={() => handleTypeSelect('interior')}
-                  className="group relative overflow-hidden rounded-lg border border-black/10 hover:border-[#1a2e1a] hover:shadow-md transition-all duration-300 min-h-[300px]"
-                >
-                  <div className="absolute inset-0 bg-[#1a2e1a]/5 group-hover:bg-[#1a2e1a]/10 transition-all duration-300" />
-                  
-                  <div className="flex relative z-10 flex-col justify-between p-12 h-full text-left">
-                    <div>
-                      <div className="w-16 h-16 bg-[#1a2e1a]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1a2e1a]/20 transition-all duration-300">
-                        <Home className="w-8 h-8 text-[#1a2e1a]" />
-                      </div>
-                      <h4 className="text-3xl font-medium text-black mb-4 group-hover:text-[#1a2e1a] transition-colors">
-                        Interiér
-                      </h4>
-                      <p className="mb-6 text-lg font-light leading-relaxed text-black/60">
-                        Vytvorte jedinečný interiér s prémiovými drevenými obkladmi, podlahami a saunovými materiálmi
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center text-[#1a2e1a] group-hover:text-[#2d4a2d] transition-colors">
-                      <span className="mr-2 font-medium">Objaviť produkty</span>
-                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() => handleTypeSelect('exterior')}
-                  className="group relative overflow-hidden rounded-lg border border-black/10 hover:border-[#1a2e1a] hover:shadow-md transition-all duration-300 min-h-[300px]"
-                >
-                  <div className="absolute inset-0 bg-[#1a2e1a]/5 group-hover:bg-[#1a2e1a]/10 transition-all duration-300" />
-                  
-                  <div className="flex relative z-10 flex-col justify-between p-12 h-full text-left">
-                    <div>
-                      <div className="w-16 h-16 bg-[#1a2e1a]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#1a2e1a]/20 transition-all duration-300">
-                        <Trees className="w-8 h-8 text-[#1a2e1a]" />
-                      </div>
-                      <h4 className="text-3xl font-medium text-black mb-4 group-hover:text-[#1a2e1a] transition-colors">
-                        Exteriér
-                      </h4>
-                      <p className="mb-6 text-lg font-light leading-relaxed text-black/60">
-                        Ochráňte a skrášlite svoj domov s odolnými terasami, fasádami a záhradnými riešeniami
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center text-[#1a2e1a] group-hover:text-[#2d4a2d] transition-colors">
-                      <span className="mr-2 font-medium">Objaviť produkty</span>
-                      <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </div>
-                  </div>
-                </button>
-              </div>
+        <div className="mx-auto max-w-8xl">
+          {/* Loading State */}
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 text-secondary animate-spin mb-3" />
+              <p className="text-sm text-black/60">Načítavam kategórie...</p>
             </div>
           )}
 
-          {/* Step 2: Category Selection */}
-          {currentStep === 2 && selectedType && (
-            <div className="space-y-8">
+          {/* Step 1: Interior/Exterior Selection */}
+          {currentStep === 1 && !loading && (
+            <div className="space-y-6 animate-in fade-in-50 duration-500">
               <div className="text-center">
-                <button 
-                  onClick={resetWizard}
-                  className="mb-4 text-sm font-medium text-black/60 hover:text-black"
-                >
-                  ← Späť na výber typu
-                </button>
-                <h3 className="mb-4 text-2xl font-medium text-black">
-                  Vyberte kategóriu ({selectedType === 'interior' ? 'Interiér' : 'Exteriér'})
-                </h3>
-                <p className="text-black/60">Pre aký účel potrebujete drevo?</p>
+                <h3 className="mb-3 text-xl sm:text-2xl font-normal text-black">Vyberte typ projektu</h3>
+                <p className="text-base text-black/60">Kde plánujete použiť drevené materiály?</p>
               </div>
-              
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                {categories[selectedType].map((category) => {
-                  const IconComponent = category.icon
+
+              <div className="grid grid-cols-1 gap-4 lg:gap-6 lg:grid-cols-2">
+                {[
+                  {
+                    type: 'interior' as const,
+                    title: 'Interiér',
+                    description: 'Prémiové drevené obklady, podlahy a saunové materiály',
+                    icon: Home,
+                    iconColor: 'text-slate-600'
+                  },
+                  {
+                    type: 'exterior' as const,
+                    title: 'Exteriér',
+                    description: 'Odolné terasy, fasády a záhradné riešenia',
+                    icon: Trees,
+                    iconColor: 'text-slate-600'
+                  }
+                ].map((option) => {
+                  const IconComponent = option.icon
                   return (
                     <button
-                      key={category.id}
-                      onClick={() => handleCategorySelect(category.id)}
-                      className="group p-6 bg-white rounded-lg border border-black/10 hover:border-[#1a2e1a] hover:shadow-md transition-all duration-300"
+                      key={option.type}
+                      onClick={() => handleTypeSelect(option.type)}
+                      className="group bg-white border-2 border-slate-200 hover:border-secondary hover:bg-slate-50 transition-all duration-300 p-6 sm:p-8 text-left"
                     >
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-[#1a2e1a]/5 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-[#1a2e1a]/10 transition-colors">
-                          <IconComponent className="w-8 h-8 text-[#1a2e1a]" />
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          <div className={`w-10 h-10 ${option.iconColor} flex items-center justify-center group-hover:text-secondary transition-colors duration-300`}>
+                            <IconComponent className="w-5 h-5" />
+                          </div>
                         </div>
-                        <h4 className="text-lg font-medium text-black">{category.name}</h4>
+
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-lg sm:text-xl font-normal text-slate-900 mb-2 group-hover:text-secondary transition-colors duration-300">
+                            {option.title}
+                          </h4>
+                          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                            {option.description}
+                          </p>
+                        </div>
+
+                        <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <ArrowRight className="w-4 h-4 text-secondary" />
+                        </div>
                       </div>
                     </button>
                   )
@@ -204,44 +287,179 @@ const WoodConfiguratorSection = () => {
             </div>
           )}
 
-          {/* Step 3: Product Preview */}
-          {currentStep === 3 && selectedCategory && (
-            <div className="space-y-8">
+          {/* Step 2: Category Selection */}
+          {currentStep === 2 && selectedType && (
+            <div className="space-y-6 animate-in slide-in-from-right-5 duration-500">
               <div className="text-center">
-                <button 
-                  onClick={() => setCurrentStep(2)}
-                  className="mb-4 text-sm font-medium text-black/60 hover:text-black"
+                <button
+                  onClick={resetWizard}
+                  className="inline-flex items-center gap-1 mb-4 px-3 py-1 text-xs font-normal text-black/60 hover:text-black hover:bg-black/5 rounded-md transition-all duration-200"
                 >
-                  ← Späť na kategórie
+                  <ChevronRight className="w-3 h-3 rotate-180" />
+                  Späť na výber typu
                 </button>
-                <h3 className="mb-4 text-2xl font-medium text-black">Odporúčané produkty</h3>
-                <p className="text-black/60">Vyberte si z našich najlepších produktov pre vašu kategóriu</p>
-              </div>
-              
-              <div className="grid grid-cols-1 gap-6 mx-auto max-w-2xl md:grid-cols-2">
-                {products[selectedCategory as keyof typeof products]?.map((product) => (
-                  <div key={product.id} className="p-6 bg-white rounded-lg border shadow-sm transition-all duration-300 border-black/10 hover:shadow-md">
-                    <div className="text-center">
-                      <div className="mb-4 text-4xl">{product.image}</div>
-                      <h4 className="mb-2 text-lg font-medium text-black">{product.name}</h4>
-                      <p className="text-2xl font-medium text-[#1a2e1a] mb-4">{product.price}</p>
-                      <button className="w-full bg-[#1a2e1a] hover:bg-[#2d4a2d] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300">
-                        Zobraziť detail
-                        <ChevronRight className="inline ml-2 w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                <h3 className="mb-3 text-xl sm:text-2xl font-normal text-black">
+                  Vyberte kategóriu ({selectedType === 'interior' ? 'Interiér' : 'Exteriér'})
+                </h3>
+                <p className="text-sm text-black/60">Pre aký účel potrebujete drevo?</p>
               </div>
 
-              <div className="pt-8 text-center">
-                <button 
-                  onClick={resetWizard}
-                  className="px-8 py-3 font-medium text-black bg-white rounded-lg border transition-all duration-300 hover:bg-black hover:text-white border-black/10"
-                >
-                  Začať znovu
-                </button>
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {getCategoriesByType(selectedType).map((category, index) => {
+                  const IconComponent = getIconForCategory(category.name)
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => handleCategorySelect(category)}
+                      className="group p-4 sm:p-5 bg-white rounded-xl border-2 border-gray-100 hover:border-secondary hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] animate-in fade-in-50 duration-300"
+                      style={{ animationDelay: `${index * 80}ms` }}
+                    >
+                      <div className="text-center">
+                        <div className="aspect-[4/3] w-full bg-gray-100 rounded-lg overflow-hidden mb-3 group-hover:scale-105 transition-transform duration-300">
+                          {(category.metadata as any)?.image_url ? (
+                            <img
+                              src={(category.metadata as any).image_url}
+                              alt={category.name}
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.src = '/api/placeholder/400/400'
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center">
+                              <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-slate-500" />
+                            </div>
+                          )}
+                        </div>
+                        <h4 className="text-base sm:text-lg font-normal text-black group-hover:text-secondary transition-colors">
+                          {category.name}
+                        </h4>
+                        <div className="mt-1 text-xs text-slate-500 group-hover:text-slate-700 transition-colors">
+                          {getCategoryDescription(category.name)}
+                        </div>
+                        <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <ArrowRight className="w-4 h-4 mx-auto text-secondary" />
+                        </div>
+                      </div>
+                    </button>
+                  )
+                })}
+
+                {getCategoriesByType(selectedType).length === 0 && (
+                  <div className="col-span-full text-center py-8">
+                    <div className="text-4xl mb-3">🏗️</div>
+                    <h4 className="text-lg font-normal text-black/60 mb-2">
+                      Žiadne kategórie pre {selectedType === 'interior' ? 'interiér' : 'exteriér'}
+                    </h4>
+                    <p className="text-sm text-black/40">
+                      Kategórie sa načítavajú alebo nie sú dostupné
+                    </p>
+                  </div>
+                )}
               </div>
+            </div>
+          )}
+
+          {/* Step 3: Product Preview */}
+          {currentStep === 3 && selectedCategory && (
+            <div className="space-y-6 animate-in slide-in-from-bottom-5 duration-500">
+              <div className="text-center">
+                <button
+                  onClick={() => setCurrentStep(2)}
+                  className="inline-flex items-center gap-1 mb-4 px-3 py-1 text-xs font-normal text-black/60 hover:text-black hover:bg-black/5 rounded-md transition-all duration-200"
+                >
+                  <ChevronRight className="w-3 h-3 rotate-180" />
+                  Späť na kategórie
+                </button>
+                <h3 className="mb-3 text-xl sm:text-2xl font-normal text-black">
+                  Odporúčané produkty
+                </h3>
+                <p className="text-sm text-black/60">
+                  Vyberte si z našich najlepších produktov pre kategóriu "{selectedCategory.name}"
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {products.map((product, index) => (
+                  <LocalizedClientLink
+                    key={product.id}
+                    href={`/products/${product.handle}`}
+                    className="group block"
+                  >
+                    <div className="bg-white rounded-xl border-2 border-gray-100 hover:border-secondary hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] overflow-hidden animate-in fade-in-50 duration-300"
+                         style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="aspect-square relative overflow-hidden">
+                        <img
+                          src={product.thumbnail || '/api/placeholder/400/400'}
+                          alt={product.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = '/api/placeholder/400/400'
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+
+                      <div className="p-4">
+                        <h4 className="mb-2 text-base sm:text-lg font-normal text-black group-hover:text-secondary transition-colors line-clamp-2">
+                          {product.title}
+                        </h4>
+                        <div className="flex items-center justify-between">
+                          <p className="text-lg sm:text-xl font-normal text-secondary">
+                            {formatPrice(product)}
+                          </p>
+                          <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-1 group-hover:translate-x-0">
+                            <ArrowRight className="w-4 h-4 text-secondary" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </LocalizedClientLink>
+                ))}
+
+                {products.length === 0 && (
+                  <div className="col-span-full text-center py-10">
+                    <div className="text-4xl mb-3">📦</div>
+                    <h4 className="text-lg font-normal text-black/60 mb-2">
+                      Žiadne produkty v tejto kategórii
+                    </h4>
+                    <p className="text-sm text-black/40 mb-4">
+                      Produkty sa načítavajú alebo nie sú dostupné
+                    </p>
+                    <button
+                      onClick={() => setCurrentStep(2)}
+                      className="inline-flex items-center gap-1 px-4 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-md font-normal transition-colors duration-200 text-sm"
+                    >
+                      <ChevronRight className="w-3 h-3 rotate-180" />
+                      Späť na kategórie
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {products.length > 0 && (
+                <div className="pt-6 text-center">
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                    <LocalizedClientLink
+                      href={`/categories/${selectedCategory.handle}`}
+                      className="inline-flex items-center gap-1 px-6 py-2 bg-secondary hover:bg-secondary/90 text-white rounded-lg font-normal transition-all duration-200 hover:shadow-md text-sm"
+                    >
+                      Zobraziť všetky produkty
+                      <ArrowRight className="w-3 h-3" />
+                    </LocalizedClientLink>
+
+                    <button
+                      onClick={resetWizard}
+                      className="px-6 py-2 font-normal text-black bg-white rounded-lg border-2 border-gray-200 hover:border-primary hover:bg-primary/5 transition-all duration-200 text-sm"
+                    >
+                      Začať znovu
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
