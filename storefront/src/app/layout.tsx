@@ -30,7 +30,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <RegionProvider>
-            <main className="relative">{children}</main>
+            <main className="">{children}</main>
           </RegionProvider>
         </NextIntlClientProvider>
       </body>

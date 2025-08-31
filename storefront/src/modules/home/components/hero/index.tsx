@@ -27,7 +27,7 @@ const Hero = () => {
     {
       headline: "Kvalitné drevené materiály",
       subheadline: "Tradičná remeselná kvalita.",
-      description: "Objavte našu širokú ponuku prémiových drevených materiálov pre váš domov.",
+      description: "Objavte našu širokú ponuku prémiových drevených materiálov.",
       buttonText: "Prezrieť produkty",
       buttonLink: "/categories",
       showCategories: true,
@@ -90,7 +90,7 @@ const Hero = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center py-8 sm:py-12 lg:py-16">
+        <div className="relative z-10 flex-1 flex flex-col justify-cente py-8 md:p-4    lg:p-8">
           <div className="max-w-7xl mx-auto w-full">
             {/* Main Content */}
             <div className="text-center lg:text-left lg:max-w-4xl">
@@ -130,7 +130,7 @@ const Hero = () => {
                     return (
                       <LocalizedClientLink key={index} href={category.href}>
                         <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 sm:p-4 hover:bg-white/15 hover:border-white/30 transition-all duration-300 active:scale-95 text-center">
-                          <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-white mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                          <IconComponent className="w-6 h-6 sm:w-5 sm:h-5 lg:w-5 lg:h-5 xl:w-6 xl:h-6 text-white mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
                           <span className="text-white font-medium text-xs sm:text-sm block">{category.name}</span>
                         </div>
                       </LocalizedClientLink>
