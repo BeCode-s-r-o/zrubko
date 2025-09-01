@@ -121,7 +121,7 @@ export default function HlavneMobilneMenu({ isOpen, onClose, regions, currentReg
   const staticPages = [
     { href: '/', title: 'Domov' },
     { href: '/o-nas', title: 'O nás' },
-    { href: '/projekty', title: 'Realizácie' },
+    { href: '/realizacie', title: 'Realizácie' },
     { href: '/sluzby', title: 'Doprava a Služby' },
     { href: '/spolupraca', title: 'Spolupráca' },
     { href: '/blog', title: 'Blog' },

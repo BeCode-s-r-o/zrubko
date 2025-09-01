@@ -128,7 +128,7 @@ export default function NavClient({ regions, categories, currentRegion }: NavCli
           <div className="items-center hidden gap-6 font-sans whitespace-nowrap lg:flex">
            
             <LocalizedClientLink href="/o-nas" className="transition-colors hover:text-gray-300">O nás</LocalizedClientLink>
-            <LocalizedClientLink href="/projekty" className="transition-colors hover:text-gray-300">Realizácie</LocalizedClientLink>
+            <LocalizedClientLink href="/realizacie" className="transition-colors hover:text-gray-300">Realizácie</LocalizedClientLink>
             <LocalizedClientLink href="/sluzby" className="transition-colors hover:text-gray-300">Doprava a Služby</LocalizedClientLink>
             <LocalizedClientLink href="/spolupraca" className="transition-colors hover:text-gray-300">Spolupráca</LocalizedClientLink>
             <LocalizedClientLink href="/blog" className="transition-colors hover:text-gray-300">Blog</LocalizedClientLink>

@@ -69,15 +69,6 @@ export function BlogGridClient({ searchParams, countryCode }: BlogGridClientProp
         })}
       </div>
 
-      {totalCount > posts.length && (
-        <div className="text-center">
-          <p className="text-gray-600 mb-4">
-            {t('showingPosts', { current: posts.length, total: totalCount }) ||
-             `Showing ${posts.length} of ${totalCount} posts`}
-          </p>
-          {/* TODO: Add pagination component */}
-        </div>
-      )}
     </div>
   )
 }

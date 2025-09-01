@@ -4,6 +4,7 @@ import Image from 'next/image'
 import LocalizedClientLink from '@/modules/common/components/localized-client-link'
 import { BlogPost } from '@/types/blog'
 import { useTranslations } from 'next-intl'
+import { renderMarkdown } from '@/lib/util/markdown'
 
 interface BlogCardProps {
   post: BlogPost
@@ -42,9 +43,10 @@ export function BlogCard({ post, showExcerpt = true }: BlogCardProps) {
         </h2>
 
         {showExcerpt && post.excerpt && (
-          <p className="text-gray-600 mb-4 line-clamp-3">
-            {post.excerpt}
-          </p>
+          <div
+            className="prose prose-sm prose-gray max-w-none mb-4 line-clamp-3 prose-headings:text-sm prose-h1:text-sm"
+            dangerouslySetInnerHTML={renderMarkdown(post.excerpt)}
+          />
         )}
 
         {post.tags && post.tags.length > 0 && (
@@ -52,7 +54,7 @@ export function BlogCard({ post, showExcerpt = true }: BlogCardProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-block bg-gray-100 text-gray-700 text-xl px-2 py-1 rounded-full"
+                className="inline-block bg-secondary text-white text-sm font-medium px-3 py-1 rounded-full shadow-sm hover:bg-secondary/90 transition-colors"
               >
                 {tag}
               </span>
@@ -63,9 +65,9 @@ export function BlogCard({ post, showExcerpt = true }: BlogCardProps) {
         <div className="mt-4">
           <LocalizedClientLink
             href={`/blog/${post.slug}`}
-            className="text-blue-600 hover:text-blue-800 font-medium text-base"
+            className="text-primary hover:text-primary/80 font-medium text-base transition-colors"
           >
-            {t('readMore') || 'Read more →'}
+            {t('readMore') || 'Čítať viac →'}
           </LocalizedClientLink>
         </div>
       </div>
