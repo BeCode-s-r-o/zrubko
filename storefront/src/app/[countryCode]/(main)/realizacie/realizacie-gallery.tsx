@@ -89,6 +89,8 @@ export default function RealizacieGallery() {
   const headerAnimation = useScrollAnimation()
   const ctaAnimation = useScrollAnimation()
 
+
+  
   return (
     <>
       {/* Main Content Container */}
