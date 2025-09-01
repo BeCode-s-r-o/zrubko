@@ -170,6 +170,7 @@
     "about": "O nás",
     "contact": "Kontakt",
     "blog": "Blog",
+    "realizacie": "Realizácie",
     "categories": "Kategórie",
     "shopByCategories": "Nakupujte podľa kategórií"
   },
@@ -207,7 +208,24 @@
     "showingPosts": "Zobrazujem {current} z {total} článkov",
     "postNotFound": "Článok nenájdený",
     "postNotFoundDesc": "Požadovaný článok neexistuje alebo bol odstránený.",
-    "backToBlog": "Späť na blog"
+    "backToBlog": "Späť na blog",
+    "previousPost": "Predchádzajúci článok",
+    "nextPost": "Nasledujúci článok",
+    "noPreviousPost": "Žiadny predchádzajúci článok",
+    "noNextPost": "Žiadny nasledujúci článok"
+  },
+  "realizacie": {
+    "title": "Naše realizácie",
+    "subtitle": "Pozrite si naše dokončené projekty a realizácie.",
+    "ourWork": "Naše práce hovoria za nás",
+    "description": "Pozrite si výber našich najnovších realizácií. Každý projekt je jedinečný a odráža kvalitu našej práce.",
+    "clientSatisfied": "Klient spokojný",
+    "location": "Lokalita",
+    "date": "Dátum realizácie",
+    "whatWeRealized": "Čo sme realizovali:",
+    "haveProjectIdea": "Máte predstavu o projekte?",
+    "contactUsDesc": "Kontaktujte nás a zrealizujeme váš projekt s rovnakou kvalitou a precíznosťou.",
+    "contactUs": "Kontaktujte nás"
   },
   "checkout": {
     "deliveryOptions": "Možnosti dopravy",

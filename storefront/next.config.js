@@ -35,6 +35,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "bucket-production-b953.up.railway.app",
       },
+      { // Note: Railway console for Medusa media
+        protocol: "https",
+        hostname: "console-production-f027.up.railway.app",
+      },
       { // Note: can be removed after deleting demo products
         protocol: "https",
         hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com",
