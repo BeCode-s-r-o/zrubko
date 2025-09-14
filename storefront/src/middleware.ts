@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
 
 // Podporované locale
-export const locales = ['sk', 'cz', 'de', 'gb']
+export const locales = ['sk', 'cz', 'at', 'de', 'gb']
 export const defaultLocale = 'sk'
 
 export default createMiddleware({
@@ -30,5 +30,5 @@ export default createMiddleware({
 
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(sk|cz|de|gb)/:path*']
+  matcher: ['/', '/(sk|cz|at|de|gb)/:path*']
 } 

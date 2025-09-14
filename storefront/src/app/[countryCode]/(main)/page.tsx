@@ -18,12 +18,25 @@ export const metadata: Metadata = {
     "Objavte našu kolekciu prémiových drevených produktov. Kvalitné drevo na mieru, remeselná dokonalosť a nezabudnuteľný dizajn pre váš domov a záhradu.",
 }
 
+// Mapovanie locale na skutočné country codes v backende
+const getBackendCountryCode = (locale: string): string => {
+  const localeToBackendMap: Record<string, string> = {
+    'sk': 'sk',
+    'cz': 'sk', // CZ používa SK regióny
+    'at': 'sk', // AT používa SK regióny  
+    'de': 'sk', // DE používa SK regióny
+    'gb': 'gb'  // GB má vlastné regióny ak existujú
+  }
+  return localeToBackendMap[locale] || 'sk'
+}
+
 export default async function Home({
   params: { countryCode },
 }: {
   params: { countryCode: string }
 }) {
-  const region = await getRegion(countryCode)
+  const backendCountryCode = getBackendCountryCode(countryCode)
+  const region = await getRegion(backendCountryCode)
   const categories = await listCategories()
 
   if (!region) {

@@ -4,6 +4,7 @@ import { getRequestConfig } from "next-intl/server"
 const countryToLocaleMap: Record<string, string> = {
   sk: "sk",
   cz: "cz",
+  at: "at",
   de: "de",
   gb: "gb"
 }

@@ -26,6 +26,18 @@ interface CategoryTemplateProps {
   }
 }
 
+// Mapovanie locale na skutočné country codes v backende
+const getBackendCountryCode = (locale: string): string => {
+  const localeToBackendMap: Record<string, string> = {
+    'sk': 'sk',
+    'cz': 'sk', // CZ používa SK regióny
+    'at': 'sk', // AT používa SK regióny  
+    'de': 'sk', // DE používa SK regióny
+    'gb': 'gb'  // GB má vlastné regióny ak existujú
+  }
+  return localeToBackendMap[locale] || 'sk'
+}
+
 export default async function CategoryTemplate({
   categories,
   countryCode,
@@ -36,8 +48,9 @@ export default async function CategoryTemplate({
 
   if (!category || !countryCode) notFound()
 
-  // Get region for product cards
-  const region = await getRegion(countryCode)
+  // Get region for product cards using backend country code
+  const backendCountryCode = getBackendCountryCode(countryCode)
+  const region = await getRegion(backendCountryCode)
   if (!region) notFound()
 
   // Get all products in category for client-side filtering
@@ -49,7 +62,7 @@ export default async function CategoryTemplate({
   const { response: { products: allProducts } } = await getProductsListWithSort({
     page: 1,
     queryParams,
-    countryCode,
+    countryCode: backendCountryCode,
   })
 
   // Extract available filters from all products in category
