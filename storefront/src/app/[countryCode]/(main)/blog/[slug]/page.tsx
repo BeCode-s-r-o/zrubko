@@ -12,11 +12,24 @@ interface BlogPostPageProps {
   }
 }
 
+// Mapovanie locale na backend language kódy
+const getBackendLanguageCode = (locale: string): string => {
+  const localeToLanguageMap: Record<string, string> = {
+    'sk': 'sk',
+    'cz': 'cz',
+    'at': 'de', // AT používa nemecký obsah
+    'de': 'de',
+    'gb': 'en'  // GB používa anglický obsah
+  }
+  return localeToLanguageMap[locale] || 'sk'
+}
+
 async function fetchBlogPost(slug: string, countryCode: string) {
   try {
     // Direct backend call with language parameter and cache busting
     const timestamp = Date.now()
-    const response = await storeFetch(`/store/blog/posts/${slug}?language=${countryCode}&_t=${timestamp}`, {}, countryCode)
+    const backendLanguage = getBackendLanguageCode(countryCode)
+    const response = await storeFetch(`/store/blog/posts/${slug}?language=${backendLanguage}&_t=${timestamp}`, {}, countryCode)
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -34,7 +47,8 @@ async function fetchBlogPost(slug: string, countryCode: string) {
 
 async function fetchAllBlogPosts(countryCode: string) {
   try {
-    const response = await storeFetch(`/store/blog/posts?language=${countryCode}&limit=100`, {}, countryCode)
+    const backendLanguage = getBackendLanguageCode(countryCode)
+    const response = await storeFetch(`/store/blog/posts?language=${backendLanguage}&limit=100`, {}, countryCode)
 
     if (!response.ok) {
       throw new Error('Failed to fetch blog posts')

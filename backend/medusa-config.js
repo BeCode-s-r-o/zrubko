@@ -172,6 +172,9 @@ const medusaConfig = {
     }] : [])
   ],
   plugins: [
+    {
+      resolve: "@alphabite/medusa-category-images",
+    },
   ...(MEILISEARCH_HOST && MEILISEARCH_ADMIN_KEY ? [{
       resolve: '@rokmohar/medusa-plugin-meilisearch',
       options: {

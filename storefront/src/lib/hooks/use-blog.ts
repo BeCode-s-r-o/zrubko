@@ -3,6 +3,18 @@
 import { useState, useEffect } from 'react'
 import { BlogPost, BlogPostWithContent, BlogPostListResponse, BlogQueryParams } from '@/types/blog'
 
+// Mapovanie locale na backend language kódy
+const getBackendLanguageCode = (locale: string): string => {
+  const localeToLanguageMap: Record<string, string> = {
+    'sk': 'sk',
+    'cz': 'cz',
+    'at': 'de', // AT používa nemecký obsah
+    'de': 'de',
+    'gb': 'en'  // GB používa anglický obsah
+  }
+  return localeToLanguageMap[locale] || 'sk'
+}
+
 // Hook for fetching blog posts list
 export function useBlogPosts(params?: BlogQueryParams, countryCode?: string) {
   const [posts, setPosts] = useState<BlogPost[]>([])
@@ -18,9 +30,10 @@ export function useBlogPosts(params?: BlogQueryParams, countryCode?: string) {
 
         const queryParams = new URLSearchParams()
 
-        // Add language filter based on country code
+        // Add language filter based on country code mapped to backend language
         if (countryCode) {
-          queryParams.append('language', countryCode)
+          const backendLanguage = getBackendLanguageCode(countryCode)
+          queryParams.append('language', backendLanguage)
         }
 
         if (params?.q) queryParams.append('q', params.q)
@@ -65,8 +78,9 @@ export function useBlogPost(slug: string, countryCode?: string) {
         setLoading(true)
         setError(null)
 
-        // Add country code as query parameter for language filtering
-        const queryParams = countryCode ? `?countryCode=${countryCode}` : ''
+        // Add backend language code as query parameter for language filtering
+        const backendLanguage = countryCode ? getBackendLanguageCode(countryCode) : 'sk'
+        const queryParams = `?countryCode=${backendLanguage}`
         const response = await fetch(`/api/blog/${slug}${queryParams}`)
 
         if (!response.ok) {
