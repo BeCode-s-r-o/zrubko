@@ -11,6 +11,9 @@ importers:
 
   .:
     dependencies:
+      '@alphabite/medusa-category-images':
+        specifier: ^0.3.10
+        version: 0.3.11(ypltzkypb5jv73lh4zmyfp66na)
       '@medusajs/admin-sdk':
         specifier: ^2.9.0
         version: 2.9.0
@@ -159,6 +162,31 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+  '@alphabite/medusa-category-images@0.3.11':
+    resolution: {integrity: sha512-AQlZTaOQqVHX2xhGRr0UJBvb7BJCUIGRbqjFvkq63zKRiF9l5KrfNS4iguvdBela1FN1b/E5TNWtXRMJ3KV55g==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      '@medusajs/admin-sdk': 2.8.3
+      '@medusajs/cli': 2.8.3
+      '@medusajs/framework': 2.8.3
+      '@medusajs/icons': 2.8.3
+      '@medusajs/medusa': 2.8.3
+      '@medusajs/test-utils': 2.8.3
+      '@medusajs/ui': 4.0.3
+      '@mikro-orm/cli': 6.4.3
+      '@mikro-orm/core': 6.4.3
+      '@mikro-orm/knex': 6.4.3
+      '@mikro-orm/migrations': 6.4.3
+      '@mikro-orm/postgresql': 6.4.3
+      '@tanstack/react-query': 5.64.2
+      awilix: ^8.0.1
+      pg: ^8.13.0
+      radix-ui: 1.1.2
+      react-hook-form: 7.49.1
+      react-i18next: 13.5.0
+      react-router: 6.20.1
+      react-router-dom: 6.20.1
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -7713,6 +7741,29 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
+  '@alphabite/medusa-category-images@0.3.11(ypltzkypb5jv73lh4zmyfp66na)':
+    dependencies:
+      '@medusajs/admin-sdk': 2.9.0
+      '@medusajs/cli': 2.9.0(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3))(@mikro-orm/migrations@6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(@types/node@20.19.11)(awilix@8.0.1)(ioredis@5.7.0)(pg@8.16.3)(vite@5.4.19(@types/node@20.19.11))
+      '@medusajs/framework': 2.9.0(@medusajs/cli@2.9.0(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3))(@mikro-orm/migrations@6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(@types/node@20.19.11)(awilix@8.0.1)(ioredis@5.7.0)(pg@8.16.3)(vite@5.4.19(@types/node@20.19.11)))(@mikro-orm/cli@6.4.3(pg@8.16.3))(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3))(@mikro-orm/migrations@6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(awilix@8.0.1)(ioredis@5.7.0)(pg@8.16.3)(vite@5.4.19(@types/node@20.19.11))
+      '@medusajs/icons': 2.9.0(react@18.3.1)
+      '@medusajs/medusa': 2.9.0(esnycilp6qxr3rnxkyuq57wcym)
+      '@medusajs/test-utils': 2.9.0(@medusajs/framework@2.9.0(@medusajs/cli@2.9.0(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3))(@mikro-orm/migrations@6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(@types/node@20.19.11)(awilix@8.0.1)(ioredis@5.7.0)(pg@8.16.3)(vite@5.4.19(@types/node@20.19.11)))(@mikro-orm/cli@6.4.3(pg@8.16.3))(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3))(@mikro-orm/migrations@6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(awilix@8.0.1)(ioredis@5.7.0)(pg@8.16.3)(vite@5.4.19(@types/node@20.19.11)))(@medusajs/medusa@2.9.0(esnycilp6qxr3rnxkyuq57wcym))(@mikro-orm/postgresql@6.4.3(@mikro-orm/core@6.4.3))(awilix@8.0.1)
+      '@medusajs/ui': 4.0.21(@types/react-dom@18.3.7(@types/react@18.3.24))(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.9.2)
+      '@mikro-orm/cli': 6.4.3(pg@8.16.3)
+      '@mikro-orm/core': 6.4.3
+      '@mikro-orm/knex': 6.4.3(@mikro-orm/core@6.4.3)(pg@8.16.3)
+      '@mikro-orm/migrations': 6.4.3(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3)
+      '@mikro-orm/postgresql': 6.4.3(@mikro-orm/core@6.4.3)
+      '@tanstack/react-query': 5.85.5(react@18.3.1)
+      awilix: 8.0.1
+      pg: 8.16.3
+      radix-ui: 1.1.2(@types/react-dom@18.3.7(@types/react@18.3.24))(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hook-form: 7.62.0(react@18.3.1)
+      react-i18next: 13.5.0(i18next@23.7.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-router: 6.20.1(react@18.3.1)
+      react-router-dom: 6.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
   '@ampproject/remapping@2.3.0':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
@@ -9961,8 +10012,8 @@ snapshots:
     dependencies:
       '@medusajs/types': 1.11.17
       '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3)))
-      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@types/node@20.19.11)(pg@8.16.3)
-      '@mikro-orm/postgresql': 5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.19.11)(pg@8.16.3)
+      '@mikro-orm/postgresql': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))
       awilix: 8.0.1
       bignumber.js: 9.3.1
       knex: 2.4.2(pg@8.16.3)
@@ -10187,7 +10238,7 @@ snapshots:
       - supports-color
       - tedious
 
-  '@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@types/node@20.19.11)(pg@8.16.3)':
+  '@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.19.11)(pg@8.16.3)':
     dependencies:
       '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3)))
       '@mikro-orm/knex': 5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(pg@8.16.3)
@@ -10246,7 +10297,7 @@ snapshots:
       - supports-color
       - tedious
 
-  '@mikro-orm/postgresql@5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))':
+  '@mikro-orm/postgresql@5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))':
     dependencies:
       '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3)))
       '@mikro-orm/knex': 5.9.7(@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(@mikro-orm/postgresql@5.9.7(@mikro-orm/core@6.4.3)(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))))(@mikro-orm/migrations@5.9.7(@mikro-orm/core@6.4.3)(@types/node@20.19.11)(pg@8.16.3))(pg@8.11.3)
