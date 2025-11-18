@@ -2,10 +2,10 @@
 
 import { Suspense } from 'react'
 import { useTranslations } from 'next-intl'
-import { useBlogPosts } from '@/lib/hooks/use-blog'
+import { useBlogPosts } from '@lib/hooks/use-blog'
 import { BlogCard, BlogGridSkeleton } from '@/components/blog'
 import { BlogPost } from '@/types/blog'
-import { markdownToPlainText } from '@/lib/utils/markdown'
+import { markdownToPlainText } from '@lib/utils/markdown'
 
 interface BlogGridClientProps {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -72,3 +72,4 @@ export function BlogGridClient({ searchParams, countryCode }: BlogGridClientProp
     </div>
   )
 }
+

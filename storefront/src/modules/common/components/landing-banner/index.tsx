@@ -72,4 +72,5 @@ const LandingBanner: React.FC<LandingBannerProps> = ({
   )
 }
 
-export default LandingBanner 
+export default LandingBanner
+

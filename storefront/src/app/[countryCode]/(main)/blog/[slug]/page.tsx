@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 import { BlogPost, BlogPostNavigation } from '@/components/blog'
-import { storeFetch } from '@/lib/util/fetch'
-import { markdownToHtml } from '@/lib/utils/markdown'
+import { storeFetch } from '@lib/util/fetch'
+import { markdownToHtml } from '@lib/utils/markdown'
 
 interface BlogPostPageProps {
   params: {
@@ -123,3 +123,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   )
 }
+

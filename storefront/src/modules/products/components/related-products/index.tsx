@@ -1,4 +1,4 @@
-import WoodProductCard from "../wood-product-card"
+import Product from "../product-preview"
 import { getRegion } from "@lib/data/regions"
 import { getProductsList } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
@@ -8,6 +8,14 @@ type RelatedProductsProps = {
   countryCode: string
 }
 
+type StoreProductParamsWithTags = HttpTypes.StoreProductParams & {
+  tags?: string[]
+}
+
+type StoreProductWithTags = HttpTypes.StoreProduct & {
+  tags?: { value: string }[]
+}
+
 export default async function RelatedProducts({
   product,
   countryCode,
@@ -15,17 +23,24 @@ export default async function RelatedProducts({
   const region = await getRegion(countryCode)
 
   if (!region) {
-    return null
+  const queryParams: StoreProductParamsWithTags = {}
   }
 
-  // Define related products logic based on collection
-  const queryParams: any = {}
-
-  queryParams.limit = 4
-  
+  // edit this function to define your related products logic
+  const queryParams: StoreProductParamsWithTags = {}
+  if (region?.id) {
+    queryParams.region_id = region.id
+  }
   if (product.collection_id) {
     queryParams.collection_id = [product.collection_id]
   }
+  const productWithTags = product as StoreProductWithTags
+  if (productWithTags.tags) {
+    queryParams.tags = productWithTags.tags
+      .map((t) => t.value)
+      .filter(Boolean) as string[]
+  }
+  queryParams.is_giftcard = false
 
   const products = await getProductsList({
     queryParams,
@@ -41,27 +56,23 @@ export default async function RelatedProducts({
   }
 
   return (
-    <section className="">
-      <div className="">
-        {/* Header */}
-        <div className="mb-6 text-center">
-          <h4 className="mb-4 text-3xl text-gray-900">
-            Podobné produkty
-          </h4>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            Môžu sa Vám páčiť aj tieto produkty.
-          </p>
-        </div>
-
-        {/* Related products grid with progressive enhancement */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
-          {products.map((product) => (
-            <div key={product.id} className="bg-white rounded-xl transition-all duration-300 overflow-hidden min-h-[600px]">
-              <WoodProductCard product={product} region={region} />
-            </div>
-          ))}
-        </div>
+    <div className="product-page-constraint">
+      <div className="flex flex-col items-center text-center mb-16">
+        <span className="text-base-regular text-gray-600 mb-6">
+          Related products
+        </span>
+        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
+          You might also want to check out these products.
+        </p>
       </div>
-    </section>
+
+      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
+        {products.map((product) => (
+          <li key={product.id}>
+            {region && <Product region={region} product={product} />}
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }

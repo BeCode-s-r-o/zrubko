@@ -14,7 +14,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
   return (
     <div data-testid="overview-page-wrapper">
       <div className="hidden small:block">
-        <div className="text-xl-semi flex justify-between items-center  mt-4  mb-4">
+        <div className="text-xl-semi flex justify-between items-center mb-4">
           <span data-testid="welcome-message" data-value={customer?.first_name}>
             Hello {customer?.first_name}
           </span>
@@ -82,7 +82,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                         data-value={order.id}
                       >
                         <LocalizedClientLink
-                          href={`/ucet/orders/details/${order.id}`}
+                          href={`/account/orders/details/${order.id}`}
                         >
                           <Container className="bg-gray-50 flex justify-between items-center p-4">
                             <div className="grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1">

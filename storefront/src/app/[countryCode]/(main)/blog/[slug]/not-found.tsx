@@ -1,6 +1,6 @@
 "use client"
 
-import LocalizedClientLink from '@/modules/common/components/localized-client-link'
+import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { useTranslations } from 'next-intl'
 
 export default function NotFound() {
@@ -29,3 +29,4 @@ export default function NotFound() {
     </div>
   )
 }
+

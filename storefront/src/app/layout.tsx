@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import "styles/globals.css"
 import { RegionProvider } from "@lib/context/region-context"
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, getLocale } from 'next-intl/server'
 import { listRegions } from "@lib/data/regions"
 
 export const metadata: Metadata = {
@@ -11,12 +11,13 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({
-  children,
-  params: { locale }
+  children
 }: {
   children: React.ReactNode
-  params: { locale: string }
 }) {
+  // Get locale from next-intl
+  const locale = await getLocale()
+  
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages()

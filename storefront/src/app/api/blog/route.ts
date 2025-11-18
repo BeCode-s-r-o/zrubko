@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { storeFetch } from '@/lib/util/fetch'
+import { storeFetch } from '@lib/util/fetch'
 
 // GET /api/blog - Fetch blog posts list
 export async function GET(request: NextRequest) {
@@ -44,3 +44,4 @@ export async function GET(request: NextRequest) {
     )
   }
 }
+

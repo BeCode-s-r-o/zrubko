@@ -57,10 +57,9 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-email-editor"
       >
-        <div className="space-y-2">
-          <h3 className="text-sm font-medium text-gray-700">E-mail</h3>
+        <div className="grid grid-cols-1 gap-y-2">
           <Input
-            label=""
+            label="Email"
             name="email"
             type="email"
             autoComplete="email"

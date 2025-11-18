@@ -57,4 +57,5 @@ const PageBreadcrumbs: React.FC<PageBreadcrumbsProps> = ({
   )
 }
 
-export default PageBreadcrumbs 
+export default PageBreadcrumbs
+

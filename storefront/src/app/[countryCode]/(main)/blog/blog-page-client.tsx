@@ -44,3 +44,4 @@ export default function BlogPageClient({ params, searchParams }: BlogPageClientP
     </div>
   )
 }
+
