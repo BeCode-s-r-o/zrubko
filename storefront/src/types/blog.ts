@@ -45,3 +45,4 @@ export const SUPPORTED_LANGUAGES = {
 } as const
 
 export type SupportedLanguage = keyof typeof SUPPORTED_LANGUAGES
+

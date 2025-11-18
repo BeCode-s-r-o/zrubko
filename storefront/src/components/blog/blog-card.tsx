@@ -1,10 +1,10 @@
 "use client"
 
 import Image from 'next/image'
-import LocalizedClientLink from '@/modules/common/components/localized-client-link'
+import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { BlogPost } from '@/types/blog'
 import { useTranslations } from 'next-intl'
-import { renderMarkdown } from '@/lib/util/markdown'
+import { renderMarkdown } from '@lib/util/markdown'
 
 interface BlogCardProps {
   post: BlogPost
@@ -51,7 +51,7 @@ export function BlogCard({ post, showExcerpt = true }: BlogCardProps) {
 
         {post.tags && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
+            {post.tags.map((tag: string) => (
               <span
                 key={tag}
                 className="inline-block bg-secondary text-white text-sm font-medium px-3 py-1 rounded-full shadow-sm hover:bg-secondary/90 transition-colors"
@@ -74,3 +74,4 @@ export function BlogCard({ post, showExcerpt = true }: BlogCardProps) {
     </article>
   )
 }
+

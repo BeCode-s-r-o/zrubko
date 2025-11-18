@@ -29,7 +29,6 @@ const AddressSelect = ({
   }
 
   const selectedAddress = useMemo(() => {
-    if (!addressInput) return null
     return addresses.find((a) => compareAddresses(a, addressInput))
   }, [addresses, addressInput])
 

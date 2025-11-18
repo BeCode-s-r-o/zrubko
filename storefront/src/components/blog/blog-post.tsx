@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { BlogPostWithContent } from '@/types/blog'
-import { renderMarkdown } from '@/lib/util/markdown'
+import { renderMarkdown } from '@lib/util/markdown'
 
 interface BlogPostProps {
   post: BlogPostWithContent
@@ -82,3 +82,4 @@ export function BlogPost({ post }: BlogPostProps) {
     </article>
   )
 }
+

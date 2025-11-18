@@ -7,7 +7,6 @@ import { getProductByHandle, getProductsList } from "@lib/data/products"
 
 type Props = {
   params: { countryCode: string; handle: string }
-  searchParams: { sourceCategory?: string }
 }
 
 export async function generateStaticParams() {
@@ -68,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function ProductPage({ params, searchParams }: Props) {
+export default async function ProductPage({ params }: Props) {
   const region = await getRegion(params.countryCode)
 
   if (!region) {
@@ -85,7 +84,6 @@ export default async function ProductPage({ params, searchParams }: Props) {
       product={pricedProduct}
       region={region}
       countryCode={params.countryCode}
-      sourceCategory={searchParams.sourceCategory}
     />
   )
 }

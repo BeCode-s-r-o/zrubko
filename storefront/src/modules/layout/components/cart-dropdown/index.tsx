@@ -202,10 +202,10 @@ const CartDropdown = ({
                   </div>
                   <span>Your shopping bag is empty.</span>
                   <div>
-                    <LocalizedClientLink href="/produkty">
+                    <LocalizedClientLink href="/store">
                       <>
-                        <span className="sr-only">Ísť na stránku s produktmi</span>
-                                                  <Button onClick={close}>Preskúmať produkty</Button>
+                        <span className="sr-only">Go to all products page</span>
+                        <Button onClick={close}>Explore products</Button>
                       </>
                     </LocalizedClientLink>
                   </div>

@@ -1,4 +1,4 @@
-import LocalizedClientLink from '@/modules/common/components/localized-client-link'
+import LocalizedClientLink from '@modules/common/components/localized-client-link'
 
 interface BlogPostNavigationProps {
   previousPost: {
@@ -153,3 +153,4 @@ export function BlogPostNavigation({
     </nav>
   )
 }
+

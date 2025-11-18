@@ -56,27 +56,21 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-name-editor"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-700">Meno</h3>
-            <Input
-              label=""
-              name="first_name"
-              required
-              defaultValue={customer.first_name ?? ""}
-              data-testid="first-name-input"
-            />
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-sm font-medium text-gray-700">Priezvisko</h3>
-            <Input
-              label=""
-              name="last_name"
-              required
-              defaultValue={customer.last_name ?? ""}
-              data-testid="last-name-input"
-            />
-          </div>
+        <div className="grid grid-cols-2 gap-x-4">
+          <Input
+            label="First name"
+            name="first_name"
+            required
+            defaultValue={customer.first_name ?? ""}
+            data-testid="first-name-input"
+          />
+          <Input
+            label="Last name"
+            name="last_name"
+            required
+            defaultValue={customer.last_name ?? ""}
+            data-testid="last-name-input"
+          />
         </div>
       </AccountInfo>
     </form>

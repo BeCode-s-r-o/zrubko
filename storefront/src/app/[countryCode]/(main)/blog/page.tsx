@@ -19,3 +19,4 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 export default function BlogPage({ params, searchParams }: BlogPageProps) {
   return <BlogPageClient params={params} searchParams={searchParams} />
 }
+

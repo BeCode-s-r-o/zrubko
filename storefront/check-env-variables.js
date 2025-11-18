@@ -1,28 +1,4 @@
-// const c = require("ansi-colors")
-
-// Simple color functions without external dependency
-const colors = {
-  yellow: (text) => `\x1b[33m${text}\x1b[0m`,
-  bold: (text) => `\x1b[1m${text}\x1b[0m`,
-  dim: (text) => `\x1b[2m${text}\x1b[0m`
-}
-
-// Create helper object mimicking the subset of `ansi-colors` that we need
-const c = {
-  // Regular yellow text function
-  yellow: Object.assign(
-    (text) => colors.yellow(text),
-    {
-      // Yellow & bold
-      bold: (text) => colors.bold(colors.yellow(text)),
-      // Yellow & dimmed
-      dim: (text) => colors.dim(colors.yellow(text)),
-    }
-  ),
-  // Stand-alone bold and dim helpers
-  bold: colors.bold,
-  dim: colors.dim,
-}
+const c = require("ansi-colors")
 
 const requiredEnvs = [
   {
@@ -39,28 +15,25 @@ function checkEnvVariables() {
   })
 
   if (missingEnvs.length > 0) {
-    console.warn(
-      c.yellow.bold("\n⚠️  Warning: Missing environment variables\n")
+    console.error(
+      c.red.bold("\n🚫 Error: Missing required environment variables\n")
     )
 
     missingEnvs.forEach(function (env) {
-      console.warn(c.yellow(`  ${c.bold(env.key)}`))
+      console.error(c.yellow(`  ${c.bold(env.key)}`))
       if (env.description) {
-        console.warn(c.dim(`    ${env.description}\n`))
+        console.error(c.dim(`    ${env.description}\n`))
       }
     })
 
-    console.warn(
+    console.error(
       c.yellow(
-        "\nApplication will continue but some features may not work properly.\n"
+        "\nPlease set these variables in your .env file or environment before starting the application.\n"
       )
     )
 
-    // Changed from process.exit(1) to just warning
-    return false
+    process.exit(1)
   }
-  
-  return true
 }
 
 module.exports = checkEnvVariables

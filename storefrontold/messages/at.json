@@ -1,0 +1,156 @@
+{
+  "product-title": {
+    
+  },
+  "about": {
+    "subtitle": "Entdecken Sie die Geschichte und Werte von TUBA s.r.o.",
+    "section1": {
+      "label": "01. Unsere Geschichte",
+      "title1": "Über 30 Jahre",
+      "title2": "am Markt",
+      "paragraph": "TUBA s.r.o. wurde 1991 als Teil des Verbandes der Handwerker gegründet. Anfangs konzentrierte sich das Unternehmen auf den Handel mit Lebensmitteln und Gewürzen in Tuben.",
+      "link": "Kontaktieren Sie uns →",
+      "statYearsNumber": "29",
+      "statYearsTitle": "Jahre tätig",
+      "statYearsDesc1": "Seit 1994",
+      "statYearsDesc2": "bedienen wir kontinuierlich unsere Kunden",
+      "statProductsTitle": "Produkte im Angebot",
+      "statProductsDesc1": "Breites Sortiment",
+      "statProductsDesc2": "an Schreibwaren und Verpackungen",
+      "statSatisfactionTitle": "Kundenzufriedenheit",
+      "statSatisfactionDesc1": "Vertrauen unserer",
+      "statSatisfactionDesc2": "Geschäftspartner"
+    },
+    "section2": {
+      "imgAlt": "Historischer Blick auf ein kleines Geschäft mit Gewürzen und Lebensmitteln in Tuben, mit Personen am Schaufenster",
+      "label": "02. Unsere Anfänge",
+      "title1": "Vom Tubenhandel",
+      "title2": "zum umfassenden Angebot",
+      "paragraph": "Es handelte mit Produkten in Tuben wie verschiedenen Arten von Senf, Ketchup und anderen Gewürzen. 1997 zog es in die aktuellen Räumlichkeiten von Konštrukta Trenčín in der Straße K Výstavisku um.",
+      "link": "Besuchen Sie unseren Shop →"
+    },
+    "section3": {
+      "label": "03. Entwicklung und Expansion",
+      "title1": "Stetige Erweiterung",
+      "title2": "unseres Angebots",
+      "paragraph": "Im Jahr 1998 löste sich der Verband auf und das Unternehmen führte seine Tätigkeit unter einem einzigen Gewerbe – Rudolf Bušo – TUBA – fort. Nach und nach begannen wir, unser Angebot um Schnüre, Öko‑Taschen, Regalpapiere, Papier‑ und Geschenktüten zu erweitern.",
+      "link": "Unser Angebot ansehen →",
+      "imgAlt": "Öko‑Tasche mit einem Blatt im Hintergrund, Symbol für Sortimentserweiterung"
+    },
+    "section4": {
+      "label": "04. Unsere Lieferanten",
+      "title1": "Zuverlässige Partner",
+      "title2": "für Qualitätsprodukte",
+      "paragraph": "Unsere größten Lieferanten sind ausländische Produktionsunternehmen aus EU‑Ländern, insbesondere aus Tschechien, Italien, Polen und Deutschland. Wir arbeiten mit renommierten Marken wie ARIA zusammen, die unser Hauptpartner ist.",
+      "partnerAriaAlt": "Lieferant Aria"
+    },
+    "section5": {
+      "ceoNameTitle": "Michal Bušo, CEO TUBA s.r.o.",
+      "ceoQuote": "Wir freuen uns auf die Zusammenarbeit!"
+    }
+  },
+  "common": {
+    "search": "Suchen",
+    "cart": "Warenkorb",
+    "account": "Konto",
+    "wishlist": "Wunschliste",
+    "language": "Sprache",
+    "country": "Land",
+    "loading": "Lade...",
+    "quantity": "Menge",
+    "remove": "Entfernen",
+    "withoutVAT": "exkl. MwSt",
+    "summary": "Zusammenfassung",
+    "discount": "Rabatt",
+    "shipping": "Versand",
+    "taxes": "Inkl. MwSt.",
+    "taxesIncluded": "Inkl. MwSt.",
+    "withVATShort": "inkl. MwSt.",
+    "withVATParen": "(inkl. MwSt.)",
+    "total": "Gesamt",
+    "appliedDiscounts": "Angewandte Rabatte:",
+    "removeCode": "Code entfernen",
+    "discountCode": "Rabattcode",
+    "enterCode": "Code eingeben",
+    "applying": "Wird angewendet...",
+    "applyCoupon": "Coupon anwenden",
+    "discountApplied": "Rabattcode angewendet!",
+    "discountRemoved": "Rabattcode entfernt.",
+    "applyCodeFailed": "Code konnte nicht angewendet werden",
+    "removeCodeFailed": "Code konnte nicht entfernt werden",
+    "edit": "Bearbeiten",
+    "cancel": "Abbrechen",
+    "saveChanges": "Änderungen speichern",
+    "updatedSuccessfully": "{label} erfolgreich aktualisiert",
+    "errorTryAgain": "Es ist ein Fehler aufgetreten, bitte erneut versuchen",
+    "contact": "Kontakt",
+    "product": "Produkt",
+    "price": "Preis",
+    "variant": "Variante",
+    "items": "{count} {count, plural, one {Artikel} other {Artikel}}",
+    "more": "mehr",
+    "shopNow": "Jetzt einkaufen"
+  },
+  "header": {
+    "welcome": "Büro- und Schulbedarf, Verpackungs- und Geschenkartikel",
+    "selectCountry": "Land auswählen",
+    "selectLanguage": "Sprache auswählen",
+    "loading": "Lade...",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "user": "Benutzer",
+    "callUs": "Rufen Sie uns an:",
+    "mobileSearchPlaceholder": "Produkt suchen..."
+  },
+  "home": {
+    "hero": {
+      "slide1": {
+        "title": "Beutel zum Füllen",
+        "subtitle": "Für Cremes, Füllungen und Glasuren – verschiedene Größen und Typen",
+        "cta": "Angebot entdecken"
+      },
+      "slide2": {
+        "title": "Backzubehör",
+        "subtitle": "Praktische Lösungen für stressfreies Backen",
+        "cta": "Mehr anzeigen"
+      },
+      "side": {
+        "title": "Schnüre Bindfäden",
+        "cta": "Anzeigen"
+      }
+    },
+    "categories": {
+      "bakery": {
+        "name": "Konditoreibedarf",
+        "subcategories": {
+          "trays": "Tabletts und Servierplatten",
+          "decoration": "Kuchenverzierung",
+          "baking": "Backhilfen",
+          "boxes": "Pappschachteln",
+          "cups": "Fingerfood-Becher"
+        }
+      },
+      "packaging": {
+        "name": "Verpackungen und Zubehör",
+        "subcategories": {
+          "strings": "Schnüre",
+          "bowls": "Öko-Schalen",
+          "bags": "Öko-Taschen",
+          "boxes": "Gastro-Thermoboxen",
+          "sleeves": "Ärmel und Taschen"
+        }
+      },
+      "stationery": {
+        "name": "Schreibwaren ARIA",
+        "subcategories": {
+          "blocks": "Schreibblöcke",
+          "gifts": "Geschenksortiment",
+          "wrapping": "Geschenkpapier",
+          "bags": "Geschenktaschen",
+          "envelopes": "Dekorative Umschläge"
+        }
+      }
+    }
+  }
+}

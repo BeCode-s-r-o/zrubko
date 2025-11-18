@@ -1,5 +1,3 @@
-// Deprecated: This file used Algolia hooks. Use Meilisearch-based components instead.
-
 import { useRouter } from "next/navigation"
 import {
   ChangeEvent,
@@ -33,7 +31,7 @@ type SearchBoxProps = {
 
 const SearchBoxWrapper = ({
   children,
-  placeholder = "Hľadať produkty...",
+  placeholder = "Search products...",
   ...rest
 }: SearchBoxProps) => {
   const { query, refine } = useSearchBox(rest)

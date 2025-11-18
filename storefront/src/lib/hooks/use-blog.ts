@@ -104,4 +104,4 @@ export function useBlogPost(slug: string, countryCode?: string) {
 
   return { post, loading, error }
 }
-  
+

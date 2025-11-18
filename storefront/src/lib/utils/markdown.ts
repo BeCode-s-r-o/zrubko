@@ -49,3 +49,4 @@ export function markdownToPlainText(markdown: string): string {
     return String(markdown || '')
   }
 }
+
