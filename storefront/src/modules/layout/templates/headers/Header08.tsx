@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import Logo from '@modules/common/components/logo'
 
 export default function Header08() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -62,9 +63,11 @@ export default function Header08() {
           <div className="container">
             <div className="row">
               <div className="col-6 col-xl-3">
-                <Link href="/" className="navbar-brand mr-0 d-flex align-items-center h-100 py-0">
-                  <Image src="/furnitor/images/logo.png" alt="Furnitor" width={150} height={50} />
-                </Link>
+                <Logo 
+                  width={150} 
+                  height={50}
+                  className="navbar-brand mr-0 d-flex align-items-center h-100 py-0"
+                />
               </div>
               <div className="col-xl-6">
                 <form className="d-flex align-items-center h-100">
@@ -211,9 +214,11 @@ export default function Header08() {
               <button className="navbar-toggler border-0 px-0 canvas-toggle" type="button" data-canvas="true" data-canvas-options='{"width":"250px","container":".sidenav"}' onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 <span className="fs-24 toggle-icon"></span>
               </button>
-              <Link href="/" className="navbar-brand d-inline-block mx-auto py-0">
-                <Image src="/furnitor/images/logo.png" alt="Furnitor" width={120} height={40} />
-              </Link>
+              <Logo 
+                width={120} 
+                height={40}
+                className="navbar-brand d-inline-block mx-auto py-0"
+              />
               <a href="#search-popup" data-gtf-mfp="true" data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}' className="nav-search d-block py-0" title="Search">
                 <i className="far fa-search"></i>
               </a>
