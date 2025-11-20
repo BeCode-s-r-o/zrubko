@@ -1,0 +1,63 @@
+---
+layout: docs
+title: Testimonial
+description: Customer testimonials.
+group: templates
+toc: true
+---
+<h2>Testimonial 01</h2>
+
+{% capture example %}
+<div style="max-width: 350px;">
+    <div class="card border-0">
+        <div class="card-body px-3 py-0 text-center">
+            <div class="mxw-84px mb-6 mx-auto">
+                <img src="{{ '/images/tes_01.png' | document_url }}" alt="Alfie Wood">
+            </div>
+            <ul class="list-inline mb-4">
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+            </ul>
+            <p class="card-text mb-4 font-weight-500">
+                “ These are beautiful, well made &
+                comfortable! I bought them to wear to work & casually. I wore them immediately walking in the city & has
+                no problem. “
+            </p>
+            <p class="card-text text-primary font-weight-bold mb-1 fs-15">Sampson Totton</p>
+            <p class="card-text text-muted fs-12 text-uppercase letter-spacing-05 font-weight-500">Golden Clock</p>
+
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Testimonial 02</h2>
+
+{% capture example %}
+<div style="max-width: 370px;">
+    <div class="media">
+        <div class="mxw-84px mr-4">
+            <img src="{{ '/images/tes_04.jpg' | document_url }}" alt="Sampson Totton">
+        </div>
+        <div class="media-body">
+            <ul class="list-inline mb-2">
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+            </ul>
+            <p class="card-text mb-3 font-weight-500">
+                “ Such amazing quality! We also bought the mattress sheet and have nothing bad to say!! “
+            </p>
+            <p class="card-text text-primary font-weight-bold mb-1 fs-15">Sampson Totton</p>
+            <p class="card-text text-muted fs-12 text-uppercase letter-spacing-05 font-weight-500">Golden Clock</p>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

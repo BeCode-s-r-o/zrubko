@@ -1,0 +1,11 @@
+.pagination {
+	.page-item {
+		font-size: 18px;
+		font-weight: 500;
+		letter-spacing: 4.5px;
+	}
+
+	.page-link:focus {
+		box-shadow: none;
+	}
+}

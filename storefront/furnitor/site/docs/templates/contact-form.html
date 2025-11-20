@@ -1,0 +1,37 @@
+---
+layout: docs
+title: Contact Form
+description: Different contact form types
+group: templates
+toc: true
+---
+<h2>Contact form 1</h2>
+
+{% capture example %}
+<div class="py-10">
+    <h2 class="fs-24 mb-1">
+        We would love to hear from you.
+    </h2>
+    <p class="mb-7">If you’ve got great products your making or looking to work with us then drop us a line.</p>
+    <form>
+        <div class="row mb-6">
+            <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Your Name*" required>
+            </div>
+            <div class="col-sm-6">
+                <input type="email" class="form-control" placeholder="Your Email*" required>
+            </div>
+        </div>
+        <div class="form-group mb-4">
+            <textarea class="form-control" rows="6">Comment</textarea>
+        </div>
+        <div class="custom-control custom-checkbox mb-6">
+            <input type="checkbox" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label fs-15" for="customCheck1"> Save my name, email, and website in this
+                browser for the next time I comment.</label>
+        </div>
+        <button type="submit" class="btn btn-primary text-uppercase letter-spacing-05">submit now</button>
+    </form>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

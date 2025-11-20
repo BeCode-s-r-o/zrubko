@@ -1,0 +1,82 @@
+products:
+  - image: /images/product-19.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+  - image: /images/product-02.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: new
+  - image: /images/product-10.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-16.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-26.jpg
+    category: decor
+    title: Golden Clock
+    price: $1000.00
+    sale: $1390.00
+    label: sale
+  - image: /images/product-05.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: hot
+
+testimonial:
+  - image: /images/tes_01.png
+    content: “These are beautiful, well made & comfortable! I bought them to wear to work & casually. I wore them immediately walking in the city & has no problem. “
+    name: Sampson Totton
+    position: Golden Clock
+  - image: /images/tes_02.png
+    content: “ Clothers are addicting! Love this brand and shoe. The arch support is wonderful and helps for long hours on your body. The narrow heel is wonderfully ! “
+    name: Alfie Wood
+    position: Piper Bar
+  - image: /images/tes_03.png
+    content: “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for style.”“
+    name: Herse Hedman
+    position: Potato Chair
+  - image: /images/tes_01.png
+    content: “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for style.”“
+    name: Herse Hedman
+    position: Potato Chair
+  - image: /images/tes_02.png
+    content: “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for style.”“
+    name: Herse Hedman
+    position: Potato Chair
+  - image: /images/tes_03.png
+    content: “Super class, cute, comfortable. You can wear them with just about anything.I will never sacrifice for style.”“
+    name: Herse Hedman
+    position: Potato Chair
+
+blogs:
+  - image: /images/blog_01.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+    content: These are beautiful, well made & ortable! I bought them to wear to work & casually.
+  - image: /images/blog_02.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+    content: These are beautiful, well made & ortable! I bought them to wear to work & casually.
+  - image: /images/blog_03.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+    content: These are beautiful, well made & ortable! I bought them to wear to work & casually.

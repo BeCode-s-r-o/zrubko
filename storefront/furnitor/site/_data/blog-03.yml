@@ -1,0 +1,50 @@
+blogs:
+  - image: /images/blog_01.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_02.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_03.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+  - image: /images/blog_07.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_12.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_11.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+  - image: /images/blog_09.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_10.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_05.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+  - image: /images/blog_08.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_06.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_04.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+  - image: /images/blog_13.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+  - image: /images/blog_14.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_15.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_16.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+

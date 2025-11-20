@@ -1,0 +1,70 @@
+---
+layout: home-12
+title: "Home 12"
+category_text: "Home"
+category_url: /home-12.html
+---
+<section class="pt-11 pb-11">
+    <div class="container">
+        <div class="mxw-110px mx-auto mb-8">
+            <img src="{{ '/images/logo_circle.png' | document_url }}" alt="Logo circle">
+        </div>
+        <div class="mxw-924 mx-auto">
+            <h2 class="fs-30 fs-md-40 lh-15 text-center">Having a place set aside for an activity you
+                love makes it more likely you’ll do it.</h2>
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-12">
+    <div class="container">
+        <div class="row mb-2">
+            {% for product in site.data.home-12.products %}
+            <div class="col-sm-6 col-lg-4 mb-8" data-animate="fadeInUp">
+                <div class="card border-0 hover-change-content product product-03">
+                    <div class="card-img-top position-relative">
+                        <div style="background-image: url('{{ product.image | document_url }}')"
+                             class="card-img ratio bg-img-cover-center ratio-1-1">
+                        </div>
+                        <div class="card-img-overlay d-flex d-flex">
+                            <div class="ml-auto d-flex flex-column">
+                                <div class="my-auto content-change-vertical">
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                        <i class="far fa-random"></i>
+                                    </a>
+                                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pt-4 pb-0 d-flex align-items-end">
+                        <div class="mr-auto">
+                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 d-block font-weight-500">{{product.category}}</a>
+                            <a href="#" class="font-weight-bold mt-1 d-block">{{product.title}}</a>
+                        </div>
+                        <div class="price-wrap">
+                            <p class="text-primary mb-0 price font-weight-500">{{product.price}}</p>
+                            <a href="#"
+                               class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                                to
+                                card</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{{ '/shop-page-04.html' | document_url }}"
+               class="btn btn-outline-primary text-uppercase letter-spacing-05">Load more</a>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,17 @@
+---
+layout: docs
+title: Counter
+description: Counter for each object. Include title and number
+group: templates
+toc: true
+---
+<h2>Counter 01</h2>
+
+{% capture example %}
+<div class="counterup fs-60 text-primary font-weight-500 lh-13 mb-3" data-start="0"
+     data-end="12346" data-decimals="0"
+     data-duration="0" data-separator=",">12346
+</div>
+<div class="text-primary font-weight-500">Satisfied customers worldwide and growing</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

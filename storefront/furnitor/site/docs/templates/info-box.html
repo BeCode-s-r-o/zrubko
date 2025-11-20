@@ -1,0 +1,107 @@
+---
+layout: docs
+title: Info Box
+description: Info Box for each object. Include title and description
+group: templates
+toc: true
+---
+<h2>Icon box 01</h2>
+
+{% capture example %}
+<div class="py-10">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="media border-md-right justify-content-center align-items-center">
+                    <div class="w-52px mr-5">
+                        <img src="{{ '/images/icon-box-03.png' | document_url }}" alt="100 Days Return">
+                    </div>
+                    <div class="media-body flex-unset">
+                        <h3 class="fs-20 mb-1">100 Days Return</h3>
+                        <p class="mb-0 font-weight-500 fs-15">No question asked</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="media border-md-right justify-content-center align-items-center">
+                    <div class="w-52px mr-5">
+                        <img src="{{ '/images/icon-box-02.png' | document_url }}" alt="Lifetime Warranty">
+                    </div>
+                    <div class="media-body flex-unset">
+                        <h3 class="fs-20 mb-1">Lifetime Warranty</h3>
+                        <p class="mb-0 font-weight-500 fs-15">For original owners</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="media justify-content-center align-items-center">
+                    <div class="w-52px mr-5">
+                        <img src="{{ '/images/icon-box-01.png' | document_url }}" alt="Custom Services">
+                    </div>
+                    <div class="media-body flex-unset">
+                        <h3 class="fs-20 mb-1">Custom Services</h3>
+                        <p class="mb-0 font-weight-500 fs-15">Our priority</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Icon box 02</h2>
+
+{% capture example %}
+<div class="py-10 bg-accent">
+    <div class="container">
+        <h2 class="fs-sm-40 mb-10 text-center">Core Values</h2>
+        <div class="row">
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="card bg-transparent border-0 align-items-center">
+                    <div class="w-63px card-img">
+                        <img src="{{ '/images/fish_bowl_lg.png' | document_url }}" alt="Cruises & Water Tours">
+                    </div>
+                    <div class="card-body px-0 pt-6 text-center">
+                        <h3 class="card-title fs-20 mb-3">Cruises & Water Tours</h3>
+                        <p class="cart-text mb-0">These are beautiful, well made & ortable! I bought them to wear to
+                            work &
+                            casually. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="card bg-transparent border-0 align-items-center">
+                    <div class="w-63px card-img">
+                        <img src="{{ '/images/plant_lg.png' | document_url }}" alt="Night Life">
+                    </div>
+                    <div class="card-body px-0 pt-6 text-center">
+                        <h3 class="card-title fs-20 mb-3">Night Life</h3>
+                        <p class="cart-text mb-0">These are beautiful, well made & ortable! I bought them to wear to
+                            work &
+                            casually. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-6 mb-md-0">
+                <div class="card bg-transparent border-0 align-items-center">
+                    <div class="w-63px card-img">
+                        <img src="{{ '/images/sofa_lg.png' | document_url }}" alt="Hiking">
+                    </div>
+                    <div class="card-body px-0 pt-6 text-center">
+                        <h3 class="card-title fs-20 mb-3">Hiking</h3>
+                        <p class="cart-text mb-0">These are beautiful, well made & ortable! I bought them to wear to
+                            work &
+                            casually. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+

@@ -1,0 +1,49 @@
+---
+layout: docs
+title: Countdown
+description: Countdown layouts are used in the Furnitor
+group: templates
+toc: true
+---
+<h2>Countdown 1</h2>
+
+{% capture example %}
+<div class="py-10 py-lg-15 bg-img-cover-center bg-custom-01"
+     style="background-image: url('{{ '/images/bg-countdown.jpg' | document_url }}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <h2 class="fs-lg-60 mb-7 text-center">
+                    Bobby Stool
+                </h2>
+                <div class="countdown d-flex justify-content-center mb-8" data-countdown="true"
+                     data-countdown-end="Jan 27, 2022 18:24:25">
+                    <div class="countdown-item d-flex flex-column text-center px-2 px-sm-4">
+                        <span class="fs-30 fs-sm-40 fs-lg-60 lh-1 text-primary day">02</span>
+                        <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">days</span>
+                    </div>
+                    <div class="separate fs-30">:</div>
+                    <div class="countdown-item d-flex flex-column text-center px-2 px-sm-4">
+                        <span class="fs-30 fs-sm-40 fs-lg-60 lh-1 text-primary hour">24</span>
+                        <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">hours</span>
+                    </div>
+                    <div class="separate fs-30">:</div>
+                    <div class="countdown-item d-flex flex-column text-center px-2 px-sm-4">
+                        <span class="fs-30 fs-sm-40 fs-lg-60 lh-1 text-primary minute">15</span>
+                        <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">minutes</span>
+                    </div>
+                    <div class="separate fs-30">:</div>
+                    <div class="countdown-item d-flex flex-column text-center px-2 px-sm-4">
+                        <span class="fs-30 fs-sm-40 fs-lg-60 lh-1 text-primary second">41</span>
+                        <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">seconds</span>
+                    </div>
+                </div>
+                <div class="text-center mb-3">
+                    <a href="#" class="btn btn-outline-primary text-uppercase letter-spacing-05 px-5">get only $1000</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

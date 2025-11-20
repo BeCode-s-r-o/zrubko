@@ -1,0 +1,19 @@
+breadcrumbs:
+  - title: Home
+    url: /
+  - title: Shop
+    url: /
+  - title: Dining Night
+    is_active: true
+
+products:
+  - image: /images/product-page-21.jpg
+    alt: Single Product 01
+  - image: /images/product-page-22.jpg
+    alt: Single Product 02
+  - image: /images/product-page-23.jpg
+    alt: Single Product 03
+  - image: /images/product-page-24.jpg
+    alt: Single Product 04
+  - image: /images/product-page-25.jpg
+    alt: Single Product 05

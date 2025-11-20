@@ -1,0 +1,340 @@
+---
+layout: docs
+title: Product grid
+description: Display list of product in the form Grid
+group: templates
+toc: true
+---
+<h2 id="grid-01">
+    <span>Grid 01</span>
+    <a href="#grid-01" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div style="max-width: 408px;" class="mb-6">
+    <div class="card border-0 hover-change-content product">
+        <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Bow Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">Table</a>
+                <p class="mt-auto text-primary mb-0 font-weight-500">$1390.00</p>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="my-auto content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to card"
+                       class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-shopping-basket"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="max-width: 408px;" class="mb-6">
+    <div class="card border-0 hover-change-content product">
+        <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Bow Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">Table</a>
+                <p class="mt-auto text-primary mb-0 font-weight-500">$1390.00</p>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="badge badge-green badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                    new
+                </div>
+                <div class="my-auto content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to card"
+                       class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-shopping-basket"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="max-width: 408px;">
+    <div class="card border-0 hover-change-content product">
+        <div style="background-image: url('{{ '/images/product-03.jpg' | document_url }}')"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Bow Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">Table</a>
+                <p class="mt-auto text-primary mb-0 font-weight-500"><span
+                        class="text-line-through text-secondary fs-14 d-inline-block mr-2 font-weight-normal">$1390.00</span>$1000.00</p>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="badge badge-pink badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                    sale
+                </div>
+                <div class="my-auto content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to card"
+                       class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-shopping-basket"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>
+    Grid 02
+
+</h2>
+{% capture example %}
+<div style="max-width: 269px;">
+    <div class="card border-0 hover-change-content product">
+        <div class="card-img-top position-relative">
+            <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+                 class="card-img ratio bg-img-cover-center ratio-1-1">
+            </div>
+            <div class="position-absolute pos-fixed-bottom px-4 px-sm-6 pb-5 d-flex w-100 justify-content-center content-change-horizontal">
+                <a href="#" data-toggle="tooltip" title="Add to cart"
+                   class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                    <i class="far fa-shopping-basket"></i>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Add to favourite"
+                   class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                    <i class="far fa-heart"></i>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Add to compare"
+                   class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                    <i class="far fa-random"></i>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Preview"
+                   class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle border">
+                    <i class="far fa-eye"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="card-body px-0 pt-4 pb-0 d-flex align-items-end">
+            <div class="mr-auto">
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 d-block font-weight-500">Table</a>
+                <a href="#" class="font-weight-bold mt-1 d-block">Bow Chair</a>
+            </div>
+            <p class="text-primary mb-0 font-weight-500">$1390.00</p>
+        </div>
+
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2 id="grid-03">
+    <span>Grid 03</span>
+    <a href="#grid-03" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div style="max-width: 408px;">
+    <div class="card border-0 hover-change-content product-03 mb-6 product">
+        <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Bow Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">Table</a>
+                <div class="mt-auto price-wrap">
+                    <p class="text-primary mb-0 price font-weight-500">$1390.00</p>
+                    <a href="#"
+                       class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                        to
+                        card</a>
+                </div>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="max-width: 408px;">
+    <div class="card border-0 hover-change-content product product-03 mb-6">
+        <div style="background-image: url('{{ '/images/product-19.jpg' | document_url }}');"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Potato Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">chair</a>
+                <div class="mt-auto price-wrap">
+                    <p class="text-primary mb-0 price font-weight-500">$1390.00</p>
+                    <a href="#"
+                       class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                        to
+                        card</a>
+                </div>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="badge badge-green badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                    new
+                </div>
+                <div class="my-auto content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div style="max-width: 408px;">
+    <div class="card border-0 hover-change-content product product-03 mb-6">
+        <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+             class="card-img ratio bg-img-cover-center ratio-1-1">
+        </div>
+        <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+            <div class="d-flex flex-column">
+                <a href="#" class="font-weight-bold mb-1 d-block lh-12">Potato Chair</a>
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">chair</a>
+                <div class="mt-auto price-wrap">
+                    <p class="text-primary mb-0 price font-weight-500"><span
+                            class="text-line-through text-secondary fs-14 d-inline-block mr-2 font-weight-normal">$1390.00</span>$1000.00
+                    </p>
+                    <a href="#"
+                       class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                        to
+                        card</a>
+                </div>
+            </div>
+            <div class="ml-auto d-flex flex-column">
+                <div class="badge badge-pink badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                    sale
+                </div>
+                <div class="my-auto content-change-vertical">
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                       class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                       class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-random"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                       class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                        <i class="far fa-eye"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>
+    Grid 04
+</h2>
+{% capture example %}
+<div style="max-width: 269px;">
+    <div class="card border-0 hover-change-content product product-03">
+        <div class="card-img-top position-relative">
+            <div style="background-image: url('{{'/images/product-19.jpg' | document_url }}')"
+                 class="card-img ratio bg-img-cover-center ratio-1-1">
+            </div>
+            <div class="card-img-overlay d-flex d-flex">
+                <div class="ml-auto d-flex flex-column">
+                    <div class="my-auto content-change-vertical">
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                           class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                           class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                            <i class="far fa-random"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                           class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                            <i class="far fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pt-4 pb-0 d-flex align-items-end">
+            <div class="mr-auto">
+                <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 d-block font-weight-500">Table</a>
+                <a href="#" class="font-weight-bold mt-1 d-block">Bow Chair</a>
+            </div>
+            <div class="price-wrap">
+                <p class="text-primary mb-0 price font-weight-500">$1390.00</p>
+                <a href="#"
+                   class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                    to
+                    card</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

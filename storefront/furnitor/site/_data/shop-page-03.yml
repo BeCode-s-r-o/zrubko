@@ -1,0 +1,132 @@
+products:
+  - image: /images/product-19.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-02.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: new
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-10.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-20.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    col: 1
+    row: 2
+    ratio: 2-1
+  - image: /images/product-09.jpg
+    category: table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+    col: 2
+    row: 1
+    ratio: 1-2
+  - image: /images/product-26.jpg
+    category: table
+    title: Bow Chair
+    price: $1000.00
+    sale: $1390.00
+    label: sale
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-16.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-04.jpg
+    category: table
+    title: Piper Bar
+    price: $1000.00
+    label: hot
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-06.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-05.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-20.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    col: 1
+    row: 2
+    ratio: 2-1
+  - image: /images/product-04.jpg
+    category: table
+    title: Bow Chair
+    price: $1000.00
+    label: hot
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-06.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-05.jpg
+    category: table
+    title: Piper Bar
+    price: $1000.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+  - image: /images/product-09.jpg
+    category: table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+    col: 2
+    row: 1
+    ratio: 1-2
+  - image: /images/product-05.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    col: 1
+    row: 1
+    ratio: 1-1
+
+

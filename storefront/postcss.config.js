@@ -1,6 +1,6 @@
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    // tailwindcss: {}, // Disabled - Using Bootstrap 4 instead
     autoprefixer: {},
   },
 }

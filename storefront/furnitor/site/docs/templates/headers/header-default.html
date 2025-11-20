@@ -1,0 +1,129 @@
+---
+layout: header-docs
+title: "Header default"
+category_text: Headers
+category_url: /docs/templates/header.html
+---
+<header class="main-header navbar-light header-sticky header-sticky-smart">
+    <div class="sticky-area bg-white">
+        <div class="{{ page.header_container| default: 'container container-xxl' }}">
+            <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 d-block">
+                <div class="d-none d-xl-block">
+                    <div class="row align-items-center">
+                        <div class="col-2">
+                            <div class="position-relative">
+                                <a href="#search-popup" data-gtf-mfp="true"
+                                   data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                                   class="nav-search d-flex align-items-center"><i
+                                        class="far fa-search"></i><span
+                                        class="d-none d-xl-inline-block ml-2 font-weight-500">Search</span></a>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-8 mx-auto position-static">
+                            <div class="d-flex mt-3 mt-xl-0 align-items-center w-100 justify-content-center">
+                                {% include navbar-main-left.html %}
+                                <a class="navbar-brand mx-8 mx-xxl-10 d-inline-block py-0"
+                                   href="{{ '/index.html' | document_url }}">
+                                    <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                                </a>
+                                {% include navbar-main-right.html %}
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            {% include navbar-right.html %}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center d-xl-none">
+                    <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button"
+                            data-canvas="true"
+                            data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                        <span class="fs-24 toggle-icon"></span>
+                    </button>
+                    <div class="mx-auto"><a class="navbar-brand d-inline-block mr-0"
+                                            href="{{ '/index.html' | document_url }}">
+                        <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                    </a></div>
+                    <a href="#search-popup" data-gtf-mfp="true"
+                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                       class="nav-search d-flex align-items-center"><i
+                            class="far fa-search"></i><span
+                            class="d-none d-xl-inline-block ml-2 font-weight-500">Search</span></a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    {% include components/page-title/docs.html %}
+    <section class="py-10">
+        <div class="container">
+            <div class="bg-gray-01 overflow-auto">
+                {% highlight html %}
+<header class="main-header navbar-light header-sticky header-sticky-smart">
+    <div class="sticky-area bg-white">
+        <div class="{{ page.header_container| default: 'container container-xxl' }}">
+            <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 d-block">
+                <div class="d-none d-xl-block">
+                    <div class="row align-items-center">
+                        <div class="col-2 d-none d-xl-block">
+                            <div class="position-relative">
+                                <a href="#search-popup" data-gtf-mfp="true"
+                                   data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                                   class="nav-search d-flex align-items-center"><i
+                                        class="far fa-search"></i><span
+                                        class="d-none d-xl-inline-block ml-2 font-weight-500">Search</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 mx-auto position-static">
+                            <div class="d-flex mt-3 mt-xl-0 align-items-center w-100 justify-content-center">
+                                {% include navbar-main-left.html %}
+                                <a class="navbar-brand mx-8 mx-xxl-10 d-none d-xl-inline-block"
+                                   href="{{ '/index.html' | document_url }}">
+                                    <img src="{{ '/images/logo.png' | document_url }}"
+                                         alt="{{site.title}}">
+                                </a>
+                                {% include navbar-main-right.html %}
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            {% include navbar-right.html %}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-block d-xl-none">
+                    <div class="d-flex align-items-center">
+                        <a href="#" class="nav-search d-flex align-items-center"><i
+                                class="far fa-search"></i><span
+                                class="d-none d-xl-inline-block ml-2 font-weight-500">Search</span> </a>
+                        <div class="mx-auto"><a class="navbar-brand d-inline-block mr-0"
+                                                href="{{ '/index.html' | document_url }}">
+                            <img src="{{ '/images/logo-white.png' | document_url }}"
+                                 alt="{{site.title}}">
+                        </a></div>
+                        <button class="navbar-toggler border-0 px-0 d-flex align-items-center"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#primaryMenu"
+                                aria-controls="primaryMenu" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="text-white fs-24"><i class="fal fa-bars"></i></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse mt-3 mt-xl-0" id="primaryMenu">
+                        {% include navbar-main-mobile.html %}
+                        {% include navbar-right-mobile.html %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+                {% endhighlight %}
+            </div>
+        </div>
+    </section>
+</main>

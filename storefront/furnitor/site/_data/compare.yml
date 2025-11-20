@@ -1,0 +1,29 @@
+products:
+  - image: /images/product-16.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    in_stock: true
+    brand: H&M
+    color: Red, Yellow
+  - image: /images/product-04.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    in_stock: true
+    brand: H&M
+    color: Red, Yellow
+  - image: /images/product-06.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    in_stock: false
+    brand: H&M
+    color: Red, Yellow
+  - image: /images/product-05.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    in_stock: true
+    brand: H&M
+    color: Red, Yellow

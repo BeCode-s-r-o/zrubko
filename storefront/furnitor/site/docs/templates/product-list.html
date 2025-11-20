@@ -1,0 +1,39 @@
+---
+layout: docs
+title: Product List
+description: Display list of product in the form List
+group: templates
+toc: true
+---
+<h2 id="list-01">
+    <span>List 01</span>
+    <a href="#list-01" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div class="card border-0">
+    <div class="row no-gutters">
+        <div class="col-sm-4">
+            <div class="hover-zoom-in">
+                <img src="{{ '/images/product-19.jpg' | document_url }}" class="card-img"
+                     alt="Bow Chair">
+            </div>
+        </div>
+        <div class="col-sm-8 pl-sm-6">
+            <div class="card-body py-4 px-0 pl-sm-3">
+                <div class="d-flex align-items-end mb-4">
+                    <div class="mr-auto">
+                        <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 mb-1 d-block">decor</a>
+                        <a href="#" class="fs-20 font-weight-bold d-block">Golden Clock</a>
+                    </div>
+                    <p class="text-primary mb-0 font-weight-500">$1390.00</p>
+                </div>
+                <p class="card-text mb-4 font-weight-500">Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our
+                    Sonoma Pillows and Throws are inspired by the basics we...</p>
+                <a href="#" class="btn btn-primary text-uppercase letter-spacing-05">add to cart</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

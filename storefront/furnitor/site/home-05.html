@@ -1,0 +1,185 @@
+---
+layout: home-5
+title: "Home 05"
+category_text: "Home"
+category_url: /home-05.html
+---
+<section class="overflow-hidden">
+    <div class="container container-xxl">
+        <div class="slick-slider dots-inner-center"
+             data-slick-options='{"slidesToShow": 1,"infinite":false,"autoplay":true,"dots":true,"arrows":false}'>
+            <div class="box">
+                <div class="d-flex flex-column justify-content-center bg-img-cover-center custom-vh custom-height-sm"
+                     style="background-image: url('{{ '/images/bg-home-05.jpg' | document_url }}')">
+                    <div class="d-flex flex-column h-100 justify-content-center pl-3 pl-md-10 pl-lg-14">
+                        <p class="text-primary font-weight-bold fs-20 mb-4" data-animate="fadeInUp">New - In</p>
+                        <h1 class="mb-7 fs-sm-60 fs-lg-90 lh-1" data-animate="fadeInUp">Carabottino</h1>
+                        <div>
+                            <a href="#" class="btn btn-primary text-uppercase letter-spacing-05"
+                               data-animate="fadeInUp">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="d-flex flex-column justify-content-center bg-img-cover-center custom-vh custom-height-sm"
+                     style="background-image: url('{{ '/images/bg-home-05.jpg' | document_url }}')">
+                    <div class="d-flex flex-column h-100 justify-content-center pl-3 pl-md-10 pl-lg-14">
+                        <p class="text-primary font-weight-bold fs-20 mb-4" data-animate="fadeInUp">New - In</p>
+                        <h2 class="mb-7 fs-sm-60 fs-lg-90 lh-1" data-animate="fadeInUp">Carabottino</h2>
+                        <div>
+                            <a href="#" class="btn btn-primary text-uppercase letter-spacing-05"
+                               data-animate="fadeInUp">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="d-flex flex-column justify-content-center bg-img-cover-center custom-vh custom-height-sm"
+                     style="background-image: url('{{ '/images/bg-home-05.jpg' | document_url }}')">
+                    <div class="d-flex flex-column h-100 justify-content-center pl-3 pl-md-10 pl-lg-14">
+                        <p class="text-primary font-weight-bold fs-20 mb-4" data-animate="fadeInUp">New - In</p>
+                        <h2 class="mb-7 fs-sm-60 fs-lg-90 lh-1" data-animate="fadeInUp">Carabottino</h2>
+                        <div>
+                            <a href="#" class="btn btn-primary text-uppercase letter-spacing-05"
+                               data-animate="fadeInUp">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-6">
+    <div class="container container-xxl">
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 2, "autoplay":true,"dots":false,"arrows":false,"responsive":[{"breakpoint": 768,"settings": {"slidesToShow": 1}}]}'>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_11.jpg' | document_url }}" alt="Chairs" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Chairs</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-03.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_12.jpg' | document_url }}" alt="Stands" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Stands</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-03.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-11 py-lg-15">
+    <div class="container container-xxl">
+        <h2 class="mb-9 text-center fs-30 fs-md-40">Essenstial Items</h2>
+        <div class="row mb-6 overflow-hidden">
+            {% for product in site.data.home-05.products %}
+            <div class="col-sm-6 col-lg-3 mb-6" data-animate="fadeInUp">
+                <div class="card border-0 hover-change-content product product-03">
+                    <div style="background-image: url('{{ product.image | document_url }}')"
+                         class="card-img ratio bg-img-cover-center ratio-1-1 ratio-lg-{{product.ratio}}">
+                    </div>
+                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                        <div class="d-flex flex-column">
+                            <a href="#" class="font-weight-bold mb-1 d-block lh-12">{{product.title}}</a>
+                            <a href="#"
+                               class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">{{product.category}}</a>
+                            <div class="mt-auto price-wrap">
+                                <p class="mt-auto text-primary mb-0 price font-weight-500">
+                                    {% if product.sale %}
+                                    <span
+                                            class="text-line-through text-secondary fs-14 d-inline-block mr-2 font-weight-normal">{{ product.sale }}</span>
+                                    {% endif %}
+                                    {{ product.price }}</p>
+                                <a href="#"
+                                   class="fs-14 font-weight-500 border-bottom border-light-dark border-hover-primary text-uppercase letter-spacing-05 add-to-cart d-inline-block">Add
+                                    to
+                                    card</a>
+                            </div>
+                        </div>
+                        <div class="ml-auto d-flex flex-column">
+                            {%- assign label = product.label | slugify -%}
+                            {% if label == "new" %}
+                            <div class="badge badge-green badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                new
+                            </div>
+                            {% endif %}
+                            {% if label == "sale" %}
+                            <div class="badge badge-pink badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                sale
+                            </div>
+                            {% endif %}
+                            {% if label == "hot" %}
+                            <div class="badge badge-yellow badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                hot
+                            </div>
+                            {% endif %}
+                            <div class="content-change-vertical">
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                                   class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                                   class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-random"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                                   class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{{ '/shop-page-06.html' | document_url }}"
+               class="btn btn-outline-primary text-uppercase letter-spacing-05">Shop Now</a>
+        </div>
+    </div>
+
+</section>
+<section class="pb-12">
+    <div class="container container-xxl">
+        <h2 class="mb-9 text-center fs-30 fs-md-40">Our Journal</h2>
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 4,"infinite":true,"autoplay":true,"dots":false,"arrows":false,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":3}},{"breakpoint": 992,"settings": {"slidesToShow":2}},{"breakpoint": 576,"settings": {"slidesToShow":1}}]}'>
+            {% for blog in site.data.home-05.blogs %}
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <a href="{{ '/blog-post-01.html' | document_url }}" class="hover-shine card-img-top">
+                        <img src="{{ blog.image | document_url }}"
+                             alt="{{blog.title}}">
+                    </a>
+                    <div class="card-body px-0 pt-6 pb-0">
+                        <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                            {{blog.date}}
+                        </p>
+                        <h3 class="card-title mb-0 fs-20">
+                            <a href="{{ '/blog-post-01.html' | document_url }}">{{blog.title}}</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>

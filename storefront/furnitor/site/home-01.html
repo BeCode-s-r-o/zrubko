@@ -1,0 +1,177 @@
+---
+layout: home-1
+title: "Home 01"
+category_text: "Home"
+category_url: /home-01.html
+---
+<section class="overflow-hidden">
+    <div class="slick-slider custom-slider-02 mx-0 slider-01"
+         data-slick-options='{"slidesToShow": 1,"infinite":true,"autoplay":false,"dots":true,"arrows":false}'>
+        <div class="box px-0">
+            <div class="d-flex flex-column justify-content-center bg-img-cover-center vh-100 custom-height-sm"
+                 style="background-image: url('{{ '/images/bg-home-01.jpg' | document_url }}');background-position: center top;">
+                <div class="d-flex flex-column h-100 justify-content-center">
+                    <div class="container container-xxl">
+                        <p class="text-primary font-weight-bold fs-24 mb-3 mb-md-6" data-animate="fadeInUp">New - In</p>
+                        <h1 class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113">
+                            <strong class="d-block" data-animate="fadeInUp">Sundae</strong>
+                            <strong class="d-block" data-animate="fadeInUp">Lounges</strong>
+                        </h1>
+                        <a href="{{ '/shop-page-02.html' | document_url }}" class="btn btn-outline-primary text-uppercase letter-spacing-05"
+                           data-animate="fadeInUp">Shop Now</a>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <div class="container container-xxl">
+                        <p class="text-primary mb-8">Designed by <span
+                                class="font-weight-600">Nicholas Karlovasitis & Sarah Gibson</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box px-0">
+            <div class="d-flex flex-column justify-content-center bg-img-cover-center vh-100 custom-height-sm"
+                 style="background-image: url('{{ '/images/bg-home-01.jpg' | document_url }}');background-position: center top;">
+                <div class="d-flex flex-column h-100 justify-content-center">
+                    <div class="container container-xxl">
+                        <p class="text-primary font-weight-bold fs-24 mb-3 mb-md-6">New - In</p>
+                        <h2 class="mb-4 mb-md-9 fs-60 fs-xxl-120 heading-home-01 lh-113">
+                            <strong class="d-block" data-animate="fadeInUp">Sundae</strong>
+                            <strong class="d-block" data-animate="fadeInUp">Lounges</strong>
+                        </h2>
+                        <a href="{{ '/shop-page-02.html' | document_url }}" class="btn btn-outline-primary text-uppercase letter-spacing-05">Shop Now</a>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <div class="container container-xxl">
+                        <p class="text-primary mb-8">Designed by <span
+                                class="font-weight-600">Nicholas Karlovasitis & Sarah Gibson</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box px-0">
+            <div class="d-flex flex-column justify-content-center bg-img-cover-center vh-100 custom-height-sm"
+                 style="background-image: url('{{ '/images/bg-home-01.jpg' | document_url }}');background-position: center top;">
+                <div class="d-flex flex-column h-100 justify-content-center">
+                    <div class="container container-xxl">
+                        <p class="text-primary font-weight-bold fs-24 mb-3 mb-md-6">New - In</p>
+                        <h2 class="mb-4 mb-md-9 fs-60 fs-xxl-120 heading-home-01 lh-113">
+                            <strong class="d-block" data-animate="fadeInUp">Sundae</strong>
+                            <strong class="d-block" data-animate="fadeInUp">Lounges</strong>
+                        </h2>
+                        <a href="{{ '/shop-page-02.html' | document_url }}" class="btn btn-outline-primary text-uppercase letter-spacing-05">Shop Now</a>
+                    </div>
+                </div>
+                <div class="mt-auto">
+                    <div class="container container-xxl">
+                        <p class="text-primary mb-8">Designed by <span
+                                class="font-weight-600">Nicholas Karlovasitis & Sarah Gibson</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-lg-14 py-11">
+    <div class="container container-xxl">
+        <div class="d-grid g-1 g-sm-2 g-lg-4 grid-gap overflow-hidden">
+            {% for product in site.data.home-01.products %}
+            {% if product.is_category == false %}
+            <div class="grid-item">
+                <div class="card border-0 hover-change-content product" data-animate="fadeInUp">
+                    <div style="background-image: url('{{ product.image | document_url }}')"
+                         class="card-img ratio bg-img-cover-center ratio-1-1">
+                    </div>
+                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                        <div class="d-flex flex-column">
+                            <a href="#" class="font-weight-bold mb-1 d-block lh-12">{{ product.title }}</a>
+                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-13 font-weight-500">{{ product.category
+                                }}</a>
+                            <p class="mt-auto text-primary mb-0 font-weight-500">
+                                {% if product.sale %}
+                                <span
+                                        class="text-line-through text-secondary fs-14 d-inline-block mr-2 font-weight-normal">{{ product.sale }}</span>
+                                {% endif %}
+                                {{ product.price }}</p>
+                        </div>
+                        <div class="ml-auto d-flex flex-column">
+                            {%- assign label = product.label | slugify -%}
+                            {% if label == "new" %}
+                            <div class="badge badge-green badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                new
+                            </div>
+                            {% endif %}
+                            {% if label == "sale" %}
+                            <div class="badge badge-pink badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                sale
+                            </div>
+                            {% endif %}
+                            {% if label == "hot" %}
+                            <div class="badge badge-yellow badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                hot
+                            </div>
+                            {% endif %}
+                            <div class="my-auto content-change-vertical">
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to card"
+                                   class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-shopping-basket"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                                   class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                                   class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-random"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                                   class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="grid-item gc-sm-2  {% if product.title == 'Dining <br> Table' %}gr-start-7 gr-start-sm-4 gr-start-lg-2{% elsif product.title == 'Planters' %}gc-start-lg-3 gc-end-lg-5 gr-start-14 gr-start-sm-8 gr-start-lg-4{% else %}gr-start-21 gr-start-sm-12 gr-start-lg-6{% endif %}">
+                <div class="card border-0" data-animate="fadeInUp">
+                    <div style="background-image: url('{{ product.image | document_url }}')"
+                         class="card-img ratio bg-img-cover-center ratio-1-1 ratio-sm-1-2">
+                    </div>
+                    <div class="card-img-overlay d-inline-flex flex-column p-xl-8">
+                        <div class="mxw-320px">
+                            <h3 class="card-title fs-48 fs-lg-40 fs-xxl-56 {% if product.title == 'Dining <br> Table' %}pt-xxl-1{% elsif product.title == 'Planters' %}pt-xxl-6{% else %}pt-xxl-5{% endif %}">{{ product.title }}</h3>
+                            {% if product.description %}
+                            <p class="text-primary">{{product.description}}</p>
+                            {% endif %}
+                        </div>
+                        {% if product.from_price %}
+                        <div class="position-absolute d-none d-lg-block category-price">
+                            <p class="text-primary d-flex flex-column align-items-center justify-content-center w-88px h-88 rounded-circle bg-white text-center">
+                                <span class="font-weight-bold d-block">Form</span>
+                                {{product.from_price}}</p>
+                        </div>
+
+                        {% endif %}
+                        <div class="mt-auto">
+                            <a href="#"
+                               class="btn btn-outline-primary text-uppercase letter-spacing-05">{{ product.price }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="text-center mt-11">
+            <a href="{{ '/shop-page-02.html' | document_url }}" class="btn btn-outline-primary text-uppercase letter-spacing-05" data-animate="fadeInUp">Shop
+                Now</a>
+        </div>
+    </div>
+</section>
+
+
+
+

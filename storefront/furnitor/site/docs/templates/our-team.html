@@ -1,0 +1,75 @@
+---
+layout: docs
+title: Our team
+description: Different our team types
+group: templates
+toc: true
+---
+<h2>Our team 1</h2>
+
+{% capture example %}
+<div class="slick-slider custom-arrow-1"
+     data-slick-options='{"slidesToShow": 5,"infinite":true,"autoplay":true,"dots":false,"arrows":true,"responsive":[{"breakpoint": 992,"settings": {"slidesToShow":4}},{"breakpoint": 768,"settings": {"slidesToShow": 3}},{"breakpoint": 576,"settings": {"slidesToShow": 2}}]}'>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-01.jpg' | document_url }}" alt="Mattie Blooman">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Mattie Blooman</p>
+            </div>
+        </a>
+    </div>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-02.jpg' | document_url }}" alt="Chioke Chinasa">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Chioke Chinasa</p>
+            </div>
+        </a>
+    </div>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-03.jpg' | document_url }}" alt="Fakhri Shokoohi">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Fakhri Shokoohi</p>
+            </div>
+        </a>
+    </div>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-04.jpg' | document_url }}" alt="Mattie Blooman">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Mattie Blooman</p>
+            </div>
+        </a>
+    </div>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-05.jpg' | document_url }}" alt="Kip Collison">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Kip Collison</p>
+            </div>
+        </a>
+    </div>
+    <div class="box">
+        <a href="#" class="card border-0 align-items-center">
+            <div class="w-130 rounded-circle overflow-hidden card-img">
+                <img src="{{ '/images/our-team-06.jpg' | document_url }}" alt="Kip Collison">
+            </div>
+            <div class="card-body px-0 pt-3 pb-0">
+                <p class="card-title text-primary fs-15 font-weight-bold mb-0">Kip Collison</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

@@ -1,0 +1,350 @@
+---
+layout: docs
+title: Widget
+description: List of widgets being used on the Furnitor
+group: templates
+toc: true
+---
+
+<h2>Categories</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Categories
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-4 pb-0">
+            <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Sweaters</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Beauty</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Fashion</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Shopping</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Trends</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Recent Comments</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Recent Comments
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-4 pb-0">
+            <ul class="list-unstyled mb-0">
+                <li class="mb-6">
+                    <div class="media">
+                        <div class="mr-2 fs-15 lh-1 mt-2 text-primary"><i class="fal fa-comment-dots"></i></div>
+                        <div class="media-body">
+                            <p class="mb-0 text-primary lh-175">Jason Freidlich</p>
+                            <p class="font-weight-light text-primary lh-175 mb-0">on <a href="#"
+                                                                                        class="font-weight-bold">Wild
+                                Days In Oregon</a></p>
+                        </div>
+                    </div>
+                </li>
+                <li class="mb-6">
+                    <div class="media">
+                        <div class="mr-2 fs-15 lh-1 mt-2 text-primary"><i class="fal fa-comment-dots"></i></div>
+                        <div class="media-body">
+                            <p class="mb-0 text-primary lh-175">Jason Freidlich</p>
+                            <p class="font-weight-light text-primary lh-175 mb-0">on <a href="#"
+                                                                                        class="font-weight-bold">Wild
+                                Days In Oregon</a></p>
+                        </div>
+                    </div>
+                </li>
+                <li class="mb-0">
+                    <div class="media">
+                        <div class="mr-2 fs-15 lh-1 mt-2 text-primary"><i class="fal fa-comment-dots"></i></div>
+                        <div class="media-body">
+                            <p class="mb-0 text-primary lh-175">Jason Freidlich</p>
+                            <p class="font-weight-light text-primary lh-175 mb-0">on <a href="#"
+                                                                                        class="font-weight-bold">Wild
+                                Days In Oregon</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Recent Posts</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Recent Posts
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-6 pb-0">
+            <ul class="list-unstyled mb-0">
+                <li class="mb-6">
+                    <div class="media">
+                        <a href="#" class="d-block w-70px mr-2"><img
+                                src="{{ '/images/recent-post-03.jpg' | document_url }}"
+                                alt="Sampson Totton"></a>
+                        <div class="media-body">
+                            <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">April 24,
+                                2019</p>
+                            <a href="#" class="font-weight-bold">How to care for your cotton. </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="mb-6">
+                    <div class="media">
+                        <a href="#" class="w-70px mr-2 d-block"><img
+                                src="{{ '/images/recent-post-02.jpg' | document_url }}"
+                                alt="Sampson Totton"></a>
+                        <div class="media-body">
+                            <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">April 24,
+                                2019</p>
+                            <a href="#" class="font-weight-bold">Time for new start ?
+                                We’re hiring </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="mb-0">
+                    <div class="media">
+                        <a href="#" class="w-70px mr-2 d-block"><img
+                                src="{{ '/images/recent-post-01.jpg' | document_url }}"
+                                alt="Sampson Totton"></a>
+                        <div class="media-body">
+                            <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">April 24,
+                                2019</p>
+                            <a href="#" class="font-weight-bold">Black live matter</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Tags</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Tags
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-6 pb-0">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Vintage</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Awesome</a>
+
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Summer</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Beachwear</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Sunglasses</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Winter</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Shorts</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Cool</a>
+                </li>
+                <li class="list-inline-item mr-2 py-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">Nice</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Instagram</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0 widget-instagram">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Instagram
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-6 pb-0">
+            <div class="row no-gutters">
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_06.jpg' | document_url }}" alt="Instagram">
+                    </a>
+
+                </div>
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_04.jpg' | document_url }}" alt="Instagram">
+                    </a>
+
+                </div>
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_08.jpg' | document_url }}" alt="Instagram">
+                    </a>
+
+                </div>
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_05.jpg' | document_url }}" alt="Instagram">
+                    </a>
+
+                </div>
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_07.jpg' | document_url }}" alt="Instagram">
+                    </a>
+
+                </div>
+                <div class="col-4 item">
+                    <a href="#" class="d-block">
+                        <img src="{{ '/images/in_02.jpg' | document_url }}" alt="Instagram">
+                    </a>
+                </div>
+
+            </div>
+            <a href="#" class="d-block mt-1"><span class="d-inline-block mr-1"><i class="fab fa-instagram"></i></span>@furnitor.stu</a>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Price</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Price
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-4 pb-0">
+            <ul class="list-unstyled mb-0">
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">All
+                    </a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">$10
+                        - $100</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">$100
+                        - $200</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">$200
+                        - $300</a>
+                </li>
+                <li class="mb-1">
+                    <a href="#"
+                       class="text-secondary hover-primary border-bottom border-white border-hover-primary d-inline-block lh-12">$300
+                        - $400</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2>Colors</h2>
+
+{% capture example %}
+<div style="max-width:270px">
+    <div class="card border-0 widget-color">
+        <div class="card-header bg-transparent border-0 p-0">
+            <h3 class="card-title fs-20 mb-0">
+                Colors
+            </h3>
+        </div>
+        <div class="card-body px-0 pt-4 pb-0">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <a href="#"
+                       class="d-block item" style="background-color: #d0a272;"></a>
+                </li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #68412d;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #000000;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #aa5959;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #8db4d2;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #c2c3a0;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #c7857d;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #e3e1e7;"></a></li>
+                <li class="list-inline-item"><a href="#"
+                                                class="d-block item" style="background-color: #b490b0;"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

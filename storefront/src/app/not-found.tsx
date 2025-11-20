@@ -1,5 +1,3 @@
-import { ArrowUpRightMini } from "@medusajs/icons"
-import { Text } from "@medusajs/ui"
 import { Metadata } from "next"
 import Link from "next/link"
 
@@ -10,20 +8,17 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col gap-4 items-center justify-center min-h-[calc(100vh-64px)]">
-      <h1 className="text-2xl-semi text-ui-fg-base">Page not found</h1>
-      <p className="text-small-regular text-ui-fg-base">
+    <div className="d-flex flex-column align-items-center justify-content-center" style={{ minHeight: 'calc(100vh - 64px)' }}>
+      <h1 className="fs-40 mb-4">Page not found</h1>
+      <p className="fs-16 mb-4 text-muted">
         The page you tried to access does not exist.
       </p>
       <Link
-        className="flex gap-x-1 items-center group"
+        className="d-flex align-items-center text-primary font-weight-500"
         href="/"
       >
-        <Text className="text-ui-fg-interactive">Go to frontpage</Text>
-        <ArrowUpRightMini
-          className="group-hover:rotate-45 ease-in-out duration-150"
-          color="var(--fg-interactive)"
-        />
+        <span className="mr-2">Go to frontpage</span>
+        <i className="far fa-arrow-right"></i>
       </Link>
     </div>
   )

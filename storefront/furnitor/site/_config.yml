@@ -1,0 +1,33 @@
+# Social
+title:          "Furnitor"
+description:    "Furniture Shop Html Template"
+social_image_path:  /images/logo_01.png
+social_logo_path:   /images/logo_01.png
+
+# Server
+destination:    ./../dist
+host:           "localhost"
+port:           4000
+url:            ""
+baseurl:        "/html-furnitor" # the subpath of your site, e.g. /blog
+
+keep_files:
+  - js
+  - css
+  - images
+  - vendors
+
+plugins:
+  - jekyll-tidy
+  - jekyll-toc
+
+toc:
+  min_level:        2
+  max_level:        4
+  no_toc_section_class:
+    - "bd-callout"
+    - "bd-example"
+  list_class: section-nav toc-nav nav flex-column
+  sublist_class: ''
+  item_class: toc-entry nav-item
+  item_prefix: toc-

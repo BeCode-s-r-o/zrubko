@@ -1,0 +1,176 @@
+---
+layout: header-docs
+title: "Header 04"
+category_text: Headers
+category_url: /docs/templates/header.html
+---
+<header class="main-header navbar-dark header-sticky header-sticky-smart position-absolute fixed-top header-04">
+    <div class="topbar topbar-border d-none d-xl-block">
+        <div class="container container-xxl">
+            <p class="mb-0 py-2 text-white font-weight-600 text-center">Free Express Shipping on all US order over
+                $100</p>
+        </div>
+    </div>
+    <div class="sticky-area">
+        <div class="{{ page.header_container| default: 'container container-xxl' }}">
+            <div class="d-none d-xl-block">
+                <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 row align-items-center no-gutters">
+                    <div class="col-5 position-static">
+                        {% include navbar-main-01.html %}
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a class="navbar-brand mx-0 d-block"
+                           href="{{ '/index.html' | document_url }}">
+                            <img src="{{ '/images/logo-white.png' | document_url }}" alt="{{site.title}}"
+                                 class="normal-logo">
+                            <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}"
+                                 class="sticky-logo">
+                        </a>
+                    </div>
+                    <div class="d-xl-flex align-items-center col-5 justify-content-end">
+                        <div class="navbar-right position-relative">
+                            <ul class="navbar-nav flex-row justify-content-xl-end d-flex flex-wrap text-body">
+                                <li class="nav-item">
+                                    <a class="nav-link pr-3" href="#">
+                                        Account
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#search-popup" data-gtf-mfp="true"
+                                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                                       class="nav-link nav-search px-3" title="Search">Search</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link position-relative px-3" href="#"><i class="far fa-heart"></i>
+                                        <span class="position-absolute number">0</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link position-relative px-3 menu-cart" href="#" data-canvas="true"
+                                       data-canvas-options='{"container":".cart-canvas"}'>
+                                        <i class="far fa-shopping-basket"></i>
+                                        <span class="position-absolute number">0</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="d-block d-xl-none">
+                <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 align-items-center w-100">
+                    <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button"
+                            data-canvas="true"
+                            data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                        <span class="fs-24 toggle-icon"></span>
+                    </button>
+                    <a class="navbar-brand d-inline-block mx-auto" href="{{ '/index.html' | document_url }}">
+                        <img src="{{ '/images/logo-white.png' | document_url }}" alt="{{site.title}}"
+                             class="normal-logo">
+                        <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}"
+                             class="sticky-logo">
+                    </a>
+                    <a href="#search-popup" data-gtf-mfp="true"
+                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                       class="nav-search d-block py-0" title="Search"><i
+                            class="far fa-search"></i></a>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<main>
+    <section
+            style="background-image: url('{{ '/images/bg-home-04.jpg' | document_url }}');background-position: center;background-size: cover;"
+            class="py-18 bg-overlay">
+    </section>
+    {% include components/page-title/docs.html %}
+    <section class="py-10">
+        <div class="container">
+            <div class="bg-gray-01 overflow-auto">
+                {% highlight html %}
+<header class="main-header navbar-dark header-sticky header-sticky-smart position-absolute fixed-top header-04">
+    <div class="topbar topbar-border d-none d-xl-block">
+        <div class="container container-xxl">
+            <p class="mb-0 py-2 text-white font-weight-600 text-center">Free Express Shipping on all US order over
+                $100</p>
+        </div>
+    </div>
+    <div class="sticky-area">
+        <div class="{{ page.header_container| default: 'container container-xxl' }}">
+            <div class="d-none d-xl-block">
+                <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 row align-items-center no-gutters">
+                    <div class="col-5 position-static">
+                        {% include navbar-main-01.html %}
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a class="navbar-brand mx-0 d-block"
+                           href="{{ '/index.html' | document_url }}">
+                            <img src="{{ '/images/logo-white.png' | document_url }}" alt="{{site.title}}"
+                                 class="normal-logo">
+                            <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}"
+                                 class="sticky-logo">
+                        </a>
+                    </div>
+                    <div class="d-xl-flex align-items-center col-5 justify-content-end">
+                        <div class="navbar-right position-relative">
+                            <ul class="navbar-nav flex-row justify-content-xl-end d-flex flex-wrap text-body">
+                                <li class="nav-item">
+                                    <a class="nav-link pr-3" href="#">
+                                        Account
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#search-popup" data-gtf-mfp="true"
+                                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                                       class="nav-link nav-search px-3" title="Search">Search</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link position-relative px-3" href="#"><i class="far fa-heart"></i>
+                                        <span class="position-absolute number">0</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link position-relative px-3 menu-cart" href="#" data-canvas="true"
+                                       data-canvas-options='{"container":".cart-canvas"}'>
+                                        <i class="far fa-shopping-basket"></i>
+                                        <span class="position-absolute number">0</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="d-block d-xl-none">
+                <nav class="navbar navbar-expand-xl px-0 py-2 py-xl-0 align-items-center w-100">
+                    <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button"
+                            data-canvas="true"
+                            data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                        <span class="fs-24 toggle-icon"></span>
+                    </button>
+                    <a class="navbar-brand d-inline-block mx-auto" href="{{ '/index.html' | document_url }}">
+                        <img src="{{ '/images/logo-white.png' | document_url }}" alt="{{site.title}}"
+                             class="normal-logo">
+                        <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}"
+                             class="sticky-logo">
+                    </a>
+                    <a href="#search-popup" data-gtf-mfp="true"
+                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                       class="nav-search d-block py-0" title="Search"><i
+                            class="far fa-search"></i></a>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+</header>
+                {% endhighlight %}
+            </div>
+        </div>
+    </section>
+</main>

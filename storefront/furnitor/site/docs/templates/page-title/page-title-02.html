@@ -1,0 +1,41 @@
+---
+layout: page-title-docs
+title: "Page Tile 02"
+category_text: Page Title
+category_url: /docs/templates/page-title.html
+---
+{% include components/page-title/docs.html %}
+<div style="background-image: url('{{ '/images/bg-page-title-02.jpg' | document_url }}');"
+class="pt-18 pb-6 bg-img-cover-center">
+<div class="container">
+    <h1 class="fs-40 mb-17">Shop All</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb py-0">
+            <li class="breadcrumb-item"><a href="{{ '/index.html' | document_url }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shop All</li>
+        </ol>
+    </nav>
+</div>
+</div>
+<section class="py-10">
+    <div class="container">
+        <div class="bg-gray-01 overflow-auto">
+            {% highlight html %}
+<div style="background-image: url('{{ '/images/bg-page-title-02.jpg' | document_url }}');"
+     class="pt-18 pb-6 bg-img-cover-center">
+    <div class="container">
+        <h1 class="fs-40 mb-17">Shop All</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-0">
+                <li class="breadcrumb-item"><a href="{{ '/index.html' | document_url }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Shop All</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+            {% endhighlight %}
+        </div>
+    </div>
+</section>

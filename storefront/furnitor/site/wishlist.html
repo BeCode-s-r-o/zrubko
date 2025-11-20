@@ -1,0 +1,55 @@
+---
+layout: default
+title: "Wishlist"
+category_text: "Pages"
+category_url: /wishlist.html
+---
+<section class="py-3 bg-color-3">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-0">
+                <li class="breadcrumb-item"><a href="{{ '/index.html' | document_url }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="#"> Pages </a></li>
+                <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<section class="pb-11 pb-lg-12 pt-10">
+    <div class="container">
+        <h2 class="fs-sm-40 mb-11 text-center">Wishlist</h2>
+        <div class="row no-gutters">
+            <div class="col-lg-9 mx-auto">
+                <div class="row">
+                    {% for product in site.data.wishlist.products %}
+                    <div class="col-md-4 mb-6">
+                        <div class="card border-0 hover-change-content product">
+                            <div class="card-img-top position-relative">
+                                <div style="background-image: url('{{ product.image | document_url }}')"
+                                     class="card-img ratio bg-img-cover-center ratio-1-1">
+                                </div>
+                                <div class="position-absolute pos-fixed-top-right pr-4 pt-4">
+                                    <a href="#" data-toggle="tooltip" title="Delete"
+                                       class="fs-20">
+                                        <i class="fal fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pt-4 pb-0">
+                                <div class="d-flex align-items-end mb-1">
+                                    <a href="{{ '/product-page-01.html' | document_url }}" class="font-weight-bold d-block">{{product.title}}</a>
+                                    <p class="text-primary mb-0 ml-auto">{{product.price}}</p>
+                                </div>
+                                <p class="fs-15 text-primary d-block mb-4">{{product.property}}</p>
+                                <a href="#" class="btn btn-outline-primary btn-block">add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>

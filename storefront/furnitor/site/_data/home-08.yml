@@ -1,0 +1,26 @@
+products:
+  - image: /images/product-14.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+  - image: /images/product-16.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+  - image: /images/product-17.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+products_02:
+  - image: /images/product-05.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+  - image: /images/product-26.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+  - image: /images/product-02.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
