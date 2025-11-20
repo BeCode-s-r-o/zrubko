@@ -1,0 +1,546 @@
+---
+alwaysApply: true
+---
+# Project Rules & Guidelines
+
+## 🎯 Core Principles
+
+1. **Bootstrap 4 Only** - Use Bootstrap 4 classes, NOT Tailwind CSS
+2. **Furnitor Theme** - Follow Furnitor design patterns and component structure
+3. **Next.js Best Practices** - Use Next.js 14 App Router conventions
+4. **Medusa.js Integration** - Maintain all e-commerce functionality
+5. **Type Safety** - Use TypeScript for all components
+
+---
+
+## 📁 File Structure Rules
+
+### Component Organization
+```
+src/modules/
+├── layout/
+│   └── templates/
+│       ├── headers/          ← Header variants (Header01.tsx, Header08.tsx, etc.)
+│       └── footers/          ← Footer variants (Footer01.tsx, Footer10.tsx, etc.)
+├── home/
+│   └── components/           ← Home page components
+├── products/                 ← Product-related components
+├── cart/                     ← Cart components
+└── account/                  ← Account components
+```
+
+### Naming Conventions
+- **Components**: PascalCase (e.g., `Header08.tsx`, `ProductGrid.tsx`)
+- **Files**: Match component name exactly
+- **Directories**: kebab-case (e.g., `hero-slider/`, `product-grid/`)
+- **Index files**: Always create `index.tsx` for easier imports
+
+---
+
+## 🎨 CSS & Styling Rules
+
+### ✅ DO: Use Bootstrap 4 Classes
+```tsx
+// ✅ CORRECT
+<div className="container">
+  <div className="row">
+    <div className="col-md-6">Content</div>
+  </div>
+</div>
+<button className="btn btn-primary">Click</button>
+```
+
+### ❌ DON'T: Use Tailwind Classes
+```tsx
+// ❌ WRONG
+<div className="flex flex-col gap-4">
+  <button className="bg-blue-500 text-white">Click</button>
+</div>
+```
+
+### Custom CSS
+- Place custom CSS in `src/styles/globals.css`
+- **NO** `@layer` directives (Tailwind is disabled)
+- Use regular CSS classes
+- Prefix custom classes to avoid conflicts (e.g., `.furnitor-custom-class`)
+
+---
+
+## 🖼️ Image Handling Rules
+
+### Image Paths
+- **Always** use `/furnitor/images/` prefix for Furnitor assets
+- Use Next.js `Image` component for optimization
+
+```tsx
+// ✅ CORRECT
+import Image from 'next/image'
+
+<Image 
+  src="/furnitor/images/logo.png" 
+  alt="Logo"
+  width={150}
+  height={50}
+/>
+```
+
+### Image Locations
+- Furnitor images: `/furnitor/images/`
+- Custom images: `/images/` (create if needed)
+- Product images: From Medusa backend (use Next.js Image with remote patterns)
+
+---
+
+## 🔄 HTML to JSX Conversion Rules
+
+### Required Conversions
+
+| HTML | JSX |
+|------|-----|
+| `class` | `className` |
+| `for` | `htmlFor` |
+| `style="color: red"` | `style={{ color: 'red' }}` |
+| `<img>` | `<img />` (self-closing) |
+| `<a href>` | `<Link href>` (from next/link) |
+| `onclick` | `onClick` |
+
+### Data Attributes
+- **Keep all `data-*` attributes** - They're needed for Furnitor JavaScript plugins
+- Examples: `data-toggle`, `data-canvas`, `data-slick-options`, etc.
+
+```tsx
+// ✅ CORRECT - Keep data attributes
+<button 
+  className="btn"
+  data-toggle="dropdown"
+  data-canvas="true"
+  data-canvas-options='{"width":"250px"}'
+>
+  Menu
+</button>
+```
+
+---
+
+## 📦 Component Creation Rules
+
+### 1. Client vs Server Components
+
+**Use `'use client'` when:**
+- Component uses React hooks (useState, useEffect, etc.)
+- Component has event handlers (onClick, onChange, etc.)
+- Component uses browser APIs (window, document, etc.)
+- Component needs interactivity
+
+**Use Server Components (default) when:**
+- Component only displays data
+- Component fetches data from Medusa
+- Component is static
+
+### 2. Component Structure Template
+
+```tsx
+'use client' // Only if needed
+
+import Link from 'next/link'
+import Image from 'next/image'
+
+interface ComponentProps {
+  // Define props with TypeScript
+}
+
+export default function ComponentName({ props }: ComponentProps) {
+  return (
+    <div className="container">
+      {/* Bootstrap 4 classes */}
+    </div>
+  )
+}
+```
+
+### 3. Import Order
+1. React/Next.js imports
+2. Third-party imports
+3. Local component imports
+4. Type imports
+5. Style imports
+
+```tsx
+// 1. React/Next.js
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+
+// 2. Third-party
+import { someLibrary } from 'package'
+
+// 3. Local components
+import ProductCard from '@modules/products/components/product-card'
+
+// 4. Types
+import type { Product } from '@medusajs/types'
+
+// 5. Styles (if needed)
+import styles from './component.module.css'
+```
+
+---
+
+## 🛒 Medusa.js Integration Rules
+
+### Data Fetching Pattern
+
+```tsx
+// ✅ CORRECT - Server Component
+import { getProducts } from "@lib/data/products"
+import { getRegion } from "@lib/data/regions"
+
+export default async function Page({ params }: { params: { countryCode: string } }) {
+  const region = await getRegion(params.countryCode)
+  const products = await getProducts(params.countryCode, region)
+  
+  return <ProductGrid products={products} />
+}
+```
+
+### Product Data Mapping
+
+When converting Medusa products to Furnitor format:
+
+```tsx
+const furnitorProducts = products.map(product => ({
+  id: product.id,
+  name: product.title,
+  category: product.collection?.title || 'Uncategorized',
+  price: formatPrice(product.variants[0]?.prices?.[0]?.amount, region.currency_code),
+  image: product.images?.[0]?.url || '/furnitor/images/placeholder.jpg',
+  link: `/products/${product.handle}`
+}))
+```
+
+### Cart Integration
+- Use Medusa cart API for cart operations
+- Update cart count in header using cart context
+- Preserve cart functionality - don't break existing cart features
+
+---
+
+## 🎯 Furnitor-Specific Rules
+
+### JavaScript Plugins Initialization
+
+Furnitor uses jQuery-based plugins. Initialize them in client components:
+
+```tsx
+'use client'
+import { useEffect } from 'react'
+
+export default function SliderComponent() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.$) {
+      // Initialize Slick slider
+      window.$('.slick-slider').slick({
+        slidesToShow: 4,
+        autoplay: true
+      })
+    }
+  }, [])
+
+  return (
+    <div className="slick-slider" data-slick-options='{"slidesToShow": 4}'>
+      {/* slides */}
+    </div>
+  )
+}
+```
+
+### Bootstrap 4 Dropdowns
+- Use Bootstrap 4 dropdown classes: `dropdown`, `dropdown-toggle`, `dropdown-menu`
+- Keep `data-toggle="dropdown"` attributes
+- Bootstrap JS handles the dropdown functionality
+
+### Slick Slider Configuration
+- Use `data-slick-options` attribute for configuration
+- Or initialize via JavaScript in `useEffect`
+- Always include responsive breakpoints
+
+---
+
+## 🚫 What NOT to Do
+
+### ❌ Don't Mix Tailwind and Bootstrap
+```tsx
+// ❌ WRONG
+<div className="container flex flex-col gap-4">
+```
+
+### ❌ Don't Remove Data Attributes
+```tsx
+// ❌ WRONG - Removed data attributes
+<button className="btn" onClick={handleClick}>
+
+// ✅ CORRECT - Keep data attributes
+<button 
+  className="btn" 
+  data-toggle="dropdown"
+  onClick={handleClick}
+>
+```
+
+### ❌ Don't Use Hardcoded Paths for Furnitor Assets
+```tsx
+// ❌ WRONG
+<Image src="/images/logo.png" />
+
+// ✅ CORRECT
+<Image src="/furnitor/images/logo.png" />
+```
+
+### ❌ Don't Break Medusa Functionality
+- Always test cart, checkout, and account pages after changes
+- Don't remove Medusa API calls
+- Maintain existing data fetching patterns
+
+---
+
+## 📝 Code Style Rules
+
+### TypeScript
+- Always define prop types with interfaces
+- Use type imports: `import type { Product } from '@medusajs/types'`
+- Avoid `any` type - use proper types
+
+### Component Props
+```tsx
+// ✅ CORRECT
+interface ProductCardProps {
+  product: Product
+  region: Region
+  showActions?: boolean
+}
+
+export default function ProductCard({ 
+  product, 
+  region, 
+  showActions = true 
+}: ProductCardProps) {
+  // ...
+}
+```
+
+### Error Handling
+- Always handle loading and error states
+- Use Next.js `notFound()` for 404 cases
+- Provide fallback UI for missing data
+
+---
+
+## 🔍 Component Conversion Checklist
+
+When converting Furnitor HTML to React:
+
+- [ ] Convert `class` to `className`
+- [ ] Convert `<a>` to `<Link>` (from next/link)
+- [ ] Convert `<img>` to `<Image>` (from next/image)
+- [ ] Update image paths to `/furnitor/images/`
+- [ ] Keep all `data-*` attributes
+- [ ] Convert inline styles to objects
+- [ ] Add TypeScript interfaces for props
+- [ ] Mark component as `'use client'` if needed
+- [ ] Test responsive design
+- [ ] Verify JavaScript plugins work
+- [ ] Check console for errors
+
+---
+
+## 🎨 Design System Rules
+
+### Colors
+- Use Bootstrap 4 color classes: `text-primary`, `bg-primary`, `btn-primary`
+- Furnitor theme colors are in `themes.css` - reference for custom colors
+
+### Typography
+- Use Bootstrap 4 typography classes: `fs-20`, `font-weight-bold`, `text-uppercase`
+- Furnitor uses Poppins font (loaded in layout.tsx)
+
+### Spacing
+- Use Bootstrap 4 spacing: `mb-4`, `py-6`, `px-3`
+- Follow Furnitor spacing patterns from HTML templates
+
+### Breakpoints
+- Bootstrap 4 breakpoints: `sm`, `md`, `lg`, `xl`
+- Use responsive classes: `d-none d-md-block`, `col-md-6`, etc.
+
+---
+
+## 🧪 Testing Rules
+
+### Before Committing
+- [ ] Test on mobile (responsive design)
+- [ ] Test on desktop
+- [ ] Verify all images load
+- [ ] Check browser console for errors
+- [ ] Test navigation links
+- [ ] Verify cart functionality (if applicable)
+- [ ] Test JavaScript plugins (sliders, dropdowns, modals)
+
+### Browser Testing
+- Test in Chrome, Firefox, Safari
+- Test on iOS and Android devices
+- Verify Bootstrap 4 components work correctly
+
+---
+
+## 📚 Reference Files
+
+### Furnitor Templates
+- HTML templates: `furnitor/dist/`
+- Source templates: `furnitor/site/_includes/`
+- Use these as reference for structure and classes
+
+### Documentation
+- `BOOTSTRAP4_SETUP.md` - Bootstrap 4 setup details
+- `HOME10_IMPLEMENTATION.md` - Home-10 component structure
+- `HEADER_FOOTER_VARIANTS.md` - Header/Footer conversion guide
+
+### Bootstrap 4 Docs
+- Official docs: https://getbootstrap.com/docs/4.6/
+- Use Bootstrap 4 classes, NOT Bootstrap 5
+
+---
+
+## 🔧 Development Workflow
+
+### Creating New Components
+
+1. **Reference Furnitor HTML**
+   - Find similar component in `furnitor/dist/`
+   - Copy HTML structure
+
+2. **Convert to React**
+   - Convert HTML to JSX
+   - Add TypeScript interfaces
+   - Use Next.js components (Link, Image)
+
+3. **Add to Project**
+   - Place in appropriate `src/modules/` directory
+   - Create `index.tsx` for exports
+   - Import and use in pages
+
+4. **Test**
+   - Verify styling matches Furnitor
+   - Test responsive design
+   - Check JavaScript functionality
+
+### Updating Existing Components
+
+1. **Check Furnitor Reference**
+   - Compare with original HTML template
+   - Ensure all classes match
+
+2. **Preserve Functionality**
+   - Don't break Medusa integration
+   - Keep data attributes
+   - Maintain event handlers
+
+3. **Test Changes**
+   - Test affected pages
+   - Verify no regressions
+
+---
+
+## 🚨 Common Pitfalls to Avoid
+
+1. **Mixing Tailwind and Bootstrap** - Use Bootstrap 4 only
+2. **Removing data attributes** - They're needed for JS plugins
+3. **Wrong image paths** - Always use `/furnitor/images/` prefix
+4. **Breaking Medusa API calls** - Test cart/checkout after changes
+5. **Forgetting responsive classes** - Always test mobile/desktop
+6. **Not initializing JS plugins** - Use useEffect for Slick, etc.
+7. **Using Bootstrap 5 classes** - This is Bootstrap 4 project
+
+---
+
+## ✅ Code Review Checklist
+
+Before submitting code:
+
+- [ ] Uses Bootstrap 4 classes (not Tailwind)
+- [ ] Image paths use `/furnitor/images/` prefix
+- [ ] All `data-*` attributes preserved
+- [ ] TypeScript types defined
+- [ ] Responsive design tested
+- [ ] JavaScript plugins initialized
+- [ ] Medusa functionality preserved
+- [ ] No console errors
+- [ ] Follows component structure rules
+- [ ] Matches Furnitor design
+
+---
+
+## 📖 Quick Reference
+
+### Bootstrap 4 Common Classes
+```tsx
+// Layout
+className="container"
+className="row"
+className="col-md-6"
+
+// Buttons
+className="btn btn-primary"
+className="btn btn-outline-primary"
+
+// Typography
+className="fs-20 font-weight-bold text-uppercase"
+
+// Display
+className="d-none d-md-block"
+className="d-flex align-items-center"
+
+// Spacing
+className="mb-4 py-6 px-3"
+```
+
+### Next.js Components
+```tsx
+import Link from 'next/link'
+import Image from 'next/image'
+
+<Link href="/path">Text</Link>
+<Image src="/furnitor/images/logo.png" width={150} height={50} alt="Logo" />
+```
+
+### Furnitor Data Attributes
+```tsx
+data-toggle="dropdown"
+data-canvas="true"
+data-slick-options='{"slidesToShow": 4}'
+data-gtf-mfp="true"
+data-animate="fadeInUp"
+```
+
+---
+
+## 🎯 Summary
+
+**Remember:**
+1. ✅ Bootstrap 4 only - NO Tailwind
+2. ✅ Furnitor assets in `/furnitor/` directory
+3. ✅ Keep all `data-*` attributes
+4. ✅ Use Next.js Link and Image components
+5. ✅ Preserve Medusa.js functionality
+6. ✅ Follow Furnitor design patterns
+7. ✅ Test responsive design
+8. ✅ Initialize JavaScript plugins
+
+**When in doubt:**
+- Check Furnitor HTML templates in `furnitor/dist/`
+- Reference Bootstrap 4 documentation
+- Follow existing component patterns
+- Test thoroughly before committing
+
+---
+
+*Last updated: Based on Furnitor Home-10 implementation*
+
