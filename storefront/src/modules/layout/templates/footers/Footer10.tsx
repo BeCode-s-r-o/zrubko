@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
+import Logo from '@modules/common/components/logo'
 
 export default function Footer10() {
   return (
@@ -9,9 +9,11 @@ export default function Footer10() {
       <div className="container container-xxl">
         <div className="row">
           <div className="col-lg mb-6 mb-lg-0">
-            <Link href="/" className="footer-logo d-block">
-              <Image src="/furnitor/images/logo.png" alt="Furnitor" width={150} height={50} />
-            </Link>
+            <Logo 
+              width={150} 
+              height={50}
+              className="footer-logo d-block"
+            />
           </div>
           <div className="col-sm-6 col-lg mb-6 mb-lg-0">
             <ul className="list-unstyled mb-0">

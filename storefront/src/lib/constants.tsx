@@ -5,6 +5,13 @@ import Ideal from "@modules/common/icons/ideal"
 import Bancontact from "@modules/common/icons/bancontact"
 import PayPal from "@modules/common/icons/paypal"
 
+// Logo URLs from Medusa backend
+export const LOGO_URL = "https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=logos%2Fbrown_black.png&version_id=null"
+export const LOGO_URL_HOVER = "https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=logos%2Fblack_black.png&version_id=null"
+
+// Site name
+export const SITE_NAME = "Zrubko"
+
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
   string,
