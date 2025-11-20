@@ -1,0 +1,14 @@
+products:
+  - image: /images/product-16.jpg
+    property: Black / 900 Diameter
+    title: Bow Chair
+    price: $1390.00
+  - image: /images/product-04.jpg
+    property: Black / Short
+    title: Piper Bar
+    price: $1390.00
+  - image: /images/product-06.jpg
+    property: Brown
+    title: Golden Clock
+    price: $1000.00
+

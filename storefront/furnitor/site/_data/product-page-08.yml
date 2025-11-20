@@ -1,0 +1,101 @@
+breadcrumbs:
+  - title: Home
+    url: /
+  - title: Shop
+    url: /
+  - title: Partridge Bar Stool
+    is_active: true
+
+product_cats:
+  - category: Accessories
+  - category: Chairs
+  - category: Clock
+  - category: Dining Tables
+  - category: Lighting
+  - category: Lounges & Sofa
+  - category: Stool
+  - category: …
+
+product_prices:
+  - price_min: $10
+    price_max: $100
+  - price_min: $100
+    price_max: $200
+  - price_min: $200
+    price_max: $300
+  - price_min: $300
+    price_max: $400
+
+product_materials:
+  - category: Laminate
+  - category: Acrylic
+  - category: Aluminium
+  - category: Cotton
+  - category: Leather
+  - category: Metal
+
+product_tags:
+  - title: Vintage
+  - title: Awesome
+  - title: Summer
+  - title: Beachwear
+  - title: Sunglasses
+  - title: Winter
+  - title: Shorts
+  - title: Cool
+  - title: Nice
+
+galleries-01:
+  - image: /images/product-17.jpg
+  - image: /images/single-product-02.jpg
+  - image: /images/single-product-03.jpg
+  - image: /images/single-product-04.jpg
+  - image: /images/single-product-05.jpg
+
+galleries-02:
+  - image: /images/product-17.jpg
+    alt: Single Product 01
+  - image: /images/single-product-02.jpg
+    alt: Single Product 02
+  - image: /images/single-product-03.jpg
+    alt: Single Product 03
+  - image: /images/single-product-04.jpg
+    alt: Single Product 04
+  - image: /images/single-product-05.jpg
+    alt: Single Product 05
+
+products:
+  - image: /images/product-04.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+  - image: /images/product-06.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+  - image: /images/product-05.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

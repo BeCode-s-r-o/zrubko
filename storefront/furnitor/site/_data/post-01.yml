@@ -1,0 +1,38 @@
+blogs:
+  - image: /images/blog_01.jpg
+    date: April 24, 2019
+    title: Under the sun in Cape Town
+  - image: /images/blog_02.jpg
+    date: April 24, 2019
+    title: Hats to Suit Your Mood
+  - image: /images/blog_03.jpg
+    date: April 24, 2019
+    title: Meet the Model - Tropics
+comments:
+  - image: /images/tes_01.png
+    date: Nov 20, 2020
+    name: Dean. D
+    content: It has a really nice fit however it loses many fluffs and is kind of see-through because the fabric is quite wid-meshed. Nevertheless it's a really good and comfy staple that goes with every kind.
+  - image: /images/tes_02.png
+    date: Nov 20, 2020
+    name: Dean. D
+    content: It has a really nice fit however it loses many fluffs and is kind of see-through because the fabric is quite wid-meshed. Nevertheless it's a really good and comfy staple that goes with every kind.
+  - image: /images/tes_03.png
+    date: Nov 20, 2020
+    name: Dean. D
+    content: It has a really nice fit however it loses many fluffs and is kind of see-through because the fabric is quite wid-meshed. Nevertheless it's a really good and comfy staple that goes with every kind.
+
+products:
+  - image: /images/product-16.jpg
+    category: chair
+    title: Bow Chair
+    price: $1390.00
+  - image: /images/product-04.jpg
+    category: table
+    title: Piper Bar
+    price: $1390.00
+  - image: /images/product-06.jpg
+    category: decor
+    title: Golden Clock
+    price: $1000.00
+

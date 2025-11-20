@@ -1,0 +1,83 @@
+products:
+  - image: /images/product-19.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+  - image: /images/product-02.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: new
+  - image: /images/product-10.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-16.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-06.jpg
+    category: decor
+    title: Golden Clock
+    price: $1000.00
+    sale: $1390.00
+    label: sale
+  - image: /images/product-05.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: hot
+  - image: /images/product-08.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+  - image: /images/product-15.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: new
+  - image: /images/product-18.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-13.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-09.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+  - image: /images/product-05_1.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+  - image: /images/product-26.jpg
+    category: decor
+    title: Golden Clock
+    price: $1000.00
+    sale: $1390.00
+    label: sale
+  - image: /images/product-07.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: hot

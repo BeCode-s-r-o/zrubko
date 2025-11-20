@@ -1,0 +1,74 @@
+---
+layout: page-title-docs
+title: "Banner 03"
+category_text: Banners
+category_url: /docs/templates/banners.html
+---
+{% include components/page-title/docs.html %}
+<div class="py-6">
+    <div class="container-fluid">
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 2, "autoplay":true,"dots":false,"arrows":false,"responsive":[{"breakpoint": 768,"settings": {"slidesToShow": 1}}]}'>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_11.jpg' | document_url }}" alt="Chairs" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Chairs</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-02.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_12.jpg' | document_url }}" alt="Stands" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Stands</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-02.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="py-10">
+    <div class="container">
+        <div class="bg-gray-01 overflow-auto">
+            {% highlight html %}
+<div class="py-6">
+    <div class="container-fluid">
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 2, "autoplay":true,"dots":false,"arrows":false,"responsive":[{"breakpoint": 768,"settings": {"slidesToShow": 1}}]}'>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_11.jpg' | document_url }}" alt="Chairs" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Chairs</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-02.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box" data-animate="fadeInUp">
+                <div class="card border-0">
+                    <img src="{{ '/images/c_12.jpg' | document_url }}" alt="Stands" class="card-img">
+                    <div class="card-img-overlay d-inline-flex flex-column p-8">
+                        <h3 class="card-title fs-30 fs-md-40 fs-lg-56">Stands</h3>
+                        <div class="mt-auto">
+                            <a href="{{ '/shop-page-02.html' | document_url }}" class="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            {% endhighlight %}
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,406 @@
+---
+layout: header-docs
+title: "Header 08"
+category_text: Headers
+category_url: /docs/templates/header.html
+---
+<header class="main-header navbar-light header-sticky header-sticky-smart header-08">
+    <div class="topbar bg-accent py-2 d-none d-xl-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 mb-2 mb-xl-0">
+                    <div class="d-flex align-items-center h-100 justify-content-center justify-content-xl-start">
+                        <a href="#"
+                           class="d-flex align-items-center text-primary fs-15 pr-3 border-right border-light-dark">
+                            <span class="d-inline-block mr-2"><i class="fal fa-map-marker-alt"></i></span>
+                            <span>Find a Store</span>
+                        </a>
+                        <a href="#" class="d-flex align-items-center text-primary fs-15 pl-3">
+                            <span class="d-inline-block mr-2"><i class="fal fa-envelope"></i></span>
+                            <span>Newsletter</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 mb-2 mb-xl-0"><p class="mb-0 fs-15 text-primary text-center">Free shipping for
+                    orders over $59 !</p></div>
+                <div class="col-xl-4">
+                    <div class="d-flex align-items-center justify-content-center justify-content-xl-end h-100">
+                        <div class="dropdown px-3 border-right border-light-dark">
+                            <a href="#" class="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuLanguage"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                English
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+                                <a class="dropdown-item text-primary" href="#">English</a>
+                                <a class="dropdown-item text-primary" href="#">Vietnamese</a>
+                                <a class="dropdown-item text-primary" href="#">Chinese</a>
+                            </div>
+                        </div>
+                        <div class="dropdown pl-3">
+                            <a href="#" class="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuCurrency1"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                USD
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuCurrency1">
+                                <a class="dropdown-item text-primary" href="#">USD</a>
+                                <a class="dropdown-item text-primary" href="#">EURO</a>
+                                <a class="dropdown-item text-primary" href="#">VND</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-none d-xl-block">
+        <div class="pt-6 pb-7">
+            <div class="{{ page.header_container| default: 'container' }}">
+                <div class="row">
+                    <div class="col-6 col-xl-3">
+                        <a class="navbar-brand mr-0 d-flex align-items-center h-100 py-0"
+                           href="{{ '/index.html' | document_url }}">
+                            <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                        </a>
+                    </div>
+                    <div class="col-xl-6">
+                        <form class="d-flex align-items-center h-100">
+                            <div class="input-group position-relative">
+                                <input type="text"
+                                       class="form-control border-0 border-bottom pl-0 border-2x bg-transparent"
+                                       placeholder="Search Something...">
+                                <div class="input-group-append position-absolute pos-fixed-right-center">
+                                    <button class="input-group-text bg-transparent border-0 text-primary fs-18 px-0"
+                                            type="submit"><i
+                                            class="far fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 col-xl-3 ml-auto">
+                        <div class="d-flex align-items-center justify-content-end h-100">
+                            {% include navbar-right.html %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-area bg-white">
+        <div class="d-none d-xl-block">
+            <div class="border-top-0 border-xl-top">
+                <div class="{{ page.header_container| default: 'container' }}">
+                    <nav class="navbar navbar-expand-xl px-0 py-4 py-xl-0 row w-100 no-gutters">
+                        <div class="col-xl-3">
+                            <div class="dropdown no-caret">
+                                <a href="#"
+                                   class="btn dropdown-toggle btn-primary d-flex w-100 text-left align-items-center px-0 px-xl-4 border-0 shadow-none"
+                                   id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <div class="toggle-bar"><span class="toggle-icon text-white"></span></div>
+                                    <div class="pl-5">Browse Categories</div>
+                                </a>
+                                <div class="dropdown-menu w-100 py-0" aria-labelledby="dropdownMenuButton1">
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/chair.png' | document_url }}" alt="Chair">
+                                        </div>
+                                        <div class="media-body">Chairs
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/desk.png' | document_url }}" alt="Table">
+                                        </div>
+                                        <div class="media-body">Table
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/fish_bowl.png' | document_url }}"
+                                                 alt="Accessories">
+                                        </div>
+                                        <div class="media-body">Accessories
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/sofa.png' | document_url }}" alt="Sofa">
+                                        </div>
+                                        <div class="media-body">Sofa
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/plant.png' | document_url }}" alt="Plants">
+                                        </div>
+                                        <div class="media-body">Plants
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/stool.png' | document_url }}" alt="Stool">
+                                        </div>
+                                        <div class="media-body">Stool
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/ladder.png' | document_url }}" alt="Stands">
+                                        </div>
+                                        <div class="media-body">Stands
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 d-flex pl-xl-8 position-static">
+                            {% include navbar-main-01.html %}
+                            <div class="pl-5 border-left-0 border-xl-left ml-auto d-none d-xl-block">
+                                <a href="#" class="d-flex align-items-center justify-content-end h-100">
+                                    <span class="d-block mr-2"><i class="far fa-phone-alt"></i></span>Call us
+                                    (+1)
+                                    866 540
+                                    3229</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="d-block d-xl-none">
+            <div class="{{ page.header_container| default: 'container' }}">
+                <nav class="navbar navbar-expand-xl px-0 py-3 w-100 align-items-center">
+                    <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button"
+                            data-canvas="true"
+                            data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                        <span class="fs-24 toggle-icon"></span>
+                    </button>
+                    <a class="navbar-brand d-inline-block mx-auto py-0" href="{{ '/index.html' | document_url }}">
+                        <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                    </a>
+                    <a href="#search-popup" data-gtf-mfp="true"
+                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                       class="nav-search d-block py-0" title="Search"><i
+                            class="far fa-search"></i></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section
+            style="background-image: url('{{ '/images/bg-home-10.jpg' | document_url }}');background-position: center;background-size: cover;"
+            class="py-18 bg-overlay">
+    </section>
+    {% include components/page-title/docs.html %}
+    <section class="py-10">
+        <div class="container">
+            <div class="bg-gray-01 overflow-auto">
+                {% highlight html %}
+<header class="main-header navbar-light header-sticky header-sticky-smart header-08">
+    <div class="topbar bg-accent py-2 d-none d-xl-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 mb-2 mb-xl-0">
+                    <div class="d-flex align-items-center h-100 justify-content-center justify-content-xl-start">
+                        <a href="#"
+                           class="d-flex align-items-center text-primary fs-15 pr-3 border-right border-light-dark">
+                            <span class="d-inline-block mr-2"><i class="fal fa-map-marker-alt"></i></span>
+                            <span>Find a Store</span>
+                        </a>
+                        <a href="#" class="d-flex align-items-center text-primary fs-15 pl-3">
+                            <span class="d-inline-block mr-2"><i class="fal fa-envelope"></i></span>
+                            <span>Newsletter</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="col-xl-4 mb-2 mb-xl-0"><p class="mb-0 fs-15 text-primary text-center">Free shipping for
+                    orders over $59 !</p></div>
+                <div class="col-xl-4">
+                    <div class="d-flex align-items-center justify-content-center justify-content-xl-end h-100">
+                        <div class="dropdown px-3 border-right border-light-dark">
+                            <a href="#" class="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuLanguage"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                English
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+                                <a class="dropdown-item text-primary" href="#">English</a>
+                                <a class="dropdown-item text-primary" href="#">Vietnamese</a>
+                                <a class="dropdown-item text-primary" href="#">Chinese</a>
+                            </div>
+                        </div>
+                        <div class="dropdown pl-3">
+                            <a href="#" class="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuCurrency1"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                USD
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuCurrency1">
+                                <a class="dropdown-item text-primary" href="#">USD</a>
+                                <a class="dropdown-item text-primary" href="#">EURO</a>
+                                <a class="dropdown-item text-primary" href="#">VND</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="d-none d-xl-block">
+        <div class="pt-6 pb-7">
+            <div class="{{ page.header_container| default: 'container' }}">
+                <div class="row">
+                    <div class="col-6 col-xl-3">
+                        <a class="navbar-brand mr-0 d-flex align-items-center h-100 py-0"
+                           href="{{ '/index.html' | document_url }}">
+                            <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                        </a>
+                    </div>
+                    <div class="col-xl-6">
+                        <form class="d-flex align-items-center h-100">
+                            <div class="input-group position-relative">
+                                <input type="text"
+                                       class="form-control border-0 border-bottom pl-0 border-2x bg-transparent"
+                                       placeholder="Search Something...">
+                                <div class="input-group-append position-absolute pos-fixed-right-center">
+                                    <button class="input-group-text bg-transparent border-0 text-primary fs-18 px-0"
+                                            type="submit"><i
+                                            class="far fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 col-xl-3 ml-auto">
+                        <div class="d-flex align-items-center justify-content-end h-100">
+                            {% include navbar-right.html %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-area bg-white">
+        <div class="d-none d-xl-block">
+            <div class="border-top-0 border-xl-top">
+                <div class="{{ page.header_container| default: 'container' }}">
+                    <nav class="navbar navbar-expand-xl px-0 py-4 py-xl-0 row w-100 no-gutters">
+                        <div class="col-xl-3">
+                            <div class="dropdown no-caret">
+                                <a href="#"
+                                   class="btn dropdown-toggle btn-primary d-flex w-100 text-left align-items-center px-0 px-xl-4 border-0 shadow-none"
+                                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <div class="toggle-bar"><span class="toggle-icon text-white"></span></div>
+                                    <div class="pl-5">Browse Categories</div>
+                                </a>
+                                <div class="dropdown-menu w-100 py-0" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/chair.png' | document_url }}" alt="Chair">
+                                        </div>
+                                        <div class="media-body">Chairs
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/desk.png' | document_url }}" alt="Table">
+                                        </div>
+                                        <div class="media-body">Table
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/fish_bowl.png' | document_url }}"
+                                                 alt="Accessories">
+                                        </div>
+                                        <div class="media-body">Accessories
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/sofa.png' | document_url }}" alt="Sofa">
+                                        </div>
+                                        <div class="media-body">Sofa
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/plant.png' | document_url }}" alt="Plants">
+                                        </div>
+                                        <div class="media-body">Plants
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/stool.png' | document_url }}" alt="Stool">
+                                        </div>
+                                        <div class="media-body">Stool
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item media align-items-center border-bottom py-2"
+                                       href="#">
+                                        <div class="w-28px mr-3">
+                                            <img src="{{ '/images/ladder.png' | document_url }}" alt="Stands">
+                                        </div>
+                                        <div class="media-body">Stands
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 d-flex pl-xl-8 position-static">
+                            {% include navbar-main-01.html %}
+                            <div class="pl-5 border-left-0 border-xl-left ml-auto d-none d-xl-block">
+                                <a href="#" class="d-flex align-items-center justify-content-end h-100">
+                                    <span class="d-block mr-2"><i class="far fa-phone-alt"></i></span>Call us
+                                    (+1)
+                                    866 540
+                                    3229</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="d-block d-xl-none">
+            <div class="{{ page.header_container| default: 'container' }}">
+                <nav class="navbar navbar-expand-xl px-0 py-3 w-100 align-items-center">
+                    <button class="navbar-toggler border-0 px-0 canvas-toggle" type="button"
+                            data-canvas="true"
+                            data-canvas-options='{"width":"250px","container":".sidenav"}'>
+                        <span class="fs-24 toggle-icon"></span>
+                    </button>
+                    <a class="navbar-brand d-inline-block mx-auto py-0" href="{{ '/index.html' | document_url }}">
+                        <img src="{{ '/images/logo.png' | document_url }}" alt="{{site.title}}">
+                    </a>
+                    <a href="#search-popup" data-gtf-mfp="true"
+                       data-mfp-options='{"type":"inline","focus": "#keyword","mainClass": "mfp-search-form mfp-move-from-top mfp-align-top"}'
+                       class="nav-search d-block py-0" title="Search"><i
+                            class="far fa-search"></i></a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+                {% endhighlight %}
+            </div>
+        </div>
+    </section>
+</main>

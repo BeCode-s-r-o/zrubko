@@ -1,0 +1,43 @@
+---
+layout: docs
+title: Image Box
+description: Image Box for each object. Include title and description
+group: templates
+toc: true
+---
+<h2>Image box 01</h2>
+
+{% capture example %}
+<div class="row">
+    <div class="col-md-4 mb-6 mb-md-0">
+        <div class="card border-0">
+                <img src="{{ '/images/image-box-01.jpg' | document_url }}" alt="Cruises & Water Tours">
+            <div class="card-body px-0 pt-6 pb-0">
+                <h3 class="fs-20 mb-3">Cruises & Water Tours</h3>
+                <p class="mb-0">These are beautiful, well made & ortable! I bought them to wear to work & casually. </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-6 mb-md-0">
+        <div class="card border-0">
+            <img src="{{ '/images/image-box-02.jpg' | document_url }}" alt="Night Life">
+            <div class="card-body px-0 pt-6 pb-0">
+                <h3 class="fs-20 mb-3">Night Life</h3>
+                <p class="mb-0">These are beautiful, well made & ortable! I bought them to wear to work & casually. </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-6 mb-md-0">
+        <div class="card border-0">
+            <img src="{{ '/images/image-box-03.jpg' | document_url }}" alt="Hiking">
+            <div class="card-body px-0 pt-6 pb-0">
+                <h3 class="fs-20 mb-3">Hiking</h3>
+                <p class="mb-0">These are beautiful, well made & ortable! I bought them to wear to work & casually. </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endcapture %}
+{% include docs/example.html content=example %}
+

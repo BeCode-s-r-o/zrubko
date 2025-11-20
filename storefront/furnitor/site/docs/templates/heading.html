@@ -1,0 +1,16 @@
+---
+layout: docs
+title: Heading
+description: Different title types. Include title, sub title description, separator
+group: templates
+toc: true
+---
+<h2>Heading 1</h2>
+<p>Heading default style.</p>
+
+{% capture example %}
+<h2 class="fs-30 fs-md-60">Refresh<br>
+    Your Room</h2>
+<p>Having a place set aside for an activity you<br> love makes it more likely you’ll do it.</p>
+{% endcapture %}
+{% include docs/example.html content=example %}

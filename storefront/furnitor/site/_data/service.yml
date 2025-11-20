@@ -1,0 +1,19 @@
+services:
+  - image: /images/image-box-08.jpg
+    title: Future Leader
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...
+  - image: /images/image-box-03.jpg
+    title: Powerful Solution
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...
+  - image: /images/image-box-04.jpg
+    title: Progressive Tools
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...
+  - image: /images/image-box-05.jpg
+    title: Creative Projects
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...
+  - image: /images/image-box-06.jpg
+    title: Innovation Experts
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...
+  - image: /images/image-box-07.jpg
+    title: Leading Strategies
+    content: We've collaborated with one of our favourite New Zealand retailers, Superette to create...

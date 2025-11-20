@@ -1,0 +1,112 @@
+demos:
+  - image: /images/b1.jpg
+    title: Home 01
+    url: /home-01.html
+    is_hot: true
+  - image: /images/b2.jpg
+    title: Home 02
+    url: /home-02.html
+    is_hot: true
+  - image: /images/b3.jpg
+    title: Home 03
+    url: /home-03.html
+    is_hot: false
+  - image: /images/b4.jpg
+    title: Home 04
+    url: /home-04.html
+    is_hot: true
+  - image: /images/b5.jpg
+    title: Home 05
+    url: /home-05.html
+    is_hot: false
+  - image: /images/b6.jpg
+    title: Home 06
+    url: /home-06.html
+    is_hot: false
+  - image: /images/b7.jpg
+    title: Home 07
+    url: /home-07.html
+    is_hot: false
+  - image: /images/b8.jpg
+    title: Home 08
+    url: /home-08.html
+    is_hot: true
+  - image: /images/b9.jpg
+    title: Home 09
+    url: /home-09.html
+    is_hot: false
+  - image: /images/b10.jpg
+    title: Home 10
+    url: /home-10.html
+    is_hot: false
+  - image: /images/b11.jpg
+    title: Home 11
+    url: /home-11.html
+    is_hot: false
+  - image: /images/b12.jpg
+    title: Home 12
+    url: /home-12.html
+    is_hot: false
+shops:
+  - image: /images/c1.jpg
+    title: Shop page 01
+    url: /shop-page-01.html
+  - image: /images/c2.jpg
+    title: Shop page 02
+    url: /shop-page-02.html
+  - image: /images/c3.jpg
+    title: Shop page 03
+    url: /shop-page-03.html
+  - image: /images/c4.jpg
+    title: Shop page 04
+    url: /shop-page-06.html
+  - image: /images/c5.jpg
+    title: Shop page 05
+    url: /shop-page-05.html
+  - image: /images/c6.jpg
+    title: Shop page 06
+    url: /shop-page-04.html
+  - image: /images/c7.jpg
+    title: Shop page 07
+    url: /shop-page-07.html
+  - image: /images/c8.jpg
+    title: Shop page 08
+    url: /shop-page-08.html
+  - image: /images/c9.jpg
+    title: Shop page 09
+    url: /shop-page-09.html
+  - image: /images/c10.jpg
+    title: Shop page 10
+    url: /shop-page-10.html
+pages_1:
+  - image: /images/e1.jpg
+  - image: /images/e2.jpg
+  - image: /images/e3.jpg
+  - image: /images/e4.jpg
+pages_2:
+  - image: /images/e5.jpg
+  - image: /images/e6.jpg
+  - image: /images/e7.jpg
+  - image: /images/e8.jpg
+  - image: /images/e9.jpg
+
+features:
+  - image: /images/f1.jpg
+    title: Gallery
+  - image: /images/f2.jpg
+    title: Countdown Timer
+  - image: /images/f3.jpg
+    title: Image Marker
+  - image: /images/f4.jpg
+    title: Image Box
+  - image: /images/f5.jpg
+    title: Advanced Shop Filter
+  - image: /images/f6.jpg
+    title: Banner
+  - image: /images/f7.jpg
+    title: Product Variable
+  - image: /images/f8.jpg
+    title: Product External/Affiliate
+  - image: /images/f9.jpg
+    title: Product Grouped
+

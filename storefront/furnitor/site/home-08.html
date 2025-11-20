@@ -1,0 +1,359 @@
+---
+layout: home-8
+title: "Home 08"
+category_text: "Home"
+category_url: /home-08.html
+---
+<section class="overflow-hidden">
+    <div class="slick-slider slick-dots-light dots-inner-center"
+         data-slick-options='{"slidesToShow": 1,"infinite":true,"autoplay":false,"dots":true,"arrows":false}'>
+        <div class="box">
+            <div class="d-flex flex-column justify-content-center justify-content-lg-start bg-img-cover-center custom-height-sm vh-100 pt-lg-17"
+                 style="background-image: url('{{ '/images/bg-home-08.jpg' | document_url }}')">
+                <div class="d-flex flex-column justify-content-center justify-content-lg-start h-100 w-100 align-items-center">
+                    <div class="container container-xxl">
+                        <div class="d-flex justify-content-center mb-6">
+                            <a href="https://www.youtube.com/watch?v=6v2L2UGZJAM" data-gtf-mfp="true"
+                               data-mfp-options='{"type":"iframe","preloader":false}'
+                               class="w-100px h-100px rounded-circle border d-none d-lg-flex align-items-center justify-content-center border-primary hover-white bg-hover-primary"
+                               data-animate="fadeInUp"><i class="fas fa-play"></i></a>
+                        </div>
+                        <h1 class="mb-3 fs-60 fs-xxl-80 lh-1 text-center" data-animate="fadeInUp">Sundae Lounges</h1>
+                        <div class=text-center><a href="#" class="fs-20 font-weight-500"
+                                                  data-animate="fadeInUp">Made in aluminium.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="d-flex flex-column justify-content-center justify-content-lg-start bg-img-cover-center vh-100 custom-height-sm pt-lg-17"
+                 style="background-image: url('{{ '/images/bg-home-08.jpg' | document_url }}')">
+                <div class="d-flex flex-column justify-content-center justify-content-lg-start h-100 w-100 align-items-center">
+                    <div class="container container-xxl">
+                        <div class="d-flex justify-content-center mb-6">
+                            <a href="https://www.youtube.com/watch?v=6v2L2UGZJAM" data-gtf-mfp="true"
+                               data-mfp-options='{"type":"iframe","preloader":false}'
+                               class="w-100px h-100px rounded-circle border d-none d-lg-flex align-items-center justify-content-center border-primary hover-white bg-hover-primary"
+                               data-animate="fadeInUp"><i class="fas fa-play"></i></a>
+                        </div>
+                        <h2 class="mb-3 fs-60 fs-xxl-80 lh-1 text-center" data-animate="fadeInUp">Sundae Lounges</h2>
+                        <div class=text-center><a href="#" class="fs-20 font-weight-500"
+                                                  data-animate="fadeInUp">Made in aluminium.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="d-flex flex-column justify-content-center justify-content-lg-start bg-img-cover-center vh-100 custom-height-sm pt-lg-17"
+                 style="background-image: url('{{ '/images/bg-home-08.jpg' | document_url }}')">
+                <div class="d-flex flex-column justify-content-center justify-content-lg-start h-100 w-100 align-items-center">
+                    <div class="container container-xxl">
+                        <div class="d-flex justify-content-center mb-6">
+                            <a href="https://www.youtube.com/watch?v=6v2L2UGZJAM" data-gtf-mfp="true"
+                               data-mfp-options='{"type":"iframe","preloader":false}'
+                               class="w-100px h-100px rounded-circle border d-none d-lg-flex align-items-center justify-content-center border-primary hover-white bg-hover-primary"
+                               data-animate="fadeInUp"><i class="fas fa-play"></i></a>
+                        </div>
+                        <h2 class="mb-3 fs-60 fs-xxl-80 lh-1 text-center" data-animate="fadeInUp">Sundae Lounges</h2>
+                        <div class=text-center><a href="#" class="fs-20 font-weight-500"
+                                                  data-animate="fadeInUp">Made in aluminium.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-11 py-lg-15">
+    <div class="container">
+        <div class="row align-items-center no-gutters">
+            <div class="col-md-6 col-lg-7 order-1 order-md-first" data-animate="fadeInLeft">
+                <img src="{{ '/images/b-09.jpg' | document_url }}" alt="Bobby Bar Stools" class="d-block w-100">
+            </div>
+            <div class="col-md-6 col-lg-5 pl-lg-12 pl-md-6 order-first order-md-1 mb-9 mb-md-0"
+                 data-animate="fadeInRight">
+                <h2 class="fs-30 fs-md-60 mb-5">Bobby<br>
+                    Bar Stools</h2>
+                <p class="mb-7">We believe in crafting pieces where sustainability and style go hand in hand. Made from
+                    materials like recycled cashmere and sustainable.</p>
+                <a href="{{ '/shop-page-04.html' | document_url }}"
+                   class="btn btn-outline-primary text-uppercase letter-spacing-05">SHOP collection</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-12">
+    <div class="container">
+        <div class="row">
+            {% for product in site.data.home-08.products %}
+            <div class="col-md-4 mb-6" data-animate="fadeInUp">
+                <div class="card border-0 hover-change-content product">
+                    <div class="card-img-top position-relative">
+                        <div style="background-image: url('{{ product.image | document_url }}')"
+                             class="card-img ratio bg-img-cover-center ratio-1-1">
+                        </div>
+                        <div class="position-absolute pos-fixed-bottom px-4 px-sm-6 pb-5 d-flex w-100 justify-content-center content-change-horizontal">
+                            <a href="#" data-toggle="tooltip" title="Add to cart"
+                               class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-shopping-basket"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Add to favourite"
+                               class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Add to compare"
+                               class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-random"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Preview"
+                               class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle border">
+                                <i class="far fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pt-4 pb-0 d-flex align-items-end">
+                        <div class="mr-auto">
+                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 d-block font-weight-500">{{product.category}}</a>
+                            <a href="#" class="font-weight-bold mt-1 d-block">{{product.title}}</a>
+                        </div>
+                        <p class="text-primary mb-0 font-weight-500">{{product.price}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-15">
+    <div class="container">
+        <div class="row align-items-center no-gutters">
+            <div class="col-md-6 col-lg-5 pr-lg-12 pr-md-6" data-animate="fadeInLeft">
+                <h2 class="fs-30 fs-md-60 mb-5">Partridge<br>
+                    Chair</h2>
+                <p class="mb-7">We believe in crafting pieces where sustainability and style go hand in hand. Made from
+                    materials like recycled cashmere and sustainable.</p>
+                <a href="{{ '/shop-page-04.html' | document_url }}"
+                   class="btn btn-outline-primary text-uppercase letter-spacing-05">SHOP collection</a>
+            </div>
+            <div class="col-md-6 col-lg-7 mt-9 mt-md-0" data-animate="fadeInRight">
+                <img src="{{ '/images/b-10.jpg' | document_url }}" alt="Partridge Chair">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-12">
+    <div class="container">
+        <div class="row">
+            {% for product in site.data.home-08.products_02 %}
+            <div class="col-md-4 mb-6" data-animate="fadeInUp">
+                <div class="card border-0 hover-change-content product">
+                    <div class="card-img-top position-relative">
+                        <div style="background-image: url('{{ product.image | document_url }}')"
+                             class="card-img ratio bg-img-cover-center ratio-1-1">
+                        </div>
+                        <div class="position-absolute pos-fixed-bottom px-4 px-sm-6 pb-5 d-flex w-100 justify-content-center content-change-horizontal">
+                            <a href="#" data-toggle="tooltip" title="Add to cart"
+                               class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-shopping-basket"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Add to favourite"
+                               class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-heart"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Add to compare"
+                               class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">
+                                <i class="far fa-random"></i>
+                            </a>
+                            <a href="#" data-toggle="tooltip" title="Preview"
+                               class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle border">
+                                <i class="far fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pt-4 pb-0 d-flex align-items-end">
+                        <div class="mr-auto">
+                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 d-block font-weight-500">{{product.category}}</a>
+                            <a href="#" class="font-weight-bold mt-1 d-block">{{product.title}}</a>
+                        </div>
+                        <p class="text-primary mb-0 font-weight-500">{{product.price}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-15 border-bottom">
+    <div class="container">
+        <h2 class="fs-30 fs-md-40 mb-11 text-center">Happy Clients</h2>
+        <div class="slick-slider custom-arrow-1"
+             data-slick-options='{"slidesToShow": 3,"infinite":false,"autoplay":false,"dots":true,"arrows":true,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow":2,"arrows":false,"dots":true}},{"breakpoint": 576,"settings": {"slidesToShow": 1,"arrows":false,"dots":true}}]}'>
+            {% for tes in site.data.home-03.testimonial %}
+            <div class="box">
+                <div class="media">
+                    <div class="mxw-84px mr-4">
+                        <img src="{{ tes.image | document_url }}" alt="{{tes.name}}">
+                    </div>
+                    <div class="media-body">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                            <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                            <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                            <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                            <li class="list-inline-item fs-14 text-primary mr-0"><i class="fas fa-star"></i></li>
+                        </ul>
+                        <p class="card-text mb-3 font-weight-500">
+                            {{tes.content}}
+                        </p>
+                        <p class="card-text text-primary font-weight-bold mb-1 fs-15">{{tes.name}}</p>
+                        <p class="card-text text-muted fs-12 text-uppercase letter-spacing-05 font-weight-500">{{tes.position}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="pt-11 pt-lg-15">
+    <div class="container container-xxl">
+        <h2 class="fs-30 fs-md-40 mb-8 text-center">Create Space to Enjoy</h2>
+        <div class="row">
+            <div class="col-sm-6 col-lg-3 mb-6 mb-lg-0" data-animate="fadeInUp">
+                <div class="card border-0 hover-shine hover-change-content">
+                    <img src="{{ '/images/in_01.jpg' | document_url }}" alt="Instagram 01"
+                         class="card-img">
+                    <div class="card-img-overlay d-flex flex-column px-5 pb-6 pt-4">
+                        <div>
+                            <a href="#" class="badge badge-white fs-13 text-lowercase rounded-0 lh-1 font-weight-600">@lovehome</a>
+                        </div>
+                        <div class="mt-auto text-center content-change">
+                            <a href="#"
+                               class="border-bottom border-white text-white fs-14 letter-spacing-05 text-uppercase font-weight-bold">shop
+                                this look</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3 mb-6 mb-lg-0" data-animate="fadeInUp">
+                <div class="card border-0 hover-shine hover-change-content">
+                    <img src="{{ '/images/in_02.jpg' | document_url }}" alt="Instagram 02"
+                         class="card-img">
+                    <div class="card-img-overlay d-flex flex-column px-5 pb-6 pt-4">
+                        <div>
+                            <a href="#" class="badge badge-white fs-13 text-lowercase rounded-0 lh-1 font-weight-600">@lovehome</a>
+                        </div>
+                        <div class="mt-auto text-center content-change">
+                            <a href="#"
+                               class="border-bottom border-white text-white fs-14 letter-spacing-05 text-uppercase font-weight-bold">shop
+                                this look</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3 mb-6 mb-lg-0" data-animate="fadeInUp">
+                <div class="card border-0 hover-shine hover-change-content">
+                    <img src="{{ '/images/in_03.jpg' | document_url }}" alt="Instagram 03   "
+                         class="card-img">
+                    <div class="card-img-overlay d-flex flex-column px-5 pb-6 pt-4">
+                        <div>
+                            <a href="#" class="badge badge-white fs-13 text-lowercase rounded-0 lh-1 font-weight-600">@nolovenolie</a>
+                        </div>
+                        <div class="mt-auto text-center content-change">
+                            <a href="#"
+                               class="border-bottom border-white text-white fs-14 letter-spacing-05 text-uppercase font-weight-bold">shop
+                                this look</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3 mb-9 mb-lg-0" data-animate="fadeInUp">
+                <div class="card border-0 hover-shine hover-change-content">
+                    <img src="{{ '/images/in_04.jpg' | document_url }}" alt="Instagram 04"
+                         class="card-img">
+                    <div class="card-img-overlay d-flex flex-column px-5 pb-6 pt-4">
+                        <div>
+                            <a href="#" class="badge badge-white fs-13 text-lowercase rounded-0 lh-1 font-weight-600">@furnitoo</a>
+                        </div>
+                        <div class="mt-auto text-center content-change">
+                            <a href="#"
+                               class="border-bottom border-white text-white fs-14 letter-spacing-05 text-uppercase font-weight-bold">shop
+                                this look</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pt-8 pb-7">
+    <div class="container container-xxl">
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 7,"infinite":true,"autoplay":false,"dots":false,"arrows":false,"responsive":[{"breakpoint": 1367,"settings": {"slidesToShow":6}},{"breakpoint": 992,"settings": {"slidesToShow":5}},{"breakpoint": 768,"settings": {"slidesToShow": 4}},{"breakpoint": 576,"settings": {"slidesToShow": 2}}]}'>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_01.png' | document_url }}" alt="Client Logo 01"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_02.png' | document_url }}" alt="Client Logo 02"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_03.png' | document_url }}" alt="Client Logo 03"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_04.png' | document_url }}" alt="Client Logo 04"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_05.png' | document_url }}" alt="Client Logo 05"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_06.png' | document_url }}" alt="Client Logo 06"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_07.png' | document_url }}" alt="Client Logo 07"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_08.png' | document_url }}" alt="Client Logo 08"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_09.png' | document_url }}" alt="Client Logo 09"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+            <div class="box">
+                <a href="#" class="d-block px-3 px-xl-7">
+                    <img src="{{ '/images/client_logo_10.png' | document_url }}" alt="Client Logo 10"
+                         class="opacity-5 opacity-hover-10">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

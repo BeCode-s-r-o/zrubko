@@ -1,0 +1,534 @@
+---
+layout: default
+title: "Product Page 07"
+---
+
+<section class="bg-color-3 py-3">
+    <div class="container container-xxl">
+        <nav aria-label="breadcrumb" class="d-flex align-items-center justify-content-between">
+            <ol class="breadcrumb py-0 mr-6">
+                {% for breadcrumb in site.data.product-page-07.breadcrumbs %}
+                {% if breadcrumb.is_active == true %}
+                <li class="breadcrumb-item active">{{ breadcrumb.title }}</li>
+                {% else %}
+                <li class="breadcrumb-item">
+                    <a href="{{ breadcrumb.url | document_url }}">{{ breadcrumb.title }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ol>
+            <div class="navigation d-flex align-items-center">
+                <div class="dropdown no-caret product-dropdown">
+                    <a class="fs-14 pr-3 py-3 d-block dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" rel="prev">
+                        <i class="far fa-arrow-left"></i>
+                    </a>
+                    <div class="dropdown-menu w-215px p-2 border-0 dropdown-menu-right rounded-0">
+                        <a href="{{ '/product-page-01.html' | document_url }}" class="media align-items-center">
+                            <div class="w-60px mr-2">
+                                <img src="{{ '/images/product-08.jpg' | document_url }}"
+                                     alt="Bow Chair">
+                            </div>
+                            <div class="media-body">
+                                <p class="font-weight-bold text-primary mb-0 lh-11 mb-1">Bow Chair </p>
+                                <p class="text-primary mb-0 lh-1 fs-14">$1390.00 </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropdown no-caret product-dropdown">
+                    <a class="fs-14 py-3 d-block dropdown-toggle" href="#" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" rel="next">
+                        <i class="far fa-arrow-right"></i>
+                    </a>
+                    <div class="dropdown-menu w-215px p-2 border-0 dropdown-menu-right rounded-0">
+                        <a href="{{ '/product-page-01.html' | document_url }}" class="media align-items-center">
+                            <div class="w-60px mr-2">
+                                <img src="{{ '/images/product-10.jpg' | document_url }}"
+                                     alt="Bow Chair">
+                            </div>
+                            <div class="media-body">
+                                <p class="font-weight-bold text-primary mb-0 lh-11 mb-1">Golden Clock</p>
+                                <p class="text-primary mb-0 lh-1 fs-14">$1390.00 </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
+<section class="pt-10 pb-lg-15 pb-11 product-details-layout-07">
+    <div class="container container-xxl">
+        <div class="row no-gutters">
+            <div class="col-md-7 galleries">
+                <div class="d-flex position-relative w-100">
+                    <div id="list-dots" class="list-group product-image-dots dot-circle dots-circle-custom-2">
+                        {% for slider in site.data.product-page-07.products %}
+                        <a class="list-group-item list-group-item-action bg-transparent p-0 d-flex justify-content-center mb-4 align-items-center {% if forloop.index == 1 %}active{% endif %}"
+                           href="#gallery-{{forloop.index}}">
+                            <span class="icon"></span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <div class="scrollspy-images ml-md-12">
+                        {% for slider in site.data.product-page-07.products %}
+                        <a href="{{ slider.image| document_url }}"
+                           data-gtf-mfp="true"
+                           data-gallery-id="01" class="d-block mb-2" id="gallery-{{forloop.index}}">
+                            <img src="{{ slider.image | document_url }}"
+                                 alt="{{slider.alt}}">
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 primary-summary summary-sticky pl-lg-6"
+                 id="summary-sticky">
+                <div class="primary-summary-inner">
+                    <p class="text-muted fs-12 font-weight-500 letter-spacing-05 text-uppercase">Dining Set</p>
+                    <h2 class="fs-30 fs-lg-40 mb-2">Dining Night</h2>
+                    <p class="mb-4 d-flex align-items-center fs-20 text-primary">
+                        $2000.00
+                    </p>
+                    <div class="d-flex align-items-center flex-wrap mb-4">
+                        <ul class="list-inline d-flex justify-content-sm-end justify-content-center mb-0 rating-result">
+                            <li class="list-inline-item">
+                                <span class="text-primary fs-12 lh-2"><i class="fas fa-star"></i></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="text-primary fs-12 lh-2"><i class="fas fa-star"></i></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="text-primary fs-12 lh-2"><i class="fas fa-star"></i></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="text-primary fs-12 lh-2"><i class="fas fa-star"></i></span>
+                            </li>
+                            <li class="list-inline-item">
+                                <span class="text-primary fs-12 lh-2"><i class="fas fa-star"></i></span>
+                            </li>
+                        </ul>
+                        <p class="text-primary mb-0 fs-15 lh-1 overflow-hidden pl-4">
+                            <span class="pr-1 mr-1 border-right ">5.0</span><a href="#">See 3 Reviews</a>
+                        </p>
+                    </div>
+                    <div class="countdown d-flex mb-5 flex-wrap" data-countdown="true"
+                         data-countdown-end="Jan 27, 2022 18:24:25">
+                        <div class="countdown-item d-flex flex-column text-center w-88px border mr-2 mb-2 py-2">
+                            <span class="fs-34 text-primary day lh-13">02</span>
+                            <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">days</span>
+                        </div>
+                        <div class="countdown-item d-flex flex-column text-center w-88px border mr-2 mb-2 py-2">
+                            <span class="fs-34 text-primary hour lh-13">24</span>
+                            <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">hrs</span>
+                        </div>
+                        <div class="countdown-item d-flex flex-column text-center w-88px border mr-2 mb-2 py-2">
+                            <span class="fs-34 text-primary minute lh-13">15</span>
+                            <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">min</span>
+                        </div>
+                        <div class="countdown-item d-flex flex-column text-center w-88px border mr-2 mb-2 py-2">
+                            <span class="fs-34 text-primary second lh-13">41</span>
+                            <span class="fs-12 letter-spacing-05 text-uppercase text-primary font-weight-500">sec</span>
+                        </div>
+                    </div>
+                    <p class="mb-6">Minimal, yet bold - LYNEA Plug Lamp adds an architectural addition without the
+                        pain
+                        of a professional installation.</p>
+                    <form>
+                        <div class="media mb-6">
+                            <div class="w-70px mr-4">
+                                <img src="{{ '/images/cart-01.jpg' | document_url }}"
+                                     alt="Partridge Bar Stool">
+                            </div>
+                            <div class="media-body">
+                                <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">
+                                    chairs</p>
+                                <a href="#" class="font-weight-bold mb-2 d-block">Partridge Bar
+                                    Stool</a>
+                                <div class="d-flex align-items-center">
+                                    <div class="input-group position-relative w-100px">
+                                        <a href="#" class="down position-absolute pos-fixed-left-center pl-2 z-index-2"><i
+                                                class="far fa-minus"></i></a>
+                                        <input name="number[]" type="number"
+                                               class="form-control form-control-sm w-100 px-6 fs-16 text-center input-quality bg-transparent h-35px"
+                                               value="1"
+                                               required>
+                                        <a href="#"
+                                           class="up position-absolute pos-fixed-right-center pr-2 z-index-2"><i
+                                                class="far fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <p class="ml-auto mb-0 text-primary">$750.00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="media mb-7">
+                            <div class="w-70px mr-4">
+                                <img src="{{ '/images/cart-02.jpg' | document_url }}"
+                                     alt="Partridge Bar Stool">
+                            </div>
+                            <div class="media-body">
+                                <p class="text-muted fs-12 mb-0 text-uppercase letter-spacing-05 lh-1 mb-1">
+                                    table</p>
+                                <a href="#" class="font-weight-bold mb-2 d-block">Partridge Round
+                                    Bar</a>
+                                <div class="d-flex align-items-center">
+                                    <div class="input-group position-relative w-100px">
+                                        <a href="#" class="down position-absolute pos-fixed-left-center pl-2 z-index-2"><i
+                                                class="far fa-minus"></i></a>
+                                        <input name="number[]" type="number"
+                                               class="form-control form-control-sm w-100 px-6 fs-16 text-center input-quality bg-transparent h-35px"
+                                               value="1"
+                                               required>
+                                        <a href="#"
+                                           class="up position-absolute pos-fixed-right-center pr-2 z-index-2"><i
+                                                class="far fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <p class="ml-auto mb-0 text-primary">$750.00</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mb-4">add to cart
+                        </button>
+                    </form>
+                    <div class="d-flex align-items-center flex-wrap mt-5">
+                        <a href="#" class="text-uppercase font-weight-bold letter-spacing-05 fs-14 mr-6">
+                            <i class="fas fa-random fs-16"></i>
+                            <span class="ml-1">Compare</span>
+                        </a>
+                        <a href="#" class="text-uppercase font-weight-bold letter-spacing-05 fs-14">
+                            <i class="far fa-heart fs-16"></i>
+                            <span class="ml-1">Add to wishlist</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-13">
+    <div class="container">
+        <div class="collapse-tabs">
+            <ul class="nav nav-pills mb-3 justify-content-center d-md-flex d-none" id="pills-tab"
+                role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show fs-lg-32 fs-24 font-weight-600 p-0 mr-md-10 mr-4"
+                       id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab"
+                       aria-controls="pills-description" aria-selected="false">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-lg-32 fs-24 font-weight-600 p-0 mr-md-10 mr-4"
+                       id="pills-infomation-tab" data-toggle="pill" href="#pills-infomation" role="tab"
+                       aria-controls="pills-infomation" aria-selected="false">Infomation</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-lg-32 fs-24 font-weight-600 p-0" id="pills-reviews-tab"
+                       data-toggle="pill" href="#pills-reviews" role="tab" aria-controls="pills-reviews"
+                       aria-selected="true">Reviews (3)</a>
+                </li>
+            </ul>
+            <div class="tab-content bg-white-md shadow-none py-md-5 p-0">
+                <div id="collapse-tabs-accordion-01">
+                    <div class="tab-pane tab-pane-parent fade show active" id="pills-description"
+                         role="tabpanel">
+                        <div class="card border-0 bg-transparent">
+                            <div class="card-header border-0 d-block d-md-none bg-transparent px-0 py-1"
+                                 id="headingDetails-01">
+                                <h5 class="mb-0">
+                                    <button class="btn lh-2 fs-18 py-1 px-6 shadow-none w-100 collapse-parent border text-primary"
+                                            data-toggle="false" data-target="#description-collapse-01"
+                                            aria-expanded="true" aria-controls="description-collapse-01">
+                                        Description
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="description-collapse-01" class="collapsible collapse show"
+                                 aria-labelledby="headingDetails-01"
+                                 data-parent="#collapse-tabs-accordion-01" style="">
+                                <div id="accordion-style-01"
+                                     class="accordion accordion-01 border-md-0 border p-md-0 p-6">
+                                    <div class="text-center pt-md-7">
+                                        <img src="{{ '/images/description-product.jpg' | document_url }}"
+                                             alt="Description Product">
+                                    </div>
+                                    <p class="mt-6 mt-md-10 mxw-830 mx-auto mb-0">Perfect for Equestrian homes or every horse
+                                        lover.
+                                        Designer premium signature aluminum alloy all Arthur Court is
+                                        compliance with FDA regulations.
+                                        Aluminum Serveware can be chilled in the freezer or refrigerator and
+                                        warmed in the oven to 350. Wash by hand with mild dish soap and dry
+                                        immediately – do not put in the dishwasher.
+                                        Comes in Gift Box perfect for Equestrian home or Horse lover in your
+                                        life.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane tab-pane-parent fade" id="pills-infomation" role="tabpanel">
+                        <div class="card border-0 bg-transparent">
+                            <div class="card-header border-0 d-block d-md-none bg-transparent px-0 py-1"
+                                 id="headinginfomation-01">
+                                <h5 class="mb-0">
+                                    <button class="btn lh-2 fs-18 py-1 px-6 shadow-none w-100 collapse-parent border collapsed text-primary"
+                                            data-toggle="collapse" data-target="#infomation-collapse-01"
+                                            aria-expanded="false" aria-controls="infomation-collapse-01">
+                                        Infomation
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="infomation-collapse-01" class="collapsible collapse"
+                                 aria-labelledby="headinginfomation-01"
+                                 data-parent="#collapse-tabs-accordion-01" style="">
+                                <div id="accordion-style-01-2"
+                                     class="accordion accordion-01 border-md-0 border p-md-0 p-6 ">
+                                    <div class="mxw-830 mx-auto pt-md-4">
+                                        <div class="table-responsive mb-md-7">
+                                            <table class="table table-border-top-0 mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="pl-0">Material</td>
+                                                        <td class="text-right pr-0">Steel, Wood, Marble</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-0">Dimensions</td>
+                                                        <td class="text-right pr-0">55.1"W X 14.6"D X 23.6"H</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-0">Weight</td>
+                                                        <td class="text-right pr-0">Weight 23 lbs</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-0">Origin</td>
+                                                        <td class="text-right pr-0">Denmark</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pl-0">Brand</td>
+                                                        <td class="text-right pr-0">FLOYD</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3 col-md-2 mb-6 mb-sm-0">
+                                                <img class="border"
+                                                     src="{{ '/images/product-page-09.jpg' | document_url }}"
+                                                     alt="Image Product">
+                                            </div>
+                                            <div class="col-sm-9 col-md-10">
+                                                Perfect for Equestrian homes or every horse lover. Designer premium
+                                                signature aluminum alloy all Arthur Court is compliance with FDA
+                                                regulations. Aluminum Serveware can be chilled in the freezer or
+                                                refrigerator and warmed in the oven to 350. Wash by hand with mild dish
+                                                soap and dry immediately – do not put in the dishwasher. Comes in Gift
+                                                Box perfect for Equestrian home or Horse lover in your life.
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane tab-pane-parent fade" id="pills-reviews" role="tabpanel">
+                        <div class="card border-0 bg-transparent">
+                            <div class="card-header border-0 d-block d-md-none bg-transparent px-0 py-1"
+                                 id="headingreviews-01">
+                                <h5 class="mb-0">
+                                    <button class="btn lh-2 fs-18 py-1 px-6 shadow-none w-100 collapse-parent border collapsed text-primary"
+                                            data-toggle="collapse" data-target="#reviews-collapse-01"
+                                            aria-expanded="false" aria-controls="reviews-collapse-01">
+                                        Reviews (3)
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="reviews-collapse-01" class="collapsible collapse"
+                                 aria-labelledby="headingreviews-01"
+                                 data-parent="#collapse-tabs-accordion-01" style="">
+                                <div id="accordion-style-01-3"
+                                     class="accordion accordion-01 border-md-0 border p-md-0 p-6">
+                                    <div class="comment-product mxw-830 mx-auto pt-md-4">
+                                        <ul class="list-inline mb-3 d-flex justify-content-center rating-result">
+                                            <li class="list-inline-item fs-18 text-primary"><i
+                                                    class="fas fa-star"></i></li>
+                                            <li class="list-inline-item fs-18 text-primary"><i
+                                                    class="fas fa-star"></i></li>
+                                            <li class="list-inline-item fs-18 text-primary"><i
+                                                    class="fas fa-star"></i></li>
+                                            <li class="list-inline-item fs-18 text-primary"><i
+                                                    class="fas fa-star"></i></li>
+                                            <li class="list-inline-item fs-18 text-primary"><i
+                                                    class="fas fa-star"></i></li>
+                                        </ul>
+                                        <p class="text-center mb-9 fs-15 text-primary lh-1"><span
+                                                class="d-inline-block border-right pr-1 mr-1">5.0</span>Base on 3
+                                            Reviews</p>
+                                        {% for comment in site.data.product-page-01.comments %}
+                                        <div class="media {% if forloop.last == false %}border-bottom pb-6 mb-6 {% endif %}">
+                                            <div class="w-70px d-block mr-6">
+                                                <img src="{{ comment.image | document_url }}"
+                                                     alt="{{comment.name}}">
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="row no-gutters mb-2 align-items-center rating-result">
+                                                    <ul class="list-inline mb-0 mr-auto d-flex col-sm-6">
+                                                        <li class="list-inline-item fs-12 text-primary"><i
+                                                                class="fas fa-star"></i></li>
+                                                        <li class="list-inline-item fs-12 text-primary"><i
+                                                                class="fas fa-star"></i></li>
+                                                        <li class="list-inline-item fs-12 text-primary"><i
+                                                                class="fas fa-star"></i></li>
+                                                        <li class="list-inline-item fs-12 text-primary"><i
+                                                                class="fas fa-star"></i></li>
+                                                        <li class="list-inline-item fs-12 text-primary"><i
+                                                                class="fas fa-star"></i></li>
+                                                    </ul>
+                                                    <div class="col-sm-6 text-sm-right"><span
+                                                            class="fs-12 text-primary">{{comment.date}}</span></div>
+
+                                                </div>
+                                                <p class="text-gray-01 lh-175 mb-2">{{comment.content}}</p>
+                                                <span class="font-weight-600 text-primary d-block">{{comment.name}}</span>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                        <div class="text-center mt-6 mt-md-9">
+                                            <a href="#" class="btn btn-outline-primary write-review">write a review</a>
+                                        </div>
+                                        <div class="card border-0 mt-9 form-review hide ">
+                                            <div class="card-body p-0">
+                                                <h3 class="fs-40 text-center mb-9">Write A Review</h3>
+                                                <form>
+                                                    <div class="d-flex flex-wrap">
+                                                        <p class="text-primary font-weight-bold mb-0 mr-2 mb-2">Your
+                                                            Rating</p>
+                                                        <div class="form-group mb-6 d-flex justify-content-start">
+                                                            <div class="rate-input">
+                                                                <input type="radio" id="star5" name="rate" value="5">
+                                                                <label for="star5" title="text" class="mb-0 mr-1 lh-1">
+                                                                    <i class="fal fa-star"></i>
+                                                                </label>
+                                                                <input type="radio" id="star4" name="rate" value="4">
+                                                                <label for="star4" title="text" class="mb-0 mr-1 lh-1">
+                                                                    <i class="fal fa-star"></i>
+                                                                </label>
+                                                                <input type="radio" id="star3" name="rate" value="3">
+                                                                <label for="star3" title="text" class="mb-0 mr-1 lh-1">
+                                                                    <i class="fal fa-star"></i>
+                                                                </label>
+                                                                <input type="radio" id="star2" name="rate" value="2">
+                                                                <label for="star2" title="text" class="mb-0 mr-1 lh-1">
+                                                                    <i class="fal fa-star"></i>
+                                                                </label>
+                                                                <input type="radio" id="star1" name="rate" value="1">
+                                                                <label for="star1" title="text" class="mb-0 mr-1 lh-1">
+                                                                    <i class="fal fa-star"></i>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group mb-6">
+                                                                <input placeholder="Your Name*" class="form-control"
+                                                                       type="text" name="name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group mb-6">
+                                                                <input type="email" placeholder="Your Email*"
+                                                                       name="email"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-8">
+                                                    <textarea class="form-control" placeholder="Your Review"
+                                                              name="message" rows="5"></textarea>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-primary">submit now
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="pb-11 pb-lg-15">
+    <div class="container container-xxl">
+        <h2 class="fs-md-40 fs-30 mb-9 text-center">May You Like This</h2>
+        <div class="slick-slider"
+             data-slick-options='{"slidesToShow": 4, "autoplay":false,"dots":false,"arrows":false,"responsive":[{"breakpoint": 992,"settings": {"slidesToShow":3}},{"breakpoint": 768,"settings": {"slidesToShow": 2}},{"breakpoint": 576,"settings": {"slidesToShow": 1}}]}'>
+            {% for product in site.data.product-page-01.products %}
+            <div class="box">
+                <div class="card border-0 hover-change-content product">
+                    <div style="background-image: url('{{ product.image | document_url }}')"
+                         class="card-img ratio bg-img-cover-center ratio-1-1">
+                    </div>
+                    <div class="card-img-overlay d-flex py-4 py-sm-5 pl-6 pr-4">
+                        <div class="d-flex flex-column">
+                            <a href="#" class="font-weight-bold mb-1 d-block lh-12">{{ product.title }}</a>
+                            <a href="#" class="text-uppercase text-muted letter-spacing-05 fs-12 font-weight-500">{{ product.category
+                                }}</a>
+                            <p class="mt-auto text-primary mb-0 font-weight-500">
+                                {% if product.sale %}
+                                <span
+                                        class="text-line-through text-secondary fs-14 d-inline-block mr-2 font-weight-normal">{{ product.sale }}</span>
+                                {% endif %}
+                                {{ product.price }}</p>
+                        </div>
+                        <div class="ml-auto d-flex flex-column">
+                            {%- assign label = product.label | slugify -%}
+                            {% if label == "new" %}
+                            <div class="badge badge-green badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                new
+                            </div>
+                            {% endif %}
+                            {% if label == "sale" %}
+                            <div class="badge badge-pink badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                sale
+                            </div>
+                            {% endif %}
+                            {% if label == "hot" %}
+                            <div class="badge badge-yellow badge-circle ml-auto w-45px h-45px fs-12 d-flex align-items-center justify-content-center mb-2">
+                                hot
+                            </div>
+                            {% endif %}
+                            <div class="my-auto content-change-vertical">
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to card"
+                                   class="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-shopping-basket"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to favourite"
+                                   class="add-to-wishlist d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-heart"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Add to compare"
+                                   class="add-to-compare d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-random"></i>
+                                </a>
+                                <a href="#" data-toggle="tooltip" data-placement="left" title="Preview"
+                                   class="preview d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mb-2 border">
+                                    <i class="far fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

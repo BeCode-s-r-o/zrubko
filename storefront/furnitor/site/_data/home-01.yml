@@ -1,0 +1,131 @@
+products:
+  - image: /images/product-19.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-02.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: new
+    is_category: false
+  - image: /images/product-10.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/c_18.jpg
+    category: none
+    title: Dining <br> Table
+    price: from $500
+    label: none
+    is_category: true
+  - image: /images/product-26.jpg
+    category: decor
+    title: Golden Clock
+    price: $1000.00
+    sale: $1390.00
+    label: sale
+    is_category: false
+  - image: /images/product-07.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-16.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-04.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: hot
+    is_category: false
+  - image: /images/product-06.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-05.jpg
+    category: chair
+    title: Potato Chair
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-15.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-09.jpg
+    category: table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/c_19.jpg
+    category: none
+    title: Planters
+    description: Featuring the signature flexible spine and made in aluminium.
+    price: Shop Now
+    label: none
+    is_category: true
+    from_price: $20.00
+  - image: /images/product-08.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-04.jpg
+    category: table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-18.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-03.jpg
+    category: table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/c_20.jpg
+    category: none
+    title: Pao by <br> chiandchi
+    price: shop now
+    label: none
+    is_category: true
+  - image: /images/product-10.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    label: none
+    is_category: false
+  - image: /images/product-05_1.jpg
+    category: Table
+    title: Piper Bar
+    price: $1390.00
+    label: none
+    is_category: false
+

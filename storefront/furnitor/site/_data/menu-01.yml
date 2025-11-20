@@ -1,0 +1,77 @@
+- title: Home
+  url: /index.html
+  submenu:
+    - title: Home 01
+      url: /home-01.html
+    - title: Home 02
+      url: /home-02.html
+    - title: Home 03
+      url: /home-03.html
+    - title: Home 04
+      url: /home-04.html
+    - title: Home 05
+      url: /home-05.html
+    - title: Home 06
+      url: /home-06.html
+    - title: Home 07
+      url: /home-07.html
+    - title: Home 08
+      url: /home-08.html
+    - title: Home 09
+      url: /home-09.html
+    - title: Home 10
+      url: /home-10.html
+    - title: Home 11
+      url: /home-11.html
+    - title: Home 12
+      url: /home-12.html
+- title: Shop
+  url: /store.html
+  submenu: menu/megamenu-listing.html
+- title: Pages
+  url: /#
+  submenu:
+    - title: About us
+      url: /#
+      submenu:
+        - title: About Us 01
+          url: /about-us-01.html
+        - title: About Us 02
+          url: /about-us-02.html
+    - title: Contact
+      url: /#
+      submenu:
+        - title: Contact 01
+          url: /contact-01.html
+        - title: Contact 02
+          url: /contact-02.html
+    - title: FAQs
+      url: /faqs.html
+    - title: Service
+      url: /service.html
+    - title: Login Register
+      url: /login-register.html
+- title: Blog
+  url: /#
+  submenu:
+    - title: Blog Listing
+      url: /#
+      submenu:
+        - title: Blog Layout 01
+          url: /blog-layout-01.html
+        - title: Blog Layout 02
+          url: /blog-layout-02.html
+        - title: Blog Layout 03
+          url: /blog-layout-03.html
+        - title: Blog Layout 04
+          url: /blog-layout-04.html
+    - title: Blog Post
+      url: /#
+      submenu:
+        - title: Blog Post 01
+          url: /blog-post-01.html
+        - title: Blog Post 02
+          url: /blog-post-02.html
+- title: Docs
+  url: /#
+  submenu: menu/menu-docs.html

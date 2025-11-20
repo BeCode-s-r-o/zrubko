@@ -1,0 +1,31 @@
+products:
+  - image: /images/product-19.jpg
+    category: Table
+    title: Bow Chair
+    price: $1390.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...
+  - image: /images/product-06.jpg
+    category: decor
+    title: Albert Bench
+    price: $1390.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...
+  - image: /images/product-13.jpg
+    category: decor
+    title: Affordances Side Table
+    price: $1390.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...
+  - image: /images/product-05.jpg
+    category: decor
+    title: Golden Clock
+    price: $1390.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...
+  - image: /images/product-16.jpg
+    category: table
+    title: 64 Bench
+    price: $1390.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...
+  - image: /images/product-08.jpg
+    category: Chair
+    title: Afteroom Dining Chair
+    price: $1000.00
+    description: Luxe, lightweight, and made with the perfect blend of cashmere and cotton, our Sonoma Pillows and Throws are inspired by the basics we...

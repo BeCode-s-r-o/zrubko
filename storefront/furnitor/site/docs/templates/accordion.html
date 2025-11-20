@@ -1,0 +1,138 @@
+---
+layout: docs
+title: Accordion
+description: Vertically stacked list of items. When clicked each item switch content in the tab pane.
+group: templates
+toc: true
+---
+<h2>Accordion 01</h2>
+{% capture example %}
+<div id="accordion-style-01" class="accordion">
+    <div class="card border-0 mb-5">
+        <div class="card-header border-0 p-0 bg-transparent bg-transparent" id="headingOne">
+            <h5 class="mb-0 fs-16 w-100">
+                <a href="#" class="d-flex align-items-center border-bottom pb-3 pr-2" data-toggle="collapse"
+                   data-target="#collapseOne"
+                   aria-expanded="true" aria-controls="collapseOne">
+                    <span>Available Payments</span>
+                    <span class="icon d-inline-block ml-auto"></span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-style-01">
+            <div class="card-body py-4 px-0">
+                <p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24/7™ Lace
+                    Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and
+                    eliminates gaping. Removable pads let you customize you</p>
+                <ul class="mb-0 fs-16 w-100">
+                    <li class="lh-213">Cropped pink crepe knit top</li>
+                    <li class="lh-213">Square neckline</li>
+                    <li class="lh-213">Embroidered Aje logo</li>
+                    <li class="lh-213">Cross back straps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 mb-5">
+        <div class="card-header border-0 p-0 bg-transparent" id="headingTwo">
+            <h5 class="mb-0 fs-16 w-100">
+                <a href="#" class="d-flex align-items-center border-bottom pb-3 pr-2 collapsed"
+                   data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                   aria-controls="collapseTwo">
+                    <span>Order History and Disputes</span>
+                    <span class="icon d-inline-block ml-auto"></span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-style-01">
+            <div class="card-body py-4 px-0">
+                <p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24/7™ Lace
+                    Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and
+                    eliminates gaping. Removable pads let you customize you</p>
+                <ul class="mb-0 fs-16 w-100">
+                    <li class="lh-213">Cropped pink crepe knit top</li>
+                    <li class="lh-213">Square neckline</li>
+                    <li class="lh-213">Embroidered Aje logo</li>
+                    <li class="lh-213">Cross back straps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 mb-5">
+        <div class="card-header border-0 p-0 bg-transparent" id="headingThree">
+            <h5 class="mb-0 fs-16 w-100">
+                <a href="#" class="d-flex align-items-center border-bottom pb-3 pr-2 collapsed"
+                   data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
+                   aria-controls="collapseThree">
+                    <span>Shipping and Handling</span>
+                    <span class="icon d-inline-block ml-auto"></span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-style-01">
+            <div class="card-body py-4 px-0">
+                <p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24/7™ Lace
+                    Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and
+                    eliminates gaping. Removable pads let you customize you</p>
+                <ul class="mb-0 fs-16 w-100">
+                    <li class="lh-213">Cropped pink crepe knit top</li>
+                    <li class="lh-213">Square neckline</li>
+                    <li class="lh-213">Embroidered Aje logo</li>
+                    <li class="lh-213">Cross back straps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 mb-5">
+        <div class="card-header border-0 p-0 bg-transparent" id="headingFour">
+            <h5 class="mb-0 fs-16 w-100">
+                <a href="#" class="d-flex align-items-center border-bottom pb-3 pr-2 collapsed"
+                   data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
+                   aria-controls="collapseFour">
+                    <span>Gift Cards</span>
+                    <span class="icon d-inline-block ml-auto"></span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-style-01">
+            <div class="card-body py-4 px-0">
+                <p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24/7™ Lace
+                    Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and
+                    eliminates gaping. Removable pads let you customize you</p>
+                <ul class="mb-0 fs-16 w-100">
+                    <li class="lh-213">Cropped pink crepe knit top</li>
+                    <li class="lh-213">Square neckline</li>
+                    <li class="lh-213">Embroidered Aje logo</li>
+                    <li class="lh-213">Cross back straps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card border-0 mb-5">
+        <div class="card-header border-0 p-0 bg-transparent" id="headingFive">
+            <h5 class="mb-0 fs-16 w-100">
+                <a href="#" class="d-flex align-items-center border-bottom pb-3 pr-2 collapsed"
+                   data-toggle="collapse" data-target="#collapseFive" aria-expanded="true"
+                   aria-controls="collapseFive">
+                    <span>Returns and Exchanges</span>
+                    <span class="icon d-inline-block ml-auto"></span>
+                </a>
+            </h5>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion-style-01">
+            <div class="card-body py-4 px-0">
+                <p>So beautiful you’ll want to show it off, so comfortable you’ll forget it’s there. Our 24/7™ Lace
+                    Contour Plunge Bra combines gorgeous floral lace with sheer overlay straps that hold you in and
+                    eliminates gaping. Removable pads let you customize you</p>
+                <ul class="mb-0 fs-16 w-100">
+                    <li class="lh-213">Cropped pink crepe knit top</li>
+                    <li class="lh-213">Square neckline</li>
+                    <li class="lh-213">Embroidered Aje logo</li>
+                    <li class="lh-213">Cross back straps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}

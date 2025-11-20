@@ -1,0 +1,126 @@
+---
+layout: docs
+title: Posts
+description: Display list of post in the form of List or Grid
+group: templates
+toc: true
+---
+<h2 id="post-01">
+    <span>Post 01</span>
+    <a href="#post-01" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div style="max-width: 370px">
+    <div class="card border-0">
+        <a href="{{ '/blog-post-01.html' | document_url }}" class="hover-shine card-img-top">
+            <img src="{{ '/images/blog_01.jpg' | document_url }}"
+                 alt="Under the sun in Cape Town">
+        </a>
+        <div class="card-body px-0 pt-6 pb-0">
+            <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                April 24, 2019
+            </p>
+            <h3 class="card-title mb-3 fs-20">
+                <a href="{{ '/blog-post-01.html' | document_url }}">Under the sun in Cape Town</a>
+            </h3>
+            <p class="card-text mb-4 font-weight-500">These are beautiful, well made & ortable! I bought them to wear to work &
+                casually. </p>
+            <a href="#"
+               class="fs-14 font-weight-bold border-bottom border-light-dark text-uppercase letter-spacing-05 d-inline-block border-hover-primary">
+                Read more
+            </a>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2 id="post-02">
+    <span>Post 02</span>
+    <a href="#post-02" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div style="max-width: 408px">
+    <div class="card border-0">
+        <a href="{{ '/blog-post-01.html' | document_url }}" class="hover-shine card-img-top">
+            <img src="{{ '/images/blog_01.jpg' | document_url }}"
+                 alt="Under the sun in Cape Town">
+        </a>
+        <div class="card-body px-0 pt-6 pb-0">
+            <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                April 24, 2019
+            </p>
+            <h3 class="card-title mb-0 fs-20">
+                <a href="{{ '/blog-post-01.html' | document_url }}">Under the sun in Cape Town</a>
+            </h3>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2 id="post-03">
+    <span>Post 03</span>
+    <a href="#post-03" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div class="card border-0">
+    <div class="row no-gutters">
+        <div class="col-md-6 pr-md-8">
+            <a href="{{ '/blog-post-01.html' | document_url }}" class="hover-shine d-block">
+                <img src="{{ '/images/blog_01.jpg' | document_url }}"
+                     alt="Under the sun in Cape Town">
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body py-6 px-0 pb-0">
+                <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                    April 24, 2019
+                </p>
+                <h3 class="card-title mb-3 fs-20">
+                    <a href="{{ '/blog-post-01.html' | document_url }}">Under the sun in Cape Town</a>
+                </h3>
+                <p class="card-text mb-4 font-weight-500">These are beautiful, well made & ortable! I bought them to wear to work &
+                    casually. </p>
+                <a href="#"
+                   class="fs-14 font-weight-bold border-bottom border-light-dark text-uppercase letter-spacing-05 d-inline-block border-hover-primary">
+                    Read more
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
+
+<h2 id="post-04">
+    <span>Post 04</span>
+    <a href="#post-04" class="anchorjs-link"></a>
+</h2>
+{% capture example %}
+<div style="max-width: 830px;">
+    <div class="card border-0">
+        <a href="{{ '/blog-post-01.html' | document_url }}" class="hover-shine card-img-top d-block mb-7">
+            <img src="{{ '/images/blog_larger_01.jpg' | document_url }}"
+                 alt="Meet the Model - Tropics">
+        </a>
+        <div class="card-body p-0 text-center mxw-630 mx-auto">
+            <p class="card-text fs-12 mb-2 text-muted lh-12 text-uppercase letter-spacing-05 font-weight-500">
+                April 24, 2019
+            </p>
+            <h3 class="card-title mb-3 fs-20">
+                <a href="{{ '/blog-post-01.html' | document_url }}">Meet the Model - Tropics</a>
+            </h3>
+            <p class="card-text mb-6">Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve
+                been in the cool place, but I wasn’t really cool …</p>
+            <a href="#"
+               class="fs-14 font-weight-bold border-bottom border-light-dark text-uppercase letter-spacing-05 d-inline-block border-hover-primary">
+                Read more
+            </a>
+        </div>
+    </div>
+</div>
+{% endcapture %}
+{% include docs/example.html content=example %}
