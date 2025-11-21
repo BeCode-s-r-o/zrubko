@@ -13,7 +13,7 @@ interface Product {
 }
 
 interface ProductGridProps {
-  title?: string
+  title?: string | React.ReactNode
   products: Product[]
   showButton?: boolean
   buttonText?: string

@@ -11,28 +11,28 @@ export default function Header08() {
   return (
     <header className="main-header navbar-light header-sticky header-sticky-smart header-08">
       {/* Topbar */}
-      <div className="topbar bg-accent py-2 d-none d-xl-block">
+      <div className="topbar py-2 d-none d-xl-block" style={{ backgroundColor: 'rgb(27,46,25)' }}>
         <div className="container">
           <div className="row">
             <div className="col-xl-4 mb-2 mb-xl-0">
               <div className="d-flex align-items-center h-100 justify-content-center justify-content-xl-start">
-                <Link href="#" className="d-flex align-items-center text-primary fs-15 pr-3 border-right border-light-dark">
+                <Link href="#" className="d-flex align-items-center text-white fs-15 pr-3 border-right border-white">
                   <span className="d-inline-block mr-2"><i className="fal fa-map-marker-alt"></i></span>
                   <span>Nájsť obchod</span>
                 </Link>
-                <Link href="#" className="d-flex align-items-center text-primary fs-15 pl-3">
+                <Link href="#" className="d-flex align-items-center text-white fs-15 pl-3">
                   <span className="d-inline-block mr-2"><i className="fal fa-envelope"></i></span>
                   <span>Newsletter</span>
                 </Link>
               </div>
             </div>
             <div className="col-xl-4 mb-2 mb-xl-0">
-              <p className="mb-0 fs-15 text-primary text-center">Doprava zdarma pri objednávkach nad 59 € !</p>
+              <p className="mb-0 fs-15 text-white text-center">Doprava zdarma pri objednávkach nad 59 € !</p>
             </div>
             <div className="col-xl-4">
               <div className="d-flex align-items-center justify-content-center justify-content-xl-end h-100">
-                <div className="dropdown px-3 border-right border-light-dark">
-                  <a href="#" className="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div className="dropdown px-3 border-right border-white">
+                  <a href="#" className="dropdown-toggle text-white font-weight-500 fs-15" id="dropdownMenuLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Slovenčina
                   </a>
                   <div className="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
@@ -43,7 +43,7 @@ export default function Header08() {
                   </div>
                 </div>
                 <div className="dropdown pl-3">
-                  <a href="#" className="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuCurrency1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="#" className="dropdown-toggle text-white font-weight-500 fs-15" id="dropdownMenuCurrency1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     EUR
                   </a>
                   <div className="dropdown-menu" aria-labelledby="dropdownMenuCurrency1">
@@ -193,9 +193,9 @@ export default function Header08() {
                     </li>
                   </ul>
                   <div className="pl-5 border-left-0 border-xl-left ml-auto d-none d-xl-block">
-                    <Link href="tel:+18665403229" className="d-flex align-items-center justify-content-end h-100">
+                    <Link href="tel:+421911869777" className="d-flex align-items-center justify-content-end h-100">
                       <span className="d-block mr-2"><i className="far fa-phone-alt"></i></span>
-                      Call us (+1) 866 540 3229
+                      Zavolajte nám +421 911 869 777
                     </Link>
                   </div>
                 </div>
