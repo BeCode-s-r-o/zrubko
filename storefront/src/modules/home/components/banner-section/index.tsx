@@ -22,12 +22,23 @@ export default function BannerSection({ banners }: BannerSectionProps) {
         <div className="row">
           {banners.map((banner, index) => (
             <div key={index} className={banner.className || (index === 0 ? 'col-lg-8 mb-6 mb-lg-0' : 'col-lg-4')}>
-              <div className="card border-0 banner banner-07">
+              <div className="card border-0 banner banner-07" style={{ position: 'relative' }}>
                 <div 
                   className="card-img bg-img-cover-center" 
                   style={{ backgroundImage: `url('${banner.image}')` }}
                 ></div>
-                <div className={`card-img-overlay d-inline-flex flex-column ${index === 0 ? 'p-4 px-sm-7 py-sm-8' : 'p-4 px-sm-7 py-sm-8'}`}>
+                <div 
+                  style={{ 
+                    position: 'absolute', 
+                    top: 0, 
+                    left: 0, 
+                    width: '100%', 
+                    height: '100%', 
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                    zIndex: 1
+                  }}
+                ></div>
+                <div className={`card-img-overlay d-inline-flex flex-column ${index === 0 ? 'p-4 px-sm-7 py-sm-8' : 'p-4 px-sm-7 py-sm-8'}`} style={{ zIndex: 2 }}>
                   <h3 className={`card-title ${index === 0 ? 'fs-30 fs-md-40' : 'fs-30 fs-md-40'} text-white`}>
                     {banner.title}
                     {banner.subtitle && <><br />{banner.subtitle}</>}

@@ -9,27 +9,27 @@ export default function HeroSlider() {
       title: 'Sweet Home',
       buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
-      backgroundImage: '/furnitor/images/bg-home-10.jpg'
+      backgroundImage: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fbanner.jpg&version_id=null'
     },
     {
       subtitle: 'Modern Design',
       title: 'Sweet Home',
       buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
-      backgroundImage: '/furnitor/images/bg-home-10.jpg'
+      backgroundImage: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fdrevoo.jpg&version_id=null'
     },
     {
       subtitle: 'Modern Design',
       title: 'Sweet Home',
       buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
-      backgroundImage: '/furnitor/images/bg-home-10.jpg'
+      backgroundImage: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fosmo.jpg&version_id=null'
     }
   ]
 
   return (
     <section className="overflow-hidden">
-      <div className="slick-slider slick-dots-light dots-inner-center" data-slick-options='{"slidesToShow": 1,"infinite":true,"autoplay":false,"dots":true,"arrows":false}'>
+      <div className="slick-slider slick-dots-light dots-inner-center" data-slick-options='{"slidesToShow": 1,"infinite":true,"autoplay":true,"autoplaySpeed":5000,"dots":true,"arrows":false}'>
         {slides.map((slide, index) => (
           <div key={index} className="box">
             <div 

@@ -156,15 +156,19 @@ export default function Home10() {
       />
       <ClientLogos logos={clientLogos} />
       <ProductGrid
-        title="Featured Items"
+        title={
+          <>
+            Najpredávanejšie <span style={{ color: 'rgb(174,118,70)' }}>OSMO</span> produkty
+          </>
+        }
         products={featuredProducts}
         showButton={false}
       />
       <RoomInspiration
-        title="Room Inspiration"
-        description="We believe in crafting pieces where sustainability and style go hand in hand. Made from materials like recycled cashmere and sustainable."
-        image="/furnitor/images/b-05.jpg"
-        buttonText="our journal"
+        title="Zrubko – Drevo pre Váš projekt"
+        description="Pozrite si realizácie, kde kvalitné drevo a remeselná práca vytvárajú jedinečnú atmosféru. Inšpirujte sa štýlom, ktorý obstojí v čase."
+        image="https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2FNa-vrchy-print-size-46.jpg&version_id=null"
+        buttonText="Inšpirovať sa"
         buttonLink="/store"
       />
     </main>
