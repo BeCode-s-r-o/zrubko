@@ -21,7 +21,7 @@ interface ProductGridProps {
 }
 
 export default function ProductGrid({ 
-  title = 'Essenstial Items', 
+  title = 'Odporúčané produkty', 
   products, 
   showButton = true,
   buttonText = 'Kúpiť teraz',
