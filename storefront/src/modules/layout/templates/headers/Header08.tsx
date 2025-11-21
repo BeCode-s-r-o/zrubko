@@ -18,7 +18,7 @@ export default function Header08() {
               <div className="d-flex align-items-center h-100 justify-content-center justify-content-xl-start">
                 <Link href="#" className="d-flex align-items-center text-primary fs-15 pr-3 border-right border-light-dark">
                   <span className="d-inline-block mr-2"><i className="fal fa-map-marker-alt"></i></span>
-                  <span>Find a Store</span>
+                  <span>Nájsť obchod</span>
                 </Link>
                 <Link href="#" className="d-flex align-items-center text-primary fs-15 pl-3">
                   <span className="d-inline-block mr-2"><i className="fal fa-envelope"></i></span>
@@ -27,28 +27,29 @@ export default function Header08() {
               </div>
             </div>
             <div className="col-xl-4 mb-2 mb-xl-0">
-              <p className="mb-0 fs-15 text-primary text-center">Free shipping for orders over $59 !</p>
+              <p className="mb-0 fs-15 text-primary text-center">Doprava zdarma pri objednávkach nad 59 € !</p>
             </div>
             <div className="col-xl-4">
               <div className="d-flex align-items-center justify-content-center justify-content-xl-end h-100">
                 <div className="dropdown px-3 border-right border-light-dark">
                   <a href="#" className="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuLanguage" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    English
+                    Slovenčina
                   </a>
                   <div className="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+                    <a className="dropdown-item text-primary" href="#">Slovenčina</a>
+                    <a className="dropdown-item text-primary" href="#">Čeština</a>
+                    <a className="dropdown-item text-primary" href="#">Deutsch</a>
                     <a className="dropdown-item text-primary" href="#">English</a>
-                    <a className="dropdown-item text-primary" href="#">Vietnamese</a>
-                    <a className="dropdown-item text-primary" href="#">Chinese</a>
                   </div>
                 </div>
                 <div className="dropdown pl-3">
                   <a href="#" className="dropdown-toggle font-weight-500 fs-15" id="dropdownMenuCurrency1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    USD
+                    EUR
                   </a>
                   <div className="dropdown-menu" aria-labelledby="dropdownMenuCurrency1">
+                    <a className="dropdown-item text-primary" href="#">EUR</a>
                     <a className="dropdown-item text-primary" href="#">USD</a>
-                    <a className="dropdown-item text-primary" href="#">EURO</a>
-                    <a className="dropdown-item text-primary" href="#">VND</a>
+                    <a className="dropdown-item text-primary" href="#">CZK</a>
                   </div>
                 </div>
               </div>
@@ -72,7 +73,7 @@ export default function Header08() {
               <div className="col-xl-6">
                 <form className="d-flex align-items-center h-100">
                   <div className="input-group position-relative">
-                    <input type="text" className="form-control border-0 border-bottom pl-0 border-2x bg-transparent" placeholder="Search Something..." />
+                    <input type="text" className="form-control border-0 border-bottom pl-0 border-2x bg-transparent" placeholder="Hľadať..." />
                     <div className="input-group-append position-absolute pos-fixed-right-center">
                       <button className="input-group-text bg-transparent border-0 text-primary fs-18 px-0" type="submit">
                         <i className="far fa-search"></i>
@@ -119,79 +120,75 @@ export default function Header08() {
                   <div className="dropdown no-caret">
                     <a href="#" className="btn dropdown-toggle btn-primary d-flex w-100 text-left align-items-center px-0 px-xl-4 border-0 shadow-none" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div className="toggle-bar"><span className="toggle-icon text-white"></span></div>
-                      <div className="pl-5">Browse Categories</div>
+                      <div className="pl-5">Drevené materiály</div>
                     </a>
                     <div className="dropdown-menu w-100 py-0" aria-labelledby="dropdownMenuButton1">
                       <Link href="/categories/chairs" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/chair.png" alt="Chair" width={28} height={28} />
+                          <Image src="/furnitor/images/chair.png" alt="Drevené obklady" width={28} height={28} />
                         </div>
-                        <div className="media-body">Chairs</div>
+                        <div className="media-body">Drevené obklady</div>
                       </Link>
                       <Link href="/categories/tables" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/desk.png" alt="Table" width={28} height={28} />
+                          <Image src="/furnitor/images/desk.png" alt="Drevené podlahy" width={28} height={28} />
                         </div>
-                        <div className="media-body">Table</div>
+                        <div className="media-body">Drevené podlahy</div>
                       </Link>
                       <Link href="/categories/accessories" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/fish_bowl.png" alt="Accessories" width={28} height={28} />
+                          <Image src="/furnitor/images/ladder.png" alt="Obklady Termodrevo" width={28} height={28} />
                         </div>
-                        <div className="media-body">Accessories</div>
+                        <div className="media-body">Obklady Termodrevo</div>
                       </Link>
                       <Link href="/categories/sofa" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/sofa.png" alt="Sofa" width={28} height={28} />
+                          <Image src="/furnitor/images/ladder.png" alt="Podlahy Termodrevo" width={28} height={28} />
                         </div>
-                        <div className="media-body">Sofa</div>
+                        <div className="media-body">Podlahy Termodrevo</div>
                       </Link>
                       <Link href="/categories/plants" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/plant.png" alt="Plants" width={28} height={28} />
+                          <Image src="/furnitor/images/plant.png" alt="Terasové dosky" width={28} height={28} />
                         </div>
-                        <div className="media-body">Plants</div>
+                        <div className="media-body">Terasové dosky</div>
                       </Link>
                       <Link href="/categories/stools" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/stool.png" alt="Stool" width={28} height={28} />
+                          <Image src="/furnitor/images/stool.png" alt="Drevo do sauny" width={28} height={28} />
                         </div>
-                        <div className="media-body">Stool</div>
+                        <div className="media-body">Drevo do sauny</div>
                       </Link>
                       <Link href="/categories/stands" className="dropdown-item media align-items-center border-bottom py-2">
                         <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/ladder.png" alt="Stands" width={28} height={28} />
+                          <Image src="/furnitor/images/ladder.png" alt="Drevené hranoly a Lišty" width={28} height={28} />
                         </div>
-                        <div className="media-body">Stands</div>
+                        <div className="media-body">Drevené hranoly a Lišty</div>
+                      </Link>
+                      <Link href="/categories/kvh-hranoly" className="dropdown-item media align-items-center border-bottom py-2">
+                        <div className="w-28px mr-3">
+                          <Image src="/furnitor/images/ladder.png" alt="KVH Hranoly" width={28} height={28} />
+                        </div>
+                        <div className="media-body">KVH Hranoly</div>
                       </Link>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-9 d-flex pl-xl-8 position-static">
                   <ul className="navbar-nav hover-menu main-menu px-0 mx-xl-n4">
-                    <li className="nav-item dropdown-item-home dropdown py-2 py-xl-5 px-0 px-xl-4">
-                      <Link href="/" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        Home <span className="caret"></span>
-                      </Link>
-                      <ul className="dropdown-menu pt-3 pb-0 pb-xl-3 x-animated x-fadeInUp">
-                        <li className="dropdown-item active">
-                          <Link href="/" className="dropdown-link">Home 10</Link>
-                        </li>
-                      </ul>
-                    </li>
                     <li className="nav-item dropdown-item-shop dropdown py-2 py-xl-5 px-0 px-xl-4">
                       <Link href="/store" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        Shop <span className="caret"></span>
+                        OSMO <span className="caret"></span>
                       </Link>
                     </li>
                     <li className="nav-item dropdown-item-pages dropdown py-2 py-xl-5 px-0 px-xl-4">
                       <Link href="#" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        Pages <span className="caret"></span>
+                        Najpredávanejšie produkty <span className="caret"></span>
                       </Link>
                     </li>
                     <li className="nav-item dropdown-item-blog dropdown py-2 py-xl-5 px-0 px-xl-4">
                       <Link href="/blog" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        Blog <span className="caret"></span>
+                        Blogy <span className="caret"></span>
                       </Link>
                     </li>
                   </ul>

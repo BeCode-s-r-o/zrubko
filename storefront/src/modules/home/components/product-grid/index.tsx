@@ -24,7 +24,7 @@ export default function ProductGrid({
   title = 'Essenstial Items', 
   products, 
   showButton = true,
-  buttonText = 'Shop Now',
+  buttonText = 'Kúpiť teraz',
   buttonLink = '/store'
 }: ProductGridProps) {
   return (

@@ -1,16 +1,17 @@
 import { defineRouteConfig } from "@medusajs/admin-sdk"
-import { BlogPostForm } from "../components/blog-post-form"
+import { Container, Heading } from "@medusajs/ui"
+import { BlogPostForm } from "../components/blog-post-form.js"
 
 const CreateBlogPostPage = () => {
   return (
-    <div className="container mx-auto p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Create Blog Post</h1>
+    <Container className="divide-y p-0">
+      <div className="flex items-center justify-between px-6 py-4">
+        <Heading level="h1">Create Blog Post</Heading>
       </div>
-      <div>
+      <div className="px-6 py-4">
         <BlogPostForm />
       </div>
-    </div>
+    </Container>
   )
 }
 

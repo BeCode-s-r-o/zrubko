@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { storeFetch } from '@lib/util/fetch'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/blog/[slug] - Fetch individual blog post
 export async function GET(
   request: NextRequest,
@@ -10,7 +12,7 @@ export async function GET(
     const { slug } = params
 
     // Extract language from query parameters
-    const { searchParams } = new URL(request.url)
+    const { searchParams } = request.nextUrl
     const language = searchParams.get("language") || "sk"
 
     // Build backend URL with language parameter for filtering

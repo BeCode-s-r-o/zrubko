@@ -109,14 +109,14 @@ const banners = [
     subtitle: 'chiandchi',
     image: '/furnitor/images/c_01.jpg',
     link: '/store',
-    buttonText: 'Shop Now',
+    buttonText: 'Kúpiť teraz',
     className: 'col-lg-8 mb-6 mb-lg-0'
   },
   {
-    title: 'Soft Sofa',
+    title: 'Drevené podlahy',
     image: '/furnitor/images/c_16.jpg',
     link: '/store',
-    buttonText: 'Shop Now',
+    buttonText: 'Kúpiť teraz',
     className: 'col-lg-4'
   }
 ]
@@ -143,7 +143,7 @@ export default function Home10() {
         title="Essenstial Items"
         products={essentialProducts}
         showButton={true}
-        buttonText="Shop Now"
+        buttonText="Kúpiť teraz"
         buttonLink="/store"
       />
       <BannerSection banners={banners} />
