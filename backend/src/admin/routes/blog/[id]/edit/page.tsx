@@ -1,6 +1,6 @@
 import { defineRouteConfig } from "@medusajs/admin-sdk"
 import { Container, Heading } from "@medusajs/ui"
-import { BlogPostForm } from "../../components/blog-post-form"
+import { BlogPostForm } from "../../components/blog-post-form.js"
 
 const EditBlogPostPage = () => {
   // Extract ID from URL since useParams from react-router-dom is not available in Medusa Admin

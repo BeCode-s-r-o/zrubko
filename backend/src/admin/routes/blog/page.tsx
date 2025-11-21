@@ -1,7 +1,6 @@
 import { defineRouteConfig } from "@medusajs/admin-sdk"
-import { ChatBubbleLeftRight } from "@medusajs/icons"
 import { Container, Heading } from "@medusajs/ui"
-import { BlogPostList } from "./components/blog-post-list"
+import { BlogPostList } from "./components/blog-post-list.js"
 
 const BlogPage = () => {
   return (
@@ -18,7 +17,6 @@ const BlogPage = () => {
 
 export const config = defineRouteConfig({
   label: "Blog",
-  icon: ChatBubbleLeftRight,
 })
 
 export default BlogPage

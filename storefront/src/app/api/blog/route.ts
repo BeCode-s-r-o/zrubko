@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { storeFetch } from '@lib/util/fetch'
 
+export const dynamic = 'force-dynamic'
+
 // GET /api/blog - Fetch blog posts list
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
+    const { searchParams } = request.nextUrl
     const query = searchParams.get('q') || ''
     const author = searchParams.get('author') || ''
     const language = searchParams.get('language') || 'sk'

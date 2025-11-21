@@ -7,21 +7,21 @@ export default function HeroSlider() {
     {
       subtitle: 'Modern Design',
       title: 'Sweet Home',
-      buttonText: 'Shop Now',
+      buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
       backgroundImage: '/furnitor/images/bg-home-10.jpg'
     },
     {
       subtitle: 'Modern Design',
       title: 'Sweet Home',
-      buttonText: 'Shop Now',
+      buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
       backgroundImage: '/furnitor/images/bg-home-10.jpg'
     },
     {
       subtitle: 'Modern Design',
       title: 'Sweet Home',
-      buttonText: 'Shop Now',
+      buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
       backgroundImage: '/furnitor/images/bg-home-10.jpg'
     }

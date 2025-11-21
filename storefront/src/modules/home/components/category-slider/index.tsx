@@ -5,11 +5,14 @@ import Image from 'next/image'
 
 export default function CategorySlider() {
   const categories = [
-    { name: 'Chairs', image: '/furnitor/images/c_07.jpg', link: '/store' },
-    { name: 'Accessories', image: '/furnitor/images/c_08.jpg', link: '/store' },
-    { name: 'Tables', image: '/furnitor/images/c_09.jpg', link: '/store' },
-    { name: 'Sofa', image: '/furnitor/images/c_10.jpg', link: '/store' },
-    { name: 'Chairs', image: '/furnitor/images/c_07.jpg', link: '/store' }
+    { name: 'Drevené obklady', image: '/furnitor/images/c_07.jpg', link: '/store' },
+    { name: 'Drevené podlahy', image: '/furnitor/images/c_08.jpg', link: '/store' },
+    { name: 'Obklady Termodrevo', image: '/furnitor/images/c_09.jpg', link: '/store' },
+    { name: 'Podlahy Termodrevo', image: '/furnitor/images/c_10.jpg', link: '/store' },
+    { name: 'Terasové dosky', image: '/furnitor/images/c_07.jpg', link: '/store' },
+    { name: 'Drevo do sauny', image: '/furnitor/images/c_08.jpg', link: '/store' },
+    { name: 'Drevené hranoly a Lišty', image: '/furnitor/images/c_09.jpg', link: '/store' },
+    { name: 'KVH Hranoly', image: '/furnitor/images/c_10.jpg', link: '/store' }
   ]
 
   return (
@@ -27,7 +30,7 @@ export default function CategorySlider() {
                   <h3 className="card-title fs-30">{category.name}</h3>
                   <div className="mt-auto">
                     <Link href={category.link} className="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">
-                      Shop Now
+                      Kúpiť teraz
                     </Link>
                   </div>
                 </div>

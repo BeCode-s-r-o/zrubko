@@ -1,7 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "esnext"
+    "module": "NodeNext",
+    "jsx": "react-jsx",
+    "lib": ["es2020", "dom", "dom.iterable"]
   },
   "include": ["."],
   "exclude": ["**/*.spec.js"]
