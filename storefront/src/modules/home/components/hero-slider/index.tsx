@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function HeroSlider() {
   const slides = [
     {
-      subtitle: 'Modern Design',
+      subtitle: 'Modernnn Design',
       title: 'Sweet Home',
       buttonText: 'Kúpiť teraz',
       buttonLink: '/store',
