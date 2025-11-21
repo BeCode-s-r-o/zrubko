@@ -35,10 +35,16 @@ export default function ProductGrid({
           {products.map((product) => (
             <div key={product.id} className="col-sm-6 col-lg-3 mb-8" data-animate="fadeInUp">
               <div className="card border-0 hover-change-content product">
-                <div className="card-img-top position-relative">
+                <div className="card-img-top position-relative" style={{ height: '350px' }}>
                   <div 
                     className="card-img ratio bg-img-cover-center ratio-1-1"
-                    style={{ backgroundImage: `url('${product.image}')` }}
+                    style={{ 
+                      backgroundImage: `url('${product.image}')`,
+                      width: '100%',
+                      height: '350px',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
                   ></div>
                   <div className="position-absolute pos-fixed-bottom px-4 px-sm-6 pb-5 d-flex w-100 justify-content-center content-change-horizontal">
                     <a href="#" data-toggle="tooltip" title="Add to cart" className="add-to-cart d-flex align-items-center justify-content-center text-primary bg-white hover-white bg-hover-primary w-45px h-45px rounded-circle mr-2 border">

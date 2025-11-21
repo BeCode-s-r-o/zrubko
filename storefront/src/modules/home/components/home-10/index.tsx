@@ -15,7 +15,7 @@ const essentialProducts = [
     name: 'Bow Chair',
     category: 'Table',
     price: '$1390.00',
-    image: '/furnitor/images/product-19.jpg',
+    image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fwooden-spatula-is-laying-floor-fireplace.jpg&version_id=null',
     link: '/products/bow-chair'
   },
   {
@@ -107,14 +107,14 @@ const banners = [
   {
     title: 'Osmo pre exteriér',
     subtitle: '',
-    image: '/furnitor/images/c_01.jpg',
+    image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fcloseup.jpg&version_id=null',
     link: '/store',
     buttonText: 'Kúpiť teraz',
     className: 'col-lg-8 mb-6 mb-lg-0'
   },
   {
     title: 'Osmo pre interiér',
-    image: '/furnitor/images/c_16.jpg',
+    image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fwooden-spatula-is-laying-floor-fireplace.jpg&version_id=null',
     link: '/store',
     buttonText: 'Kúpiť teraz',
     className: 'col-lg-4'
@@ -122,16 +122,16 @@ const banners = [
 ]
 
 const clientLogos = [
-  { image: '/furnitor/images/client_logo_01.png', alt: 'Client Logo 01', link: '#' },
-  { image: '/furnitor/images/client_logo_02.png', alt: 'Client Logo 02', link: '#' },
-  { image: '/furnitor/images/client_logo_03.png', alt: 'Client Logo 03', link: '#' },
-  { image: '/furnitor/images/client_logo_04.png', alt: 'Client Logo 04', link: '#' },
-  { image: '/furnitor/images/client_logo_05.png', alt: 'Client Logo 05', link: '#' },
-  { image: '/furnitor/images/client_logo_06.png', alt: 'Client Logo 06', link: '#' },
-  { image: '/furnitor/images/client_logo_07.png', alt: 'Client Logo 07', link: '#' },
-  { image: '/furnitor/images/client_logo_08.png', alt: 'Client Logo 08', link: '#' },
-  { image: '/furnitor/images/client_logo_09.png', alt: 'Client Logo 09', link: '#' },
-  { image: '/furnitor/images/client_logo_10.png', alt: 'Client Logo 10', link: '#' }
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fbrown_logo_transparent.png&version_id=null', alt: 'Client Logo 01', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fblack_black.png&version_id=null', alt: 'FLOYD', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fblack_logo_transparent.png&version_id=null', alt: 'Client Logo 03', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fosmo-logo-.png&version_id=null', alt: 'Client Logo 04', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fbrown_logo_transparent.png&version_id=null', alt: 'Client Logo 01', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fblack_black.png&version_id=null', alt: 'FLOYD', link: '#' },
+  { image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_brands%2Fblack_logo_transparent.png&version_id=null', alt: 'Client Logo 03', link: '#' },
+ // { image: '/furnitor/images/client_logo_08.png', alt: 'Client Logo 08', link: '#' },
+ // { image: '/furnitor/images/client_logo_09.png', alt: 'Client Logo 09', link: '#' },
+ // { image: '/furnitor/images/client_logo_10.png', alt: 'Client Logo 10', link: '#' }
 ]
 
 export default function Home10() {
