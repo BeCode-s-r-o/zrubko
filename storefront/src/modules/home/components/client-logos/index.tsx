@@ -23,13 +23,14 @@ export default function ClientLogos({ logos }: ClientLogosProps) {
         >
           {logos.map((logo, index) => (
             <div key={index} className="box">
-              <Link href={logo.link} className="d-block px-3 px-xl-7">
+              <Link href={logo.link} className="d-flex align-items-center justify-content-center px-3 px-xl-7" style={{ height: '100px' }}>
                 <Image 
                   src={logo.image} 
                   alt={logo.alt}
                   className="opacity-5 opacity-hover-10"
-                  width={150}
-                  height={60}
+                  width={180}
+                  height={80}
+                  style={{ objectFit: 'contain', maxHeight: '80px', maxWidth: '180px' }}
                 />
               </Link>
             </div>

@@ -28,12 +28,12 @@ export default function BannerSection({ banners }: BannerSectionProps) {
                   style={{ backgroundImage: `url('${banner.image}')` }}
                 ></div>
                 <div className={`card-img-overlay d-inline-flex flex-column ${index === 0 ? 'p-4 px-sm-7 py-sm-8' : 'p-4 px-sm-7 py-sm-8'}`}>
-                  <h3 className={`card-title ${index === 0 ? 'fs-30 fs-md-40' : 'fs-30 fs-md-40'}`}>
+                  <h3 className={`card-title ${index === 0 ? 'fs-30 fs-md-40' : 'fs-30 fs-md-40'} text-white`}>
                     {banner.title}
                     {banner.subtitle && <><br />{banner.subtitle}</>}
                   </h3>
                   <div className="mt-auto">
-                    <Link href={banner.link} className="text-uppercase fs-14 letter-spacing-05 border-bottom border-light-dark border-hover-primary font-weight-bold">
+                    <Link href={banner.link} className="text-uppercase fs-14 letter-spacing-05 border-bottom border-white border-hover-primary font-weight-bold text-white">
                       {banner.buttonText}
                     </Link>
                   </div>
