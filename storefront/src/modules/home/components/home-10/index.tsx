@@ -105,15 +105,15 @@ const featuredProducts = [
 
 const banners = [
   {
-    title: 'Pao by',
-    subtitle: 'chiandchi',
+    title: 'Osmo pre exteriér',
+    subtitle: '',
     image: '/furnitor/images/c_01.jpg',
     link: '/store',
     buttonText: 'Kúpiť teraz',
     className: 'col-lg-8 mb-6 mb-lg-0'
   },
   {
-    title: 'Drevené podlahy',
+    title: 'Osmo pre interiér',
     image: '/furnitor/images/c_16.jpg',
     link: '/store',
     buttonText: 'Kúpiť teraz',
@@ -140,7 +140,7 @@ export default function Home10() {
       <HeroSlider />
       <CategorySlider />
       <ProductGrid 
-        title="Essenstial Items"
+        title="Odporúčané produkty"
         products={essentialProducts}
         showButton={true}
         buttonText="Kúpiť teraz"
