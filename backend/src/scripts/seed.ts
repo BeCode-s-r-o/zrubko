@@ -70,28 +70,49 @@ export default async function seedDemoData({ container }: ExecArgs) {
     },
   });
   logger.info("Seeding region data...");
-  const { result: regionResult } = await createRegionsWorkflow(container).run({
-    input: {
-      regions: [
-        {
-          name: "Europe",
-          currency_code: "eur",
-          countries,
-          payment_providers: ["pp_system_default"],
-        },
-      ],
-    },
+  const regionModuleService = container.resolve(Modules.REGION);
+  let existingRegions = await regionModuleService.listRegions({
+    name: "Europe",
   });
-  const region = regionResult[0];
+  
+  let region;
+  if (existingRegions.length > 0) {
+    logger.info("Europe region already exists, skipping region creation...");
+    region = existingRegions[0];
+  } else {
+    const { result: regionResult } = await createRegionsWorkflow(container).run({
+      input: {
+        regions: [
+          {
+            name: "Europe",
+            currency_code: "eur",
+            countries,
+            payment_providers: ["pp_system_default"],
+          },
+        ],
+      },
+    });
+    region = regionResult[0];
+  }
   logger.info("Finished seeding regions.");
 
   logger.info("Seeding tax regions...");
-  await createTaxRegionsWorkflow(container).run({
-    input: countries.map((country_code) => ({
-      country_code,
-      provider_id: "tp_system"
-    })),
-  });
+  const taxModuleService = container.resolve(Modules.TAX);
+  const existingTaxRegions = await taxModuleService.listTaxRegions();
+  const existingTaxCountryCodes = existingTaxRegions.map(tr => tr.country_code);
+  const newTaxCountries = countries.filter(cc => !existingTaxCountryCodes.includes(cc));
+  
+  if (newTaxCountries.length > 0) {
+    await createTaxRegionsWorkflow(container).run({
+      input: newTaxCountries.map((country_code) => ({
+        country_code,
+        provider_id: "tp_system"
+      })),
+    });
+    logger.info(`Created tax regions for: ${newTaxCountries.join(", ")}`);
+  } else {
+    logger.info("All tax regions already exist, skipping...");
+  }
   logger.info("Finished seeding tax regions.");
 
   logger.info("Seeding stock location data...");

@@ -4,6 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 import Logo from '@modules/common/components/logo'
+import CategoryMenu from '@modules/layout/components/category-menu'
+import OsmoMenu from '@modules/layout/components/osmo-menu'
+import BestSellingMenu from '@modules/layout/components/best-selling-menu'
 
 export default function Header08() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -117,75 +120,12 @@ export default function Header08() {
             <div className="container">
               <nav className="navbar navbar-expand-xl px-0 py-4 py-xl-0 row w-100 no-gutters">
                 <div className="col-xl-3">
-                  <div className="dropdown no-caret">
-                    <a href="#" className="btn dropdown-toggle btn-primary d-flex w-100 text-left align-items-center px-0 px-xl-4 border-0 shadow-none" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <div className="toggle-bar"><span className="toggle-icon text-white"></span></div>
-                      <div className="pl-5">Drevené materiály</div>
-                    </a>
-                    <div className="dropdown-menu w-100 py-0" aria-labelledby="dropdownMenuButton1">
-                      <Link href="/categories/chairs" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/chair.png" alt="Drevené obklady" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Drevené obklady</div>
-                      </Link>
-                      <Link href="/categories/tables" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/desk.png" alt="Drevené podlahy" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Drevené podlahy</div>
-                      </Link>
-                      <Link href="/categories/accessories" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/ladder.png" alt="Obklady Termodrevo" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Obklady Termodrevo</div>
-                      </Link>
-                      <Link href="/categories/sofa" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/ladder.png" alt="Podlahy Termodrevo" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Podlahy Termodrevo</div>
-                      </Link>
-                      <Link href="/categories/plants" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/plant.png" alt="Terasové dosky" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Terasové dosky</div>
-                      </Link>
-                      <Link href="/categories/stools" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/stool.png" alt="Drevo do sauny" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Drevo do sauny</div>
-                      </Link>
-                      <Link href="/categories/stands" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/ladder.png" alt="Drevené hranoly a Lišty" width={28} height={28} />
-                        </div>
-                        <div className="media-body">Drevené hranoly a Lišty</div>
-                      </Link>
-                      <Link href="/categories/kvh-hranoly" className="dropdown-item media align-items-center border-bottom py-2">
-                        <div className="w-28px mr-3">
-                          <Image src="/furnitor/images/ladder.png" alt="KVH Hranoly" width={28} height={28} />
-                        </div>
-                        <div className="media-body">KVH Hranoly</div>
-                      </Link>
-                    </div>
-                  </div>
+                  <CategoryMenu />
                 </div>
-                <div className="col-xl-9 d-flex pl-xl-8 position-static">
-                  <ul className="navbar-nav hover-menu main-menu px-0 mx-xl-n4">
-                    <li className="nav-item dropdown-item-shop dropdown py-2 py-xl-5 px-0 px-xl-4">
-                      <Link href="/store" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        OSMO <span className="caret"></span>
-                      </Link>
-                    </li>
-                    <li className="nav-item dropdown-item-pages dropdown py-2 py-xl-5 px-0 px-xl-4">
-                      <Link href="#" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
-                        Najpredávanejšie produkty <span className="caret"></span>
-                      </Link>
-                    </li>
+                <div className="col-xl-9 d-flex pl-xl-8">
+                  <ul className="navbar-nav hover-menu main-menu px-0 mx-xl-n4 position-static">
+                    <OsmoMenu />
+                    <BestSellingMenu />
                     <li className="nav-item dropdown-item-blog dropdown py-2 py-xl-5 px-0 px-xl-4">
                       <Link href="/blog" className="nav-link dropdown-toggle p-0" data-toggle="dropdown">
                         Blogy <span className="caret"></span>
