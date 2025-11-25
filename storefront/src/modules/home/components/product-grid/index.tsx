@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-interface Product {
+export interface ProductGridItem {
   id: string
   name: string
   category: string
@@ -14,7 +14,7 @@ interface Product {
 
 interface ProductGridProps {
   title?: string | React.ReactNode
-  products: Product[]
+  products: ProductGridItem[]
   showButton?: boolean
   buttonText?: string
   buttonLink?: string
@@ -32,6 +32,13 @@ export default function ProductGrid({
       <div className="container">
         <h2 className="mb-8 text-center fs-30 fs-md-40">{title}</h2>
         <div className="row">
+          {products.length === 0 && (
+            <div className="col-12">
+              <div className="text-center text-muted py-5">
+                Momentálne nemáme v tejto sekcii žiadne produkty. Skúste to prosím neskôr.
+              </div>
+            </div>
+          )}
           {products.map((product) => (
             <div key={product.id} className="col-sm-6 col-lg-3 mb-8" data-animate="fadeInUp">
               <div className="card border-0 hover-change-content product">
@@ -70,7 +77,7 @@ export default function ProductGrid({
                       {product.name}
                     </Link>
                   </div>
-                  <p className="text-primary mb-0 font-weight-500">{product.price}</p>
+                  <p className="text-primary mb-0 font-weight-500">{product.price || 'Na dopyt'}</p>
                 </div>
               </div>
             </div>

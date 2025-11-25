@@ -12,6 +12,9 @@ export const LOGO_URL_HOVER = "https://console-production-e2699.up.railway.app/a
 // Site name
 export const SITE_NAME = "Zrubko"
 
+// Homepage sekcie
+export const HOMEPAGE_OSMO_CATEGORY_HANDLE = "najpredavanejsie-osmo-produkty"
+
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
   string,

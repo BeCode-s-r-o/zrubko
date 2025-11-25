@@ -138,3 +138,49 @@ export const getProductsListWithSort = cache(async function ({
     queryParams,
   }
 })
+
+export const getProductsByCategoryHandle = cache(async function ({
+  countryCode,
+  categoryHandle,
+  limit = 4,
+}: {
+  countryCode: string
+  categoryHandle: string
+  limit?: number
+}): Promise<HttpTypes.StoreProduct[]> {
+  try {
+    const { product_categories } = await sdk.store.category.list(
+      {
+        handle: [categoryHandle],
+        limit: 1,
+        fields: "id,handle,name,parent_category_id",
+      },
+      { next: { tags: ["categories"] } }
+    )
+
+    const categoryId = product_categories?.[0]?.id
+
+    if (!categoryId) {
+      return []
+    }
+
+    const {
+      response: { products },
+    } = await getProductsList({
+      pageParam: 1,
+      queryParams: {
+        limit,
+        category_id: [categoryId],
+      },
+      countryCode,
+    })
+
+    return products
+  } catch (error) {
+    console.error(
+      `[getProductsByCategoryHandle] Nepodarilo sa načítať produkty pre kategóriu ${categoryHandle}:`,
+      error
+    )
+    return []
+  }
+})

@@ -191,6 +191,20 @@ const categoryIcons: Record<string, string> = {
    - Produkt sa zobrazí na category page
    - URL: `/sk/categories/{handle}`
 
+### 🏠 Homepage sekcia „Najpredávanejšie OSMO produkty“
+
+- Parent kategória: `najpredavanejsie-produkty`
+- Child kategória pre homepage: **Najpredávanejšie OSMO produkty** (`najpredavanejsie-osmo-produkty`)
+- Produkty priradené do tejto child kategórie sa zobrazia na home page v sekcii „Najpredávanejšie OSMO produkty“
+
+**Postup:**
+1. V Admin paneli vytvorte (alebo skontrolujte existenciu) parent kategórie `najpredavanejsie-produkty`
+2. Ako child kategóriu vytvorte `Najpredávanejšie OSMO produkty` s handle `najpredavanejsie-osmo-produkty`
+3. Pri editácii produktu v sekcii **Categories** pridajte túto child kategóriu
+4. Po uložení sa produkt objaví na homepage po refreshi (sekcia používa Medusa API a regionálnu cenu)
+
+> 👷 Skript `backend/src/scripts/add-categories.ts` vie parent aj child kategórie vytvoriť automaticky. Spustíte ho príkazom `pnpm --filter backend run add-categories`.
+
 ---
 
 ## 🔍 Testovanie
