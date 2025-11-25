@@ -22,11 +22,17 @@ export const getCategoriesList = cache(async function (
 export const getCategoryByHandle = cache(async function (
   categoryHandle: string[]
 ) {
-
-  return sdk.store.category.list(
-    // TODO: Look into fixing the type
-    // @ts-ignore
-    { handle: categoryHandle },
-    { next: { tags: ["categories"] } }
-  )
+  try {
+    const result = await sdk.store.category.list(
+      // TODO: Look into fixing the type
+      // @ts-ignore
+      { handle: categoryHandle },
+      { next: { tags: ["categories"] } }
+    )
+    
+    return result
+  } catch (error) {
+    console.error('Error fetching category by handle:', error)
+    return { product_categories: [] }
+  }
 })

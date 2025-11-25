@@ -1,31 +1,18 @@
-import { Metadata } from "next"
-
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import StoreTemplate from "@modules/store/templates"
+import { Metadata } from 'next'
+import { listCategories } from '@lib/data/categories'
+import ShopTemplateStatic from '@modules/shop/templates/shop-template-static'
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "Explore all of our products.",
+  title: 'Shop All Products | Furnitor Store',
+  description: 'Browse all our furniture products',
 }
 
-type Params = {
-  searchParams: {
-    sortBy?: SortOptions
-    page?: string
-  }
-  params: {
-    countryCode: string
-  }
+type Props = {
+  params: { countryCode: string }
 }
 
-export default async function StorePage({ searchParams, params }: Params) {
-  const { sortBy, page } = searchParams
-
-  return (
-    <StoreTemplate
-      sortBy={sortBy}
-      page={page}
-      countryCode={params.countryCode}
-    />
-  )
+export default async function StorePage({ params }: Props) {
+  const categories = await listCategories()
+  
+  return <ShopTemplateStatic categories={categories || []} countryCode={params.countryCode} />
 }
