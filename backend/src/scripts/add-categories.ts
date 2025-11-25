@@ -45,6 +45,13 @@ export default async function addCategories({ container }: ExecArgs) {
       is_active: true,
       rank: 20, // Nastavenie rank pre poradie zobrazenia
     },
+    {
+      name: "Odporúčané produkty",
+      handle: "odporucane-produkty",
+      description: "Parent kategória pre odporúčané produkty - tu vytvárajte podkategórie pre odporúčané produkty",
+      is_active: true,
+      rank: 30, // Nastavenie rank pre poradie zobrazenia
+    },
   ];
 
   const childCategories: ChildCategoryInput[] = [
@@ -55,6 +62,14 @@ export default async function addCategories({ container }: ExecArgs) {
       is_active: true,
       rank: 10,
       parentHandle: "najpredavanejsie-produkty",
+    },
+    {
+      name: "Odporúčané produkty",
+      handle: "odporucane-produkty-homepage",
+      description: "Produkty priradené do tejto kategórie sa zobrazujú na homepage v sekcii Odporúčané produkty",
+      is_active: true,
+      rank: 10,
+      parentHandle: "odporucane-produkty",
     },
   ];
 

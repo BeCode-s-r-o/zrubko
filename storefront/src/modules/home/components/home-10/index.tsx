@@ -8,7 +8,7 @@ import CountdownSection from '../countdown-section'
 import ClientLogos from '../client-logos'
 import RoomInspiration from '../room-inspiration'
 import { getProductsByCategoryHandle } from '@lib/data/products'
-import { HOMEPAGE_OSMO_CATEGORY_HANDLE } from '@lib/constants'
+import { HOMEPAGE_OSMO_CATEGORY_HANDLE, HOMEPAGE_RECOMMENDED_CATEGORY_HANDLE } from '@lib/constants'
 import { getProductPrice } from '@lib/util/get-product-price'
 import { HttpTypes } from '@medusajs/types'
 
@@ -175,13 +175,24 @@ const mapMedusaProductsToGridItems = (
 
 export default async function Home10({ countryCode }: { countryCode: string }) {
   noStore()
-  const localizedEssentialProducts = localizeStaticProducts(essentialProductsSeed, countryCode)
 
-  const osmoProducts = await getProductsByCategoryHandle({
-    countryCode,
-    categoryHandle: HOMEPAGE_OSMO_CATEGORY_HANDLE,
-    limit: 4,
-  })
+  const [recommendedProducts, osmoProducts] = await Promise.all([
+    getProductsByCategoryHandle({
+      countryCode,
+      categoryHandle: HOMEPAGE_RECOMMENDED_CATEGORY_HANDLE,
+      limit: 8,
+    }),
+    getProductsByCategoryHandle({
+      countryCode,
+      categoryHandle: HOMEPAGE_OSMO_CATEGORY_HANDLE,
+      limit: 4,
+    }),
+  ])
+
+  const recommendedProductGridItems =
+    recommendedProducts.length > 0
+      ? mapMedusaProductsToGridItems(recommendedProducts, countryCode)
+      : localizeStaticProducts(essentialProductsSeed, countryCode)
 
   const osmoProductGridItems =
     osmoProducts.length > 0
@@ -194,7 +205,7 @@ export default async function Home10({ countryCode }: { countryCode: string }) {
       <CategorySlider />
       <ProductGrid 
         title="Odporúčané produkty"
-        products={localizedEssentialProducts}
+        products={recommendedProductGridItems}
         showButton={true}
         buttonText="Kúpiť teraz"
         buttonLink="/store"

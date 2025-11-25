@@ -14,6 +14,7 @@ export const SITE_NAME = "Zrubko"
 
 // Homepage sekcie
 export const HOMEPAGE_OSMO_CATEGORY_HANDLE = "najpredavanejsie-osmo-produkty"
+export const HOMEPAGE_RECOMMENDED_CATEGORY_HANDLE = "odporucane-produkty-homepage"
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
