@@ -6,6 +6,10 @@
 /* Furnitor & Bootstrap 4 CSS - Loaded via layout.tsx */
 /* Custom utilities - Regular CSS (no Tailwind layers) */
 
+.osmo-brand-text {
+  color: rgb(229, 32, 32);
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */

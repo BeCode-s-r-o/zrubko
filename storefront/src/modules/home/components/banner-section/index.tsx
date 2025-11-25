@@ -1,9 +1,10 @@
 'use client'
 
+import { ReactNode } from 'react'
 import Link from 'next/link'
 
 interface Banner {
-  title: string
+  title: ReactNode
   subtitle?: string
   image: string
   link: string

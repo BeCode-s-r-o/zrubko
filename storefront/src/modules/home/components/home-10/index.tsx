@@ -105,7 +105,11 @@ const featuredProducts = [
 
 const banners = [
   {
-    title: 'Osmo pre exteriér',
+    title: (
+      <>
+        <span className="osmo-brand-text">OSMO</span> pre exteriér
+      </>
+    ),
     subtitle: '',
     image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fcloseup.jpg&version_id=null',
     link: '/store',
@@ -113,7 +117,11 @@ const banners = [
     className: 'col-lg-8 mb-6 mb-lg-0'
   },
   {
-    title: 'Osmo pre interiér',
+    title: (
+      <>
+        <span className="osmo-brand-text">OSMO</span> pre interiér
+      </>
+    ),
     image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fwooden-spatula-is-laying-floor-fireplace.jpg&version_id=null',
     link: '/store',
     buttonText: 'Kúpiť teraz',
@@ -158,7 +166,7 @@ export default function Home10() {
       <ProductGrid
         title={
           <>
-            Najpredávanejšie <span style={{ color: 'rgb(174,118,70)' }}>OSMO</span> produkty
+            Najpredávanejšie <span className="osmo-brand-text">OSMO</span> produkty
           </>
         }
         products={featuredProducts}
