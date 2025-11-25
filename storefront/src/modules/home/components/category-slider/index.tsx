@@ -49,7 +49,7 @@ export default function CategorySlider() {
                   }}
                 ></div>
                 <div className="card-img-overlay d-inline-flex flex-column px-6 pt-4 pb-6" style={{ zIndex: 2 }}>
-                  <h3 className="card-title fs-30 text-white">{category.name}</h3>
+                  <h3 className="card-title fs-30 furnitor-category-title">{category.name}</h3>
                   <div className="mt-auto">
                     <Link href={category.link} className="text-white text-uppercase fs-14 letter-spacing-05 border-bottom border-white border-hover-primary font-weight-bold">
                       Kúpiť teraz

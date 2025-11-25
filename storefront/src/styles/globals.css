@@ -10,6 +10,10 @@
   color: rgb(229, 32, 32);
 }
 
+.furnitor-category-title {
+  color: rgb(239, 220, 171);
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
