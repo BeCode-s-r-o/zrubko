@@ -106,6 +106,11 @@ export default function ProductActions({
     })
 
     setIsAdding(false)
+
+    // Dispatch custom event pre aktualizáciu košíka v headeri
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cart:updated'))
+    }
   }
 
   return (

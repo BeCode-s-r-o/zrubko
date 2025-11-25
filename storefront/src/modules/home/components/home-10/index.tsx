@@ -15,6 +15,40 @@ import { HttpTypes } from '@medusajs/types'
 const FALLBACK_IMAGE = '/furnitor/images/product-14.jpg'
 const FALLBACK_CATEGORY = 'Najpredávanejšie'
 
+const isVariantAvailable = (variant?: HttpTypes.StoreProductVariant) => {
+  if (!variant) {
+    return false
+  }
+
+  if (!variant.manage_inventory) {
+    return true
+  }
+
+  if (variant.allow_backorder) {
+    return true
+  }
+
+  return (variant.inventory_quantity ?? 0) > 0
+}
+
+const getQuickAddVariantId = (
+  variants?: HttpTypes.StoreProductVariant[] | null
+): string | undefined => {
+  if (!variants?.length) {
+    return undefined
+  }
+
+  // Najprv skúsime nájsť dostupný variant
+  const availableVariant = variants.find((variant) => isVariantAvailable(variant))
+  if (availableVariant?.id) {
+    return availableVariant.id
+  }
+
+  // Ak nie je dostupný variant, použijeme prvý variant
+  // Používateľ sa môže dostať na detail produktu a vybrať si tam
+  return variants[0]?.id
+}
+
 // Sample data - zostáva ako fallback keď nie sú dostupné dáta z Medusy
 const essentialProductsSeed = [
   {
@@ -162,6 +196,7 @@ const mapMedusaProductsToGridItems = (
   products.map((product) => {
     const { cheapestPrice } = getProductPrice({ product })
     const productHandle = product.handle || product.id || ''
+    const quickAddVariantId = getQuickAddVariantId(product.variants)
 
     return {
       id: product.id || product.handle || randomUUID(),
@@ -170,6 +205,7 @@ const mapMedusaProductsToGridItems = (
       price: cheapestPrice?.calculated_price || '',
       image: product.thumbnail || product.images?.[0]?.url || FALLBACK_IMAGE,
       link: productHandle ? `/${countryCode}/products/${productHandle}` : `/${countryCode}/store`,
+      variantId: quickAddVariantId,
     }
   })
 

@@ -7,6 +7,7 @@ import Logo from '@modules/common/components/logo'
 import CategoryMenu from '@modules/layout/components/category-menu'
 import OsmoMenu from '@modules/layout/components/osmo-menu'
 import BestSellingMenu from '@modules/layout/components/best-selling-menu'
+import CartCount from '@modules/layout/components/cart-count'
 
 export default function Header08() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -102,7 +103,7 @@ export default function Header08() {
                     <li className="nav-item">
                       <Link href="/cart" className="nav-link position-relative px-3 menu-cart py-0" data-canvas="true" data-canvas-options='{"container":".cart-canvas"}'>
                         <i className="far fa-shopping-basket"></i>
-                        <span className="position-absolute number">0</span>
+                        <CartCount />
                       </Link>
                     </li>
                   </ul>
