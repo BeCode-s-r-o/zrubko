@@ -12,5 +12,5 @@ export default async function Home({
 }: {
   params: { countryCode: string }
 }) {
-  return <Home10 />
+  return <Home10 countryCode={countryCode} />
 }

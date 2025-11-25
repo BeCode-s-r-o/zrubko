@@ -17,7 +17,8 @@ export const getProductsById = cache(async function ({
       {
         id: ids,
         region_id: regionId,
-        fields: "*variants.calculated_price,+variants.inventory_quantity",
+        fields:
+          "*variants.calculated_price,+variants.inventory_quantity,+variants.allow_backorder,+variants.manage_inventory",
       },
       { next: { tags: ["products"] } }
     )
@@ -33,7 +34,8 @@ export const getProductByHandle = cache(async function (
       {
         handle,
         region_id: regionId,
-        fields: "*variants.calculated_price,+variants.inventory_quantity",
+        fields:
+          "*variants.calculated_price,+variants.inventory_quantity,+variants.allow_backorder,+variants.manage_inventory",
       },
       { next: { tags: ["products"] } }
     )
@@ -70,7 +72,8 @@ export const getProductsList = cache(async function ({
         limit,
         offset,
         region_id: region.id,
-        fields: "*variants.calculated_price",
+        fields:
+          "*variants.calculated_price,+variants.inventory_quantity,+variants.allow_backorder,+variants.manage_inventory",
         ...queryParams,
       },
       { next: { tags: ["products"] } }
@@ -136,5 +139,51 @@ export const getProductsListWithSort = cache(async function ({
     },
     nextPage,
     queryParams,
+  }
+})
+
+export const getProductsByCategoryHandle = cache(async function ({
+  countryCode,
+  categoryHandle,
+  limit = 4,
+}: {
+  countryCode: string
+  categoryHandle: string
+  limit?: number
+}): Promise<HttpTypes.StoreProduct[]> {
+  try {
+    const { product_categories } = await sdk.store.category.list(
+      {
+        handle: [categoryHandle],
+        limit: 1,
+        fields: "id,handle,name,parent_category_id",
+      },
+      { next: { tags: ["categories"] } }
+    )
+
+    const categoryId = product_categories?.[0]?.id
+
+    if (!categoryId) {
+      return []
+    }
+
+    const {
+      response: { products },
+    } = await getProductsList({
+      pageParam: 1,
+      queryParams: {
+        limit,
+        category_id: [categoryId],
+      },
+      countryCode,
+    })
+
+    return products
+  } catch (error) {
+    console.error(
+      `[getProductsByCategoryHandle] Nepodarilo sa načítať produkty pre kategóriu ${categoryHandle}:`,
+      error
+    )
+    return []
   }
 })

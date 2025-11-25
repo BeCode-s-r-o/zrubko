@@ -1,15 +1,56 @@
-'use client'
-
+import { randomUUID } from 'crypto'
+import { unstable_noStore as noStore } from 'next/cache'
 import HeroSlider from '../hero-slider'
 import CategorySlider from '../category-slider'
-import ProductGrid from '../product-grid'
+import ProductGrid, { ProductGridItem } from '../product-grid'
 import BannerSection from '../banner-section'
 import CountdownSection from '../countdown-section'
 import ClientLogos from '../client-logos'
 import RoomInspiration from '../room-inspiration'
+import { getProductsByCategoryHandle } from '@lib/data/products'
+import { HOMEPAGE_OSMO_CATEGORY_HANDLE, HOMEPAGE_RECOMMENDED_CATEGORY_HANDLE } from '@lib/constants'
+import { getProductPrice } from '@lib/util/get-product-price'
+import { HttpTypes } from '@medusajs/types'
 
-// Sample data - will be replaced with Medusa data later
-const essentialProducts = [
+const FALLBACK_IMAGE = '/furnitor/images/product-14.jpg'
+const FALLBACK_CATEGORY = 'Najpredávanejšie'
+
+const isVariantAvailable = (variant?: HttpTypes.StoreProductVariant) => {
+  if (!variant) {
+    return false
+  }
+
+  if (!variant.manage_inventory) {
+    return true
+  }
+
+  if (variant.allow_backorder) {
+    return true
+  }
+
+  return (variant.inventory_quantity ?? 0) > 0
+}
+
+const getQuickAddVariantId = (
+  variants?: HttpTypes.StoreProductVariant[] | null
+): string | undefined => {
+  if (!variants?.length) {
+    return undefined
+  }
+
+  // Najprv skúsime nájsť dostupný variant
+  const availableVariant = variants.find((variant) => isVariantAvailable(variant))
+  if (availableVariant?.id) {
+    return availableVariant.id
+  }
+
+  // Ak nie je dostupný variant, použijeme prvý variant
+  // Používateľ sa môže dostať na detail produktu a vybrať si tam
+  return variants[0]?.id
+}
+
+// Sample data - zostáva ako fallback keď nie sú dostupné dáta z Medusy
+const essentialProductsSeed = [
   {
     id: '1',
     name: 'Bow Chair',
@@ -76,7 +117,7 @@ const essentialProducts = [
   }
 ]
 
-const featuredProducts = [
+const featuredProductsSeed = [
   {
     id: '9',
     name: 'Bow Chair',
@@ -105,7 +146,11 @@ const featuredProducts = [
 
 const banners = [
   {
-    title: 'Osmo pre exteriér',
+    title: (
+      <>
+        <span className="osmo-brand-text">OSMO</span> pre exteriér
+      </>
+    ),
     subtitle: '',
     image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fcloseup.jpg&version_id=null',
     link: '/store',
@@ -113,7 +158,11 @@ const banners = [
     className: 'col-lg-8 mb-6 mb-lg-0'
   },
   {
-    title: 'Osmo pre interiér',
+    title: (
+      <>
+        <span className="osmo-brand-text">OSMO</span> pre interiér
+      </>
+    ),
     image: 'https://console-production-e2699.up.railway.app/api/v1/buckets/medusa-media/objects/download?preview=true&prefix=homepage_products%2Fwooden-spatula-is-laying-floor-fireplace.jpg&version_id=null',
     link: '/store',
     buttonText: 'Kúpiť teraz',
@@ -134,14 +183,65 @@ const clientLogos = [
  // { image: '/furnitor/images/client_logo_10.png', alt: 'Client Logo 10', link: '#' }
 ]
 
-export default function Home10() {
+const localizeStaticProducts = (products: ProductGridItem[], countryCode: string): ProductGridItem[] =>
+  products.map((product) => ({
+    ...product,
+    link: `/${countryCode}${product.link}`,
+  }))
+
+const mapMedusaProductsToGridItems = (
+  products: HttpTypes.StoreProduct[],
+  countryCode: string
+): ProductGridItem[] =>
+  products.map((product) => {
+    const { cheapestPrice } = getProductPrice({ product })
+    const productHandle = product.handle || product.id || ''
+    const quickAddVariantId = getQuickAddVariantId(product.variants)
+
+    return {
+      id: product.id || product.handle || randomUUID(),
+      name: product.title || 'Produkt',
+      category: product.categories?.[0]?.name || FALLBACK_CATEGORY,
+      price: cheapestPrice?.calculated_price || '',
+      image: product.thumbnail || product.images?.[0]?.url || FALLBACK_IMAGE,
+      link: productHandle ? `/${countryCode}/products/${productHandle}` : `/${countryCode}/store`,
+      variantId: quickAddVariantId,
+    }
+  })
+
+export default async function Home10({ countryCode }: { countryCode: string }) {
+  noStore()
+
+  const [recommendedProducts, osmoProducts] = await Promise.all([
+    getProductsByCategoryHandle({
+      countryCode,
+      categoryHandle: HOMEPAGE_RECOMMENDED_CATEGORY_HANDLE,
+      limit: 8,
+    }),
+    getProductsByCategoryHandle({
+      countryCode,
+      categoryHandle: HOMEPAGE_OSMO_CATEGORY_HANDLE,
+      limit: 4,
+    }),
+  ])
+
+  const recommendedProductGridItems =
+    recommendedProducts.length > 0
+      ? mapMedusaProductsToGridItems(recommendedProducts, countryCode)
+      : localizeStaticProducts(essentialProductsSeed, countryCode)
+
+  const osmoProductGridItems =
+    osmoProducts.length > 0
+      ? mapMedusaProductsToGridItems(osmoProducts, countryCode)
+      : localizeStaticProducts(featuredProductsSeed, countryCode)
+
   return (
     <main id="content">
       <HeroSlider />
       <CategorySlider />
       <ProductGrid 
         title="Odporúčané produkty"
-        products={essentialProducts}
+        products={recommendedProductGridItems}
         showButton={true}
         buttonText="Kúpiť teraz"
         buttonLink="/store"
@@ -158,10 +258,10 @@ export default function Home10() {
       <ProductGrid
         title={
           <>
-            Najpredávanejšie <span style={{ color: 'rgb(174,118,70)' }}>OSMO</span> produkty
+            Najpredávanejšie <span className="osmo-brand-text">OSMO</span> produkty
           </>
         }
-        products={featuredProducts}
+        products={osmoProductGridItems}
         showButton={false}
       />
       <RoomInspiration
@@ -174,4 +274,3 @@ export default function Home10() {
     </main>
   )
 }
-

@@ -10,6 +10,41 @@ type WishlistResponse = {
   count: number
 }
 
+type OsmoSectionProps = {
+  title: string
+  description: string
+  highlightLabel?: string
+}
+
+const OsmoSection = ({ title, description, highlightLabel }: OsmoSectionProps) => (
+  <div className="border border-gray-200 rounded-md p-4 space-y-1">
+    <div className="flex items-center gap-x-2">
+      {highlightLabel ? (
+        <>
+          <span
+            className="text-sm font-semibold tracking-wide uppercase"
+            style={{ color: "rgb(229, 32, 32)" }}
+          >
+            {highlightLabel}
+          </span>
+          <span className="text-sm font-medium text-gray-900">{title.replace(highlightLabel, "").trimStart()}</span>
+        </>
+      ) : (
+        <>
+          <span
+            className="text-sm font-semibold tracking-wide uppercase"
+            style={{ color: "rgb(229, 32, 32)" }}
+          >
+            OSMO
+          </span>
+          <span className="text-sm font-medium text-gray-900">{title}</span>
+        </>
+      )}
+    </div>
+    <p className="text-sm text-gray-600">{description}</p>
+  </div>
+)
+
 const ProductWidget = ({
   data: product,
 }: DetailWidgetProps<AdminProduct>) => {
@@ -27,6 +62,17 @@ const ProductWidget = ({
         {isLoading ?
           "Loading..." : `This product is in ${data?.count} wishlist(s).`
         }
+      </div>
+      <div className="px-6 pb-6 space-y-4">
+        <OsmoSection
+          title="Osmo pre interiér"
+          description="Produkty vhodné na interiérové drevené povrchy so zvýraznenou odolnosťou voči opotrebeniu."
+        />
+        <OsmoSection
+          title="OSMO pre exteriér"
+          highlightLabel="OSMO"
+          description="Vodoodpudivé a UV stabilné nátery zabezpečujúce dlhodobú ochranu dreva v exteriéri."
+        />
       </div>
     </div>
   )
